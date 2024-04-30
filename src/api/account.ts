@@ -1,7 +1,16 @@
 import axios from 'axios';
 
 export async function createAccount(username: string, password: string) {
-  const response = await axios.post('/account', {
+  const response = await axios.post('/account/create', {
+    username,
+    password
+  });
+
+  return response.data;
+}
+
+export async function login(username: string, password: string) {
+  const response = await axios.post('/account/login', {
     username,
     password
   });
