@@ -1,7 +1,8 @@
-import axios from 'axios';
+import { useTokenStore } from '../stores/token-store';
+import { server } from './connection';
 
 export async function createAccount(username: string, password: string) {
-  const response = await axios.post('/account/create', {
+  const response = await server.post('/account/create', {
     username,
     password
   });
@@ -10,10 +11,15 @@ export async function createAccount(username: string, password: string) {
 }
 
 export async function login(username: string, password: string) {
-  const response = await axios.post('/account/login', {
+  const response = await server.post('/account/login', {
     username,
     password
   });
+
+  if (response.data.refreshToken) {
+    useTokenStore().storeRefreshToken(response.data.refreshToken);
+    useTokenStore().accessToken = response.data.accessToken;
+  }
 
   return response.data;
 }

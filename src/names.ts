@@ -8,7 +8,12 @@ const firstNames = [
   'isabella',
   'william',
   'sophia',
-  'james'
+  'james',
+  'charlotte',
+  'alexander',
+  'mia',
+  'michael',
+  'amelia'
 ];
 
 const adjectives = [
@@ -21,14 +26,28 @@ const adjectives = [
   'mystic',
   'azure',
   'radiant',
-  'whispering'
+  'whispering',
+  'golden',
+  'silver',
+  'celestial',
+  'red',
+  'blue',
+  'green',
+  'purple',
+  'yellow',
+  'white',
+  'black',
+  'orange',
+  'pink',
+  'brown'
 ];
 
 export function makeRandomName() {
   // Random adjective and first name, kebab-cased
   const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
   const name = firstNames[Math.floor(Math.random() * firstNames.length)];
-  return `${adj}-${name}`;
+  const n = Math.floor(Math.random() * 900) + 100;
+  return `${adj}-${name}-${n}`;
 }
 
 export function makeRandomPassword() {
