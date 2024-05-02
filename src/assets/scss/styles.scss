@@ -64,6 +64,14 @@ button {
   }
 }
 
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 1rem;
+}
+
 .full-width {
   width: 100%;
   justify-content: center;

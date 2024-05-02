@@ -1,66 +1,33 @@
 <template>
-  <div class="container">
-    <panel id="createAccount">
-      <button @click="chooseNewValues">Choose new values</button>
-      <p>Username: {{ username }}</p>
-      <p>Password: {{ password }}</p>
-      <div class="row">
-        <button @click="onClickCreateAccount()">Create account</button>
-        <button @click="onClickLogin()">Login</button>
-      </div>
-      <p>Refresh Token: {{ shortRefreshToken }}</p>
-      <p>Access Token: {{ shortAccesstoken }}</p>
-    </panel>
+  <div class="page-layout">
+    <TheHeader />
+    <div class="page-layout__content">
+      <TheNavigation />
+      <router-view name="page"></router-view>
+    </div>
   </div>
+  <modal-manager />
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { createAccount, login } from './api/account';
-import { makeRandomName, makeRandomPassword } from './names';
-import { useTokenStore } from './stores/token-store';
+import { useRouter } from 'vue-router';
 
-const username = ref(makeRandomName());
-const password = ref(makeRandomPassword());
+const router = useRouter();
 
-const shortRefreshToken = computed(() => {
-  const token = useTokenStore().refreshToken;
-  return token ? `${token.slice(0, 6)}...${token.slice(-6)}` : '[No token]';
+// Global keyboard shortcuts
+// =================================================================================================
+window.addEventListener('keydown', (event) => {
+  if (window.location.hostname === 'localhost') {
+    // if (event.ctrlKey && event.key === '`') router.push('/model');
+  } else {
+    // if (event.ctrlKey && event.key === '`') router.push('/settings');
+  }
 });
-
-const shortAccesstoken = computed(() => {
-  const token = useTokenStore().accessToken;
-  return token ? `${token.slice(0, 6)}...${token.slice(-6)}` : '[No token]';
-});
-
-function chooseNewValues() {
-  username.value = makeRandomName();
-  password.value = makeRandomPassword();
-}
-
-async function onClickCreateAccount() {
-  console.log('Creating account...');
-  const success = await createAccount(username.value, password.value);
-  console.log(success ? 'Account created' : 'Failed to create account');
-}
-
-async function onClickLogin() {
-  console.log('Logging in...');
-  const success = await login(username.value, password.value);
-  console.log(success);
-  console.log(success ? 'Logged in' : 'Failed to log in');
-}
 </script>
 
 <style lang="scss">
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-#createAccount {
-  width: 40rem;
-}
+// @import './assets/css/variables.css';
+@import './assets/css/styles.css';
+// @import './assets/css/buttons.css';
+// @import './assets/css/modals.css';
 </style>

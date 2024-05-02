@@ -10,15 +10,22 @@ export const useTokenStore = defineStore('auth', () => {
   if (storedRefreshToken) refreshToken.value = storedRefreshToken;
 
   // Watch for changes in refreshToken and store it in localStorage
-  const storeRefreshToken = (newToken: string) => {
+  const storeRefreshToken = (newToken: string | null) => {
     refreshToken.value = newToken;
     if (!newToken) localStorage.removeItem('refreshToken');
-    localStorage.setItem('refreshToken', newToken);
+    else localStorage.setItem('refreshToken', newToken);
+  };
+
+  // Clear the refresh token from the store and localStorage
+  const clear = () => {
+    storeRefreshToken(null);
+    accessToken.value = null;
   };
 
   return {
     accessToken,
     refreshToken,
-    storeRefreshToken
+    storeRefreshToken,
+    clear
   };
 });
