@@ -79,6 +79,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 .modal {
   animation: animate-in 0.2s ease;
   min-width: 36rem;
+  max-width: 48rem;
   background-color: var(--dark);
   color: var(--light);
   border-radius: 5px;
@@ -122,6 +123,16 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   }
   to {
     transform: translateY(0);
+  }
+}
+
+// Media query for phones
+@media (max-width: 768px) {
+  .modal {
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
   }
 }
 </style>

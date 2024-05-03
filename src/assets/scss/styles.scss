@@ -120,16 +120,3 @@ pre {
   color: var(--primary);
   font-weight: bold;
 }
-
-// Media query for tablets
-@media (max-width: 1024px) {
-  .container.container--collection {
-    > .row.wrap {
-      justify-content: center;
-    }
-  }
-}
-
-// Media query for phones
-@media (max-width: 768px) {
-}
