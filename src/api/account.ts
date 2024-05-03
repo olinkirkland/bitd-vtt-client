@@ -3,12 +3,15 @@ import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
 
-export async function createAccount(username: string, password: string) {
+export async function createAccount(username?: string, password?: string) {
   try {
-    const response = await server.post('/account/create', {
-      username,
-      password
-    });
+    const isGuest = !username || !password;
+    const payload = isGuest ? {} : { username, password };
+    const response = await server.post('/account/create', payload);
+    if (response.data.refreshToken) {
+      useTokenStore().storeRefreshToken(response.data.refreshToken);
+      useTokenStore().accessToken = response.data.accessToken;
+    }
     return response.data;
   } catch {
     return null;
@@ -48,7 +51,7 @@ export async function fetchMyAccount() {
 export async function logout() {
   useTokenStore().clear();
   useUserStore().clear();
-  router.push('/login');
+  await createAccount();
 }
 
 export async function deleteAccount(password: string) {

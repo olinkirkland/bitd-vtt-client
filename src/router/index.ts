@@ -1,34 +1,31 @@
-import { fetchMyAccount } from '@/api/account';
-import TheAccountPage from '@/pages/the-account-page.vue';
-import TheLoginPage from '@/pages/the-login-page.vue';
-import TheLostPage from '@/pages/the-lost-page.vue';
+import { createAccount, fetchMyAccount } from '@/api/account';
+import GuestReminderModal from '@/components/modals/modal-content/GuestReminderModal.vue';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
+import ModalController from '@/controllers/modal-controller';
+import TheAccountPage from '@/pages/TheAccountPage.vue';
+import TheLostPage from '@/pages/TheLostPage.vue';
+import { useTokenStore } from '@/stores/token-store';
+import { useUserStore } from '@/stores/user-store';
 import { RouterOptions, createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
     path: '/',
-    redirect: '/account'
+    redirect: '/home'
   },
   {
-    path: '/login',
-    components: {
-      page: TheLoginPage
-    },
-    name: 'login'
-  },
-  {
-    path: '/account',
+    path: '/home',
     components: {
       page: TheAccountPage
     },
-    name: 'account'
+    name: 'home'
   },
   {
     path: '/:pathMatch(.*)*',
     components: {
-      app: TheLostPage
+      page: TheLostPage // 404 page
     },
-    name: '404'
+    name: 'lost'
   }
 ];
 
@@ -39,13 +36,25 @@ const routerOptions = {
 
 const router = createRouter(routerOptions as RouterOptions);
 
-router.afterEach(async (to, from) => {});
+router.afterEach(async (to, from) => {
+  ModalController.open(LoadingModal, {
+    variationClassName: 'opaque-background transparent-panel'
+  });
+  if (!useTokenStore().refreshToken || !(await fetchMyAccount()))
+    await createAccount(); // Create a guest account
+
+  if (!useUserStore().id) await fetchMyAccount();
+  ModalController.close();
+
+  if (useUserStore().isGuest && !from.name)
+    ModalController.open(GuestReminderModal, {
+      closeOnClick: true,
+      headerText: 'Welcome!',
+      headerCloseButton: true
+    });
+});
 
 router.beforeEach(async (to, from, next) => {
-  // Try to fetch me
-  // If it fails, redirect to login
-  await fetchMyAccount();
-
   next();
 });
 

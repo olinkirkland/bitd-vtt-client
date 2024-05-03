@@ -13,5 +13,5 @@ app.use(router);
 
 initializeConnection();
 
-app.component('panel', Panel);
+app.component('Panel', Panel);
 app.mount('#app');

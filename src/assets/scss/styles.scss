@@ -3,7 +3,9 @@
 :root {
   // Shades
   --light: #f8f8f2;
+  --light-2: #e9e5e5;
   --dark: #292836;
+  --dark-2: #44475a;
 
   // Primary
   --primary: #5c7cfa;
@@ -35,20 +37,23 @@ body {
 }
 
 button {
+  cursor: pointer;
+  width: fit-content;
   position: relative;
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0;
+}
+
+button.btn {
   background-color: var(--primary);
   color: var(--light);
-  width: fit-content;
   height: 4rem;
   max-height: 4rem;
   padding: 0.8rem 1.2rem;
   border-radius: 5px;
   border: 0.2rem solid var(--dark);
   border-bottom: 0.4rem solid var(--dark);
-  cursor: pointer;
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 0;
   transition: all 0.1s;
 
   &:hover {
@@ -62,6 +67,11 @@ button {
     top: 0.2rem;
     transition: none;
   }
+}
+
+button.icon {
+  background-color: transparent;
+  color: var(--light);
 }
 
 .page {
@@ -109,10 +119,6 @@ pre {
 .primary {
   color: var(--primary);
   font-weight: bold;
-}
-
-.modal {
-  max-width: 40rem;
 }
 
 // Media query for tablets

@@ -2,9 +2,6 @@
   <div class="page">
     <panel id="createAccount">
       <h1>Create Account | Login</h1>
-      <button @click="chooseNewValues">Choose new values</button>
-      <p>Username: {{ username }}</p>
-      <p>Password: {{ password }}</p>
       <div class="row">
         <button @click="onClickCreateAccount()">Create account</button>
         <button @click="onClickLogin()">Login</button>
@@ -15,17 +12,11 @@
 
 <script setup lang="ts">
 import { createAccount, login } from '@/api/account';
-import { makeRandomName, makeRandomPassword } from '@/names';
 import router from '@/router';
 import { ref } from 'vue';
 
-const username = ref(makeRandomName());
-const password = ref(makeRandomPassword());
-
-function chooseNewValues() {
-  username.value = makeRandomName();
-  password.value = makeRandomPassword();
-}
+const username = ref();
+const password = ref();
 
 async function onClickCreateAccount() {
   console.log('Creating account...');
@@ -43,7 +34,7 @@ async function onClickLogin() {
 
 <style lang="scss">
 #createAccount {
-  min-width: 100%;
+  width: 100%;
   max-width: 40rem;
 }
 </style>
