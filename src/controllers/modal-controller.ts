@@ -1,16 +1,9 @@
 import { Subject } from 'rxjs';
 import { ComponentOptions } from 'vue';
 
-export interface ModalConfig {
-  closeOnClick?: boolean;
-  headerText?: string;
-  headerCloseButton?: boolean;
-  variationClassName?: string;
-}
-
 export interface ModalDispatch {
   modal: ComponentOptions | null; // null means close
-  modalConfig?: ModalConfig;
+  modalConfig?: any;
 }
 
 export default class ModalController {
@@ -27,10 +20,7 @@ export default class ModalController {
     this.subject.next(d);
   }
 
-  public static open(
-    modal: ComponentOptions<any>,
-    modalConfig?: ModalConfig
-  ): void {
+  public static open(modal: ComponentOptions<any>, modalConfig?: any): void {
     this.getInstance().dispatch({ modal, modalConfig });
   }
 

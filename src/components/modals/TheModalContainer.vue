@@ -2,33 +2,20 @@
   <div
     v-if="!!currentModal"
     class="modal-container"
-    :class="currentModalConfig?.variationClassName"
+    :class="currentModalConfig?.backgroundClass"
   >
     <div class="modal-container__background" @click="onClickBackground()"></div>
-    <div class="modal">
-      <div v-if="showHeader" class="modal__header">
-        <span>{{ currentModalConfig?.headerText || 'Modal' }}</span>
-        <button
-          class="icon"
-          v-if="currentModalConfig?.headerCloseButton"
-          @click="ModalController.close()"
-        >
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="modal__content">
-        <component :is="currentModal" v-bind="currentModalConfig" />
-      </div>
-    </div>
+    <component :is="currentModal" v-bind="currentModalConfig" ref="modalRef" />
   </div>
 </template>
 
 <script setup lang="ts">
-import ModalController, { ModalConfig } from '@/controllers/modal-controller';
-import { ComponentOptions, computed, shallowRef } from 'vue';
+import ModalController from '@/controllers/modal-controller';
+import { ComponentOptions, computed, ref, shallowRef } from 'vue';
 
+const modalRef = ref();
 const currentModal = shallowRef<ComponentOptions | null>(null);
-const currentModalConfig = shallowRef<ModalConfig | null>(null);
+const currentModalConfig = shallowRef<any | null>(null);
 const showHeader = computed(
   () =>
     !!currentModalConfig.value?.headerText &&
@@ -71,47 +58,13 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     position: absolute;
     top: 0;
     z-index: -1;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(5px);
   }
 }
 
-.modal {
-  animation: animate-in 0.2s ease;
-  min-width: 36rem;
-  max-width: 48rem;
-  background-color: var(--dark);
-  color: var(--light);
-  border-radius: 5px;
-  overflow: hidden;
-
-  .modal__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--dark);
-    border-bottom: 1px solid var(--dark-2);
-    padding: 2rem;
-  }
-
-  .modal__content {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-}
-
 // Variations
-.transparent-panel {
-  > .panel.modal {
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-  }
-}
-
-.opaque-background {
+.opaque {
   > .modal-container__background {
     background-color: var(--dark);
   }

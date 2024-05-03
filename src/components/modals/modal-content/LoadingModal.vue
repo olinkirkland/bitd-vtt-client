@@ -8,6 +8,8 @@
 div {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
   > i {
     font-size: 4rem;
     color: var(--light);

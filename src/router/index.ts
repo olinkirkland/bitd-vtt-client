@@ -37,9 +37,7 @@ const routerOptions = {
 const router = createRouter(routerOptions as RouterOptions);
 
 router.afterEach(async (to, from) => {
-  ModalController.open(LoadingModal, {
-    variationClassName: 'opaque-background transparent-panel'
-  });
+  ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
   if (!useTokenStore().refreshToken || !(await fetchMyAccount()))
     await createAccount(); // Create a guest account
 
@@ -47,11 +45,7 @@ router.afterEach(async (to, from) => {
   ModalController.close();
 
   if (useUserStore().isGuest && !from.name)
-    ModalController.open(GuestReminderModal, {
-      closeOnClick: true,
-      headerText: 'Welcome!',
-      headerCloseButton: true
-    });
+    ModalController.open(GuestReminderModal);
 });
 
 router.beforeEach(async (to, from, next) => {
