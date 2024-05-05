@@ -3,7 +3,20 @@ import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
 
-export async function createAccount(username?: string, password?: string) {
+export async function createGuestAccount() {
+  try {
+    const response = await server.post('/account/create-guest');
+    if (response.data.refreshToken) {
+      useTokenStore().storeRefreshToken(response.data.refreshToken);
+      useTokenStore().accessToken = response.data.accessToken;
+    }
+    return response.data;
+  } catch {
+    return null;
+  }
+}
+
+export async function claimAccount(username?: string, password?: string) {
   try {
     const isGuest = !username || !password;
     const payload = isGuest ? {} : { username, password };
@@ -51,7 +64,7 @@ export async function fetchMyAccount() {
 export async function logout() {
   useTokenStore().clear();
   useUserStore().clear();
-  await createAccount();
+  await claimAccount();
 }
 
 export async function deleteAccount(password: string) {

@@ -1,4 +1,8 @@
-import { createAccount, fetchMyAccount } from '@/api/account';
+import {
+  claimAccount,
+  createGuestAccount,
+  fetchMyAccount
+} from '@/api/account';
 import GuestReminderModal from '@/components/modals/modal-content/GuestReminderModal.vue';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import ModalController from '@/controllers/modal-controller';
@@ -39,7 +43,7 @@ const router = createRouter(routerOptions as RouterOptions);
 router.afterEach(async (to, from) => {
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
   if (!useTokenStore().refreshToken || !(await fetchMyAccount()))
-    await createAccount(); // Create a guest account
+    await createGuestAccount(); // Create a guest account
 
   if (!useUserStore().id) await fetchMyAccount();
   ModalController.close();

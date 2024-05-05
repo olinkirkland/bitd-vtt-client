@@ -124,10 +124,10 @@ input[type='email'],
 input[type='password'],
 input[type='number'] {
   background-color: var(--dark-2);
-  padding: 0.8rem;
+  padding: 1.2rem;
   color: var(--primary);
-  height: 3.6rem;
-  max-height: 3.6rem;
+  height: 4rem;
+  max-height: 4rem;
   border: 1px solid var(--dark);
   transition: all 0.2s;
   border-radius: 5px;
@@ -218,4 +218,28 @@ em {
 
 .no-line-break {
   white-space: nowrap;
+}
+
+.reminder {
+  position: relative;
+  padding: 0.8rem 1.2rem;
+  color: var(--primary);
+  background-color: rgb(0, 0, 0, 0.5);
+  width: fit-content;
+  border-radius: 5px;
+  margin: 0 auto;
+  top: -0.4rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 99;
+    left: 50%;
+    transform: translateX(-50%) translateY(-1.6rem);
+    width: 0;
+    height: 0;
+    border-left: 0.8rem solid transparent;
+    border-right: 0.8rem solid transparent;
+    border-bottom: 0.8rem solid rgb(0, 0, 0, 0.5);
+  }
 }

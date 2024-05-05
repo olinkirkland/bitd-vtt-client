@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { createAccount, login } from '@/api/account';
+import { claimAccount, login } from '@/api/account';
 import router from '@/router';
 import { ref } from 'vue';
 
@@ -20,7 +20,7 @@ const password = ref();
 
 async function onClickCreateAccount() {
   console.log('Creating account...');
-  const response = await createAccount(username.value, password.value);
+  const response = await claimAccount(username.value, password.value);
   console.log(response ? 'Account created' : 'Failed to create account');
 }
 
