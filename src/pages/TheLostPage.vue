@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import Panel from '@/components/modals/Panel.vue';
-import router from '@/router';
+import { router } from '@/router';
 function onClickGoHome() {
   router.push('/');
 }
@@ -24,6 +24,5 @@ function onClickGoHome() {
   > button {
     margin: 0 auto;
   }
-  
 }
 </style>

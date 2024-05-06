@@ -63,23 +63,30 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   }
 }
 
+.modal {
+  animation: animate-in 0.2s ease;
+}
+
+// Fade in and scale
+@keyframes animate-in {
+  from {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 // Variations
 .opaque {
   > .modal-container__background {
-    background-color: var(--dark);
+    background-color: var(--black);
   }
 }
 
-@keyframes animate-in {
-  from {
-    transform: translateY(0.4rem);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-// Media query for phones
+// Media queries
 @media (max-width: 768px) {
   .modal {
     min-width: 100%;

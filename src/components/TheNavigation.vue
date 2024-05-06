@@ -1,31 +1,40 @@
 <template>
   <nav>
     <div class="logo">
-      <router-link to="/">
+      <router-link to="/home">
         <Logo />
       </router-link>
     </div>
     <div class="page-links">
       <router-link to="/">
-        <button class="btn btn--page-link">
+        <button
+          class="btn btn--page-link"
+          :class="{ active: currentPageName === 'home' }"
+        >
           <i class="fa fa-home"></i>
         </button>
       </router-link>
 
       <router-link to="/games">
-        <button class="btn btn--page-link">
+        <button
+          class="btn btn--page-link"
+          :class="{ active: currentPageName === 'games' }"
+        >
           <i class="fa fa-dice-three"></i>
         </button>
       </router-link>
 
       <router-link to="/settings">
-        <button class="btn btn--page-link">
+        <button
+          class="btn btn--page-link"
+          :class="{ active: currentPageName === 'settings' }"
+        >
           <i class="fa fa-cog"></i>
         </button>
       </router-link>
     </div>
     <div class="account">
-      <button class="btn btn--account">
+      <button class="btn btn--account" @click="onClickAccount">
         <i class="fa fa-user-circle"></i>
         <span> {{ useUserStore().username || 'Account' }}</span>
       </button>
@@ -34,8 +43,15 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user-store';
 import Logo from '@/components/Logo.vue';
+import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
+import ModalController from '@/controllers/modal-controller';
+import { currentPageName } from '@/router';
+import { useUserStore } from '@/stores/user-store';
+
+function onClickAccount() {
+  ModalController.open(AccountModal);
+}
 </script>
 
 <style lang="scss" scoped>
@@ -83,6 +99,24 @@ nav {
   button.btn--page-link {
     color: var(--primary);
     background-color: transparent;
+
+    &::after {
+      border: none;
+      border-bottom: 0.2rem solid transparent;
+      width: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.5s;
+    }
+
+    &.active {
+      filter: brightness(1);
+    }
+
+    &.active::after {
+      width: 1rem;
+      border-color: var(--primary);
+    }
   }
 }
 
@@ -101,7 +135,7 @@ button.btn.btn--account {
 
 @media (max-width: 768px) {
   nav > .page-links {
-    right: 4.4rem;
+    right: 4.6rem; // Account button width
     left: unset;
     transform: unset;
 

@@ -2,19 +2,16 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>Guest Account</h2>
+        <h2>Welcome!</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
       <div class="guest-reminder">
         <p>
-          It doesn't look like you have your own account yet. You've been
-          allocated a guest account with the username
-          <em class="no-line-break">{{ useUserStore().username }}</em
-          >.
-        </p>
-        <p class="muted">
-          You can choose to register this account now or later.
+          It doesn't look like you have an Online in the Dark account yet.
+          <br /><span class="muted"
+            >A guest account has been generated for you.</span
+          >
         </p>
 
         <div class="column center">
@@ -25,7 +22,7 @@
           <span class="muted">or</span>
 
           <button class="btn" @click="ModalController.open(CreateAccountModal)">
-            <span>Register this Account</span>
+            <span>Register an Account</span>
           </button>
         </div>
       </div>

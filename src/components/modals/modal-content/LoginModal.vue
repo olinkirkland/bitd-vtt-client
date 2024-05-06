@@ -1,16 +1,13 @@
 <template>
-  <ModalFrame>
+  <ModalFrame :class="{ disabled: busyLoggingIn }">
     <template v-slot:header>
       <ModalHeader closeButton>
         <h2>Login</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
-      <div class="create-account">
-        <p>
-          Choose a <em>username</em> and <em>password</em> to register your
-          account.
-        </p>
+      <div class="login">
+        <p>Enter your <em>username</em> and <em>password</em>.</p>
         <div class="inputs">
           <div class="input-group">
             <label for="username">Username</label>
@@ -36,22 +33,24 @@
               {{ passwordError }}
             </span>
           </div>
-          <div class="input-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input
-              type="password"
-              @input="passwordConfirmationWasTouched = true"
-              placeholder="Confirm your password"
-              v-model="passwordConfirmation"
-            />
-            <span class="reminder shake-once" v-if="passwordConfirmationError">
-              {{ passwordConfirmationError }}
-            </span>
-          </div>
         </div>
-        <div class="row center" :class="{ disabled: !canClaimAccount }">
-          <button class="btn" @click="ModalController.close()">
-            <span>Create Account</span>
+        <div class="alert" v-if="loginError">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ loginError }}</span>
+          <button class="btn icon close" @click="loginError = ''">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="row center">
+          <button class="btn mobile-full-width" @click="onClickLogin">
+            <i v-if="busyLoggingIn" class="fas fa-circle-notch fa-spin"></i>
+            <span>Login</span>
+          </button>
+        </div>
+        <div class="row center">
+          <p>Don't have an account?</p>
+          <button class="btn btn--text" @click="onClickRegister">
+            Register
           </button>
         </div>
       </div>
@@ -60,18 +59,21 @@
 </template>
 
 <script setup lang="ts">
+import { login } from '@/api/account';
 import ModalController from '@/controllers/modal-controller';
 import { computed, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import CreateAccountModal from './CreateAccountModal.vue';
+
+const loginError = ref('');
+const busyLoggingIn = ref(false);
+
 const username = ref('');
 const usernameTouched = ref(false);
 const usernameError = computed(() => {
   if (!usernameTouched.value) return null;
-  if (username.value.length === 0) return 'Cannot be blank';
-  if (username.value.length < 4) return 'Must be at least 3 characters';
-  if (username.value.length > 16) return 'Must have no more than 16 characters';
-  if (!/^[a-zA-Z0-9]+$/.test(username.value)) return 'Letters and numbers only';
+  if (username.value.length === 0) return 'Your username, please';
   return null;
 });
 
@@ -79,36 +81,53 @@ const password = ref('');
 const passwordWasTouched = ref(false);
 const passwordError = computed(() => {
   if (!passwordWasTouched.value) return null;
-  if (password.value.length === 0) return 'Cannot be blank';
-  if (password.value.length < 8)
-    return 'Must be at least 8 characters';
-  if (password.value.length > 64)
-    return 'Cannot be more than 64 characters';
+  if (password.value.length === 0) return 'Did you forget something?';
   return null;
 });
 
-const passwordConfirmation = ref('');
-const passwordConfirmationWasTouched = ref(false);
-const passwordConfirmationError = computed(() => {
-  if (!passwordConfirmationWasTouched.value) return null;
-  if (passwordConfirmation.value.length === 0)
-    return 'You must confirm your password';
-  if (password.value !== passwordConfirmation.value)
-    return 'Passwords do not match';
-  return null;
+const canLogin = computed(() => {
+  return username.value.length > 0 && password.value.length > 0;
 });
 
-const canClaimAccount = computed(() => {
-  return (
-    username.value.length > 0 &&
-    password.value.length > 0 &&
-    password.value === passwordConfirmation.value
-  );
-});
+async function onClickLogin() {
+  if (!canLogin.value) {
+    if (
+      !usernameTouched.value ||
+      !passwordWasTouched ||
+      usernameError.value ||
+      passwordError.value
+    ) {
+      usernameTouched.value = true;
+      passwordWasTouched.value = true;
+
+      // Force restart each animation
+      const reminders = document.querySelectorAll('.reminder');
+      reminders.forEach((reminder) => {
+        reminder.classList.remove('shake-once');
+        // @ts-ignore
+        reminder.offsetWidth; // => This is a hack to force a reflow
+        reminder.classList.add('shake-once');
+      });
+
+      return;
+    }
+  }
+
+  busyLoggingIn.value = true;
+  loginError.value = '';
+  const response = await login(username.value, password.value);
+  busyLoggingIn.value = false;
+  if (!response.refreshToken) loginError.value = response;
+  else ModalController.close();
+}
+
+function onClickRegister() {
+  ModalController.open(CreateAccountModal);
+}
 </script>
 
 <style scoped lang="scss">
-.create-account {
+.login {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;

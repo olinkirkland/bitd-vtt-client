@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useTokenStore } from '../stores/token-store';
-import router from '@/router';
+import { router } from '@/router';
 
 const BASE_URL =
   location.hostname === 'localhost'
@@ -35,7 +35,7 @@ export function addInterceptors() {
       return res;
     },
     async (error) => {
-      const excludeUrls = ['/auth/token', '/auth/login', '/auth/register'];
+      const excludeUrls = ['/auth/token', '/account/login', '/account/register'];
       if (
         error.response?.status === 401 &&
         !excludeUrls.includes(error.config.url)
