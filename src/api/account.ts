@@ -60,6 +60,7 @@ export async function fetchMyAccount() {
     useUserStore().id = response.data.id;
     useUserStore().username = response.data.username;
     useUserStore().isGuest = response.data.isGuest;
+    useUserStore().games = response.data.games;
     return response.data;
   } catch {
     return null;
