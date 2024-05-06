@@ -8,12 +8,14 @@
     <template v-slot:content>
       <div class="guest-reminder">
         <p>
-          It doesn't look like you have your own account yet.<br />Your guest
-          account's username is
+          It doesn't look like you have your own account yet. You've been
+          allocated a guest account with the username
           <em class="no-line-break">{{ useUserStore().username }}</em
           >.
         </p>
-        <p class="muted">You can choose to claim this account now or later.</p>
+        <p class="muted">
+          You can choose to register this account now or later.
+        </p>
 
         <div class="column center">
           <button class="btn btn--text" @click="ModalController.close()">
@@ -23,7 +25,7 @@
           <span class="muted">or</span>
 
           <button class="btn" @click="ModalController.open(CreateAccountModal)">
-            <span>Claim this Account</span>
+            <span>Register this Account</span>
           </button>
         </div>
       </div>
@@ -34,8 +36,8 @@
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
-import ModalFrame from '../modal-parts/modal-frame.vue';
-import ModalHeader from '../modal-parts/modal-header.vue';
+import ModalFrame from '../modal-parts/ModalFrame.vue';
+import ModalHeader from '../modal-parts/ModalHeader.vue';
 import CreateAccountModal from './CreateAccountModal.vue';
 </script>
 

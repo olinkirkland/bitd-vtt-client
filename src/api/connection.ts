@@ -22,8 +22,7 @@ export function initializeConnection() {
 
 export function addInterceptors() {
   // Insert the access token into the Authorization header
-  server.interceptors.request.use((config) => {
-    if (!useTokenStore().accessToken) return config;
+  server.interceptors.request.use(async (config) => {
     //@ts-ignore
     if (!config) config = {};
     config!.headers!.Authorization = `Bearer ${useTokenStore().accessToken}`;

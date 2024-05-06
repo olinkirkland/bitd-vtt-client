@@ -1,8 +1,7 @@
 <template>
   <div class="page-layout">
-    <!-- <TheHeader /> -->
+    <TheNavigation />
     <div class="page-layout__content">
-      <!-- <TheNavigation /> -->
       <router-view name="page"></router-view>
     </div>
   </div>
@@ -10,12 +9,21 @@
 </template>
 
 <script setup lang="ts">
+import TheNavigation from './components/TheNavigation.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 </script>
 
 <style lang="scss">
-// @import './assets/css/variables.css';
-@import './assets/css/styles.css';
-// @import './assets/css/buttons.css';
-// @import './assets/css/modals.css';
+@import './assets/scss/styles.scss';
+@import './assets/scss/fonts.scss';
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  > .page-layout__content {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
 </style>

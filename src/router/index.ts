@@ -42,14 +42,16 @@ const router = createRouter(routerOptions as RouterOptions);
 
 router.afterEach(async (to, from) => {
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
-  if (!useTokenStore().refreshToken || !(await fetchMyAccount()))
+  if (!useUserStore().id) await fetchMyAccount();
+
+  if (!useTokenStore().refreshToken || !useUserStore().id)
     await createGuestAccount(); // Create a guest account
 
-  if (!useUserStore().id) await fetchMyAccount();
   ModalController.close();
 
-  if (useUserStore().isGuest && !from.name)
+  if (useUserStore().isGuest && !from.name) {
     ModalController.open(GuestReminderModal);
+  }
 });
 
 router.beforeEach(async (to, from, next) => {

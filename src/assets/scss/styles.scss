@@ -7,6 +7,10 @@
   --dark: #292836;
   --dark-2: #44475a;
 
+  //  Translucent
+  --translucent-light: rgba(0, 0, 0, 0.2);
+  --translucent-heavy: rgba(0, 0, 0, 0.6);
+
   // Primary
   --primary: #a9864f;
 
@@ -27,16 +31,29 @@
   --shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
 
   // Font
-  --font-family: 'Georgia', serif;
+  --title-font: 'Patua One', serif;
+  --body-font: 'Georgia', serif;
 }
 
 body {
   background-color: var(--light);
 
   * {
-    font-family: var(--font-family);
+    font-family: var(--body-font);
     font-size: 1.6rem;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-family: var(--title-font);
+  color: var(--primary);
+  text-transform: uppercase;
 }
 
 button {
@@ -56,41 +73,23 @@ button.btn {
   transition: all 0.2s;
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  > i {
+    font-size: 1.2rem;
+  }
 
   > span {
     display: flex;
     align-items: center;
   }
 
-  &::before,
-  &::after {
-    position: relative;
-    top: -0.2rem;
-    width: 0;
-    opacity: 0;
-    transition: all 0.2s;
-  }
-
-  &::before {
-    content: '🙥';
-  }
-
-  &::after {
-    content: '🙧';
-  }
-
   &:hover {
     filter: brightness(1.1);
-    &::before,
-    &::after {
-      width: 1.6rem;
-      opacity: 0.4;
-    }
   }
 
   &:active,
   &.active {
-    transition: none;
     filter: brightness(0.8);
   }
 
@@ -116,7 +115,7 @@ button.btn {
 
 button.icon {
   background-color: transparent;
-  color: var(--light);
+  color: var(--primary);
 }
 
 input[type='text'],
@@ -162,7 +161,7 @@ input[type='number'] {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   padding: 1rem;
 }
 
@@ -221,14 +220,20 @@ em {
 }
 
 .reminder {
+  display: inline-block;
   position: relative;
   padding: 0.8rem 1.2rem;
   color: var(--primary);
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: var(--translucent-heavy);
   width: fit-content;
   border-radius: 5px;
   margin: 0 auto;
   top: -0.4rem;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--shadow);
 
   &::before {
     content: '';
@@ -240,6 +245,39 @@ em {
     height: 0;
     border-left: 0.8rem solid transparent;
     border-right: 0.8rem solid transparent;
-    border-bottom: 0.8rem solid rgb(0, 0, 0, 0.5);
+    border-bottom: 0.8rem solid var(--translucent-heavy);
+  }
+}
+
+.shake-once {
+  animation: shake 0.2s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-0.4rem);
+  }
+  50% {
+    transform: translateX(0.4rem);
+  }
+  75% {
+    transform: translateX(-0.2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// 🙥 🙧 ❖
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 768px) {
+  .mobile-full-width {
+    width: 100%;
   }
 }

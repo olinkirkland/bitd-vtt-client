@@ -2,13 +2,13 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>Claim Guest Account</h2>
+        <h2>Register an Account</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
       <div class="create-account">
         <p>
-          Enter a <em>username</em> and <em>password</em> to claim the guest
+          Choose a <em>username</em> and <em>password</em> to register your
           account.
         </p>
         <div class="inputs">
@@ -20,7 +20,7 @@
               placeholder="Enter a username"
               v-model="username"
             />
-            <span class="reminder" v-if="usernameError">
+            <span class="reminder shake-once" v-if="usernameError">
               {{ usernameError }}
             </span>
           </div>
@@ -32,7 +32,7 @@
               placeholder="Create a password"
               v-model="password"
             />
-            <span class="reminder" v-if="passwordError">
+            <span class="reminder shake-once" v-if="passwordError">
               {{ passwordError }}
             </span>
           </div>
@@ -44,15 +44,23 @@
               placeholder="Confirm your password"
               v-model="passwordConfirmation"
             />
-            <span class="reminder" v-if="passwordConfirmationError">
+            <span class="reminder shake-once" v-if="passwordConfirmationError">
               {{ passwordConfirmationError }}
             </span>
           </div>
         </div>
-        <div class="row center" :class="{ disabled: !canClaimAccount }">
-          <button class="btn" @click="ModalController.close()">
-            <span>Claim Account</span>
+        <div class="row center">
+          <button
+            class="btn mobile-full-width"
+            @click="ModalController.close()"
+          >
+            <span>Create Account</span>
           </button>
+        </div>
+
+        <div class="row center">
+          <p>Already have an account?</p>
+          <a href="#" @click="ModalController.open('login')">Log in</a>
         </div>
       </div>
     </template>
@@ -62,17 +70,16 @@
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
 import { computed, ref } from 'vue';
-import ModalFrame from '../modal-parts/modal-frame.vue';
-import ModalHeader from '../modal-parts/modal-header.vue';
+import ModalFrame from '../modal-parts/ModalFrame.vue';
+import ModalHeader from '../modal-parts/ModalHeader.vue';
 const username = ref('');
 const usernameTouched = ref(false);
 const usernameError = computed(() => {
   if (!usernameTouched.value) return null;
-  if (username.value.length === 0) return 'Username is required';
-  if (username.value.length < 4)
-    return 'Username must be at least 3 characters';
-  if (!/^[a-zA-Z0-9]+$/.test(username.value))
-    return 'Username must have letters and numbers only';
+  if (username.value.length === 0) return 'Cannot be blank';
+  if (username.value.length < 3) return 'Must be at least 3 characters';
+  if (username.value.length > 16) return 'Must have no more than 16 characters';
+  if (!/^[a-zA-Z0-9]+$/.test(username.value)) return 'Letters and numbers only';
   return null;
 });
 
@@ -80,9 +87,9 @@ const password = ref('');
 const passwordWasTouched = ref(false);
 const passwordError = computed(() => {
   if (!passwordWasTouched.value) return null;
-  if (password.value.length === 0) return 'Password is required';
-  if (password.value.length < 8)
-    return 'Password must be at least 8 characters';
+  if (password.value.length === 0) return 'Cannot be blank';
+  if (password.value.length < 8) return 'Must be at least 8 characters';
+  if (password.value.length > 64) return 'Cannot be more than 64 characters';
   return null;
 });
 
@@ -91,18 +98,10 @@ const passwordConfirmationWasTouched = ref(false);
 const passwordConfirmationError = computed(() => {
   if (!passwordConfirmationWasTouched.value) return null;
   if (passwordConfirmation.value.length === 0)
-    return 'Password confirmation is required';
+    return 'You must confirm your password';
   if (password.value !== passwordConfirmation.value)
     return 'Passwords do not match';
   return null;
-});
-
-const canClaimAccount = computed(() => {
-  return (
-    username.value.length > 0 &&
-    password.value.length > 0 &&
-    password.value === passwordConfirmation.value
-  );
 });
 </script>
 
@@ -116,7 +115,7 @@ const canClaimAccount = computed(() => {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: var(--translucent-light);
     padding: 2rem;
   }
 }
