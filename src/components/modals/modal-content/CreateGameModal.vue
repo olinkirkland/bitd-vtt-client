@@ -30,11 +30,7 @@
           <div class="input-group">
             <label for="coverImage">Cover Image</label>
             <ul class="cover-image-list">
-              <li
-                v-for="image in coverImages"
-                :key="image.id"
-                :class="{ selected: coverImage === image.id }"
-              >
+              <li v-for="image in coverImages" :key="image.id">
                 <button
                   @click="coverImage = image.id"
                   :style="{ backgroundColor: image.commonColor }"
@@ -44,8 +40,8 @@
                     @load="image.loaded = true"
                     @error="image.loaded = true"
                     :class="{ loaded: image.loaded }"
-                    v-show="image.loaded"
                   />
+                  <div class="overlay" v-if="coverImage === image.id"></div>
                   <div class="caption">
                     <span>{{ image.name }}</span>
                   </div>
@@ -160,18 +156,6 @@ ul.cover-image-list {
     overflow: hidden;
     border-radius: 5px;
 
-    &.selected > button {
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--translucent-heavy);
-      }
-    }
-
     button {
       position: relative;
       display: flex;
@@ -194,12 +178,20 @@ ul.cover-image-list {
         height: 100%;
         object-fit: cover;
         object-position: 50% 50%;
-        transition: opacity 0.3s;
+        transition: opacity 1s;
         opacity: 0;
 
         &.loaded {
           opacity: 1;
         }
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: var(--translucent-heavy);
+        opacity: 0.5;
       }
 
       .caption {
