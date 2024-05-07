@@ -1,6 +1,6 @@
-import GuestReminderModal from '@/components/modals/modal-content/GuestReminderModal.vue';
-import ModalController from '@/controllers/modal-controller';
 import { router } from '@/router';
+import { ForeignUser } from '@/types/user';
+import { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
@@ -80,4 +80,18 @@ export async function deleteAccount(password: string) {
 
 export async function changePassword(password: string, newPassword: string) {
   // Change password logic
+}
+
+export async function getUsers(userIds: string[]) {
+  try {
+    const response = await server.get('/account/users', {
+      params: {
+        ids: userIds
+      }
+    });
+    if (response.status !== HttpStatusCode.Ok) return null;
+    return response.data as ForeignUser[];
+  } catch {
+    return null;
+  }
 }

@@ -2,38 +2,172 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>Login</h2>
+        <h2>Game Preview</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
       <div class="game-preview">
-        <p>TODO info about this game</p>
-        <button>
-          <span>Join Game</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
+        <div
+          class="title-block"
+          :style="{ backgroundColor: coverImage?.commonColor }"
+        >
+          <img class="game-preview__cover" :src="coverImage?.url" />
+          <div class="overlay">
+            <h1>{{ props.game.name }}</h1>
+          </div>
+        </div>
+        <div class="row center game-join-bar">
+          <span v-if="isGM" class="tag gm">GM</span>
+          <span v-else class="tag player">
+            <span>Player</span>
+          </span>
+          <div class="row users">
+            <i class="fas fa-users"></i>
+            <span>{{ props.game.players.length }}</span>
+          </div>
+          <button class="btn mobile-full-width disabled">
+            <span>Join Game</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+        <Divider />
+        <h3>Players</h3>
+        <div class="row center waiting-players" v-if="players.length === 0">
+          <i class="fas fa-circle-notch fa-spin"></i>
+        </div>
+        <ul v-else class="players">
+          <li v-for="player in players" class="row" :key="player.id">
+            <i class="fas fa-user-alt"></i>
+            <span>{{ player.username }}</span>
+          </li>
+        </ul>
       </div>
     </template>
   </ModalFrame>
 </template>
 
 <script setup lang="ts">
+import { getUsers } from '@/api/account';
+import coverImages from '@/assets/data/cover-images.json';
+import Divider from '@/components/Divider.vue';
+import { useUserStore } from '@/stores/user-store';
+import { Game } from '@/types/game';
+import { ForeignUser } from '@/types/user';
+import { computed, onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+
+const props = defineProps<{
+  game: Game;
+}>();
+
+const isGM = computed(() => props.game.owner === useUserStore().id);
+const players = ref<ForeignUser[]>([]);
+
+onMounted(async () => {
+  players.value = (await getUsers(props.game.players)) || ([] as ForeignUser[]);
+});
+
+const coverImage = computed(() => {
+  return coverImages.find((image) => image.id === props.game.coverImage);
+});
 </script>
 
 <style scoped lang="scss">
-.login {
+.modal {
+  min-width: 64rem;
+  max-width: 64rem;
+}
+:deep(.modal__header) {
+  h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.game-preview {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 
-  .inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
+  .title-block {
+    position: relative;
+    border: 1px solid var(--dark-2);
+    line-height: 0;
+
+    img.game-preview__cover {
+      width: 100%;
+      height: 16rem;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+    > .overlay {
+      position: absolute;
+      line-height: normal;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      padding: 1.6rem;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.35);
+      h1 {
+        text-align: center;
+        width: 100%;
+        color: var(--light);
+        font-size: 2.8rem;
+        text-shadow: 2px 2px 2px var(--dark);
+      }
+    }
+  }
+
+  ul.players {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
     background-color: var(--translucent-light);
-    padding: 2rem;
+    padding: 0.4rem 1rem;
+
+    > li {
+      padding: 1.2rem 0.8rem;
+      gap: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 1.2rem;
+        opacity: 0.5;
+      }
+
+      > span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.game-join-bar {
+  > button {
+    margin-left: 4rem;
+  }
+}
+
+.waiting-players {
+  height: 8rem;
+}
+
+@media (max-width: 768px) {
+  .game-preview {
+    ul.players > li:not(:last-child) {
+      border-bottom: 1px solid var(--dark-2);
+    }
   }
 }
 </style>

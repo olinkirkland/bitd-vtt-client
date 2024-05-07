@@ -3,9 +3,11 @@ import { useTokenStore } from '../stores/token-store';
 import { router } from '@/router';
 
 const BASE_URL =
-  location.hostname === 'localhost'
+  location.hostname === 'localhost' && false
     ? 'http://localhost:3005'
-    : 'https://xxxx-xxxx-production.up.railway.app/'; // Replace with the production URL
+    : 'https://bitd-vtt-server-production.up.railway.app/'; // Replace with the production URL
+
+console.log('BASE_URL:', BASE_URL);
 
 export const server = axios.create({
   baseURL: BASE_URL,
@@ -35,7 +37,11 @@ export function addInterceptors() {
       return res;
     },
     async (error) => {
-      const excludeUrls = ['/auth/token', '/account/login', '/account/register'];
+      const excludeUrls = [
+        '/auth/token',
+        '/account/login',
+        '/account/register'
+      ];
       if (
         error.response?.status === 401 &&
         !excludeUrls.includes(error.config.url)

@@ -1,9 +1,9 @@
 <template>
   <div class="page">
-    <h1>Games Page</h1>
+    <!-- <h1>Games Page</h1> -->
     <ul class="game-list">
       <li v-for="game in games" :key="game._id">
-        <GameCard :game="game" />
+        <GameCard :game="game" @click="onClickGame(game)" />
       </li>
       <li>
         <div class="new-game-card" @click="onClickNewGame">
@@ -18,14 +18,20 @@
 <script setup lang="ts">
 import GameCard from '@/components/GameCard.vue';
 import CreateGameModal from '@/components/modals/modal-content/CreateGameModal.vue';
+import GamePreviewModal from '@/components/modals/modal-content/GamePreviewModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
+import { Game } from '@/types/game';
 import { computed } from 'vue';
 async function onClickNewGame() {
   ModalController.open(CreateGameModal);
 }
 
 const games = computed(() => useUserStore().games);
+
+function onClickGame(game: Game) {
+  ModalController.open(GamePreviewModal, { game });
+}
 </script>
 
 <style lang="scss" scoped>

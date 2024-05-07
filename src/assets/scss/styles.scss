@@ -32,7 +32,7 @@
   --shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
 
   // Font
-  --title-font: 'Patua One', serif;
+  --title-font: 'Sedan SC', 'Georgia', serif;
   --body-font: 'Georgia', serif;
 }
 
@@ -46,15 +46,21 @@ body {
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2 {
   font-weight: normal;
   font-family: var(--title-font);
   color: var(--primary);
   text-transform: uppercase;
+}
+
+h3 {
+  font-family: var(--body-font);
+  opacity: 0.8;
+  font-weight: normal;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
 }
 
 button {

@@ -24,5 +24,6 @@ defineProps({
   border-bottom: 1px solid var(--dark-2);
   height: 5.2rem;
   padding: 0 2rem;
+  gap: 1.6rem;
 }
 </style>
