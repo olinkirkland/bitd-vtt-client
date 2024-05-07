@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "colors": "node ./scripts/common-colors.js",
-    "build": "vue-tsc && vite build",
+    "build": "npm run colors && vue-tsc && vite build",
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },
