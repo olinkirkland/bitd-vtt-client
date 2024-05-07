@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue';
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 
-const base = process.env.NODE_ENV === 'production' ? '/bitd-vtt-client/' : '/';
+const base = process.env.NODE_ENV === 'development' ? '/' : '/bitd-vtt-client';
 
 export default defineConfig({
   plugins: [vue()],
