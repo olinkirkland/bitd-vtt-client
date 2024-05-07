@@ -1,11 +1,13 @@
 import vue from '@vitejs/plugin-vue';
-import { URL, fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+const base = process.env.NODE_ENV === 'production' ? '/bitd-vtt-client/' : '/';
+
 export default defineConfig({
   plugins: [vue()],
   server: { host: false }, // For external IP access,
+  base,
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
