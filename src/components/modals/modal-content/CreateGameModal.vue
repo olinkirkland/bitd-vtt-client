@@ -168,6 +168,10 @@ ul.cover-image-list {
       height: 100%;
       background-color: transparent;
 
+      &:hover {
+        filter: brightness(1.1);
+      }
+
       > i {
         color: var(--light);
         position: absolute;

@@ -39,10 +39,17 @@ ul.game-list {
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
   overflow-y: auto;
+
+  > li {
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
 }
 
 .new-game-card {
-  cursor: pointer;
   border: 1px solid var(--primary);
   color: var(--primary);
   display: flex;
