@@ -124,7 +124,7 @@ async function onClickCreate() {
   createError.value = '';
   const response = await createNewGame(gameName.value, coverImage.value);
   busyCreating.value = false;
-  if (!response.refreshToken) createError.value = response;
+  if (response) createError.value = response;
   else ModalController.close();
 }
 </script>
@@ -134,6 +134,7 @@ async function onClickCreate() {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  min-width: 52rem;
 
   .inputs {
     display: flex;
@@ -145,12 +146,15 @@ async function onClickCreate() {
 }
 
 ul.cover-image-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 1rem;
-  overflow-x: auto;
+  max-height: 20rem;
+  overflow-y: auto;
+  scrollbar-width: none;
 
   > li {
-    min-width: 12rem;
+    min-width: 100%;
     max-width: 12rem;
     height: 12rem;
     overflow: hidden;
@@ -219,10 +223,18 @@ ul.cover-image-list {
   }
 }
 
-// on screens smaller than 1200, hide the scrollbar for the cover image list
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
+  .game {
+    min-width: 0;
+  }
   ul.cover-image-list {
-    scrollbar-width: none;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    > li {
+      min-width: 45%;
+      height: 8rem;
+    }
   }
 }
 </style>

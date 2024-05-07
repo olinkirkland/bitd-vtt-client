@@ -207,6 +207,10 @@ pre {
   gap: 0.8rem;
 }
 
+.spread {
+  justify-content: space-between;
+}
+
 .column {
   display: flex;
   flex-direction: column;
@@ -333,6 +337,21 @@ em {
   100% {
     transform: translateX(0);
   }
+}
+
+span.tag {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  gap: 0.4rem;
+  color: var(--light);
+  background-color: var(--dark-2);
+  border-radius: 99px;
+  margin: 0.4rem;
+  font-size: 1rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 // 🙥 🙧 ❖
