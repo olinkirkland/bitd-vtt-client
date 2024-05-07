@@ -15,14 +15,12 @@
         </p>
 
         <div class="column center">
-          <button class="btn btn--text" @click="ModalController.close()">
-            <span>Continue as {{ useUserStore().username }}</span>
-          </button>
-
-          <span class="muted">or</span>
-
           <button class="btn" @click="ModalController.open(CreateAccountModal)">
             <span>Register an Account</span>
+          </button>
+          <span class="muted">or</span>
+          <button class="btn btn--text" @click="ModalController.close()">
+            <span>Continue as {{ useUserStore().username }}</span>
           </button>
         </div>
       </div>

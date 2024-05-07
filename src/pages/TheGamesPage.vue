@@ -20,11 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import { createNewGame } from '@/api/games';
+import CreateGameModal from '@/components/modals/modal-content/CreateGameModal.vue';
+import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
 import { computed } from 'vue';
 async function onClickNewGame() {
-  await createNewGame();
+  ModalController.open(CreateGameModal);
 }
 
 const games = computed(() => useUserStore().games);

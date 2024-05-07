@@ -1,0 +1,42 @@
+[
+  {
+    "id": "46c018c0-de33-4bd2-9024-71548b22db7e",
+    "name": "Forest",
+    "author": "Dan Meyers",
+    "source": "https://unsplash.com/photos/tall-trees-wB6B3AqXjy0",
+    "url": "images/cover-images/forest.jpg",
+    "commonColor": "#8b7d73"
+  },
+  {
+    "id": "9131e281-184e-4e2d-8994-8536f9d3c0d0",
+    "name": "Forest 2",
+    "author": "Simon Berger",
+    "source": "https://unsplash.com/photos/grayscale-photo-of-trees-and-pathway-rydQVdwcgUQ",
+    "url": "images/cover-images/forest-2.jpg",
+    "commonColor": "#7f7f7f"
+  },
+  {
+    "id": "2e2ec06d-97b4-4cce-b88d-a58c10b8bef8",
+    "name": "Castle",
+    "author": "Cederic Vandenberghe",
+    "source": "https://unsplash.com/photos/closeup-photo-of-castle-with-mist-21DP3hytVHw",
+    "url": "images/cover-images/castle.jpg",
+    "commonColor": "#3f7690"
+  },
+  {
+    "id": "230ecd94-c69b-4444-a7e2-2585a2652051",
+    "name": "Broadsword",
+    "author": "Jonathan Kemper",
+    "source": "https://unsplash.com/photos/brown-wooden-handle-bar-on-brown-wooden-table-4_ZvmLAeIZk",
+    "url": "images/cover-images/broadsword.jpg",
+    "commonColor": "#6c4c34"
+  },
+  {
+    "id": "16761f54-5c0c-4f56-8274-f04af8e7f33e",
+    "name": "Warband",
+    "author": "Hasan Almasi",
+    "source": "https://unsplash.com/photos/people-gathering-on-street-during-nighttime-OwqLxCvoVxI",
+    "url": "images/cover-images/warband.jpg",
+    "commonColor": "#c34e33"
+  }
+]
