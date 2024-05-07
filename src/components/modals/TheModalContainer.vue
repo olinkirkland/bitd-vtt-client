@@ -11,16 +11,12 @@
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
-import { ComponentOptions, computed, ref, shallowRef } from 'vue';
+import { ComponentOptions, ref, shallowRef } from 'vue';
 
 const modalRef = ref();
 const currentModal = shallowRef<ComponentOptions | null>(null);
 const currentModalConfig = shallowRef<any | null>(null);
-const showHeader = computed(
-  () =>
-    !!currentModalConfig.value?.headerText &&
-    currentModalConfig.value?.headerCloseButton
-);
+const fadeInterval = ref();
 
 function onClickBackground() {
   if (currentModalConfig.value?.closeOnClick) ModalController.close();
@@ -28,6 +24,7 @@ function onClickBackground() {
 
 ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   (document.activeElement as HTMLElement)?.blur();
+  if (fadeInterval.value) clearInterval(fadeInterval.value);
 
   // Close
   if (!modal) return (currentModal.value = null);
@@ -35,6 +32,25 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   // Open
   currentModal.value = { ...modal };
   currentModalConfig.value = { ...modalConfig };
+
+  requestAnimationFrame(() => {
+    const modal = modalRef.value?.$el;
+    if (!modal) return;
+    const modalHeaderChildren = modal.querySelector('.modal__header')
+      ? [modal.querySelector('.modal__header')]
+      : [];
+    const modalContentChildren = Array.from<HTMLElement>(
+      modal.querySelector('.modal__content > div')?.children || []
+    );
+    const modalChildren = [...modalHeaderChildren, ...modalContentChildren];
+
+    modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
+
+    fadeInterval.value = setInterval(() => {
+      if (!modalChildren.length) clearInterval(fadeInterval.value);
+      else modalChildren.shift()?.classList.remove('hidden');
+    }, 50);
+  });
 });
 </script>
 
@@ -65,6 +81,14 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 
 .modal {
   animation: animate-in 0.2s ease;
+}
+
+:deep(.modal .hidden) {
+  opacity: 0;
+}
+
+:deep(.modal *) {
+  transition: opacity 0.5s ease;
 }
 
 // Fade in and scale
