@@ -74,7 +74,7 @@ function onOpen() {
 
 function onClose() {
   console.log('@game-controller: onClose');
-  server.post(`/games/${useGameStore().id}/unsubscribe`);
+  server.post(`/game/${useGameStore().id}/unsubscribe`);
 }
 
 function onError(error: any) {

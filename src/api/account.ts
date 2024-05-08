@@ -4,6 +4,7 @@ import { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
+import { useGameStore } from '@/stores/game-store';
 
 export async function createGuestAccount() {
   try {
@@ -68,8 +69,13 @@ export async function fetchMyAccount() {
 }
 
 export async function logout() {
+  // Clear tokens
   useTokenStore().clear();
   useUserStore().clear();
+  
+  // Clear the current game
+  useGameStore().clear();
+
   // Force the router to redirect from a 'null' page to the home page
   router.push('/');
 }

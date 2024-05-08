@@ -1,6 +1,7 @@
 import { router } from '@/router';
 import axios from 'axios';
 import { useTokenStore } from '../stores/token-store';
+import { logout } from './account';
 
 export const BASE_URL =
   // false
@@ -85,8 +86,7 @@ export async function fetchAccessToken() {
     });
   } catch (error) {
     console.error('Invalid refresh token');
-    useTokenStore().clear();
-    router.push('/');
+    logout();
     return;
   }
 
