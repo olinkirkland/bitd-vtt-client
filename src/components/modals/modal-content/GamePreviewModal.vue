@@ -25,7 +25,7 @@
             <i class="fas fa-users"></i>
             <span>{{ props.game.players.length }}</span>
           </div>
-          <button class="btn mobile-full-width disabled">
+          <button class="btn mobile-full-width" @click="onClickJoinGame">
             <span>Join Game</span>
             <i class="fas fa-arrow-right"></i>
           </button>
@@ -56,6 +56,8 @@ import { ForeignUser } from '@/types/user';
 import { computed, onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import { router } from '@/router';
+import ModalController from '@/controllers/modal-controller';
 
 const props = defineProps<{
   game: Game;
@@ -71,6 +73,19 @@ onMounted(async () => {
 const coverImage = computed(() => {
   return coverImages.find((image) => image.id === props.game.coverImage);
 });
+
+function onClickJoinGame() {
+  // {
+  //   path: '/game/:id',
+  //   components: {
+  //     page: TheGamePage
+  //   },
+  //   name: 'game'
+  // },
+
+  router.push({ name: 'game', params: { id: props.game._id } });
+  ModalController.close();
+}
 </script>
 
 <style scoped lang="scss">

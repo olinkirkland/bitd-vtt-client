@@ -117,6 +117,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     max-width: 100%;
     height: 100%;
     border-radius: 0;
+    animation: none;
   }
 }
 </style>

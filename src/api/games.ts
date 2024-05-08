@@ -17,3 +17,15 @@ export async function createNewGame(gameName: string, coverImage: string) {
     return error.response.data;
   }
 }
+
+export async function joinGameWithInvite(inviteCode: string) {
+  try {
+    const response = await server.post(`/games/join/${inviteCode}`);
+    if (response.status === HttpStatusCode.Ok) {
+      // TODO
+      return null;
+    }
+  } catch (error: any) {
+    return error.response.data;
+  }
+}

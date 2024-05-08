@@ -1,16 +1,17 @@
+import { router } from '@/router';
 import axios from 'axios';
 import { useTokenStore } from '../stores/token-store';
-import { router } from '@/router';
 
-const BASE_URL =
-  location.hostname === 'localhost' && false
-    ? 'http://localhost:3005'
-    : 'https://bitd-vtt-server-production.up.railway.app/'; // Replace with the production URL
+export const BASE_URL =
+  // false
+  location.hostname === 'localhost'
+    ? 'http://localhost'
+    : 'https://bitd-vtt-server-production.up.railway.app'; // Replace with the production URL
 
 console.log('BASE_URL:', BASE_URL);
 
 export const server = axios.create({
-  baseURL: BASE_URL,
+  baseURL: BASE_URL + ':3005',
   timeout: 10000,
   withCredentials: true,
   headers: {
@@ -76,9 +77,18 @@ export function addInterceptors() {
   );
 }
 
-async function fetchAccessToken() {
-  const response = await server.put('/auth/token', {
-    refreshToken: useTokenStore().refreshToken
-  });
+export async function fetchAccessToken() {
+  let response;
+  try {
+    response = await server.put('/auth/token', {
+      refreshToken: useTokenStore().refreshToken
+    });
+  } catch (error) {
+    console.error('Invalid refresh token');
+    useTokenStore().clear();
+    router.push('/');
+    return;
+  }
+
   useTokenStore().accessToken = response.data.accessToken;
 }
