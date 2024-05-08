@@ -6,13 +6,13 @@ import { logout } from './account';
 export const BASE_URL =
   // false
   location.hostname === 'localhost'
-    ? 'http://localhost'
+    ? 'http://localhost:3005'
     : 'https://bitd-vtt-server-production.up.railway.app'; // Replace with the production URL
 
 console.log('BASE_URL:', BASE_URL);
 
 export const server = axios.create({
-  baseURL: BASE_URL + ':3005',
+  baseURL: BASE_URL,
   timeout: 10000,
   withCredentials: true,
   headers: {

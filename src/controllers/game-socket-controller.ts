@@ -25,8 +25,9 @@ export async function connectToGame() {
   // User inputs will be sent to the server via REST API
   // The server will broadcast the game state to all clients connected to this game ID
 
-  // Connect to the ws (3006)
-  const url = BASE_URL.replace(/^https?:\/\//i, 'ws://') + ':3006';
+  // Connect to the ws
+  // Replace the port with 3006
+  const url = BASE_URL.replace(/^https?/, 'ws').replace(/:\d+$/, ':3006');
 
   try {
     socket = new WebSocket(url);
