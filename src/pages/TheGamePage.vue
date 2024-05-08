@@ -14,7 +14,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const gameId = route.params.id as string;
 useGameStore().setGameId(gameId);
-connectToGame();
 
 const game: any = useGameStore().gameState || {};
 </script>

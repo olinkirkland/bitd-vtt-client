@@ -4,7 +4,7 @@ import { server } from './connection';
 
 export async function createNewGame(gameName: string, coverImage: string) {
   try {
-    const response = await server.post('/games/new', {
+    const response = await server.post('/game/new', {
       gameName,
       coverImage
     });
@@ -20,7 +20,7 @@ export async function createNewGame(gameName: string, coverImage: string) {
 
 export async function joinGameWithInvite(inviteCode: string) {
   try {
-    const response = await server.post(`/games/join/${inviteCode}`);
+    const response = await server.post(`/game/join/${inviteCode}`);
     if (response.status === HttpStatusCode.Ok) {
       // TODO
       return null;

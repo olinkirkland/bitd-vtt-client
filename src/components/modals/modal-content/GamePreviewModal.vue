@@ -32,15 +32,20 @@
         </div>
         <Divider />
         <h3>Players</h3>
-        <div class="row center waiting-players" v-if="players.length === 0">
-          <i class="fas fa-circle-notch fa-spin"></i>
+        <div class="players-container">
+          <div
+            class="row center waiting-players"
+            :class="{ collapsed: players.length > 0 }"
+          >
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <ul class="players" :class="{ collapsed: players.length === 0 }">
+            <li v-for="player in players" class="row" :key="player.id">
+              <i class="fas fa-user-alt"></i>
+              <span>{{ player.username }}</span>
+            </li>
+          </ul>
         </div>
-        <ul v-else class="players">
-          <li v-for="player in players" class="row" :key="player.id">
-            <i class="fas fa-user-alt"></i>
-            <span>{{ player.username }}</span>
-          </li>
-        </ul>
       </div>
     </template>
   </ModalFrame>
@@ -50,14 +55,14 @@
 import { getUsers } from '@/api/account';
 import coverImages from '@/assets/data/cover-images.json';
 import Divider from '@/components/Divider.vue';
+import ModalController from '@/controllers/modal-controller';
+import { router } from '@/router';
 import { useUserStore } from '@/stores/user-store';
 import { Game } from '@/types/game';
 import { ForeignUser } from '@/types/user';
 import { computed, onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import { router } from '@/router';
-import ModalController from '@/controllers/modal-controller';
 
 const props = defineProps<{
   game: Game;
@@ -75,14 +80,6 @@ const coverImage = computed(() => {
 });
 
 function onClickJoinGame() {
-  // {
-  //   path: '/game/:id',
-  //   components: {
-  //     page: TheGamePage
-  //   },
-  //   name: 'game'
-  // },
-
   router.push({ name: 'game', params: { id: props.game._id } });
   ModalController.close();
 }
@@ -141,41 +138,70 @@ function onClickJoinGame() {
     }
   }
 
-  ul.players {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-    background-color: var(--translucent-light);
-    padding: 0.4rem 1rem;
+  .game-join-bar {
+    > button {
+      margin-left: 4rem;
+    }
+  }
 
-    > li {
-      padding: 1.2rem 0.8rem;
-      gap: 1.6rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  .players-container {
+    position: relative;
+    width: 100%;
+    min-height: 4rem;
 
-      i {
-        font-size: 1.2rem;
-        opacity: 0.5;
+    ul.players {
+      display: grid;
+      overflow-y: auto;
+      scrollbar-width: none;
+      grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+      background-color: var(--translucent-light);
+      padding: 0.4rem 1rem;
+      max-height: 16rem;
+      opacity: 1;
+      transition-property: max-height, opacity;
+      transition-duration: 2s;
+
+      > li {
+        padding: 1.2rem 0.8rem;
+        gap: 1.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 1.2rem;
+          opacity: 0.5;
+        }
+
+        > span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
-      > span {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      &.collapsed {
+        max-height: 0;
+        opacity: 0;
+      }
+    }
+
+    .waiting-players {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 1s;
+
+      &.collapsed {
+        opacity: 0;
       }
     }
   }
-}
-
-.game-join-bar {
-  > button {
-    margin-left: 4rem;
-  }
-}
-
-.waiting-players {
-  height: 8rem;
 }
 
 @media (max-width: 768px) {

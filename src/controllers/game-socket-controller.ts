@@ -9,9 +9,10 @@ let socket: WebSocket | null = null;
 
 export async function connectToGame() {
   if (socket) await disconnectFromGame();
+
   try {
-    const response = await server.post(`/games/${useGameStore().id}/subscribe`);
-    console.log(response);
+    const response = await server.post(`/game/${useGameStore().id}/subscribe`);
+    const { data } = response;
   } catch (error: any) {
     console.error('Failed to subscribe to game:', error);
     return false;
@@ -26,7 +27,6 @@ export async function connectToGame() {
 
   // Connect to the ws (3006)
   const url = BASE_URL.replace(/^https?:\/\//i, 'ws://') + ':3006';
-  console.log('WS url:', url);
 
   try {
     socket = new WebSocket(url);
