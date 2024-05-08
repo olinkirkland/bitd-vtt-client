@@ -14,7 +14,7 @@ export async function connectToGame() {
     const response = await server.post(`/game/${useGameStore().id}/subscribe`);
     const { data } = response;
   } catch (error: any) {
-    console.error('Failed to subscribe to game:', error);
+    console.error('Failed to subscribe to game:', error.response.data);
     return false;
   }
 

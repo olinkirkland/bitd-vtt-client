@@ -1,15 +1,12 @@
 <template>
-  <footer>
-    <div class="game-block row center" v-if="game.id && notOnGamePage">
+  <footer v-if="game.id && notOnGamePage">
+    <div class="game-block row center">
       <button class="btn" @click="onClickGoToGame">
         <span>
           {{ game.id }}
         </span>
         <i class="fas fa-arrow-right"></i>
       </button>
-    </div>
-    <div class="row center">
-      <span> &copy; {{ currentYear }} </span>
     </div>
   </footer>
 </template>
@@ -19,9 +16,7 @@ import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { computed } from 'vue';
 
-const currentYear = new Date().getFullYear();
 const game = useGameStore();
-
 const notOnGamePage = computed(() => router.currentRoute.value.name !== 'game');
 
 function onClickGoToGame() {
