@@ -78,7 +78,10 @@ router.afterEach(async (to, from) => {
   if (useTokenStore().refreshToken && !useTokenStore().accessToken)
     await fetchAccessToken();
 
-  if (!useUserStore().id) await fetchMyAccount();
+  if (!useUserStore().id) {
+    console.log('@index.ts: fetchMyAccount() because no user id');
+    await fetchMyAccount();
+  }
 
   if (!useTokenStore().refreshToken || !useUserStore().id)
     await createGuestAccount(); // Create a guest account

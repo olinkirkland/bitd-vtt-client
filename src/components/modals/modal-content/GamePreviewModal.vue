@@ -17,10 +17,7 @@
           </div>
         </div>
         <div class="row center game-join-bar">
-          <span v-if="isGM" class="tag gm">GM</span>
-          <span v-else class="tag player">
-            <span>Player</span>
-          </span>
+          <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
           <div class="row users">
             <i class="fas fa-users"></i>
             <span>{{ props.game.players.length }}</span>
@@ -156,7 +153,7 @@ function onClickJoinGame() {
       grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
       background-color: var(--translucent-light);
       padding: 0.4rem 1rem;
-      max-height: 16rem;
+      max-height: 100rem;
       opacity: 1;
       transition-property: max-height, opacity;
       transition-duration: 2s;

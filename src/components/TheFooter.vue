@@ -2,9 +2,7 @@
   <footer v-if="game.id && notOnGamePage">
     <div class="game-block row center">
       <button class="btn mobile-full-width" @click="onClickGoToGame">
-        <span>
-          {{ game.id }}
-        </span>
+        <span> Return to {{ game.gameState.name }} </span>
         <i class="fas fa-arrow-right"></i>
       </button>
     </div>

@@ -159,6 +159,7 @@ ul.cover-image-list {
   scrollbar-width: none;
 
   > li {
+    width: 100%;
     min-width: 100%;
     max-width: 12rem;
     height: 12rem;

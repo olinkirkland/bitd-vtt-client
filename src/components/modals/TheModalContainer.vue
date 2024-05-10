@@ -34,13 +34,13 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   currentModalConfig.value = { ...modalConfig };
 
   requestAnimationFrame(() => {
-    const modal = modalRef.value?.$el;
-    if (!modal) return;
-    const modalHeaderChildren = modal.querySelector('.modal__header')
-      ? [modal.querySelector('.modal__header')]
+    const modalEl = modalRef.value?.$el;
+    if (!modalEl) return;
+    const modalHeaderChildren = modalEl.querySelector('.modal__header')
+      ? [modalEl.querySelector('.modal__header')]
       : [];
     const modalContentChildren = Array.from<HTMLElement>(
-      modal.querySelector('.modal__content > div')?.children || []
+      modalEl.querySelector('.modal__content > div')?.children || []
     );
     const modalChildren = [...modalHeaderChildren, ...modalContentChildren];
 
@@ -84,13 +84,15 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   max-height: calc(100vh - 4rem);
 }
 
-:deep(.modal .hidden) {
-  opacity: 0;
-}
-
 :deep(.modal *) {
   transition: opacity 0.5s ease;
 }
+
+:deep(.modal .hidden) {
+  opacity: 0;
+  transition: none;
+}
+
 
 // Fade in and scale
 @keyframes animate-in {

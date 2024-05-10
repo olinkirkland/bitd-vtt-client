@@ -12,6 +12,7 @@ export async function createGuestAccount() {
     if (response.data.refreshToken) {
       useTokenStore().storeRefreshToken(response.data.refreshToken);
       useTokenStore().accessToken = response.data.accessToken;
+      console.log('@account.ts: fetchMyAccount() because of createGuest');
       await fetchMyAccount();
     }
     return response.data;
@@ -28,6 +29,7 @@ export async function registerAccount(username?: string, password?: string) {
     const response = await server.post('/account/create', payload);
     console.log('response:', response);
     if (response.status !== 200) return response.data;
+    console.log('@account.ts: fetchMyAccount() because of registerAccount');
     await fetchMyAccount();
     return null;
   } catch (error: any) {
@@ -45,6 +47,7 @@ export async function login(username: string, password: string) {
     if (response.data.refreshToken) {
       useTokenStore().storeRefreshToken(response.data.refreshToken);
       useTokenStore().accessToken = response.data.accessToken;
+      console.log('@account.ts: fetchMyAccount() because of login');
       await fetchMyAccount();
     }
 
@@ -72,7 +75,7 @@ export async function logout() {
   // Clear tokens
   useTokenStore().clear();
   useUserStore().clear();
-  
+
   // Clear the current game
   useGameStore().clear();
 

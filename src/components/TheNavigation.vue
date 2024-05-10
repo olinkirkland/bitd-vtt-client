@@ -153,6 +153,10 @@ button.btn.btn--account {
     > span {
       display: none;
     }
+
+    &::after {
+      content: none;
+    }
   }
 }
 </style>

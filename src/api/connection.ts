@@ -81,6 +81,10 @@ export function addInterceptors() {
 export async function fetchAccessToken() {
   let response;
   try {
+    console.log(
+      '@fetchAccessToken: refreshToken:',
+      useTokenStore().refreshToken
+    );
     response = await server.put('/auth/token', {
       refreshToken: useTokenStore().refreshToken
     });

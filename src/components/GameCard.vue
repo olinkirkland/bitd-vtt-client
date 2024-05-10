@@ -4,11 +4,7 @@
     <div class="game-card__content">
       <h2>{{ props.game.name }}</h2>
       <div class="row info">
-        <span v-if="isGM" class="tag gm">GM</span>
-        <span v-else class="tag player">
-          <i class="fas fa-user-alt"></i>
-          <span>Player</span>
-        </span>
+        <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
         <div class="row users">
           <i class="fas fa-users"></i>
           <span>{{ props.game.players.length }}</span>
