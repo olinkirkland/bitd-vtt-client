@@ -21,11 +21,7 @@ export async function connectSocketAndSubscribeToGame() {
     return false;
   }
 
-  // Connect to the server's websocket server to receive game updates
-  // User inputs will be sent to the server via REST API
-  // The server will broadcast the game state to all clients connected to this game ID
-  // Replace the port with 3006
-  const url = BASE_URL.replace(/^https?/, 'ws').replace(/:\d+$/, ':3006');
+  const url = BASE_URL.replace(/^https?/, 'ws');
 
   try {
     socket = new WebSocket(url);
