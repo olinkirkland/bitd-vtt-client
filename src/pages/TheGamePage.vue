@@ -44,7 +44,7 @@ pre {
 }
 
 .invite-block,
-.invite-block > button {
+.invite-block button.icon {
   color: var(--light);
 }
 </style>

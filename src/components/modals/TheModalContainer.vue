@@ -43,6 +43,8 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
       modalEl.querySelector('.modal__content > div')?.children || []
     );
     const modalChildren = [...modalHeaderChildren, ...modalContentChildren];
+    // @ts-ignore
+    window.modalChildren = modalChildren;
 
     modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
 
@@ -92,7 +94,6 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   opacity: 0;
   transition: none;
 }
-
 
 // Fade in and scale
 @keyframes animate-in {
