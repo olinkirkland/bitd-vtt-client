@@ -24,7 +24,6 @@ function onClickBackground() {
 
 ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   (document.activeElement as HTMLElement)?.blur();
-  if (fadeInterval.value) clearInterval(fadeInterval.value);
 
   // Close
   if (!modal) return (currentModal.value = null);
@@ -34,6 +33,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   currentModalConfig.value = { ...modalConfig };
 
   requestAnimationFrame(() => {
+    if (fadeInterval.value) clearInterval(fadeInterval.value);
     const modalEl = modalRef.value?.$el;
     if (!modalEl) return;
     const modalHeaderChildren = modalEl.querySelector('.modal__header')
@@ -49,8 +49,13 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
 
     fadeInterval.value = setInterval(() => {
-      if (!modalChildren.length) clearInterval(fadeInterval.value);
-      else modalChildren.shift()?.classList.remove('hidden');
+      if (!modalChildren.length) {
+        console.log('clearing interval');
+        clearInterval(fadeInterval.value);
+      } else {
+        const modalChild = modalChildren.shift();
+        modalChild?.classList.remove('hidden');
+      }
     }, 50);
   });
 });
