@@ -47,7 +47,6 @@ p {
 }
 
 a {
-  // Remove all default styles
   text-decoration: none;
-  color: inherit;
+  color: currentColor;
 }

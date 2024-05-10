@@ -1,7 +1,7 @@
 <template>
   <footer v-if="game.id && notOnGamePage">
     <div class="game-block row center">
-      <button class="btn" @click="onClickGoToGame">
+      <button class="btn mobile-full-width" @click="onClickGoToGame">
         <span>
           {{ game.id }}
         </span>

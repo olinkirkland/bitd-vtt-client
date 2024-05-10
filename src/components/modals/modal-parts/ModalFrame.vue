@@ -11,6 +11,8 @@
 
 <style lang="scss" scoped>
 .modal {
+  display: flex;
+  flex-direction: column;
   animation: animate-in 0.2s ease;
   min-width: 36rem;
   max-width: 56rem;
@@ -22,7 +24,10 @@
 
   .modal__content {
     padding: 2rem;
-    height: 100%;
+    flex: 1;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 

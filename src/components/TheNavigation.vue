@@ -135,13 +135,17 @@ button.btn.btn--account {
 
 @media (max-width: 768px) {
   nav > .page-links {
-    right: 4.6rem; // Account button width
+    right: 4rem; // Account button width
     left: unset;
     transform: unset;
 
     a:nth-child(1) {
       display: none;
     }
+  }
+
+  .account {
+    padding: 0;
   }
 
   button.btn.btn--account {

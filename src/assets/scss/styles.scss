@@ -360,6 +360,11 @@ span.tag {
   text-transform: uppercase;
 }
 
+a.anchor-link {
+  color: var(--primary);
+  border-bottom: 1px solid var(--primary);
+}
+
 // 🙥 🙧 ❖
 
 @media (max-width: 1200px) {

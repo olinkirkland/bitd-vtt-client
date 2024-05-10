@@ -81,6 +81,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 
 .modal {
   animation: animate-in 0.2s ease;
+  max-height: calc(100vh - 4rem);
 }
 
 :deep(.modal .hidden) {
@@ -115,6 +116,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
   .modal {
     min-width: 100%;
     max-width: 100%;
+    max-height: 100%;
     height: 100%;
     border-radius: 0;
     animation: none;
