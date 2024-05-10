@@ -11,8 +11,10 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@types/fast-json-patch": "^1.1.5",
     "@types/ws": "^8.5.10",
     "axios": "^1.6.8",
+    "fast-json-patch": "^3.1.1",
     "gh-pages": "^6.1.1",
     "node-vibrant": "^3.2.1-alpha.1",
     "pinia": "^2.1.7",

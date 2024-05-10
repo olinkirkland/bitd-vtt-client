@@ -1,4 +1,4 @@
-import { connectToGame } from '@/controllers/game-socket-controller';
+import { connectSocketAndSubscribeToGame } from '@/controllers/game-socket-controller';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
@@ -14,7 +14,7 @@ export const useGameStore = defineStore('game', () => {
   const setGameId = (gameId: string) => {
     clear();
     id.value = gameId;
-    connectToGame();
+    connectSocketAndSubscribeToGame();
   };
   return {
     id,

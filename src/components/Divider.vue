@@ -17,6 +17,7 @@
   > * {
     display: inline-block;
     color: currentColor;
+    line-height: 0;
   }
 
   .line {

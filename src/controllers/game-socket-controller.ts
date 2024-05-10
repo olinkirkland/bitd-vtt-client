@@ -1,5 +1,7 @@
 import { BASE_URL, server } from '@/api/connection';
 import { useGameStore } from '@/stores/game-store';
+import { useTokenStore } from '@/stores/token-store';
+import { Operation, applyPatch } from 'fast-json-patch';
 
 export enum SocketMessageType {
   PATCH = 'patch'
@@ -7,25 +9,21 @@ export enum SocketMessageType {
 
 let socket: WebSocket | null = null;
 
-export async function connectToGame() {
-  if (socket) await disconnectFromGame();
+export async function connectSocketAndSubscribeToGame() {
+  if (socket) await disconnectSocket();
 
   try {
     const response = await server.post(`/game/${useGameStore().id}/subscribe`);
     const { data } = response;
+    useGameStore().gameState = data;
   } catch (error: any) {
-    console.error('Failed to subscribe to game:', error.response.data);
+    console.error('Failed to subscribe to game:', error);
     return false;
   }
-
-  const gameId = useGameStore().id;
-  console.log('Connecting to game:', gameId);
 
   // Connect to the server's websocket server to receive game updates
   // User inputs will be sent to the server via REST API
   // The server will broadcast the game state to all clients connected to this game ID
-
-  // Connect to the ws
   // Replace the port with 3006
   const url = BASE_URL.replace(/^https?/, 'ws').replace(/:\d+$/, ':3006');
 
@@ -42,7 +40,9 @@ export async function connectToGame() {
       socket!.onclose = onClose;
       socket!.onmessage = onMessage;
       socket!.onerror = onError;
+
       onOpen();
+
       resolve(true);
     };
 
@@ -52,7 +52,7 @@ export async function connectToGame() {
   });
 }
 
-export async function disconnectFromGame() {
+export async function disconnectSocket() {
   if (!socket) return;
   if (socket.readyState === WebSocket.OPEN) socket.close();
 
@@ -65,12 +65,35 @@ export async function disconnectFromGame() {
   socket = null;
 }
 
-function onMessage(event: any) {
-  console.log('@game-controller: onMessage:', event.data);
+function onMessage(message: any) {
+  console.log('@game-controller: onMessage:', message.data);
+  if (!message.data) return;
+
+  const data = JSON.parse(message.data);
+
+  if (data.type !== 'patch')
+    return console.error('Invalid message type:', data.type);
+
+  try {
+    const socketMessage = data as {
+      type: 'patch';
+      patches: Operation[];
+    };
+    useGameStore().gameState = applyPatch(
+      useGameStore().gameState,
+      socketMessage.patches
+    ).newDocument;
+  } catch (error) {
+    console.error('Failed to parse message:', error);
+    return;
+  }
 }
 
 function onOpen() {
   console.log('@game-controller: onOpen');
+  const token = useTokenStore().accessToken;
+  if (!token) return;
+  socket!.send(token);
 }
 
 function onClose() {

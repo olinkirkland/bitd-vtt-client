@@ -1,5 +1,5 @@
 import { router } from '@/router';
-import axios from 'axios';
+import axios, { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { logout } from './account';
 
@@ -45,7 +45,7 @@ export function addInterceptors() {
         '/account/register'
       ];
       if (
-        error.response?.status === 401 &&
+        error.response?.status === HttpStatusCode.Unauthorized &&
         !excludeUrls.includes(error.config.url)
       ) {
         // If it's a 401 error on a fetchAccessToken request, it means the refresh token is invalid
