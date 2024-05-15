@@ -20,7 +20,7 @@
           <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
           <div class="row users">
             <i class="fas fa-users"></i>
-            <span>{{ props.game.players.length }}</span>
+            <span>{{ props.game.playerIds.length }}</span>
           </div>
           <button class="btn mobile-full-width" @click="onClickJoinGame">
             <span>Join Game</span>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { getUsers } from '@/api/account';
+import { fetchUsers } from '@/api/account';
 import coverImages from '@/assets/data/cover-images.json';
 import Divider from '@/components/Divider.vue';
 import ModalController from '@/controllers/modal-controller';
@@ -65,11 +65,12 @@ const props = defineProps<{
   game: Game;
 }>();
 
-const isGM = computed(() => props.game.owner === useUserStore().id);
+const isGM = computed(() => props.game.ownerId === useUserStore().id);
 const players = ref<ForeignUser[]>([]);
 
 onMounted(async () => {
-  players.value = (await getUsers(props.game.players)) || ([] as ForeignUser[]);
+  players.value =
+    (await fetchUsers(props.game.playerIds)) || ([] as ForeignUser[]);
 });
 
 const coverImage = computed(() => {

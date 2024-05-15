@@ -7,13 +7,21 @@ import { server } from './connection';
 
 export async function acceptInvite(code: string) {
   ModalController.open(LoadingModal);
-  const response = await server.post(`/invite/${code}`);
-  console.log(response);
-  if (response.status === HttpStatusCode.Ok) {
-    useUserStore().games = response.data.games;
-    const gameId = response.data.gameId;
-    // Redirect to the game's page
-    router.push({ name: PageName.GAME, params: { id: gameId } });
+  try {
+    const response = await server.post(`/invite/${code}`);
+    if (response.status === HttpStatusCode.Ok) {
+      useUserStore().games = response.data.games;
+      const gameId = response.data.gameId;
+      // Redirect to the game's page
+      router.push({ name: PageName.GAME, params: { id: gameId } });
+    }
+  } catch (error) {
+    console.error(error);
+    router.push({ name: PageName.HOME });
+    ModalController.close();
+    // TODO: Open Modal with error message
+    // ModalController.open(Modal)
+    return;
   }
   ModalController.close();
 }

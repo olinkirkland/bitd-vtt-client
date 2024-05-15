@@ -7,7 +7,7 @@
         <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
         <div class="row users">
           <i class="fas fa-users"></i>
-          <span>{{ props.game.players.length }}</span>
+          <span>{{ props.game.playerIds.length }}</span>
         </div>
         <p class="date-created">{{ dateCreatedText }}</p>
       </div>
@@ -31,7 +31,7 @@ const coverImage = computed(() => {
   return coverImages.find((image) => image.id === props.game.coverImage);
 });
 
-const isGM = computed(() => props.game.owner === useUserStore().id);
+const isGM = computed(() => props.game.ownerId === useUserStore().id);
 
 const dateCreatedText = computed(() => {
   const date = new Date(props.game.createdAt);

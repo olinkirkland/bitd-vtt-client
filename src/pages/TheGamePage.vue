@@ -14,14 +14,14 @@
           <i class="fas fa-copy"></i>
         </button>
       </div>
-      <p>Players</p>
-      <ul>
-        <li v-for="player in game" :key="player.id">
-          <i class="fas fa-user-alt"></i>
-          {{ player.name }}
-        </li>
-      </ul>
     </Panel>
+    <p>Players</p>
+    <ul>
+      <li v-for="player in useGameStore().players" :key="player.id">
+        <i class="fas fa-user-alt"></i>
+        {{ player.username }}
+      </li>
+    </ul>
   </div>
 </template>
 

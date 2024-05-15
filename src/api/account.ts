@@ -91,16 +91,16 @@ export async function changePassword(password: string, newPassword: string) {
   // Change password logic
 }
 
-export async function getUsers(userIds: string[]) {
+export async function fetchUsers(userIds: string[]): Promise<ForeignUser[]> {
   try {
     const response = await server.get('/account/users', {
       params: {
         ids: userIds
       }
     });
-    if (response.status !== HttpStatusCode.Ok) return null;
+    if (response.status !== HttpStatusCode.Ok) return [];
     return response.data as ForeignUser[];
   } catch {
-    return null;
+    return [];
   }
 }

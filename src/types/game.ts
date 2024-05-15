@@ -3,6 +3,6 @@ export type Game = {
   name: string;
   coverImage: string;
   createdAt: Date;
-  owner: string;
-  players: string[];
+  ownerId: string;
+  playerIds: string[];
 };
