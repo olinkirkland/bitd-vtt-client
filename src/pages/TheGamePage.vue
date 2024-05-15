@@ -6,7 +6,7 @@
     <h1>GAME PAGE</h1>
 
     <pre>Game ID: {{ gameId }}</pre>
-    <pre>{{ useGameStore().gameState }}</pre>
+    <pre>{{ game }}</pre>
     <Panel class="invite-block">
       <div class="row center">
         <p class="muted text-center">{{ inviteLink }}</p>
@@ -14,6 +14,13 @@
           <i class="fas fa-copy"></i>
         </button>
       </div>
+      <p>Players</p>
+      <ul>
+        <li v-for="player in game" :key="player.id">
+          <i class="fas fa-user-alt"></i>
+          {{ player.name }}
+        </li>
+      </ul>
     </Panel>
   </div>
 </template>
@@ -36,6 +43,8 @@ const inviteLink = computed(() => {
 function onClickCopyInviteLink() {
   navigator.clipboard.writeText(inviteLink.value);
 }
+
+const game = computed(() => useGameStore().gameState);
 </script>
 
 <style scoped lang="scss">

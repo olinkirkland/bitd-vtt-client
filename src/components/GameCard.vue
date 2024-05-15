@@ -58,6 +58,9 @@ const dateCreatedText = computed(() => {
   }
 
   > .game-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
     z-index: 1;
     margin-top: auto;
     width: 100%;

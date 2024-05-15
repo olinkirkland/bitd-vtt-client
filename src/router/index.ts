@@ -15,6 +15,14 @@ import { RouterOptions, createRouter, createWebHistory } from 'vue-router';
 import TheGamePage from '../pages/TheGamePage.vue';
 
 export const currentPageName = ref();
+export enum PageName {
+  HOME = 'home',
+  GAMES = 'games',
+  GAME = 'game',
+  INVITE = 'invite',
+  SETTINGS = 'settings',
+  LOST = 'lost'
+}
 
 const routes = [
   {
@@ -26,42 +34,42 @@ const routes = [
     components: {
       page: TheHomePage
     },
-    name: 'home'
+    name: PageName.HOME
   },
   {
     path: '/games',
     components: {
       page: TheGamesPage
     },
-    name: 'games'
+    name: PageName.GAMES
   },
   {
     path: '/game/:id',
     components: {
       page: TheGamePage
     },
-    name: 'game'
+    name: PageName.GAME
   },
   {
     path: '/invite/:code',
     components: {
       page: TheInvitePage
     },
-    name: 'invite'
+    name: PageName.INVITE
   },
   {
     path: '/settings',
     components: {
       page: TheSettingsPage
     },
-    name: 'settings'
+    name: PageName.SETTINGS
   },
   {
     path: '/:pathMatch(.*)*',
     components: {
       page: TheLostPage // 404 page
     },
-    name: 'lost'
+    name: PageName.LOST
   }
 ];
 
@@ -72,7 +80,9 @@ const routerOptions = {
 
 export const router = createRouter(routerOptions as RouterOptions);
 
-router.afterEach(async (to, from) => {
+router.afterEach(async (to, from) => {});
+
+router.beforeEach(async (to, from, next) => {
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
 
   if (useTokenStore().refreshToken && !useTokenStore().accessToken)
@@ -88,12 +98,10 @@ router.afterEach(async (to, from) => {
 
   ModalController.close();
 
-  if (useUserStore().isGuest && !from.name)
-    ModalController.open(GuestReminderModal);
+  // if (useUserStore().isGuest && !from.name)
+  //   ModalController.open(GuestReminderModal);
 
   currentPageName.value = to.name;
-});
 
-router.beforeEach(async (to, from, next) => {
   next();
 });
