@@ -71,14 +71,17 @@ function onMessage(message: any) {
     return console.error('Invalid message type:', data.type);
 
   try {
-    const socketMessage = data as {
-      type: 'patch';
-      patches: Operation[];
-    };
+    const { patches } = data as { patches: Operation[] };
+
     useGameStore().gameState = applyPatch(
       useGameStore().gameState,
-      socketMessage.patches
+      patches
     ).newDocument;
+
+    // Are any of the patches related to the playerIds?
+    // If so, fetch the new players
+    if (patches.some((patch) => patch.path === '/playerIds'))
+      useGameStore().validatePlayers();
   } catch (error) {
     console.error('Failed to parse message:', error);
     return;

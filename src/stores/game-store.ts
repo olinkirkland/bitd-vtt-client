@@ -2,6 +2,7 @@ import { fetchUsers } from '@/api/account';
 import { connectSocketAndSubscribeToGame } from '@/controllers/game-socket-controller';
 import { Game } from '@/types/game';
 import { ForeignUser } from '@/types/user';
+import { Operation } from 'fast-json-patch';
 import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 
@@ -23,14 +24,7 @@ export const useGameStore = defineStore('game', () => {
   };
 
   const players = ref<ForeignUser[]>([]);
-
-  // Listen to changes in playerIds
-  watch(gameState, (newValue, oldValue) => {
-    if (newValue && newValue.playerIds !== oldValue?.playerIds)
-      onPlayerIdsChange();
-  });
-
-  async function onPlayerIdsChange() {
+  async function validatePlayers() {
     if (!gameState.value) return;
     players.value = await fetchUsers(gameState.value.playerIds);
   }
@@ -39,6 +33,7 @@ export const useGameStore = defineStore('game', () => {
     id,
     gameState,
     players,
+    validatePlayers,
     clear,
     setGameId
   };
