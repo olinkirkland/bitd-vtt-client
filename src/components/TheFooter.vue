@@ -1,8 +1,8 @@
 <template>
-  <footer v-if="game.id && notOnGamePage">
+  <footer v-if="useGameStore().id && notOnGamePage">
     <div class="game-block row center">
       <button class="btn mobile-full-width" @click="onClickGoToGame">
-        <span> Return to {{ game.gameState.name }} </span>
+        <span> Return to {{ useGameStore().gameState?.name }}</span>
         <i class="fas fa-arrow-right"></i>
       </button>
     </div>
@@ -14,11 +14,10 @@ import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { computed } from 'vue';
 
-const game = useGameStore();
 const notOnGamePage = computed(() => router.currentRoute.value.name !== 'game');
 
 function onClickGoToGame() {
-  router.push({ name: 'game', params: { id: game.id } });
+  router.push({ name: 'game', params: { id: useGameStore().id } });
 }
 </script>
 

@@ -1,10 +1,10 @@
 import { router } from '@/router';
+import { useGameStore } from '@/stores/game-store';
 import { ForeignUser } from '@/types/user';
 import { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
-import { useGameStore } from '@/stores/game-store';
 
 export async function createGuestAccount() {
   try {
