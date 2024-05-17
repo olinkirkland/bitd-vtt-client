@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const oldVersion = packageJson.version;
 const versionArray = oldVersion.split('.');

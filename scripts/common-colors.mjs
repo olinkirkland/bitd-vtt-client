@@ -4,7 +4,6 @@ import Vibrant from 'node-vibrant';
 const indexPaths = ['src/assets/data/cover-images.json'];
 
 indexPaths.forEach(async (indexFile) => {
-  console.log(`Processing ${indexFile} ...`);
   const index = JSON.parse(fs.readFileSync(indexFile, 'utf-8'));
 
   // Array to hold all the promises returned by determineCommonColor
@@ -16,7 +15,6 @@ indexPaths.forEach(async (indexFile) => {
   await Promise.all(promises);
 
   fs.writeFileSync(indexFile, JSON.stringify(index, null, 2));
-  console.log(`... Processed ${indexFile}`);
 });
 
 async function determineCommonColor(imagePath) {

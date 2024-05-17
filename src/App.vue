@@ -6,8 +6,8 @@
     </div>
     <TheFooter />
   </div>
-  <TheVersionOverlay />
   <TheModalContainer />
+  <TheVersionOverlay />
 </template>
 
 <script setup lang="ts">

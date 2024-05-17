@@ -1,14 +1,14 @@
 {
   "name": "bitd-vtt-client",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "colors": "node ./scripts/common-colors.js",
-    "build": "npm run colors && vue-tsc && vite build && node scripts/copy-index-as-404.js",
+    "colors": "node ./scripts/common-colors.mjs",
+    "build": "npm run colors && vue-tsc && vite build && node scripts/copy-index-as-404.mjs",
     "preview": "vite preview",
-    "deploy": "npm run build && node ./scripts/increment-version.js && gh-pages -d dist"
+    "deploy": "npm run build && node ./scripts/increment-version.mjs && gh-pages -d dist"
   },
   "dependencies": {
     "@types/fast-json-patch": "^1.1.5",
