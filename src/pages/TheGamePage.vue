@@ -7,6 +7,10 @@
 
     <pre>Game ID: {{ gameId }}</pre>
     <pre>{{ game }}</pre>
+    <div class="row">
+      <button class="btn" @click="onClickDisconnect">Disconnect</button>
+      <button class="btn btn--alt" @click="onClickLeave">Leave</button>
+    </div>
     <Panel class="invite-block">
       <div class="row center">
         <p class="muted text-center">{{ inviteLink }}</p>
@@ -27,6 +31,11 @@
 
 <script setup lang="ts">
 import Panel from '@/components/modals/Panel.vue';
+import ConfirmLeaveGameModal from '@/components/modals/modal-content/ConfirmLeaveGameModal.vue';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
+import { disconnectSocket } from '@/controllers/game-socket-controller';
+import ModalController from '@/controllers/modal-controller';
+import { PageName, router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
@@ -42,6 +51,22 @@ const inviteLink = computed(() => {
 
 function onClickCopyInviteLink() {
   navigator.clipboard.writeText(inviteLink.value);
+}
+
+async function onClickDisconnect() {
+  ModalController.open(LoadingModal);
+  try {
+    await disconnectSocket();
+  } catch (error) {
+    console.error(error);
+  }
+  useGameStore().clear();
+  router.push({ name: PageName.GAMES });
+  ModalController.close();
+}
+
+function onClickLeave() {
+  ModalController.open(ConfirmLeaveGameModal);
 }
 
 const game = computed(() => useGameStore().gameState);
