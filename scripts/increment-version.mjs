@@ -57,6 +57,8 @@ async function incrementVersion() {
   );
 
   await runCommand('git push');
+
+  console.log(chalk.bgBlue(`Client version: ${newVersion}`));
 }
 
 if (await check()) incrementVersion();
