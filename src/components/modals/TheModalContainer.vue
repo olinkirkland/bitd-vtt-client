@@ -46,6 +46,10 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     // @ts-ignore
     window.modalChildren = modalChildren;
 
+    // Pick the first element that is an input and focus it
+    const firstInput = modalEl.querySelector('input');
+    if (firstInput) firstInput.focus();
+
     modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
 
     fadeInterval.value = setInterval(() => {
