@@ -27,6 +27,7 @@ export async function connectSocketAndSubscribeToGame() {
   try {
     socket = new WebSocket(url);
   } catch (error) {
+    console.error('Failed to create WebSocket:', error);
     return false;
   }
 
