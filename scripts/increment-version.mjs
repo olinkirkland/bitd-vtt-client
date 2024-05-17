@@ -55,6 +55,8 @@ async function incrementVersion() {
   await runCommand(
     `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
   );
+
+  await runCommand('git push');
 }
 
 if (await check()) incrementVersion();
