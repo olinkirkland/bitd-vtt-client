@@ -1,4 +1,38 @@
+import { exec } from 'child_process';
 import fs from 'fs';
+import chalk from 'chalk';
+
+// Utility function to run a shell command and return it as a promise
+const runCommand = (command) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      console.log(chalk.bgWhite(` ${command} `));
+      if (error) {
+        console.log(chalk.bgRed(` ${error.message.trim()} `));
+        reject(`Error: ${error.message}`);
+      } else if (stderr) {
+        console.log(chalk.bgYellow(` ${stderr.trim()} `));
+        resolve(stderr);
+      } else {
+        console.log(chalk.bgWhite(` ${stdout.trim()} `));
+        resolve(stdout);
+      }
+    });
+  });
+};
+
+const gitStatus = await runCommand('git status');
+const gitStatusLines = gitStatus.split('\n').filter((str) => str.length);
+
+if (!gitStatusLines.some((line) => line.includes('On branch main'))) {
+  console.log(chalk.bgRed('Not on main branch'));
+  return false;
+}
+
+if (gitStatusLines.some((line) => line.includes('not staged for commit'))) {
+  console.log(chalk.bgRed('Cannot have uncommitted changes on main branch'));
+  return false;
+}
 
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const oldVersion = packageJson.version;
@@ -11,4 +45,8 @@ packageJson.version = newVersion;
 fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
 console.log(
   `Incremented version in package.json from ${oldVersion} to ${newVersion}`
+);
+
+await runCommand(
+  `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
 );
