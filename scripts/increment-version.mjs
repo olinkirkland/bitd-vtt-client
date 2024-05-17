@@ -21,32 +21,40 @@ const runCommand = (command) => {
   });
 };
 
-const gitStatus = await runCommand('git status');
-const gitStatusLines = gitStatus.split('\n').filter((str) => str.length);
+async function check() {
+  const gitStatus = await runCommand('git status');
+  const gitStatusLines = gitStatus.split('\n').filter((str) => str.length);
 
-if (!gitStatusLines.some((line) => line.includes('On branch main'))) {
-  console.log(chalk.bgRed('Not on main branch'));
-  return false;
+  if (!gitStatusLines.some((line) => line.includes('On branch main'))) {
+    console.log(chalk.bgRed('Not on main branch'));
+    return false;
+  }
+
+  if (gitStatusLines.some((line) => line.includes('not staged for commit'))) {
+    console.log(chalk.bgRed('Cannot have uncommitted changes on main branch'));
+    return false;
+  }
+
+  return true;
 }
 
-if (gitStatusLines.some((line) => line.includes('not staged for commit'))) {
-  console.log(chalk.bgRed('Cannot have uncommitted changes on main branch'));
-  return false;
+async function incrementVersion() {
+  const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const oldVersion = packageJson.version;
+  const versionArray = oldVersion.split('.');
+  versionArray[versionArray.length - 1] = (
+    parseInt(versionArray[versionArray.length - 1]) + 1
+  ).toString();
+  const newVersion = versionArray.join('.');
+  packageJson.version = newVersion;
+  fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+  console.log(
+    `Incremented version in package.json from ${oldVersion} to ${newVersion}`
+  );
+
+  await runCommand(
+    `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
+  );
 }
 
-const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-const oldVersion = packageJson.version;
-const versionArray = oldVersion.split('.');
-versionArray[versionArray.length - 1] = (
-  parseInt(versionArray[versionArray.length - 1]) + 1
-).toString();
-const newVersion = versionArray.join('.');
-packageJson.version = newVersion;
-fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
-console.log(
-  `Incremented version in package.json from ${oldVersion} to ${newVersion}`
-);
-
-await runCommand(
-  `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
-);
+if (await check()) incrementVersion();
