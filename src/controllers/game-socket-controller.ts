@@ -22,7 +22,7 @@ export async function connectSocketAndSubscribeToGame() {
     return false;
   }
 
-  const url = BASE_URL.replace(/^https?/, 'ws');
+  const url = BASE_URL.replace(/^https?/, 'wss');
 
   try {
     socket = new WebSocket(url);
