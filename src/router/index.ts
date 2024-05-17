@@ -1,6 +1,5 @@
 import { createGuestAccount, fetchMyAccount } from '@/api/account';
 import { fetchAccessToken } from '@/api/connection';
-import GuestReminderModal from '@/components/modals/modal-content/GuestReminderModal.vue';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import TheGamesPage from '@/pages/TheGamesPage.vue';
