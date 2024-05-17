@@ -6,9 +6,12 @@
 import { getServerVersion } from '@/util/version';
 import { onMounted, ref } from 'vue';
 const version = ref('');
+import packageJson from '@/../package.json';
 
 onMounted(() => {
-  getServerVersion().then((v) => (version.value = v));
+  getServerVersion().then(
+    (v) => (version.value = `c ${packageJson.version} / s ${v}`)
+  );
 });
 </script>
 
