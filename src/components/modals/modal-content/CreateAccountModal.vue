@@ -41,6 +41,7 @@
             <input
               type="password"
               @input="passwordConfirmationWasTouched = true"
+              @keyup.enter="onClickRegister"
               placeholder="Confirm your password"
               v-model="passwordConfirmation"
             />

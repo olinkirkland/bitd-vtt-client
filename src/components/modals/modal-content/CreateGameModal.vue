@@ -20,6 +20,7 @@
             <input
               type="text"
               @input="gameNameTouched = true"
+              @keyup.enter="onClickCreate"
               placeholder="Enter a name"
               v-model="gameName"
             />

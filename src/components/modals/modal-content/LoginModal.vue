@@ -26,6 +26,7 @@
             <input
               type="password"
               @input="passwordWasTouched = true"
+              @keyup.enter="onClickLogin"
               placeholder="Create a password"
               v-model="password"
             />
