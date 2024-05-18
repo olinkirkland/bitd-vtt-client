@@ -6,11 +6,13 @@ export const useUserStore = defineStore('user', () => {
   const id = ref();
   const username = ref();
   const isGuest = ref(true);
+  const portrait = ref();
   const games = ref<Game[]>([]);
 
   const clear = () => {
     id.value = null;
     username.value = null;
+    portrait.value = null;
     isGuest.value = true;
     games.value = [];
   };
@@ -18,6 +20,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     id,
     username,
+    portrait,
     isGuest,
     games,
     clear

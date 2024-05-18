@@ -2,7 +2,7 @@
   <div v-if="!useGameStore().gameState" class="page">
     <h1>Loading...</h1>
   </div>
-  <div class="page">
+  <div class="page" v-else>
     <h1>GAME PAGE</h1>
 
     <pre>Game ID: {{ gameId }}</pre>

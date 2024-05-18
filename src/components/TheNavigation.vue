@@ -35,8 +35,8 @@
     </div>
     <div class="account">
       <button class="btn btn--account" @click="onClickAccount">
-        <i class="fa fa-user-circle"></i>
-        <span> {{ useUserStore().username || 'Account' }}</span>
+        <Portrait :portraitId="useUserStore().portrait" />
+        <span>{{ useUserStore().username || 'Account' }}</span>
       </button>
     </div>
   </nav>
@@ -48,6 +48,7 @@ import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import { currentPageName } from '@/router';
 import { useUserStore } from '@/stores/user-store';
+import Portrait from './Portrait.vue';
 
 function onClickAccount() {
   ModalController.open(AccountModal);
@@ -123,6 +124,11 @@ nav {
 button.btn.btn--account {
   background-color: var(--translucent-light);
   color: var(--primary);
+  padding-left: 0.6rem;
+
+  &::after {
+    content: none;
+  }
 
   > i {
     margin-right: 0.4rem;

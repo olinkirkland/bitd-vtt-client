@@ -1,7 +1,11 @@
 import { BASE_URL, server } from '@/api/connection';
+import { PageName, router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { useTokenStore } from '@/stores/token-store';
 import { Operation, applyPatch } from 'fast-json-patch';
+import ModalController from './modal-controller';
+import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 
 export enum SocketMessageType {
   PATCH = 'patch'
@@ -10,6 +14,7 @@ export enum SocketMessageType {
 let socket: WebSocket | null = null;
 
 export async function connectSocketAndSubscribeToGame() {
+  ModalController.open(LoadingModal);
   if (socket) await disconnectSocket();
 
   try {
@@ -18,7 +23,12 @@ export async function connectSocketAndSubscribeToGame() {
     useGameStore().gameState = data;
     useGameStore().validatePlayers();
   } catch (error: any) {
-    console.error('Failed to subscribe to game:', error);
+    ModalController.open(InfoModal, {
+      title: 'Failed to connect to game',
+      message: error
+    });
+
+    useGameStore().clear();
     return false;
   }
 
@@ -35,6 +45,7 @@ export async function connectSocketAndSubscribeToGame() {
     return false;
   }
 
+  ModalController.close();
   return new Promise((resolve) => {
     if (!socket) return resolve(false);
     socket.onopen = () => {

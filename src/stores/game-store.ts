@@ -1,10 +1,13 @@
 import { fetchUsers } from '@/api/account';
+import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import { connectSocketAndSubscribeToGame } from '@/controllers/game-socket-controller';
+import ModalController from '@/controllers/modal-controller';
+import { PageName, router } from '@/router';
 import { Game } from '@/types/game';
 import { ForeignUser } from '@/types/user';
-import { Operation } from 'fast-json-patch';
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 export const useGameStore = defineStore('game', () => {
   const id = ref();
