@@ -36,6 +36,12 @@
   --body-font: 'Georgia', serif;
 }
 
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
 body {
   background-color: var(--dark);
 
