@@ -33,10 +33,15 @@ import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import { leaveGame } from '@/api/games';
 import { PageName, router } from '@/router';
+import LoadingModal from './LoadingModal.vue';
+import { fetchMyAccount } from '@/api/account';
 
 async function onClickLeaveGame() {
+  ModalController.open(LoadingModal);
   await leaveGame();
+  await fetchMyAccount();
   router.push({ name: PageName.GAMES });
+  ModalController.close();
 }
 </script>
 
