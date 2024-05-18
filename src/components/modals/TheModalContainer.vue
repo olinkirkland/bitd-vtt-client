@@ -69,6 +69,8 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 .modal-container {
   width: 100%;
   min-height: -webkit-fill-available;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   top: 0;
 
