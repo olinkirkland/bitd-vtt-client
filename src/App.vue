@@ -24,6 +24,7 @@ import TheModalContainer from './components/modals/TheModalContainer.vue';
 .page-layout {
   display: flex;
   flex-direction: column;
+  min-height: -webkit-fill-available;
   height: 100vh;
   > .page-layout__content {
     flex: 1;
