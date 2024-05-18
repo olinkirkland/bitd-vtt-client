@@ -62,3 +62,4 @@ async function incrementVersion() {
 }
 
 if (await check()) incrementVersion();
+else process.exit(1);
