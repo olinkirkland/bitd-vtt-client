@@ -30,6 +30,16 @@
         </div>
 
         <divider />
+
+        <div class="portrait-select">
+          <ul>
+            <li v-for="portrait in useUserStore().portraits" :key="po rtrait.id">
+              <img :src="portrait.url" alt="Portrait" />
+            </li>
+          </ul>
+        </div>
+
+        <divider />
         <div class="row center id-block">
           <p class="muted text-center">ID: {{ useUserStore().id }}</p>
           <button class="btn icon muted" @click="onClickCopyId">
