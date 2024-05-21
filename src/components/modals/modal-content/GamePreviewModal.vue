@@ -38,7 +38,7 @@
           </div>
           <ul class="players" :class="{ collapsed: players.length === 0 }">
             <li v-for="player in players" class="row" :key="player.id">
-              <i class="fas fa-user-alt"></i>
+              <Portrait :portraitId="player.portrait" />
               <span>{{ player.username }}</span>
             </li>
           </ul>
@@ -60,6 +60,7 @@ import { ForeignUser } from '@/types/user';
 import { computed, onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import Portrait from '@/components/Portrait.vue';
 
 const props = defineProps<{
   game: Game;

@@ -124,11 +124,11 @@ nav {
 button.btn.btn--account {
   background-color: var(--translucent-light);
   color: var(--primary);
-  padding-left: 0.4rem;
+  padding-left: 0.6rem;
 
   > .portrait {
-    border: 1px solid var(--primary);
-    height: calc(100% - 0.8rem);
+    border-radius: 3px;
+    height: calc(100% - 1.2rem);
   }
 
   &::after {

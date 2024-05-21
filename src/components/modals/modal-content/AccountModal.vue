@@ -128,6 +128,7 @@ function onClickPortrait(portraitId: string) {
 
     > .portrait {
       padding: 0.4rem; // Icons8 version
+      max-height: unset;
     }
 
     > i {

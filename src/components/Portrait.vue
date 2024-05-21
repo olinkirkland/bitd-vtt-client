@@ -19,12 +19,16 @@ const portrait = computed(() => {
 
 <style lang="scss" scoped>
 .portrait {
+  max-height: 3.2rem;
   height: 100%;
+  aspect-ratio: 1;
+  line-height: 0;
+  border-radius: 5px;
 
   img {
     width: 100%;
     height: 100%;
-    padding: 0.2rem; // Icons8 version
+    padding: 0.4rem; // Icons8 version
     object-fit: cover;
   }
 }
