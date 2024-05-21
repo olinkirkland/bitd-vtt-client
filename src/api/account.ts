@@ -7,6 +7,7 @@ import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
 import ModalController from '@/controllers/modal-controller';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
+import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
 
 export async function createGuestAccount() {
   try {
@@ -91,6 +92,31 @@ export async function logout() {
 
 export async function deleteAccount(password: string) {
   // Delete account logic
+  try {
+    const response = await server.delete('/account/me', {
+      data: {
+        password
+      }
+    });
+    if (response.status !== HttpStatusCode.Ok) return response.data;
+    return null;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
+}
+
+export async function changeUsername(newUsername: string) {
+  try {
+    const response = await server.put('/account/username', {
+      newUsername
+    });
+
+    if (response.status !== HttpStatusCode.Ok) return response.data;
+    useUserStore().username = newUsername;
+    return null;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
 }
 
 export async function changePassword(password: string, newPassword: string) {

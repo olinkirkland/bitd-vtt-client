@@ -7,76 +7,104 @@
     </template>
     <template v-slot:content>
       <div class="account">
-        <p v-if="useUserStore().isGuest" class="guest-message">
-          You are currently logged in as a guest.
-        </p>
+        <section v-if="useUserStore().isGuest">
+          <p>You are currently logged in as a guest.</p>
 
-        <button
-          class="btn btn--alt"
-          @click="onClickLogout"
-          v-if="!useUserStore().isGuest"
-        >
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Sign Out</span>
-        </button>
-        <div class="row" v-else>
-          <button class="btn" @click="onClickRegister">
-            <span>Register Account</span>
+          <div class="row" v-if="useUserStore().isGuest">
+            <button class="btn" @click="onClickRegister">
+              <span>Register Account</span>
+            </button>
+            <button class="btn btn--alt" @click="onClickLogin">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Login</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Account Management -->
+        <section v-else>
+          <button class="btn mobile-full-width" @click="onClickChangeUsername">
+            <i class="fas fa-user-edit"></i>
+            <span>Change Username</span>
           </button>
-          <button class="btn btn--alt" @click="onClickLogin">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Login</span>
+          <button class="btn mobile-full-width" @click="onClickChangePassword">
+            <i class="fas fa-key"></i>
+            <span>Change Password</span>
           </button>
-        </div>
+        </section>
 
         <divider />
 
-        <p>Select a portrait from the list below.</p>
-        <ul class="portrait-select">
-          <li
-            v-for="portrait in useUserStore().portraits"
-            :key="portrait.id"
-            @click="onClickPortrait(portrait.id)"
-            :class="{ selected: portrait.id === useUserStore().portrait }"
+        <!-- Portrait Selection -->
+        <section>
+          <p>Choose a portrait from the list below.</p>
+          <ul class="portrait-select">
+            <li
+              v-for="portrait in useUserStore().portraits"
+              :key="portrait.id"
+              @click="onClickPortrait(portrait.id)"
+              :class="{ selected: portrait.id === useUserStore().portrait }"
+            >
+              <Portrait :portraitId="portrait.id" />
+              <div
+                class="overlay"
+                v-if="portrait.id === useUserStore().portrait"
+              ></div>
+              <i
+                v-if="portrait.id === useUserStore().portrait"
+                class="fas fa-check-circle"
+              ></i>
+            </li>
+          </ul>
+        </section>
+
+        <divider />
+
+        <!-- Footer -->
+        <section class="center">
+          <button
+            class="btn btn--text"
+            @click="onClickLogout"
+            v-if="!useUserStore().isGuest"
           >
-            <Portrait :portraitId="portrait.id" />
-            <div
-              class="overlay"
-              v-if="portrait.id === useUserStore().portrait"
-            ></div>
-            <i
-              v-if="portrait.id === useUserStore().portrait"
-              class="fas fa-check-circle"
-            ></i>
-          </li>
-        </ul>
-
-        <divider />
-        <div class="row center id-block">
-          <p class="muted text-center">ID: {{ useUserStore().id }}</p>
-          <button class="btn icon muted" @click="onClickCopyId">
-            <i class="fas fa-copy"></i>
+            <span>Sign Out</span>
           </button>
-        </div>
+
+          <button
+            class="btn btn--text"
+            @click="onClickDeleteAccount"
+            v-if="!useUserStore().isGuest"
+          >
+            <span>Delete Account</span>
+          </button>
+
+          <div class="row center id-block">
+            <p class="muted text-center">ID: {{ useUserStore().id }}</p>
+            <button class="btn icon muted" @click="onClickCopyId">
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+        </section>
       </div>
     </template>
   </ModalFrame>
 </template>
 
 <script setup lang="ts">
-import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
-import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import { changePortrait, logout } from '@/api/account';
 import Portrait from '@/components/Portrait.vue';
+import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
+import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import ChangeUsernameModal from './ChangeUsernameModal.vue';
+import ConfirmDeleteAccountModal from './ConfirmDeleteAccountModal.vue';
 import CreateAccountModal from './CreateAccountModal.vue';
 import LoginModal from './LoginModal.vue';
 
 function onClickLogout() {
-  ModalController.close();
   ModalController.open(ConfirmModal, {
     title: 'Sign Out',
     message: 'Are you sure you want to sign out?',
@@ -85,6 +113,10 @@ function onClickLogout() {
     onConfirmText: 'Yes, I want to sign out',
     onCancelText: 'No, keep me signed in'
   });
+}
+
+function onClickDeleteAccount() {
+  ModalController.open(ConfirmDeleteAccountModal);
 }
 
 function onClickLogin() {
@@ -102,10 +134,24 @@ function onClickRegister() {
 function onClickPortrait(portraitId: string) {
   changePortrait(portraitId);
 }
+
+function onClickChangeUsername() {
+  ModalController.open(ChangeUsernameModal);
+}
+
+function onClickChangePassword() {
+  // ModalController.open(ChangePasswordModal);
+}
 </script>
 
 <style scoped lang="scss">
 .account {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+section {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;

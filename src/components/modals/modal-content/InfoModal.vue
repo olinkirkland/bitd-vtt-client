@@ -7,8 +7,8 @@
     </template>
     <template v-slot:content>
       <div class="info">
-        <p>{{ props.message }}</p>
-        <button class="btn" @click="onClickRedirectToGamesPage">
+        <p v-html="props.message"></p>
+        <button class="btn mobile-full-width" @click="ModalController.close">
           <span>Okay</span>
         </button>
       </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import ModalController from '@/controllers/modal-controller';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import { router, PageName } from '@/router';
@@ -25,10 +26,6 @@ const props = defineProps<{
   title: string;
   message: string;
 }>();
-
-function onClickRedirectToGamesPage() {
-  router.push({ name: PageName.GAMES });
-}
 </script>
 
 <style scoped lang="scss">
