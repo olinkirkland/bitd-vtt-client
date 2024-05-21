@@ -4,7 +4,7 @@
     "name": "Forest",
     "author": "Dan Meyers",
     "source": "https://unsplash.com/photos/tall-trees-wB6B3AqXjy0",
-    "url": "images/cover-images/forest.jpg",
+    "url": "/images/cover-images/forest.jpg",
     "commonColor": "#8b7d73"
   },
   {
@@ -12,7 +12,7 @@
     "name": "Forest 2",
     "author": "Simon Berger",
     "source": "https://unsplash.com/photos/grayscale-photo-of-trees-and-pathway-rydQVdwcgUQ",
-    "url": "images/cover-images/forest-2.jpg",
+    "url": "/images/cover-images/forest-2.jpg",
     "commonColor": "#7f7f7f"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Castle",
     "author": "Cederic Vandenberghe",
     "source": "https://unsplash.com/photos/closeup-photo-of-castle-with-mist-21DP3hytVHw",
-    "url": "images/cover-images/castle.jpg",
+    "url": "/images/cover-images/castle.jpg",
     "commonColor": "#3f7690"
   },
   {
@@ -28,7 +28,7 @@
     "name": "Broadsword",
     "author": "Jonathan Kemper",
     "source": "https://unsplash.com/photos/brown-wooden-handle-bar-on-brown-wooden-table-4_ZvmLAeIZk",
-    "url": "images/cover-images/broadsword.jpg",
+    "url": "/images/cover-images/broadsword.jpg",
     "commonColor": "#6c4c34"
   },
   {
@@ -36,7 +36,7 @@
     "name": "Warband",
     "author": "Hasan Almasi",
     "source": "https://unsplash.com/photos/people-gathering-on-street-during-nighttime-OwqLxCvoVxI",
-    "url": "images/cover-images/warband.jpg",
+    "url": "/images/cover-images/warband.jpg",
     "commonColor": "#c34e33"
   }
 ]
