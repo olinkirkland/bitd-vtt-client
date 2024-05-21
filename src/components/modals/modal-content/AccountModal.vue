@@ -103,6 +103,7 @@ import ChangeUsernameModal from './ChangeUsernameModal.vue';
 import ConfirmDeleteAccountModal from './ConfirmDeleteAccountModal.vue';
 import CreateAccountModal from './CreateAccountModal.vue';
 import LoginModal from './LoginModal.vue';
+import ChangePasswordModal from './ChangePasswordModal.vue';
 
 function onClickLogout() {
   ModalController.open(ConfirmModal, {
@@ -140,7 +141,7 @@ function onClickChangeUsername() {
 }
 
 function onClickChangePassword() {
-  // ModalController.open(ChangePasswordModal);
+  ModalController.open(ChangePasswordModal);
 }
 </script>
 

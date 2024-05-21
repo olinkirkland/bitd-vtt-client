@@ -120,7 +120,16 @@ export async function changeUsername(newUsername: string) {
 }
 
 export async function changePassword(password: string, newPassword: string) {
-  // Change password logic
+  try {
+    const response = await server.put('/account/password', {
+      password,
+      newPassword
+    });
+    if (response.status !== HttpStatusCode.Ok) return response.data;
+    return null;
+  } catch (error: any) {
+    return error?.response?.data;
+  }
 }
 
 export async function fetchUsers(userIds: string[]): Promise<ForeignUser[]> {
