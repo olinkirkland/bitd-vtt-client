@@ -7,13 +7,11 @@
     <TheFooter />
   </div>
   <TheModalContainer />
-  <TheVersionOverlay />
 </template>
 
 <script setup lang="ts">
 import TheFooter from './components/TheFooter.vue';
 import TheNavigation from './components/TheNavigation.vue';
-import TheVersionOverlay from './components/TheVersionOverlay.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 </script>
 

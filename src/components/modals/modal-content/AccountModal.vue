@@ -84,6 +84,7 @@
               <i class="fas fa-copy"></i>
             </button>
           </div>
+          <p class="muted text-center">{{ version }}</p>
         </section>
       </div>
     </template>
@@ -97,13 +98,23 @@ import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
 import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
+import { getServerVersion } from '@/util/version';
+import { onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import ChangePasswordModal from './ChangePasswordModal.vue';
 import ChangeUsernameModal from './ChangeUsernameModal.vue';
 import ConfirmDeleteAccountModal from './ConfirmDeleteAccountModal.vue';
 import CreateAccountModal from './CreateAccountModal.vue';
 import LoginModal from './LoginModal.vue';
-import ChangePasswordModal from './ChangePasswordModal.vue';
+import packageJson from '@/../package.json';
+
+const version = ref('');
+onMounted(() => {
+  getServerVersion().then(
+    (v) => (version.value = `${packageJson.version} • ${v}`)
+  );
+});
 
 function onClickLogout() {
   ModalController.open(ConfirmModal, {
