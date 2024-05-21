@@ -5,6 +5,8 @@ import { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
+import ModalController from '@/controllers/modal-controller';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 
 export async function createGuestAccount() {
   try {
@@ -79,9 +81,12 @@ export async function logout() {
 
   // Clear the current game
   useGameStore().clear();
-
-  // Force the router to redirect from a 'null' page to the home page
   router.push('/');
+
+  // Force createguest account
+  ModalController.open(LoadingModal);
+  await createGuestAccount();
+  ModalController.close();
 }
 
 export async function deleteAccount(password: string) {

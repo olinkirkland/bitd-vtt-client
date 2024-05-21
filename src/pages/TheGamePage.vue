@@ -9,7 +9,10 @@
     <pre>{{ game }}</pre>
     <div class="row">
       <button class="btn" @click="onClickDisconnect">Disconnect</button>
-      <button class="btn btn--alt" @click="onClickLeave">Leave</button>
+      <button class="btn btn--alt" @click="onClickLeave">
+        <i class="fas fa-skull-crossbones"></i>
+        Abandon Game
+      </button>
     </div>
     <Panel class="invite-block">
       <div class="row center">

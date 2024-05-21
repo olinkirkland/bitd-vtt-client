@@ -16,13 +16,14 @@
 </template>
 
 <script setup lang="ts">
+import { fetchMyAccount } from '@/api/account';
 import GameCard from '@/components/GameCard.vue';
 import CreateGameModal from '@/components/modals/modal-content/CreateGameModal.vue';
 import GamePreviewModal from '@/components/modals/modal-content/GamePreviewModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
 import { Game } from '@/types/game';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 async function onClickNewGame() {
   ModalController.open(CreateGameModal);
 }
@@ -32,6 +33,10 @@ const games = computed(() => useUserStore().games);
 function onClickGame(game: Game) {
   ModalController.open(GamePreviewModal, { game });
 }
+
+onMounted(() => {
+  fetchMyAccount();
+});
 </script>
 
 <style lang="scss" scoped>

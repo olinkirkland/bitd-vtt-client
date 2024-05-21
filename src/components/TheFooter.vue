@@ -3,7 +3,6 @@
     <div class="game-block row center">
       <button class="btn mobile-full-width" @click="onClickGoToGame">
         <span> Return to {{ useGameStore().gameState?.name }}</span>
-        <i class="fas fa-arrow-right"></i>
       </button>
     </div>
   </footer>

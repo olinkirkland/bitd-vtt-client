@@ -17,7 +17,7 @@
           v-if="!useUserStore().isGuest"
         >
           <i class="fas fa-sign-out-alt"></i>
-          <span>Logout</span>
+          <span>Sign Out</span>
         </button>
         <div class="row" v-else>
           <button class="btn" @click="onClickRegister">

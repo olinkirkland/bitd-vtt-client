@@ -2,7 +2,7 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>Leave Game</h2>
+        <h2>Abandon Game</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
@@ -17,6 +17,7 @@
           <button class="btn" @click="ModalController.close()">
             <span>No, I changed my mind</span>
           </button>
+          <span class="muted">or</span>
           <button class="btn btn--text" @click="onClickLeaveGame">
             <span>Yes, remove me from this game</span>
           </button>

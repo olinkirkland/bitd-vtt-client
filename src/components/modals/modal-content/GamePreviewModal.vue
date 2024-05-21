@@ -23,8 +23,7 @@
             <span>{{ props.game.playerIds.length }}</span>
           </div>
           <button class="btn mobile-full-width" @click="onClickJoinGame">
-            <span>Join Game</span>
-            <i class="fas fa-arrow-right"></i>
+            <span>Play</span>
           </button>
         </div>
         <Divider />
