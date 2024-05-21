@@ -33,8 +33,9 @@
 </template>
 
 <script setup lang="ts">
+import { leaveGame } from '@/api/games';
 import Panel from '@/components/modals/Panel.vue';
-import ConfirmLeaveGameModal from '@/components/modals/modal-content/ConfirmLeaveGameModal.vue';
+import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import { disconnectSocket } from '@/controllers/game-socket-controller';
 import ModalController from '@/controllers/modal-controller';
@@ -69,7 +70,22 @@ async function onClickDisconnect() {
 }
 
 function onClickLeave() {
-  ModalController.open(ConfirmLeaveGameModal);
+  ModalController.open(ConfirmModal, {
+    title: 'Abandon Game',
+    message: `Are you sure? This action will remove you from <em>${
+      useGameStore().gameState?.name
+    }</em>.<br />You'll be able to rejoin using the invite link.`,
+    onConfirm: onConfirmLeaveGame,
+    onConfirmText: 'Yes, remove me from this game',
+    onCancelText: 'No, I changed my mind'
+  });
+}
+
+async function onConfirmLeaveGame() {
+  ModalController.open(LoadingModal);
+  await leaveGame();
+  router.push({ name: PageName.GAMES });
+  ModalController.close();
 }
 
 const game = computed(() => useGameStore().gameState);
