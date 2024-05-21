@@ -10,7 +10,7 @@ import packageJson from '@/../package.json';
 
 onMounted(() => {
   getServerVersion().then(
-    (v) => (version.value = `${packageJson.version} / ${v}`)
+    (v) => (version.value = `${packageJson.version} • ${v}`)
   );
 });
 </script>
@@ -19,9 +19,10 @@ onMounted(() => {
 .version {
   position: fixed;
   bottom: 0.4rem;
-  right: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 0.2rem 0.4rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   background-color: var(--translucent-heavy);
   opacity: 0.5;

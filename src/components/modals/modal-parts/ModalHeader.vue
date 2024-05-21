@@ -23,7 +23,7 @@ defineProps({
   background-color: var(--dark);
   border-bottom: 1px solid var(--dark-2);
   width: 100%;
-  height: 5.2rem;
+  min-height: 5.2rem;
   padding: 0 2rem;
   gap: 1.6rem;
 }

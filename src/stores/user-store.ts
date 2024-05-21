@@ -1,6 +1,7 @@
 import { Game } from '@/types/game';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import portraitsJson from '@/assets/data/portrait-images.json';
 
 export const useUserStore = defineStore('user', () => {
   const id = ref();
@@ -8,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const isGuest = ref(true);
   const portrait = ref();
   const games = ref<Game[]>([]);
+  const portraits = ref([...portraitsJson]);
 
   const clear = () => {
     id.value = null;
@@ -23,6 +25,7 @@ export const useUserStore = defineStore('user', () => {
     portrait,
     isGuest,
     games,
-    clear
+    clear,
+    portraits
   };
 });

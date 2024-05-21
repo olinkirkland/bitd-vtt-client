@@ -64,6 +64,7 @@ export async function fetchMyAccount() {
     useUserStore().id = response.data.id;
     useUserStore().username = response.data.username;
     useUserStore().isGuest = response.data.isGuest;
+    useUserStore().portrait = response.data.portrait;
     useUserStore().games = response.data.games;
     return response.data;
   } catch {
@@ -102,5 +103,18 @@ export async function fetchUsers(userIds: string[]): Promise<ForeignUser[]> {
     return response.data as ForeignUser[];
   } catch {
     return [];
+  }
+}
+
+export async function changePortrait(portraitId: string) {
+  try {
+    const response = await server.put('/account/portrait', {
+      portraitId
+    });
+    if (response.status !== HttpStatusCode.Ok) return response.data;
+    useUserStore().portrait = portraitId;
+    return null;
+  } catch (error: any) {
+    return error?.response?.data;
   }
 }

@@ -46,9 +46,17 @@
         </p>
         <Divider />
         <p class="images-description">
-          Images are from
+          Icons are from
+          <a class="anchor-link" href="https://fontawesome.com/" target="_blank"
+            >Font Awesome</a
+          >
+          and <a class="anchor-link" href="https://icons8.com/">Icons8</a>.
+        </p>
+        <Divider />
+        <p class="images-description">
+          Cover images are from
           <a class="anchor-link" href="https://unsplash.com/" target="_blank"
-            >Unsplash.com</a
+            >Unsplash</a
           >.
         </p>
         <ul class="images">
@@ -96,7 +104,6 @@ const shortenAuthor = (author: string) => {
 
 p.images-description {
   text-align: center;
-  margin: 0.8rem;
 }
 
 ul.images {
