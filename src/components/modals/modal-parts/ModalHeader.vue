@@ -1,7 +1,7 @@
 <template>
   <div class="modal__header">
     <slot></slot>
-    <button class="icon" v-if="closeButton" @click="ModalController.close()">
+    <button class="icon" v-if="closeButton" @click="onClickClose">
       <i class="fas fa-times"></i>
     </button>
   </div>
@@ -10,9 +10,14 @@
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
 
-defineProps({
-  closeButton: Boolean
+const props = defineProps({
+  closeButton: Boolean,
+  closeButtonAction: Function
 });
+
+function onClickClose() {
+  props.closeButtonAction ? props.closeButtonAction() : ModalController.close();
+}
 </script>
 
 <style lang="scss" scoped>

@@ -64,6 +64,8 @@
 </template>
 
 <script setup lang="ts">
+import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
+import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import { changePortrait, logout } from '@/api/account';
 import Portrait from '@/components/Portrait.vue';
 import ModalController from '@/controllers/modal-controller';
@@ -75,7 +77,14 @@ import LoginModal from './LoginModal.vue';
 
 function onClickLogout() {
   ModalController.close();
-  logout();
+  ModalController.open(ConfirmModal, {
+    title: 'Sign Out',
+    message: 'Are you sure you want to sign out?',
+    onConfirm: () => logout(),
+    onCancel: () => ModalController.open(AccountModal),
+    onConfirmText: 'Yes, I want to sign out',
+    onCancelText: 'No, keep me signed in'
+  });
 }
 
 function onClickLogin() {
