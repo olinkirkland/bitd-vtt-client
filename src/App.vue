@@ -28,7 +28,8 @@ import TheModalContainer from './components/modals/TheModalContainer.vue';
   max-height: -webkit-fill-available;
   > .page-layout__content {
     flex: 1;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
   }
 }
 </style>

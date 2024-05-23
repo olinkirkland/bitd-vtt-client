@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h1>Settings</h1>
+    <h1>App Settings</h1>
     <!-- <pre>{{ useUserStore() }}</pre> -->
     <button
       class="btn btn--alt"

@@ -22,7 +22,7 @@
         </section>
 
         <!-- Account Management -->
-        <section v-else>
+        <section class="account-management" v-else>
           <button class="btn mobile-full-width" @click="onClickChangeUsername">
             <i class="fas fa-user-edit"></i>
             <span>Change Username</span>
@@ -92,6 +92,7 @@
 </template>
 
 <script setup lang="ts">
+import packageJson from '@/../package.json';
 import { changePortrait, logout } from '@/api/account';
 import Portrait from '@/components/Portrait.vue';
 import AccountModal from '@/components/modals/modal-content/AccountModal.vue';
@@ -107,7 +108,6 @@ import ChangeUsernameModal from './ChangeUsernameModal.vue';
 import ConfirmDeleteAccountModal from './ConfirmDeleteAccountModal.vue';
 import CreateAccountModal from './CreateAccountModal.vue';
 import LoginModal from './LoginModal.vue';
-import packageJson from '@/../package.json';
 
 const version = ref('');
 onMounted(() => {
@@ -157,6 +157,10 @@ function onClickChangePassword() {
 </script>
 
 <style scoped lang="scss">
+.modal {
+  width: 64rem;
+}
+
 .account {
   display: flex;
   flex-direction: column;
@@ -167,6 +171,13 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+}
+
+section.account-management {
+  flex-direction: row;
+  > button {
+    flex: 1;
+  }
 }
 
 .id-block > button {

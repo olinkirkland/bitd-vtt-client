@@ -2,7 +2,7 @@
   <footer v-if="useGameStore().id && notOnGamePage">
     <div class="game-block row center">
       <button class="btn mobile-full-width" @click="onClickGoToGame">
-        <span> Return to {{ useGameStore().gameState?.name }}</span>
+        <span> You're connected to "{{ useGameStore().gameState?.name }}"</span>
       </button>
     </div>
   </footer>

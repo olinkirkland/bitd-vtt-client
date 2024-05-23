@@ -2,6 +2,7 @@ import { useUserStore } from '@/stores/user-store';
 import { HttpStatusCode } from 'axios';
 import { server } from './connection';
 import { useGameStore } from '@/stores/game-store';
+import { fetchMyAccount } from './account';
 
 export async function createNewGame(gameName: string, coverImage: string) {
   try {
@@ -36,6 +37,7 @@ export async function leaveGame() {
     const response = await server.post(`/game/${useGameStore().id}/leave`);
     if (response.status === HttpStatusCode.Ok) {
       useGameStore().clear();
+      await fetchMyAccount();
       return null;
     }
   } catch (error: any) {

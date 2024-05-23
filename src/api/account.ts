@@ -31,7 +31,7 @@ export async function registerAccount(username?: string, password?: string) {
     console.log('registerAccount payload:', payload);
     const response = await server.post('/account/create', payload);
     console.log('response:', response);
-    if (response.status !== 200) return response.data;
+    if (response.status !== HttpStatusCode.Ok) return response.data;
     console.log('@account.ts: fetchMyAccount() because of registerAccount');
     await fetchMyAccount();
     return null;
