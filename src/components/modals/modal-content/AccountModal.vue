@@ -80,7 +80,7 @@
 
           <div class="row center id-block">
             <p class="muted text-center">ID: {{ useUserStore().id }}</p>
-            <button class="btn icon muted" @click="onClickCopyId">
+            <button class="btn btn--icon muted" @click="onClickCopyId">
               <i class="fas fa-copy"></i>
             </button>
           </div>

@@ -4,13 +4,11 @@
     <div class="page-layout__content">
       <router-view name="page"></router-view>
     </div>
-    <TheFooter />
   </div>
   <TheModalContainer />
 </template>
 
 <script setup lang="ts">
-import TheFooter from './components/TheFooter.vue';
 import TheNavigation from './components/TheNavigation.vue';
 import TheModalContainer from './components/modals/TheModalContainer.vue';
 </script>

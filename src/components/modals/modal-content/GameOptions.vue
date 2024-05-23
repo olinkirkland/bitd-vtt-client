@@ -11,15 +11,14 @@
           <p>Invite Link</p>
           <div class="row invite-block">
             <p class="muted text-center">{{ inviteLink }}</p>
-            <button class="btn icon muted" @click="onClickCopyInviteLink">
+            <button class="btn btn--icon muted" @click="onClickCopyInviteLink">
               <i class="fas fa-copy"></i>
             </button>
           </div>
         </section>
         <Divider />
         <button class="btn btn--alt" @click="onClickAbandonGame">
-          <i class="fas fa-skull-crossbones"></i>
-          <span> Abandon Game </span>
+          <span> Leave Game </span>
         </button>
       </div>
     </template>
@@ -49,8 +48,9 @@ function onClickCopyInviteLink() {
 
 function onClickAbandonGame() {
   ModalController.open(ConfirmModal, {
-    title: 'Abandon Game',
-    message: 'Are you sure you want to abandon the game?',
+    title: 'Leave Game',
+    message: 'Are you sure you want to leave the game?',
+    confirmText: 'Leave Game',
     onConfirm: async () => {
       await leaveGame();
       router.push('/games');
@@ -68,7 +68,7 @@ function onClickAbandonGame() {
 }
 
 .invite-block,
-.invite-block button.icon {
+.invite-block * {
   color: var(--light);
 }
 </style>

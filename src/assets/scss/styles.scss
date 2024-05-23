@@ -140,7 +140,7 @@ button.btn {
   }
 }
 
-button.icon {
+button.btn--icon {
   background-color: transparent;
   color: var(--primary);
 
@@ -381,5 +381,9 @@ a.anchor-link {
 @media (max-width: 768px) {
   .mobile-full-width {
     width: 100%;
+  }
+
+  .mobile-hidden {
+    display: none;
   }
 }

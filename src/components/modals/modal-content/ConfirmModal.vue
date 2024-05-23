@@ -11,11 +11,11 @@
 
         <div class="column center">
           <button class="btn" @click="onClickCancel">
-            <span>{{ props.onCancelText || 'No, I changed my mind' }}</span>
+            <span>{{ props.cancelText || 'No, I changed my mind' }}</span>
           </button>
           <span class="muted">or</span>
           <button class="btn btn--text" @click="props.onConfirm">
-            <span>{{ props.onConfirmText || 'Yes, continue' }}</span>
+            <span>{{ props.confirmText || 'Yes, continue' }}</span>
           </button>
         </div>
       </div>
@@ -33,8 +33,8 @@ const props = defineProps<{
   message: string;
   onConfirm: () => void;
   onCancel: () => void;
-  onConfirmText?: string;
-  onCancelText?: string;
+  confirmText?: string;
+  cancelText?: string;
 }>();
 
 function onClickCancel() {

@@ -1,4 +1,4 @@
-import { Effect, SpecialAbility } from './game-data-types';
+import { Effect, SpecialAbility } from '../game-data-types';
 
 export type Claim = Effect & {
   position: { x: number; y: number };

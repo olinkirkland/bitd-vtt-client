@@ -1,4 +1,4 @@
-import { Effect } from './game-data-types';
+import { Effect } from '../game-data-types';
 
 export type Harm = {
   level: number; // 0-4
