@@ -18,6 +18,7 @@ export const useGameStore = defineStore('game', () => {
   const clear = () => {
     id.value = null;
     gameState.value = null;
+    players.value = [];
   };
 
   const setGameId = (gameId: string) => {

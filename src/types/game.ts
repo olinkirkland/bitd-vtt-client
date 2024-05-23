@@ -5,4 +5,5 @@ export type Game = {
   createdAt: Date;
   ownerId: string;
   playerIds: string[];
+  connectedPlayerIds: string[];
 };

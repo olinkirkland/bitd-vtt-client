@@ -301,6 +301,7 @@ em {
 
 .reminder,
 .tooltip {
+  z-index: 99;
   display: inline-block;
   position: relative;
   padding: 0.8rem 1.2rem;
@@ -327,31 +328,6 @@ em {
     border-left: 0.8rem solid transparent;
     border-right: 0.8rem solid transparent;
     border-bottom: 0.8rem solid var(--translucent-heavy);
-  }
-}
-
-*:not(:hover) + .tooltip {
-  opacity: 0;
-}
-
-.tooltip {
-  position: absolute;
-  opacity: 1;
-  transition: all 0.4s;
-  pointer-events: none;
-
-  &.tooltip--top {
-    top: auto;
-    bottom: calc(100% - 0.8rem);
-    &::before {
-      border-bottom: 0;
-      border-top: 0.8rem solid var(--translucent-heavy);
-      transform: translateX(-50%) translateY(2.4rem);
-    }
-  }
-
-  &.tooltip--no-arrow::before {
-    display: none;
   }
 }
 
