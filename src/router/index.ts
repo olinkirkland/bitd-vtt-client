@@ -2,16 +2,15 @@ import { createGuestAccount, fetchMyAccount } from '@/api/account';
 import { fetchAccessToken } from '@/api/connection';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import ModalController from '@/controllers/modal-controller';
-import TheGamesPage from '@/pages/TheGamesPage.vue';
 import TheHomePage from '@/pages/TheHomePage.vue';
 import TheInvitePage from '@/pages/TheInvitePage.vue';
 import TheLostPage from '@/pages/TheLostPage.vue';
-import TheSettingsPage from '@/pages/TheSettingsPage.vue';
 import { useTokenStore } from '@/stores/token-store';
 import { useUserStore } from '@/stores/user-store';
 import { ref } from 'vue';
 import { RouterOptions, createRouter, createWebHistory } from 'vue-router';
 import TheGamePage from '../pages/TheGamePage.vue';
+import { disconnectSocket } from '@/controllers/game-controller';
 
 export const currentPageName = ref();
 export enum PageName {
@@ -26,21 +25,10 @@ export enum PageName {
 const routes = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
     components: {
       page: TheHomePage
     },
     name: PageName.HOME
-  },
-  {
-    path: '/games',
-    components: {
-      page: TheGamesPage
-    },
-    name: PageName.GAMES
   },
   {
     path: '/game/:id',
@@ -55,13 +43,6 @@ const routes = [
       page: TheInvitePage
     },
     name: PageName.INVITE
-  },
-  {
-    path: '/settings',
-    components: {
-      page: TheSettingsPage
-    },
-    name: PageName.SETTINGS
   },
   {
     path: '/:pathMatch(.*)*',
@@ -82,6 +63,9 @@ export const router = createRouter(routerOptions as RouterOptions);
 router.afterEach(async (to, from) => {});
 
 router.beforeEach(async (to, from, next) => {
+  // Disconnect the socket if it's open
+  await disconnectSocket();
+
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
 
   if (useTokenStore().refreshToken && !useTokenStore().accessToken)

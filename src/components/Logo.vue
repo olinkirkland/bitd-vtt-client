@@ -1,52 +1,52 @@
 <template>
-  <h1
-    class="logo"
-    :class="{ 'logo--vertical': props.vertical, 'logo--big': props.big }"
-  >
-    <span>online</span>
-    <span>in the Dark</span>
-  </h1>
+  <div class="logo" :class="{ big: props.big }">
+    <span class="online">online</span>
+    <span class="in-the-dark">in the Dark</span>
+  </div>
 </template>
 
 <script setup lang="ts">
 const props = defineProps<{
-  vertical?: boolean;
   big?: boolean;
 }>();
 </script>
 
 <style lang="scss" scoped>
-h1.logo {
+.logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  height: fit-content;
+
   color: var(--primary);
-  span:first-child {
-    font-size: 3.6rem;
-    font-family: 'Kristi', cursive;
-    text-transform: lowercase;
-    display: inline-block;
-    font-weight: normal;
-    margin-right: 0.6rem;
-  }
-  span:last-child {
-    font-size: 1.2rem;
-  }
 
-  &--vertical {
-    flex-direction: column;
-    span:first-child {
-      font-size: 4rem;
-    }
-  }
+  > span {
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
 
-  &--big {
-    > span:first-child {
-      font-size: 12rem;
-    }
-    > span:last-child {
+    &.online {
       font-size: 2rem;
-      letter-spacing: 0.8rem;
+      font-family: var(--body-font);
+      display: inline-block;
+      font-weight: normal;
     }
+
+    &.in-the-dark {
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.logo.big {
+  > span.online {
+    font-size: 4rem;
+  }
+
+  > span.in-the-dark {
+    font-size: 2rem;
   }
 }
 </style>

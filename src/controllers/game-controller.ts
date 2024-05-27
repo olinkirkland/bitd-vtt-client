@@ -1,11 +1,9 @@
-import { BASE_URL, server } from '@/api/connection';
-import { PageName, router } from '@/router';
+import { BASE_URL } from '@/api/connection';
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import { useGameStore } from '@/stores/game-store';
 import { useTokenStore } from '@/stores/token-store';
 import { Operation, applyPatch } from 'fast-json-patch';
 import ModalController from './modal-controller';
-import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
-import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 
 export enum SocketMessageType {
   PATCH = 'patch'
@@ -13,30 +11,17 @@ export enum SocketMessageType {
 
 let socket: WebSocket | null = null;
 
-export async function connectSocketAndSubscribeToGame() {
+export async function connectToGame() {
+  console.log('@game-controller: connectToGame');
   ModalController.open(LoadingModal);
-  if (socket) await disconnectSocket();
-
-  try {
-    const response = await server.post(`/game/${useGameStore().id}/subscribe`);
-    const { data } = response;
-    useGameStore().gameState = data;
-    useGameStore().validatePlayers();
-  } catch (error: any) {
-    ModalController.open(InfoModal, {
-      title: 'Failed to connect to game',
-      message: error
-    });
-
-    useGameStore().clear();
-    return false;
-  }
+  await disconnectSocket();
 
   // Use ws on dev and wss on production
-  const url = BASE_URL.replace(
-    /^https?/,
-    location.hostname === 'localhost' ? 'ws' : 'wss'
-  );
+  const url =
+    BASE_URL.replace(
+      /^https?/,
+      location.hostname === 'localhost' ? 'ws' : 'wss'
+    ) + `?gameId=${useGameStore().id}&token=${useTokenStore().accessToken}`;
 
   try {
     socket = new WebSocket(url);
@@ -84,7 +69,7 @@ function onMessage(message: any) {
 
   const data = JSON.parse(message.data);
 
-  if (data.type !== 'patch')
+  if (data.type !== SocketMessageType.PATCH)
     return console.error('Invalid message type:', data.type);
 
   try {
@@ -94,11 +79,6 @@ function onMessage(message: any) {
       useGameStore().gameState,
       patches
     ).newDocument;
-
-    // Are any of the patches related to the playerIds?
-    // If so, fetch the new players
-    if (patches.some((patch) => patch.path === '/playerIds'))
-      useGameStore().validatePlayers();
   } catch (error) {
     console.error('Failed to parse message:', error);
     return;
@@ -107,14 +87,10 @@ function onMessage(message: any) {
 
 function onOpen() {
   console.log('@game-controller: onOpen');
-  const token = useTokenStore().accessToken;
-  if (!token) return;
-  socket!.send(token);
 }
 
 function onClose() {
   console.log('@game-controller: onClose');
-  server.post(`/game/${useGameStore().id}/unsubscribe`);
 }
 
 function onError(error: any) {

@@ -1,32 +1,30 @@
 <template>
-  <div class="game-footer">
-    <ul class="player-list">
-      <li
-        v-for="player in useGameStore().players"
-        :key="player.id"
+  <ul class="player-bar">
+    <li
+      v-for="player in useGameStore().players"
+      :key="player.id"
+      :class="{
+        'inactive-player': !(
+          useGameStore().gameState?.connectedPlayerIds || []
+        ).includes(player.id)
+      }"
+    >
+      <Portrait :portraitId="player.portrait" />
+      <Tooltip top :text="player.username" />
+      <div
+        class="online-indicator"
         :class="{
-          'inactive-player': !(
+          'online-indicator--online': (
             useGameStore().gameState?.connectedPlayerIds || []
           ).includes(player.id)
         }"
-      >
-        <Portrait :portraitId="player.portrait" />
-        <Tooltip top :text="player.username" />
-        <div
-          class="online-indicator"
-          :class="{
-            'online-indicator--online': (
-              useGameStore().gameState?.connectedPlayerIds || []
-            ).includes(player.id)
-          }"
-        ></div>
-      </li>
-    </ul>
-  </div>
+      ></div>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
-import { disconnectSocket } from '@/controllers/game-socket-controller';
+import { disconnectSocket } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { PageName, router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
@@ -53,13 +51,12 @@ async function onClickDisconnect() {
 </script>
 
 <style lang="scss" scoped>
-.player-list {
+.player-bar {
   display: flex;
   gap: 0.8rem;
   align-items: center;
   list-style: none;
-  padding: 0;
-  margin: 1.2rem;
+  width: fit-content;
 
   li {
     position: relative;

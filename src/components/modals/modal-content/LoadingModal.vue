@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Logo vertical big />
+  <div class="loading">
+    <Logo big />
     <i class="fas fa-circle-notch fa-spin"></i>
   </div>
 </template>
@@ -10,7 +10,7 @@ import Logo from '@/components/Logo.vue';
 </script>
 
 <style scoped lang="scss">
-div {
+.loading {
   display: flex;
   flex-direction: column;
   justify-content: center;

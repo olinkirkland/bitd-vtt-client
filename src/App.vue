@@ -15,7 +15,6 @@ import TheModalContainer from './components/modals/TheModalContainer.vue';
 
 <style lang="scss">
 @import './assets/scss/styles.scss';
-@import './assets/scss/fonts.scss';
 
 .page-layout {
   display: flex;
