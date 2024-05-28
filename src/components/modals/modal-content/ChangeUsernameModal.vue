@@ -31,7 +31,7 @@
         <div class="alert" v-if="changeUsernameError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ changeUsernameError }}</span>
-          <button class="btn icon close" @click="changeUsernameError = ''">
+          <button class="btn btn--icon close" @click="changeUsernameError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>

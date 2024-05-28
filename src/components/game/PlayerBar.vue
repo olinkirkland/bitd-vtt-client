@@ -24,29 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { disconnectSocket } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { PageName, router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import Portrait from '../Portrait.vue';
 import Tooltip from '../Tooltip.vue';
 import GameOptions from '../modals/modal-content/GameOptions.vue';
-import LoadingModal from '../modals/modal-content/LoadingModal.vue';
 
 function onClickGameOptions() {
   ModalController.open(GameOptions);
-}
-
-async function onClickDisconnect() {
-  ModalController.open(LoadingModal);
-  try {
-    await disconnectSocket();
-  } catch (error) {
-    console.error(error);
-  }
-  useGameStore().clear();
-  router.push({ name: PageName.GAMES });
-  ModalController.close();
 }
 </script>
 

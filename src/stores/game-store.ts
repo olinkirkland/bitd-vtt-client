@@ -1,11 +1,5 @@
-import { fetchUsers } from '@/api/account';
-import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
-import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
-import { connectToGame as connectToGame } from '@/controllers/game-controller';
-import ModalController from '@/controllers/modal-controller';
-import { PageName, router } from '@/router';
+import { connectToGame } from '@/controllers/game-controller';
 import { Game } from '@/types/game';
-import { ForeignUser } from '@/types/user';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 

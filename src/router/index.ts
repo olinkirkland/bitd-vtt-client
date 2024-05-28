@@ -10,7 +10,6 @@ import { useUserStore } from '@/stores/user-store';
 import { ref } from 'vue';
 import { RouterOptions, createRouter, createWebHistory } from 'vue-router';
 import TheGamePage from '../pages/TheGamePage.vue';
-import { disconnectSocket } from '@/controllers/game-controller';
 
 export const currentPageName = ref();
 export enum PageName {
@@ -63,8 +62,7 @@ export const router = createRouter(routerOptions as RouterOptions);
 router.afterEach(async (to, from) => {});
 
 router.beforeEach(async (to, from, next) => {
-  // Disconnect the socket if it's open
-  await disconnectSocket();
+  // TODO: disconnect socket
 
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
 

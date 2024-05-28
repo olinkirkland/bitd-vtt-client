@@ -53,7 +53,7 @@
         <div class="alert" v-if="changePasswordError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ changePasswordError }}</span>
-          <button class="btn icon close" @click="changePasswordError = ''">
+          <button class="btn btn--icon close" @click="changePasswordError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>
