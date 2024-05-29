@@ -10,7 +10,6 @@ export async function acceptInvite(code: string) {
   try {
     const response = await server.post(`/invite/${code}`);
     if (response.status === HttpStatusCode.Ok) {
-      useUserStore().games = response.data.games;
       const gameId = response.data.gameId;
       // Redirect to the game's page
       router.push({ name: PageName.GAME, params: { id: gameId } });

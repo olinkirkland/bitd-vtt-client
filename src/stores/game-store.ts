@@ -4,25 +4,14 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useGameStore = defineStore('game', () => {
-  const id = ref();
-
-  const gameState = ref<(Game & { [key: string]: any }) | null>(null);
+  const game = ref<Game | null>(null);
 
   const clear = () => {
-    id.value = null;
-    gameState.value = null;
-  };
-
-  const setGameId = (gameId: string) => {
-    clear();
-    id.value = gameId;
-    connectToGame();
+    game.value = null;
   };
 
   return {
-    id,
-    gameState,
-    clear,
-    setGameId
+    game,
+    clear
   };
 });

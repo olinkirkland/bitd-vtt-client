@@ -2,7 +2,10 @@
   <div class="page">
     <div class="game-layout">
       <!-- <SideBar /> -->
-      <pre>{{ game }}</pre>
+      <button class="btn" @click="copyInviteLink(inviteLink)">
+        <i class="fas fa-link"></i> Copy Invite Link
+      </button>
+      <pre>{{ useGameStore().game }}</pre>
       <PlayerBar class="mobile-hidden" />
     </div>
   </div>
@@ -10,17 +13,24 @@
 
 <script setup lang="ts">
 import PlayerBar from '@/components/game/PlayerBar.vue';
+import { connectToGame } from '@/controllers/game-controller';
 import { useGameStore } from '@/stores/game-store';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
-const gameId = route.params.id as string;
 
-if (useGameStore().id !== gameId) useGameStore().setGameId(gameId);
+onMounted(() => {
+  const gameId = route.params.id as string;
+  connectToGame(gameId);
+});
 
-const state = useGameStore().gameState;
+const inviteLink = computed(
+  () => 'http://localhost:5173/invite/' + useGameStore().game?.inviteCode
+);
 
-const game = computed(() => useGameStore().gameState);
+function copyInviteLink(link: string) {
+  navigator.clipboard.writeText(link);
+}
 </script>
 
 <style scoped lang="scss">

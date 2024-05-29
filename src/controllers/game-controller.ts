@@ -2,6 +2,7 @@ import { BASE_URL } from '@/api/connection';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import { useGameStore } from '@/stores/game-store';
 import { useTokenStore } from '@/stores/token-store';
+import { Game } from '@/types/game';
 import { Operation, applyPatch } from 'fast-json-patch';
 import { Socket, io } from 'socket.io-client';
 import ModalController from './modal-controller';
@@ -12,7 +13,7 @@ export enum SocketMessageType {
 
 let socket: Socket | null = null;
 
-export function connectToGame() {
+export function connectToGame(gameId: string) {
   console.log('@game-controller: connectToGame');
   ModalController.open(LoadingModal);
   if (socket) {
@@ -22,7 +23,7 @@ export function connectToGame() {
 
   const socketOptions = {
     query: {
-      gameId: useGameStore().id,
+      gameId,
       token: useTokenStore().accessToken
     }
   };
@@ -30,30 +31,22 @@ export function connectToGame() {
   socket = io(BASE_URL, socketOptions);
   socket.on('connect', onConnect);
   socket.on('disconnect', onDisconnect);
-  socket.on('message', onMessage);
+  socket.on('patch', onReceivePatch);
   socket.on('error', onError);
 
   ModalController.close();
 }
 
-function onMessage(message: any) {
-  console.log('@game-controller: onMessage:', message.data);
-  if (!message.data) return;
-
-  const data = JSON.parse(message.data);
-
-  if (data.type !== SocketMessageType.PATCH)
-    return console.error('Invalid message type:', data.type);
-
+function onReceivePatch(data: { patches: Operation[] }) {
   try {
-    const { patches } = data as { patches: Operation[] };
-
-    useGameStore().gameState = applyPatch(
-      useGameStore().gameState,
+    const { patches } = data;
+    console.log('@game-controller: onReceivePatch:', patches);
+    useGameStore().game = applyPatch(
+      useGameStore().game || ({} as Game),
       patches
     ).newDocument;
   } catch (error) {
-    console.error('Failed to parse message:', error);
+    console.error('Failed to patch:', error);
     return;
   }
 }
