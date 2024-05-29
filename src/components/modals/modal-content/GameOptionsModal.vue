@@ -8,7 +8,7 @@
     <template v-slot:content>
       <div class="options">
         <section>
-          <p>Invite Link</p>
+          <p class="muted">Invite Link</p>
           <div class="row invite-block">
             <p class="muted text-center">{{ inviteLink }}</p>
             <button class="btn btn--icon muted" @click="onClickCopyInviteLink">
@@ -65,10 +65,25 @@ function onClickAbandonGame() {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
 }
 
-.invite-block,
-.invite-block * {
-  color: var(--light);
+.invite-block {
+  background-color: var(--translucent-light);
+  padding: 0.8rem 1.2rem;
+
+  > p {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  * {
+    color: var(--light);
+  }
 }
 </style>

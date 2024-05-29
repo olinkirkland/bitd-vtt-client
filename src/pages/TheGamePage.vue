@@ -1,38 +1,28 @@
 <template>
   <div class="page">
     <div class="game-layout">
-      <div class="row center">
-        <button class="btn" @click="copyInviteLink(inviteLink)">
-          <i class="fas fa-link"></i> Copy Invite Link
-        </button>
-
-        <button class="btn" @click="showModelOverlay = true">
-          <i class="fas fa-cogs"></i> Debug
-        </button>
-
-        <button class="btn" @click="leaveGame">
-          <i class="fas fa-sign-out-alt"></i> Leave Game
-        </button>
-      </div>
-
+      <div class="stage"></div>
       <PlayerBar class="mobile-hidden" />
     </div>
   </div>
 
-  <div class="model-overlay center" v-if="showModelOverlay">
+  <button class="btn btn--alt debug" @click="showModelOverlay = true">
+    <i class="fas fa-cogs"></i> Debug
+  </button>
+
+  <div class="model-overlay" v-if="showModelOverlay">
     <pre>{{ JSON.stringify(useGameStore().game, null, 2) }}</pre>
-    <button class="btn btn--alt" @click="showModelOverlay = false">
+    <button class="btn debug btn--alt" @click="showModelOverlay = false">
       Close
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { leaveGame } from '@/api/games';
 import PlayerBar from '@/components/game/PlayerBar.vue';
 import { connectToGame } from '@/controllers/game-controller';
 import { useGameStore } from '@/stores/game-store';
-import { computed, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
 
@@ -42,14 +32,6 @@ onMounted(() => {
   const gameId = route.params.id as string;
   connectToGame(gameId);
 });
-
-const inviteLink = computed(
-  () => 'http://localhost:5173/invite/' + useGameStore().game?.inviteCode
-);
-
-function copyInviteLink(link: string) {
-  navigator.clipboard.writeText(link);
-}
 </script>
 
 <style scoped lang="scss">
@@ -85,5 +67,15 @@ function copyInviteLink(link: string) {
     flex: 1;
     overflow: auto;
   }
+}
+
+button.debug {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.stage {
+  flex: 1;
 }
 </style>
