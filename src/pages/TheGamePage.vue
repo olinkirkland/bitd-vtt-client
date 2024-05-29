@@ -5,6 +5,11 @@
       <button class="btn" @click="copyInviteLink(inviteLink)">
         <i class="fas fa-link"></i> Copy Invite Link
       </button>
+
+      <button class="btn" @click="leaveGame">
+        <i class="fas fa-sign-out-alt"></i> Leave Game
+      </button>
+
       <pre>{{ useGameStore().game }}</pre>
       <PlayerBar class="mobile-hidden" />
     </div>
@@ -12,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { leaveGame } from '@/api/games';
 import PlayerBar from '@/components/game/PlayerBar.vue';
 import { connectToGame } from '@/controllers/game-controller';
 import { useGameStore } from '@/stores/game-store';

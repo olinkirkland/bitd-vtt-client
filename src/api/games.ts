@@ -34,7 +34,9 @@ export async function joinGameWithInvite(inviteCode: string) {
 
 export async function leaveGame() {
   try {
-    const response = await server.post(`/game/${useGameStore().id}/leave`);
+    const response = await server.post(
+      `/game/${useGameStore().game?._id}/leave`
+    );
     if (response.status === HttpStatusCode.Ok) {
       useGameStore().clear();
       await fetchMyAccount();
