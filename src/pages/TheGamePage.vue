@@ -1,7 +1,26 @@
 <template>
   <div class="page">
     <div class="game-layout">
-      <div class="stage"></div>
+      <div class="stage">
+        <div class="row center">
+          <button
+            class="btn btn--tab"
+            :class="{ active: currentTab === 'crew' }"
+            @click="currentTab = 'crew'"
+          >
+            <i class="fas fa-users"></i>
+            <span class="mobile-hidden">Crew</span>
+          </button>
+          <button
+            class="btn btn--tab"
+            :class="{ active: currentTab === 'tasks' }"
+            @click="currentTab = 'tasks'"
+          >
+            <i class="fas fa-user-alt"></i>
+            <span class="mobile-hidden">Character</span>
+          </button>
+        </div>
+      </div>
       <PlayerBar class="mobile-hidden" />
     </div>
   </div>
@@ -25,6 +44,8 @@ import { useGameStore } from '@/stores/game-store';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 const route = useRoute();
+
+const currentTab = ref('crew');
 
 const showModelOverlay = ref(false);
 

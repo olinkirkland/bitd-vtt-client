@@ -150,8 +150,14 @@ button.btn--icon {
 button.btn--tab {
   color: var(--primary);
   background-color: transparent;
+
   text-transform: uppercase;
   font-size: 1rem;
+
+  > span {
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
 
   &::after {
     border: none;
