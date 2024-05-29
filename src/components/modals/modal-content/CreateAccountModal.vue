@@ -53,7 +53,7 @@
         <div class="alert" v-if="registerError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ registerError }}</span>
-          <button class="btn icon close" @click="registerError = ''">
+          <button class="btn btn--icon close" @click="registerError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>

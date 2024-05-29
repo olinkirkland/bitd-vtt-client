@@ -1,3 +1,5 @@
+import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
+import ModalController from '@/controllers/modal-controller';
 import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { ForeignUser } from '@/types/user';
@@ -5,9 +7,6 @@ import { HttpStatusCode } from 'axios';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
-import ModalController from '@/controllers/modal-controller';
-import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
-import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
 
 export async function createGuestAccount() {
   try {

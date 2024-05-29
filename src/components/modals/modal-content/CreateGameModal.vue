@@ -58,7 +58,7 @@
         <div class="alert" v-if="createError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ createError }}</span>
-          <button class="btn icon close" @click="createError = ''">
+          <button class="btn btn--icon close" @click="createError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>

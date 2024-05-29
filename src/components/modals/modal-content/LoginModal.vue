@@ -38,7 +38,7 @@
         <div class="alert" v-if="loginError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ loginError }}</span>
-          <button class="btn icon close" @click="loginError = ''">
+          <button class="btn btn--icon close" @click="loginError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>

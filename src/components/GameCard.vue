@@ -4,10 +4,10 @@
     <div class="game-card__content">
       <h2>{{ props.game.name }}</h2>
       <div class="row info">
-        <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
+        <span class="tag">{{ userPlayer.role }}</span>
         <div class="row users">
           <i class="fas fa-users"></i>
-          <span>{{ props.game.playerIds.length }}</span>
+          <span>{{ Object.keys(props.game.players).length }}</span>
         </div>
         <p class="date-created">{{ dateCreatedText }}</p>
       </div>
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import coverImages from '@/assets/data/cover-images.json';
-import { Game } from '@/types/game';
+import { Game, PlayerRole } from '@/types/game';
 import { useUserStore } from '@/stores/user-store';
 import { PropType, computed } from 'vue';
 const props = defineProps({
@@ -31,10 +31,10 @@ const coverImage = computed(() => {
   return coverImages.find((image) => image.id === props.game.coverImage);
 });
 
-const isGM = computed(() => props.game.ownerId === useUserStore().id);
+const userPlayer = computed(() => props.game.players[useUserStore().id]);
 
 const dateCreatedText = computed(() => {
-  const date = new Date(props.game.createdAt);
+  const date = new Date(props.game.dateCreated);
   return date.toLocaleDateString();
 });
 </script>

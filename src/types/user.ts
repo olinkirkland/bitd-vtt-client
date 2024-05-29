@@ -3,5 +3,4 @@ export type ForeignUser = {
   username: string;
   isGuest: boolean;
   portrait: string;
-  isInGame: string; // gameId
 };

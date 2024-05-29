@@ -13,14 +13,14 @@
         >
           <img class="game-preview__cover" :src="coverImage?.url" />
           <div class="overlay">
-            <h1>{{ props.game.name }}</h1>
+            <h1>{{ game.name }}</h1>
           </div>
         </div>
         <div class="row center game-join-bar">
-          <span class="tag">{{ isGM ? 'GM' : 'Player' }}</span>
+          <span class="tag">{{ userPlayer.role }}</span>
           <div class="row users">
             <i class="fas fa-users"></i>
-            <span>{{ props.game.playerIds.length }}</span>
+            <span>{{ Object.keys(game.players).length }}</span>
           </div>
           <button class="btn mobile-full-width" @click="onClickJoinGame">
             <span>Play</span>
@@ -31,12 +31,15 @@
         <div class="players-container">
           <div
             class="row center waiting-players"
-            :class="{ collapsed: players.length > 0 }"
+            :class="{ collapsed: Object.keys(game.players).length > 0 }"
           >
             <i class="fas fa-circle-notch fa-spin"></i>
           </div>
-          <ul class="players" :class="{ collapsed: players.length === 0 }">
-            <li v-for="player in players" class="row" :key="player.id">
+          <ul
+            class="players"
+            :class="{ collapsed: Object.keys(game.players).length === 0 }"
+          >
+            <li v-for="(player, id) in game.players" class="row" :key="id">
               <Portrait :portraitId="player.portrait" />
               <span>{{ player.username }}</span>
             </li>
@@ -48,30 +51,22 @@
 </template>
 
 <script setup lang="ts">
-import { fetchUsers } from '@/api/account';
 import coverImages from '@/assets/data/cover-images.json';
 import Divider from '@/components/Divider.vue';
+import Portrait from '@/components/Portrait.vue';
 import ModalController from '@/controllers/modal-controller';
 import { router } from '@/router';
 import { useUserStore } from '@/stores/user-store';
 import { Game } from '@/types/game';
-import { ForeignUser } from '@/types/user';
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import Portrait from '@/components/Portrait.vue';
 
 const props = defineProps<{
   game: Game;
 }>();
 
-const isGM = computed(() => props.game.ownerId === useUserStore().id);
-const players = ref<ForeignUser[]>([]);
-
-onMounted(async () => {
-  players.value =
-    (await fetchUsers(props.game.playerIds)) || ([] as ForeignUser[]);
-});
+const userPlayer = computed(() => props.game.players[useUserStore().id]);
 
 const coverImage = computed(() => {
   return coverImages.find((image) => image.id === props.game.coverImage);

@@ -26,7 +26,7 @@
         <div class="alert" v-if="passwordError">
           <i class="fas fa-exclamation-circle"></i>
           <span>{{ passwordError }}</span>
-          <button class="btn icon close" @click="passwordError = ''">
+          <button class="btn btn--icon close" @click="passwordError = ''">
             <i class="fas fa-times"></i>
           </button>
         </div>
