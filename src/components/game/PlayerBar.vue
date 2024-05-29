@@ -22,11 +22,7 @@ import ModalController from '@/controllers/modal-controller';
 import { useGameStore } from '@/stores/game-store';
 import Portrait from '../Portrait.vue';
 import Tooltip from '../Tooltip.vue';
-import GameOptions from '../modals/modal-content/GameOptions.vue';
-
-function onClickGameOptions() {
-  ModalController.open(GameOptions);
-}
+import GameOptions from '../modals/modal-content/GameOptionsModal.vue';
 </script>
 
 <style lang="scss" scoped>

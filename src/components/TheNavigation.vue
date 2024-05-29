@@ -6,6 +6,13 @@
       </router-link>
     </div>
     <div class="account">
+      <button
+        class="btn btn--icon game-options"
+        @click="onClickGameOptions"
+        v-if="useGameStore().game?._id"
+      >
+        <i class="fas fa-cog"></i>
+      </button>
       <button class="btn btn--account" @click="onClickAccount">
         <Portrait :portraitId="useUserStore().portrait" />
         <span>{{ useUserStore().username || 'Account' }}</span>
@@ -20,9 +27,15 @@ import ModalController from '@/controllers/modal-controller';
 import { useUserStore } from '@/stores/user-store';
 import Logo from './Logo.vue';
 import Portrait from './Portrait.vue';
+import GameOptions from './modals/modal-content/GameOptionsModal.vue';
+import { useGameStore } from '@/stores/game-store';
 
 function onClickAccount() {
   ModalController.open(AccountModal);
+}
+
+function onClickGameOptions() {
+  ModalController.open(GameOptions);
 }
 </script>
 
@@ -43,6 +56,7 @@ nav {
   }
 
   .account {
+    display: flex;
     right: 0;
   }
 }

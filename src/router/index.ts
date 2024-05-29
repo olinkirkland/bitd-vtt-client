@@ -1,6 +1,7 @@
 import { createGuestAccount, fetchMyAccount } from '@/api/account';
 import { fetchAccessToken } from '@/api/connection';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
+import { disconnectFromGame } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import TheHomePage from '@/pages/TheHomePage.vue';
 import TheInvitePage from '@/pages/TheInvitePage.vue';
@@ -62,7 +63,7 @@ export const router = createRouter(routerOptions as RouterOptions);
 router.afterEach(async (to, from) => {});
 
 router.beforeEach(async (to, from, next) => {
-  // TODO: disconnect socket
+  disconnectFromGame();
 
   ModalController.open(LoadingModal, { backgroundClass: 'opaque' });
 

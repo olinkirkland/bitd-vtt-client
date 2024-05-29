@@ -35,11 +35,10 @@ import { computed } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import ConfirmModal from './ConfirmModal.vue';
+import LoadingModal from './LoadingModal.vue';
 
 const inviteLink = computed(() => {
-  return `${window.location.origin}/invite/${
-    useGameStore().gameState?.inviteCode
-  }`;
+  return `${window.location.origin}/invite/${useGameStore().game?.inviteCode}`;
 });
 
 function onClickCopyInviteLink() {
@@ -52,8 +51,9 @@ function onClickAbandonGame() {
     message: 'Are you sure you want to leave the game?',
     confirmText: 'Leave Game',
     onConfirm: async () => {
+      ModalController.open(LoadingModal);
       await leaveGame();
-      router.push('/games');
+      router.push('/');
       ModalController.close();
     }
   });

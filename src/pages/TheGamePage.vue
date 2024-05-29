@@ -1,17 +1,19 @@
 <template>
   <div class="page">
     <div class="game-layout">
-      <button class="btn" @click="copyInviteLink(inviteLink)">
-        <i class="fas fa-link"></i> Copy Invite Link
-      </button>
+      <div class="row center">
+        <button class="btn" @click="copyInviteLink(inviteLink)">
+          <i class="fas fa-link"></i> Copy Invite Link
+        </button>
 
-      <button class="btn" @click="showModelOverlay = true">
-        <i class="fas fa-cogs"></i> Debug
-      </button>
+        <button class="btn" @click="showModelOverlay = true">
+          <i class="fas fa-cogs"></i> Debug
+        </button>
 
-      <button class="btn" @click="leaveGame">
-        <i class="fas fa-sign-out-alt"></i> Leave Game
-      </button>
+        <button class="btn" @click="leaveGame">
+          <i class="fas fa-sign-out-alt"></i> Leave Game
+        </button>
+      </div>
 
       <PlayerBar class="mobile-hidden" />
     </div>

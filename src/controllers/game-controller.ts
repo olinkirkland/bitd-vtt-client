@@ -37,6 +37,14 @@ export function connectToGame(gameId: string) {
   ModalController.close();
 }
 
+export function disconnectFromGame() {
+  if (socket) {
+    socket.disconnect();
+    socket = null;
+    useGameStore().clear();
+  }
+}
+
 function onReceivePatch(data: { patches: Operation[] }) {
   try {
     const { patches } = data;

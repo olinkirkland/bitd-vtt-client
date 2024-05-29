@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
 import { ref } from 'vue';
-import GameOptions from '../modals/modal-content/GameOptions.vue';
+import GameOptions from '../modals/modal-content/GameOptionsModal.vue';
 
 const currentSheet = ref('Playbooks');
 const sheets = ['Playbooks', 'Crew', 'World']; // TODO get this from JSON from the game state
