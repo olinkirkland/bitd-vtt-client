@@ -24,7 +24,7 @@ export function connectToGame(gameId: string) {
   const socketOptions = {
     query: {
       gameId,
-      token: useTokenStore().accessToken
+      token: useTokenStore().refreshToken
     }
   };
 

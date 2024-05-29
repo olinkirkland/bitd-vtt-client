@@ -1,22 +1,16 @@
 <template>
   <ul class="player-bar">
     <li
-      v-for="player in useGameStore().players"
-      :key="player.id"
-      :class="{
-        'inactive-player': !(
-          useGameStore().gameState?.connectedPlayerIds || []
-        ).includes(player.id)
-      }"
+      v-for="(player, playerId) in useGameStore().game?.players"
+      :key="playerId"
+      :class="{ 'inactive-player': !player.isOnline }"
     >
       <Portrait :portraitId="player.portrait" />
       <Tooltip top :text="player.username" />
       <div
         class="online-indicator"
         :class="{
-          'online-indicator--online': (
-            useGameStore().gameState?.connectedPlayerIds || []
-          ).includes(player.id)
+          'online-indicator--online': player.isOnline
         }"
       ></div>
     </li>
