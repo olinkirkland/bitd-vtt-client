@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   text: string;
@@ -25,6 +25,7 @@ const tooltip = ref<HTMLElement | null>(null);
   opacity: 1;
   transition: all 0.4s;
   pointer-events: none;
+  text-transform: unset;
 
   &--top {
     top: unset;
