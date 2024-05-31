@@ -8,16 +8,14 @@
             :class="{ active: currentTab === 'crew' }"
             @click="currentTab = 'crew'"
           >
-            <i class="fas fa-users"></i>
-            <span class="mobile-hidden">Crew</span>
+            <span>Crew</span>
           </button>
           <button
             class="btn btn--tab"
             :class="{ active: currentTab === 'tasks' }"
             @click="currentTab = 'tasks'"
           >
-            <i class="fas fa-user-alt"></i>
-            <span class="mobile-hidden">Character</span>
+            <span>Character</span>
           </button>
         </div>
       </div>

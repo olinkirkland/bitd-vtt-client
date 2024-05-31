@@ -10,9 +10,21 @@
         <section>
           <p class="muted">Invite Link</p>
           <div class="row invite-block">
-            <p class="muted text-center">{{ inviteLink }}</p>
-            <button class="btn btn--icon muted" @click="onClickCopyInviteLink">
-              <i class="fas fa-copy"></i>
+            <div class="row">
+              <p class="muted text-center">{{ inviteLink }}</p>
+              <button
+                class="btn btn--icon muted"
+                @click="onClickCopyInviteLink"
+              >
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <button
+              class="btn btn--icon muted"
+              @click="onClickRegenerateInviteLink"
+              v-if="useGameStore().userPlayer?.role === PlayerRole.GM"
+            >
+              <i class="fas fa-sync"></i>
             </button>
           </div>
         </section>
@@ -31,11 +43,14 @@ import Divider from '@/components/Divider.vue';
 import ModalController from '@/controllers/modal-controller';
 import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
+import { PlayerRole } from '@/types/game';
 import { computed } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import ConfirmModal from './ConfirmModal.vue';
 import LoadingModal from './LoadingModal.vue';
+import { patch } from '@/controllers/game-controller';
+import { makeGameInviteCode } from '@/util/names';
 
 const inviteLink = computed(() => {
   return `${window.location.origin}/invite/${useGameStore().game?.inviteCode}`;
@@ -43,6 +58,16 @@ const inviteLink = computed(() => {
 
 function onClickCopyInviteLink() {
   navigator.clipboard.writeText(inviteLink.value);
+}
+
+function onClickRegenerateInviteLink() {
+  patch([
+    {
+      op: 'replace',
+      path: '/inviteCode',
+      value: makeGameInviteCode()
+    }
+  ]);
 }
 
 function onClickAbandonGame() {
@@ -61,6 +86,10 @@ function onClickAbandonGame() {
 </script>
 
 <style scoped lang="scss">
+.modal {
+  width: 64rem;
+}
+
 .options {
   display: flex;
   flex-direction: column;
@@ -73,13 +102,16 @@ function onClickAbandonGame() {
   }
 }
 
-.invite-block {
-  background-color: var(--translucent-light);
-  padding: 0.8rem 1.2rem;
+.row.invite-block {
+  > .row {
+    max-width: 100%;
+    background-color: var(--translucent-light);
+    padding: 0.8rem 1.2rem;
 
-  > p {
-    overflow-x: auto;
-    white-space: nowrap;
+    p {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
   }
 
   * {

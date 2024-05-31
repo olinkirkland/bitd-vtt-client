@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/api/connection';
+import { BASE_URL, server } from '@/api/connection';
 import LoadingModal from '@/components/modals/modal-content/LoadingModal.vue';
 import { useGameStore } from '@/stores/game-store';
 import { useTokenStore } from '@/stores/token-store';
@@ -69,4 +69,9 @@ function onDisconnect() {
 
 function onError(error: any) {
   console.log('@game-controller: onError:', error);
+}
+
+export async function patch(patches: Operation[]) {
+  // Send a patch by rest request
+  await server.patch(`/game/${useGameStore().game?._id}`, patches);
 }

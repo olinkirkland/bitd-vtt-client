@@ -1,7 +1,7 @@
-import { connectToGame } from '@/controllers/game-controller';
 import { Game } from '@/types/game';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useUserStore } from './user-store';
 
 export const useGameStore = defineStore('game', () => {
   const game = ref<Game | null>(null);
@@ -10,8 +10,11 @@ export const useGameStore = defineStore('game', () => {
     game.value = null;
   };
 
+  const userPlayer = computed(() => game.value?.players[useUserStore().id]);
+
   return {
     game,
+    userPlayer,
     clear
   };
 });
