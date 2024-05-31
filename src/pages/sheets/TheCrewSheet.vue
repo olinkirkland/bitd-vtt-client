@@ -2,7 +2,7 @@
   <!-- <pre>{{ JSON.stringify(sheet, null, 2) }}</pre> -->
   <div
     class="crew-layout"
-    ref="carousel"
+    ref="carouselRef"
     @scroll="updateCurrentIndex($event.target as HTMLElement)"
   >
     <div class="main-and-claims">
@@ -22,8 +22,9 @@
     </div>
   </div>
   <div class="row center mobile-nav">
-    <button @click="scrollToIndex(currentIndex - 1)">Previous</button>
-    <button @click="scrollToIndex(currentIndex + 1)">Next</button>
+    <button class="btn" @click="scrollToIndex(0)">Main</button>
+    <button class="btn" @click="scrollToIndex(1)">Abilities</button>
+    <button class="btn" @click="scrollToIndex(2)">Upgrades</button>
   </div>
 </template>
 
@@ -76,10 +77,9 @@ function scrollToIndex(index: number) {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .crew-layout {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    display: flex;
 
     > div {
       min-width: 100%;
