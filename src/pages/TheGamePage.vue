@@ -5,22 +5,19 @@
         <button class="btn btn--icon" @click="currentSheet = null">
           <i class="fas fa-arrow-left"></i>
         </button>
-        <h1>{{ currentSheet.sheetType }}</h1>
         <button class="btn btn--icon delete" @click="onClickDeleteSheet">
           <i class="fas fa-trash"></i>
         </button>
       </div>
 
-      <div v-if="currentSheet">
-        <TheCrewSheet
-          :sheet="(currentSheet as Crew)"
-          v-if="currentSheet.sheetType === 'crew'"
-        />
-        <TheCharacterSheet
-          :sheet="(currentSheet as Character)"
-          v-if="currentSheet.sheetType === 'character'"
-        />
-      </div>
+      <TheCrewSheet
+        :sheet="(currentSheet as Crew)"
+        v-if="currentSheet?.sheetType === 'crew'"
+      />
+      <TheCharacterSheet
+        :sheet="(currentSheet as Character)"
+        v-if="currentSheet?.sheetType === 'character'"
+      />
     </div>
 
     <div class="sheet-select-layout" v-else>
@@ -246,7 +243,7 @@ ul.sheet-list {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  > .delete {
+  .delete {
     margin-left: auto;
   }
 }

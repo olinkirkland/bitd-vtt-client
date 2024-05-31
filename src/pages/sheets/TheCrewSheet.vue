@@ -1,6 +1,10 @@
 <template>
   <!-- <pre>{{ JSON.stringify(sheet, null, 2) }}</pre> -->
-  <div class="sheet-layout">
+  <div
+    class="crew-layout"
+    ref="carousel"
+    @scroll="updateCurrentIndex($event.target as HTMLElement)"
+  >
     <div class="main-and-claims">
       <section>NAME, REPUTATION, LAIR</section>
       <section>REP, TURF, HOLD, TIER</section>
@@ -18,22 +22,8 @@
     </div>
   </div>
   <div class="row center mobile-nav">
-    <button
-      class="btn btn--tab"
-      :class="{ active: sheetType === 'crew' }"
-      @click="sheetType = 'crew'"
-    >
-      <i class="fas fa-users"></i>
-      <span>Crew Sheets</span>
-    </button>
-    <button
-      class="btn btn--tab"
-      :class="{ active: sheetType === 'character' }"
-      @click="sheetType = 'character'"
-    >
-      <i class="fas fa-user"></i>
-      <span>Character Sheets</span>
-    </button>
+    <button @click="scrollToIndex(currentIndex - 1)">Previous</button>
+    <button @click="scrollToIndex(currentIndex + 1)">Next</button>
   </div>
 </template>
 
@@ -45,18 +35,56 @@ const props = defineProps<{
   sheet: Crew;
 }>();
 
-const mobileLayoutPage = ref(0);
+const currentIndex = ref(0);
+const lastScrolledTime = ref(Date.now());
+const carouselRef = ref<HTMLElement | null>(null);
+
+function updateCurrentIndex(carousel: HTMLElement) {
+  // If the carousel is at least 20% scrolled, update lastScrolledTime
+  if (carousel.scrollLeft % carousel.clientWidth > carousel.clientWidth * 0.2)
+    lastScrolledTime.value = Date.now();
+
+  // Get the current index from the scroll position
+  const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
+  currentIndex.value = index;
+}
+
+function scrollToIndex(index: number) {
+  if (!carouselRef.value) return;
+  carouselRef.value.scrollTo({
+    left: index * carouselRef.value.clientWidth,
+    behavior: 'smooth'
+  });
+}
 </script>
 
 <style scoped lang="scss">
-.sheet-layout {
-  border: 1px solid blue;
+.crew-layout {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  section {
-    border: 1px solid red;
-    padding: 1rem;
-    color: white;
+  border: 2px solid yellow;
+  width: 100%;
+  overflow-x: hidden;
+
+  > div {
+    border: 1px solid blue;
+    section {
+      border: 1px solid red;
+      padding: 1rem;
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .crew-layout {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    > div {
+      min-width: 100%;
+      scroll-snap-align: start;
+    }
   }
 }
 </style>
