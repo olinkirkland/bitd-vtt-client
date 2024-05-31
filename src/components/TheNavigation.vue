@@ -47,6 +47,7 @@ nav {
   color: var(--light);
   display: flex;
   gap: 0.8rem;
+  min-height: 5.2rem;
   height: 5.2rem;
   align-items: center;
 

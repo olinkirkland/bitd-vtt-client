@@ -7,16 +7,14 @@
     </template>
     <template v-slot:content>
       <div class="options">
-        <section>
-          <div
-            class="input-group"
-            :class="{
-              disabled: useGameStore().userPlayer?.role !== PlayerRole.GM
-            }"
-          >
+        <section class="game-name">
+          <div class="input-group">
             <label for="name">Game Name</label>
             <input
               type="text"
+              :class="{
+                disabled: useGameStore().userPlayer?.role !== PlayerRole.GM
+              }"
               @input="onChangeGameName"
               placeholder="Enter a descriptive name"
               v-model="gameName"
@@ -26,8 +24,8 @@
             </span>
           </div>
         </section>
-        <section>
-          <label class="muted">Invite Link</label>
+        <section class="invite">
+          <label>Invite Link</label>
           <div class="row invite-block">
             <div class="row">
               <p class="muted text-center">{{ inviteLink }}</p>
@@ -137,6 +135,10 @@ function onClickAbandonGame() {
     flex-direction: column;
     gap: 0.4rem;
   }
+}
+
+.invite label {
+  margin-bottom: 0.4rem;
 }
 
 .row.invite-block {

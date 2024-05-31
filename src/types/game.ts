@@ -20,7 +20,6 @@ export type Game = {
   inviteCode: string;
 
   players: Record<string, Player>;
-
-  templates: Record<string, any>;
-  creations: Record<string, any>;
+  
+  data: any;
 };

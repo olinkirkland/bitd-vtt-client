@@ -47,7 +47,7 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     window.modalChildren = modalChildren;
 
     // Pick the first element that is an input and focus it
-    const firstInput = modalEl.querySelector('input');
+    const firstInput = modalEl.querySelector('input:not(.disabled)');
     if (firstInput) firstInput.focus();
 
     modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
