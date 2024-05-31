@@ -1,14 +1,14 @@
 <template>
-  <h1>{{ character.book }}</h1>
-  <pre>{{ JSON.stringify(character, null, 2) }}</pre>
+  <h1>CHARACTER SHEET</h1>
+  <pre>{{ JSON.stringify(sheet, null, 2) }}</pre>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
 import { Character } from '@/game-data/sheets/character-sheet';
+import { defineProps } from 'vue';
 
 const props = defineProps<{
-  character: Character;
+  sheet: Character;
 }>();
 </script>
 

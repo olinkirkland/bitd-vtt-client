@@ -10,6 +10,17 @@
           <i class="fas fa-trash"></i>
         </button>
       </div>
+
+      <div v-if="currentSheet">
+        <TheCrewSheet
+          :sheet="(currentSheet as Crew)"
+          v-if="currentSheet.sheetType === 'crew'"
+        />
+        <TheCharacterSheet
+          :sheet="(currentSheet as Character)"
+          v-if="currentSheet.sheetType === 'character'"
+        />
+      </div>
     </div>
 
     <div class="sheet-select-layout" v-else>
@@ -19,14 +30,16 @@
           :class="{ active: sheetType === 'crew' }"
           @click="sheetType = 'crew'"
         >
-          <span>Crew</span>
+          <i class="fas fa-users"></i>
+          <span>Crew Sheets</span>
         </button>
         <button
           class="btn btn--tab"
           :class="{ active: sheetType === 'character' }"
           @click="sheetType = 'character'"
         >
-          <span>Characters</span>
+          <i class="fas fa-user"></i>
+          <span>Character Sheets</span>
         </button>
       </div>
       <ul class="sheet-list">
@@ -64,12 +77,14 @@
 import SheetCard from '@/components/SheetCard.vue';
 import PlayerBar from '@/components/game/PlayerBar.vue';
 import { connectToGame, patch } from '@/controllers/game-controller';
-import { Character, Cutter } from '@/game-data/sheets/character-sheet';
+import { Character } from '@/game-data/sheets/character-sheet';
 import { Assassins, Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
 import { useGameStore } from '@/stores/game-store';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import TheCharacterSheet from './sheets/TheCharacterSheet.vue';
+import TheCrewSheet from './sheets/TheCrewSheet.vue';
 const route = useRoute();
 
 const sheetType = ref('crew');
@@ -95,10 +110,10 @@ function onClickNewSheet() {
 
   switch (sheetType.value) {
     case 'crew':
-      sheet = new Crew(new Assassins());
+      sheet = new Assassins();
       break;
     case 'character':
-      sheet = new Character(new Cutter());
+      // sheet = new Cutter();
       break;
   }
 
@@ -181,7 +196,7 @@ button.debug {
 }
 
 .sheet-type-select {
-  padding-bottom: 1rem;
+  padding: 1rem;
   margin-bottom: 0.4rem;
   box-shadow: var(--shadow);
 }

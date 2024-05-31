@@ -151,30 +151,9 @@ button.btn--tab {
   color: var(--primary);
   background-color: transparent;
 
-  text-transform: uppercase;
-  font-size: 1rem;
-
-  > span {
-    text-transform: uppercase;
-    font-size: 1rem;
-  }
-
-  &::after {
-    border: none;
-    border-bottom: 0.2rem solid transparent;
-    width: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.5s;
-  }
-
   &.active {
-    filter: brightness(1);
-  }
-
-  &.active::after {
-    width: 1rem;
-    border-color: var(--primary);
+    background-color: var(--translucent-light);
+    filter: brightness(1.1);
   }
 }
 

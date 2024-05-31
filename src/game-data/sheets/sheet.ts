@@ -1,4 +1,5 @@
 import { useUserStore } from '@/stores/user-store';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Sheet {
   id: string;
@@ -7,7 +8,7 @@ export default class Sheet {
   createdAt: number; // The timestamp of when the sheet was created
 
   constructor() {
-    this.id = Math.random().toString(36).substr(2, 9);
+    this.id = uuidv4();
     this.sheetType = 'sheet';
     this.createdBy = useUserStore().id;
     this.createdAt = Date.now();

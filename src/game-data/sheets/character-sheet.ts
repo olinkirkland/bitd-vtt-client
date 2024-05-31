@@ -1,10 +1,10 @@
-import { Effect } from '../game-data-types';
+import { Effectable } from '../game-data-types';
 import Sheet from './sheet';
 
 export type Harm = {
   level: number; // 0-4
   description: string;
-  effect: Effect;
+  effect: Effectable;
   healed: boolean;
 };
 
@@ -28,7 +28,7 @@ export class Character extends Sheet {
     stress: number; // 0-9
     maxStress: number;
 
-    trauma: Effect[];
+    trauma: Effectable[];
     maxTrauma: number;
   };
 
@@ -44,7 +44,7 @@ export class Character extends Sheet {
 export interface PlayBook {
   name: string;
   description: string;
-  specialAbilities: Effect[];
+  specialAbilities: Effectable[];
   contacts: string[];
   standardItems: string[];
   bookItems: string[];
@@ -53,7 +53,7 @@ export interface PlayBook {
 export class Cutter implements PlayBook {
   name: string = 'Cutter';
   description: string = 'A dangerous and intimidating fighter';
-  specialAbilities: Effect[] = [];
+  specialAbilities: Effectable[] = [];
   contacts: string[] = [];
   standardItems: string[] = [];
   bookItems: string[] = [];

@@ -1,42 +1,36 @@
-export type Item = {
+export type Thing = {
   id: string;
   name: string;
   description: string;
-  weight: number; // 0-3
-  quantity: number; // 0-3
 };
 
-export type Effect = {
-  id: string;
-  name: string;
-  description: string;
-
-  uses: number; // Usually 0-1
-  maxUses: number; // Usually 1
-
-  effect: string; // TODO: Turn this into a type that gets processed by the game
+export type Chooseable = {
+  quantity: number; // Usually 0-1
+  maxQuantity: number; // Usually 1
 };
 
-export type Person = {
-  id: string;
-  name: string;
-  description: string;
+export type Item = Thing &
+  Chooseable & {
+    load: number; // 0-3
+  };
+
+export type Effectable = Thing &
+  Chooseable & {
+    effect?: string; // TODO: Turn this into a type that gets processed by the game
+  };
+
+export type Person = Thing & {
   attitude: number; // -3 to 3
 };
 
-export type Faction = {
-  id: string;
-  name: string;
-  description: string;
+export type Faction = Thing & {
   attitude: number; // -3 to 3
   friends: string[];
   rivals: string[];
   clocks: Clock[];
 };
 
-export type Clock = {
-  name: string;
-  description: string;
+export type Clock = Thing & {
   ticks: number;
   segments: number;
 };
