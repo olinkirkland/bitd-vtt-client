@@ -1,23 +1,79 @@
 <template>
-  <!-- <pre>{{ JSON.stringify(sheet, null, 2) }}</pre> -->
   <div
     class="crew-layout"
     ref="carouselRef"
     @scroll="updateCurrentIndex($event.target as HTMLElement)"
   >
     <div class="main-and-claims">
-      <section>NAME, REPUTATION, LAIR</section>
+      <section>
+        <div class="input-group">
+          <label for="crew-name">Name</label>
+          <input
+            id="crew-name"
+            type="text"
+            :value="props.sheet.name"
+            @change="
+              onChangeValue(($event.target as HTMLInputElement)?.value, 'name')
+            "
+          />
+        </div>
+        <div class="input-group">
+          <label for="crew-reputation">Reputation</label>
+          <input
+            id="crew-reputation"
+            type="text"
+            :value="props.sheet.reputationType"
+            @change="
+              onChangeValue(
+                ($event.target as HTMLInputElement)?.value,
+                'reputationType'
+              )
+            "
+          />
+        </div>
+        <div class="input-group">
+          <label for="crew-lair">Lair</label>
+          <input
+            id="crew-lair"
+            type="text"
+            :value="props.sheet.lair"
+            @change="
+              onChangeValue(($event.target as HTMLInputElement)?.value, 'lair')
+            "
+          />
+        </div>
+        <div class="input-group">
+          <label for="crew-lair-district">Lair District</label>
+          <input
+            id="crew-lair-district"
+            type="text"
+            :value="props.sheet.lairDistrict"
+            @change="
+              onChangeValue(
+                ($event.target as HTMLInputElement)?.value,
+                'lair-district'
+              )
+            "
+          />
+        </div>
+      </section>
+      <Divider />
       <section>REP, TURF, HOLD, TIER</section>
+      <Divider />
       <section>CLAIMS</section>
+      <Divider />
       <section>HEAT, WANTED LEVEL, COINS, VAULTS</section>
     </div>
     <div class="abilities-xp-and-contacts">
       <section>ABILITIES</section>
+      <Divider />
       <section>XP</section>
+      <Divider />
       <section>CONTACTS</section>
     </div>
     <div class="upgrades-and-cohorts">
       <section>UPGRADES</section>
+      <Divider />
       <section>COHORTS</section>
     </div>
   </div>
@@ -29,6 +85,8 @@
 </template>
 
 <script setup lang="ts">
+import Divider from '@/components/Divider.vue';
+import { patch } from '@/controllers/game-controller';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import { defineProps, ref } from 'vue';
 
@@ -39,6 +97,17 @@ const props = defineProps<{
 const currentIndex = ref(0);
 const lastScrolledTime = ref(Date.now());
 const carouselRef = ref<HTMLElement | null>(null);
+
+function onChangeValue(value: any, partialPath: string) {
+  const path = `/data/sheets/${props.sheet.id}/${partialPath}`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value
+    }
+  ]);
+}
 
 function updateCurrentIndex(carousel: HTMLElement) {
   // If the carousel is at least 20% scrolled, update lastScrolledTime
@@ -63,18 +132,25 @@ function scrollToIndex(index: number) {
 .crew-layout {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border: 2px solid yellow;
   width: 100%;
   overflow-x: hidden;
 
   > div {
-    border: 1px solid blue;
+    background: var(--translucent-light);
+    padding: 1rem;
+
     section {
-      border: 1px solid red;
       padding: 1rem;
       color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
   }
+}
+
+.mobile-nav {
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -85,6 +161,10 @@ function scrollToIndex(index: number) {
       min-width: 100%;
       scroll-snap-align: start;
     }
+  }
+
+  .mobile-nav {
+    display: flex;
   }
 }
 </style>

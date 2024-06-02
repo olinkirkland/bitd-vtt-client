@@ -147,6 +147,12 @@ button.btn--icon {
   }
 }
 
+button.btn--apply-input {
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
 button.btn--tab {
   color: var(--primary);
   background-color: transparent;
@@ -186,6 +192,7 @@ input[type='number'] {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  position: relative;
 }
 
 label {

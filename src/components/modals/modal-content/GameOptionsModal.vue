@@ -15,7 +15,7 @@
               :class="{
                 disabled: useGameStore().userPlayer?.role !== PlayerRole.GM
               }"
-              @input="onChangeGameName"
+              @change="onChangeGameName"
               placeholder="Enter a descriptive name"
               v-model="gameName"
             />

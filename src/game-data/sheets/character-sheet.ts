@@ -9,12 +9,13 @@ export type Harm = {
 };
 
 export class Character extends Sheet {
+  name: string;
+  
   book: PlayBook;
 
   choices: {
     crew: string;
 
-    name: string;
     alias: string;
     look: string;
     heritage: string;

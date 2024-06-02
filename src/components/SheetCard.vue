@@ -2,7 +2,7 @@
   <div class="sheet-card" :style="{ backgroundColor: coverImage?.commonColor }">
     <img :src="coverImage?.url" />
     <div class="sheet-card__content">
-      <h2>{{ props.sheet.id }}</h2>
+      <h2>{{ props.sheet.name }}</h2>
       <div class="row info">
         <span class="tag">
           {{ useGameStore().game?.players[props.sheet.createdBy]?.username }}

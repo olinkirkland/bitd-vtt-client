@@ -5,6 +5,7 @@
         <button class="btn btn--icon" @click="currentSheet = null">
           <i class="fas fa-arrow-left"></i>
         </button>
+        <h2>{{ currentSheet.sheetType }}</h2>
         <button class="btn btn--icon delete" @click="onClickDeleteSheet">
           <i class="fas fa-trash"></i>
         </button>
@@ -55,16 +56,16 @@
   </div>
 
   <button
-    class="btn btn--alt debug"
+    class="btn btn--icon debug"
     @click="showModelOverlay = true"
     v-if="!showModelOverlay"
   >
-    <i class="fas fa-cogs"></i> Debug
+    <i class="fas fa-cogs"></i>
   </button>
 
   <div class="model-overlay" v-if="showModelOverlay">
     <pre>{{ JSON.stringify(useGameStore().game, null, 2) }}</pre>
-    <button class="btn debug btn--alt" @click="showModelOverlay = false">
+    <button class="btn debug btn" @click="showModelOverlay = false">
       Close
     </button>
   </div>
@@ -239,12 +240,21 @@ ul.sheet-list {
 
 .sheet-layout {
   width: 100%;
+  max-height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  .delete {
-    margin-left: auto;
+  > .row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .sheet-layout {
+    > .row {
+      justify-content: space-between;
+    }
   }
 }
 </style>
