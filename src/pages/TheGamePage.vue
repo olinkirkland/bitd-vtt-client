@@ -32,16 +32,14 @@
     </div>
 
     <div class="sheet-layout" v-if="currentSheet">
-      <div v-if="currentSheet">
-        <TheCrewSheet
-          :sheet="(currentSheet as Crew)"
-          v-if="currentSheet?.sheetType === 'crew'"
-        />
-        <TheCharacterSheet
-          :sheet="(currentSheet as Character)"
-          v-if="currentSheet?.sheetType === 'character'"
-        />
-      </div>
+      <TheCrewSheet
+        :sheet="(currentSheet as Crew)"
+        v-if="currentSheet?.sheetType === 'crew'"
+      />
+      <TheCharacterSheet
+        :sheet="(currentSheet as Character)"
+        v-if="currentSheet?.sheetType === 'character'"
+      />
     </div>
 
     <div class="sheet-select-layout" v-else>
@@ -283,12 +281,8 @@ ul.sheet-list {
 .sheet-layout {
   width: 100%;
   background: var(--translucent-light);
-  max-height: 100%;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-
+  overflow: hidden;
   animation: slideDown 0.3s;
 }
 
