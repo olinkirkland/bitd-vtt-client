@@ -203,7 +203,11 @@
       </div>
       <div class="abilities-xp-and-contacts">
         <section>
-          <span>ABILITIES (TODO)</span>
+          <label for="crew-abilities">Special Abilities</label>
+          <AbilityTile
+            v-for="(index, ability) in props.sheet.specialAbilities"
+            :ability="ability"
+          />
         </section>
         <Divider />
         <section>
@@ -251,6 +255,7 @@
 </template>
 
 <script setup lang="ts">
+import AbilityTile from '@/components/AbilityTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
 import { patch } from '@/controllers/game-controller';
@@ -283,6 +288,7 @@ const carouselRef = ref<HTMLElement | null>(null);
 const focus = ref();
 
 function onChangeValue(value: any, partialPath: string) {
+  console.log('onChangeValue', value, partialPath);
   const path = `/data/sheets/${props.sheet.id}/${partialPath}`;
   patch([
     {
@@ -303,7 +309,8 @@ function scrollToIndex(index: number) {
   if (!carouselRef.value) return;
   carouselRef.value.scrollTo({
     left: carouselRef.value.clientWidth * index,
-    top: 0
+    top: 0,
+    behavior: 'smooth'
   });
 }
 
@@ -372,7 +379,6 @@ function randomizeLair() {
 
     > div {
       min-width: 100%;
-      scroll-snap-align: start;
     }
   }
 
