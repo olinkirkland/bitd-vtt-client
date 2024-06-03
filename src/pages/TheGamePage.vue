@@ -17,8 +17,10 @@
           <span class="mobile-hidden">Back</span>
         </button>
         <h2 class="breadcrumbs">
-          <span>{{ currentSheet.sheetType }}</span
-          ><span class="mobile-hidden">Sheets</span>
+          <span>
+            <span>{{ currentSheet.sheetType }}</span>
+            <span class="mobile-hidden">Sheets</span>
+          </span>
           <i class="fas fa-angle-right"></i>
           <span>{{ currentSheet.name }}</span>
         </h2>
@@ -280,6 +282,7 @@ ul.sheet-list {
 
 .sheet-layout {
   width: 100%;
+  background: var(--translucent-light);
   max-height: 100%;
   flex: 1;
   display: flex;
@@ -291,15 +294,14 @@ ul.sheet-list {
 
 .controls {
   width: 100%;
-  > div.sheet-controls {
-    justify-content: space-between;
+  > div {
+    animation: fade 0.3s;
+    &.sheet-controls {
+      justify-content: space-between;
+    }
   }
   background: var(--dark);
   z-index: 1;
-
-  > div {
-    animation: fade 0.3s;
-  }
 }
 
 h2.breadcrumbs {
@@ -312,10 +314,16 @@ h2.breadcrumbs {
   text-transform: capitalize;
   max-width: 100%;
   overflow: hidden;
+
   > span {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &:first-of-type {
+      display: flex;
+      gap: 0.4rem;
+    }
 
     &:last-of-type {
       flex: 1;

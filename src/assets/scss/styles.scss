@@ -387,6 +387,14 @@ a.anchor-link {
   border-bottom: 1px solid var(--primary);
 }
 
+.text-list {
+  background-color: var(--translucent-light);
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 // 🙥 🙧 ❖
 
 @media (max-width: 1200px) {

@@ -12,10 +12,14 @@
             id="crew-name"
             type="text"
             :value="props.sheet.name"
+            @focus="focus = 'name'"
             @change="
               onChangeValue(($event.target as HTMLInputElement)?.value, 'name')
             "
           />
+          <CollapsingShelf :show="focus == 'name'">
+            <p>Choose a name for your crew.</p>
+          </CollapsingShelf>
         </div>
         <div class="input-group">
           <label for="crew-reputation">Reputation</label>
@@ -23,6 +27,7 @@
             id="crew-reputation"
             type="text"
             :value="props.sheet.reputationType"
+            @focus="focus = 'reputation'"
             @change="
               onChangeValue(
                 ($event.target as HTMLInputElement)?.value,
@@ -30,35 +35,45 @@
               )
             "
           />
-        </div>
-        <div class="block">
-          <div class="input-group">
-            <label for="crew-lair">Lair</label>
-            <input
-              id="crew-lair"
-              type="text"
-              :value="props.sheet.lair"
-              @focus="focus = 'lair'"
-              @change="
-                onChangeValue(
-                  ($event.target as HTMLInputElement)?.value,
-                  'lair'
-                )
-              "
-            />
-            <CollapsingShelf :show="focus == 'lair'">
-              <button class="btn btn--icon" @click="randomizeLair">
-                <i class="fas fa-random"></i>
-                <span>Randomize</span>
+          <CollapsingShelf :show="focus == 'reputation'">
+            <p>Choose how other underworld factions see you.</p>
+            <div class="text-list">
+              <button
+                class="btn btn--text"
+                v-for="reputation in codex.sheets.crew.reputations"
+                @click="onChangeValue(reputation, 'reputationType')"
+              >
+                {{ reputation }}
               </button>
-            </CollapsingShelf>
-          </div>
+            </div>
+          </CollapsingShelf>
+        </div>
+        <Divider />
+        <div class="input-group">
+          <label for="crew-lair">Lair</label>
+          <input
+            id="crew-lair"
+            type="text"
+            :value="props.sheet.lair"
+            @focus="focus = 'lair'"
+            @change="
+              onChangeValue(($event.target as HTMLInputElement)?.value, 'lair')
+            "
+          />
+          <CollapsingShelf :show="focus == 'lair'">
+            <p>What does your lair look like?</p>
+            <button class="btn btn--icon" @click="randomizeLair">
+              <i class="fas fa-random"></i>
+              <span>Randomize</span>
+            </button>
+          </CollapsingShelf>
           <div class="input-group">
             <label for="crew-lair-district">Lair District</label>
             <input
               id="crew-lair-district"
               type="text"
               :value="props.sheet.lairDistrict"
+              @focus="focus = 'lair-district'"
               @change="
                 onChangeValue(
                   ($event.target as HTMLInputElement)?.value,
@@ -66,6 +81,18 @@
                 )
               "
             />
+            <CollapsingShelf :show="focus == 'lair-district'">
+              <p>Where is your lair located?</p>
+              <div class="text-list">
+                <button
+                  class="btn btn--text"
+                  v-for="district in codex.lexicon.districts.map(d => d.name)"
+                  @click="onChangeValue(district, 'lairDistrict')"
+                >
+                  {{ district }}
+                </button>
+              </div>
+            </CollapsingShelf>
           </div>
         </div>
       </section>
@@ -101,7 +128,11 @@ import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
 import { patch } from '@/controllers/game-controller';
 import { Crew } from '@/game-data/sheets/crew-sheet';
+import { useGameStore } from '@/stores/game-store';
+import { pick } from '@/util/rand-helper';
 import { defineProps, onMounted, onUnmounted, ref } from 'vue';
+
+const codex = useGameStore().game?.codex;
 
 onMounted(() => {
   document.addEventListener('blur', onBlur, true);
@@ -160,9 +191,10 @@ function scrollToIndex(index: number) {
 }
 
 function randomizeLair() {
-  const lair = 'foo';
-  const district = 'bar';
-  onChangeValue(lair, 'lair');
+  const lairIdeas = codex.sheets.crew.lairs;
+  const { name, districts } = pick(lairIdeas);
+  const district = pick(districts);
+  onChangeValue(name, 'lair');
   onChangeValue(district, 'lairDistrict');
 }
 </script>
@@ -175,7 +207,6 @@ function randomizeLair() {
   overflow-x: hidden;
 
   > div {
-    background: var(--translucent-light);
     padding: 1rem;
 
     section {
@@ -190,15 +221,6 @@ function randomizeLair() {
 
 .mobile-nav {
   display: none;
-}
-
-.block {
-  background: var(--translucent-light);
-  border: 1px solid var(--dark);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 @media (max-width: 768px) {

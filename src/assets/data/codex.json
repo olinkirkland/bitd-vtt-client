@@ -1,7 +1,58 @@
 {
   "sheets": {
     "crew": {
-      "lair": []
+      "reputations": [
+        "Ambitious",
+        "Brutal",
+        "Daring",
+        "Honorable",
+        "Professional",
+        "Savvy",
+        "Subtle",
+        "Strange"
+      ],
+      "lairs": [
+        {
+          "name": "Abandoned Clock Tower",
+          "districts": ["Six Towers", "Crow's Foot", "Coalridge"]
+        },
+        {
+          "name": "Sewers Beneath the City",
+          "districts": ["Charterhall", "Nightmarket", "Barrowcleft"]
+        },
+        {
+          "name": "Old Lighthouse",
+          "districts": ["The Docks", "Nightmarket", "Crow's Foot"]
+        },
+        {
+          "name": "Disused Theater",
+          "districts": ["Silkshore", "Brightstone", "Six Towers"]
+        },
+        {
+          "name": "Forgotten Crypt",
+          "districts": ["Dunslough", "Charhollow", "Coalridge"]
+        },
+        {
+          "name": "Luxury Bathhouse",
+          "districts": ["Brightstone", "Silkshore", "Charterhall"]
+        },
+        {
+          "name": "Library Catacombs",
+          "districts": ["Charterhall", "Six Towers", "Brightstone"]
+        },
+        {
+          "name": "Derelict Ship",
+          "districts": ["The Docks", "Nightmarket", "Crow's Foot"]
+        },
+        {
+          "name": "Tunnels Beneath a Bridge",
+          "districts": ["Crow's Foot", "Charterhall", "Barrowcleft"]
+        },
+        {
+          "name": "Camouflaged Forest Bunker",
+          "districts": ["Dunslough", "Barrowcleft", "Charhollow"]
+        }
+      ]
     }
   },
   "lexicon": {
