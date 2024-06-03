@@ -20,6 +20,8 @@ export type Game = {
   inviteCode: string;
 
   players: Record<string, Player>;
-  
+
+  codex: any;
+
   data: any;
 };

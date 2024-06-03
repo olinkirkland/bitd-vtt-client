@@ -32,16 +32,13 @@
           />
         </div>
         <div class="block">
-          <div class="row">
-            <h2>Lair</h2>
-            <button class="btn btn--icon"></button>
-          </div>
           <div class="input-group">
-            <label for="crew-lair">Structure</label>
+            <label for="crew-lair">Lair</label>
             <input
               id="crew-lair"
               type="text"
               :value="props.sheet.lair"
+              @focus="focus = 'lair'"
               @change="
                 onChangeValue(
                   ($event.target as HTMLInputElement)?.value,
@@ -49,9 +46,15 @@
                 )
               "
             />
+            <CollapsingShelf :show="focus == 'lair'">
+              <button class="btn btn--icon" @click="randomizeLair">
+                <i class="fas fa-random"></i>
+                <span>Randomize</span>
+              </button>
+            </CollapsingShelf>
           </div>
           <div class="input-group">
-            <label for="crew-lair-district">District</label>
+            <label for="crew-lair-district">Lair District</label>
             <input
               id="crew-lair-district"
               type="text"
@@ -94,10 +97,28 @@
 </template>
 
 <script setup lang="ts">
+import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
 import { patch } from '@/controllers/game-controller';
 import { Crew } from '@/game-data/sheets/crew-sheet';
-import { defineProps, ref } from 'vue';
+import { defineProps, onMounted, onUnmounted, ref } from 'vue';
+
+onMounted(() => {
+  document.addEventListener('blur', onBlur, true);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('blur', onBlur, true);
+});
+
+function onBlur(event: FocusEvent) {
+  // If the focused element has an ancestor with the class 'shelf', do nothing
+  if (!event.relatedTarget) return (focus.value = null);
+  const shelf = (event.relatedTarget as HTMLElement).closest('.shelf');
+  if (shelf) return;
+
+  focus.value = null;
+}
 
 const props = defineProps<{
   sheet: Crew;
@@ -106,6 +127,8 @@ const props = defineProps<{
 const currentIndex = ref(0);
 const lastScrolledTime = ref(Date.now());
 const carouselRef = ref<HTMLElement | null>(null);
+
+const focus = ref();
 
 function onChangeValue(value: any, partialPath: string) {
   const path = `/data/sheets/${props.sheet.id}/${partialPath}`;
@@ -134,6 +157,13 @@ function scrollToIndex(index: number) {
     left: index * carouselRef.value.clientWidth,
     behavior: 'smooth'
   });
+}
+
+function randomizeLair() {
+  const lair = 'foo';
+  const district = 'bar';
+  onChangeValue(lair, 'lair');
+  onChangeValue(district, 'lairDistrict');
 }
 </script>
 
@@ -169,11 +199,6 @@ function scrollToIndex(index: number) {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  > h2 {
-    text-transform: capitalize;
-    font-style: italic;
-  }
 }
 
 @media (max-width: 768px) {
@@ -188,6 +213,10 @@ function scrollToIndex(index: number) {
 
   .mobile-nav {
     display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
 }
 </style>

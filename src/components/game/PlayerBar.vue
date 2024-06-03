@@ -18,11 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import ModalController from '@/controllers/modal-controller';
 import { useGameStore } from '@/stores/game-store';
 import Portrait from '../Portrait.vue';
 import Tooltip from '../Tooltip.vue';
-import GameOptions from '../modals/modal-content/GameOptionsModal.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -32,6 +30,7 @@ import GameOptions from '../modals/modal-content/GameOptionsModal.vue';
   align-items: center;
   list-style: none;
   width: fit-content;
+  animation: slideUp 0.3s;
 
   li {
     position: relative;

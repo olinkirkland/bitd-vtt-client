@@ -3,20 +3,12 @@
     <div class="controls">
       <div class="row" v-if="!currentSheet">
         <button
+          v-for="buttonSheet in ['crew', 'character']"
           class="btn btn--tab"
-          :class="{ active: sheetType === 'crew' }"
-          @click="sheetType = 'crew'"
+          :class="{ active: sheetType === buttonSheet }"
+          @click="sheetType = buttonSheet"
         >
-          <i class="fas fa-users"></i>
-          <span>Crew Sheets</span>
-        </button>
-        <button
-          class="btn btn--tab"
-          :class="{ active: sheetType === 'character' }"
-          @click="sheetType = 'character'"
-        >
-          <i class="fas fa-user"></i>
-          <span>Character Sheets</span>
+          <span>{{ buttonSheet }} Sheets</span>
         </button>
       </div>
       <div class="row sheet-controls" v-else>
@@ -25,7 +17,8 @@
           <span class="mobile-hidden">Back</span>
         </button>
         <h2 class="breadcrumbs">
-          <span>{{ currentSheet.sheetType }} Sheets</span>
+          <span>{{ currentSheet.sheetType }}</span
+          ><span class="mobile-hidden">Sheets</span>
           <i class="fas fa-angle-right"></i>
           <span>{{ currentSheet.name }}</span>
         </h2>
@@ -50,8 +43,19 @@
     </div>
 
     <div class="sheet-select-layout" v-else>
-      <ul class="sheet-list">
-        <li v-for="sheet in (sheets as Crew[] | Character[])" :key="sheet.id">
+      <ul class="sheet-list" v-if="sheetType === 'crew'">
+        <li v-for="sheet in (crewSheets as Crew[])" :key="sheet.id">
+          <SheetCard :sheet="sheet" @click="currentSheet = sheet" />
+        </li>
+        <li>
+          <div class="new-sheet-card" @click="onClickNewSheet">
+            <i class="fas fa-folder-plus"></i>
+            <span>New {{ sheetType }}</span>
+          </div>
+        </li>
+      </ul>
+      <ul class="sheet-list" v-else-if="sheetType === 'character'">
+        <li v-for="sheet in (characterSheets as Character[])" :key="sheet.id">
           <SheetCard :sheet="sheet" @click="currentSheet = sheet" />
         </li>
         <li>
@@ -99,10 +103,15 @@ const route = useRoute();
 
 const sheetType = ref('crew');
 const sheets = computed(() => {
-  const allSheets = Object.values(
-    useGameStore().game?.data?.sheets || []
-  ) as Sheet[];
-  return allSheets.filter((sheet) => sheet.sheetType === sheetType.value);
+  return Object.values(useGameStore().game?.data?.sheets || []) as Sheet[];
+});
+
+const crewSheets = computed(() => {
+  return sheets.value.filter((sheet) => sheet.sheetType === 'crew');
+});
+
+const characterSheets = computed(() => {
+  return sheets.value.filter((sheet) => sheet.sheetType === 'character');
 });
 
 const currentSheet = ref(null as Crew | Character | null);
@@ -172,6 +181,10 @@ function onClickDeleteSheet() {
 </script>
 
 <style scoped lang="scss">
+.page {
+  gap: 0;
+}
+
 .sheet-select-layout {
   display: flex;
   flex-direction: column;
@@ -180,7 +193,7 @@ function onClickDeleteSheet() {
   overflow: hidden;
 
   > .player-bar {
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1.2rem auto;
   }
 }
 
@@ -209,17 +222,24 @@ function onClickDeleteSheet() {
 button.debug {
   position: fixed;
   z-index: 99;
-  right: 1rem;
-  bottom: 1rem;
+  left: 50%;
+  top: 0.8rem;
+  transform: translateX(-50%);
 }
 
 .controls {
   padding: 1rem;
-  margin-bottom: 0.4rem;
   box-shadow: var(--shadow);
+  width: 100%;
+
+  button.btn.btn--tab {
+    text-transform: capitalize;
+  }
 }
 
 ul.sheet-list {
+  animation: slideDown 0.3s;
+
   padding: 1rem;
   margin: 0;
   display: grid;
@@ -264,13 +284,21 @@ ul.sheet-list {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  overflow-y: auto;
+
+  animation: slideDown 0.3s;
 }
 
 .controls {
   width: 100%;
   > div.sheet-controls {
     justify-content: space-between;
+  }
+  background: var(--dark);
+  z-index: 1;
+
+  > div {
+    animation: fade 0.3s;
   }
 }
 
@@ -282,6 +310,17 @@ h2.breadcrumbs {
   padding: 0.8rem 1.6rem;
   border-radius: 99px;
   text-transform: capitalize;
+  max-width: 100%;
+  overflow: hidden;
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:last-of-type {
+      flex: 1;
+    }
+  }
 
   > span:last-of-type {
     font-style: italic;

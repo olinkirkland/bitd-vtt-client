@@ -151,8 +151,7 @@ function onClickJoinGame() {
       padding: 0.4rem 1rem;
       max-height: 100rem;
       opacity: 1;
-      transition-property: max-height, opacity;
-      transition-duration: 2s;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
 
       > li {
         padding: 1.2rem 0.8rem;
@@ -175,6 +174,7 @@ function onClickJoinGame() {
       &.collapsed {
         max-height: 0;
         opacity: 0;
+        transition: max-height 1s ease-in-out;
       }
     }
 

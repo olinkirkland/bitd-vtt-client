@@ -207,7 +207,6 @@ label {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
   flex: 1;
@@ -400,5 +399,34 @@ a.anchor-link {
 
   .mobile-hidden {
     display: none !important;
+  }
+}
+
+// Animations
+
+@keyframes slideUp {
+  from {
+    transform: translateY(2rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-2rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
