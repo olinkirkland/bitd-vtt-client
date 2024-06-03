@@ -111,6 +111,7 @@
               <input
                 id="crew-rep"
                 type="number"
+                pattern="[0-9]*"
                 :value="props.sheet.reputation"
                 @focus="focus = 'reputation'"
                 @change="
@@ -129,6 +130,7 @@
               <input
                 id="crew-turf"
                 type="number"
+                pattern="[0-9]*"
                 :value="props.sheet.turf"
                 @focus="focus = 'turf'"
                 @change="
@@ -171,6 +173,7 @@
               <input
                 id="crew-tier"
                 type="number"
+                pattern="[0-9]*"
                 :value="props.sheet.tier"
                 @focus="focus = 'tier'"
                 @change="
@@ -187,21 +190,38 @@
           </div>
         </section>
         <Divider />
-        <section>CLAIMS</section>
+        <section>
+          <span>CLAIMS (TODO)</span>
+        </section>
         <Divider />
-        <section>HEAT, WANTED LEVEL, COINS, VAULTS</section>
+        <section>
+          <span>HEAT (TODO)</span>
+          <span>WANTED LEVEL (TODO)</span>
+          <span>COINS (TODO)</span>
+          <span>VAULTS (TODO)</span>
+        </section>
       </div>
       <div class="abilities-xp-and-contacts">
-        <section>ABILITIES</section>
+        <section>
+          <span>ABILITIES (TODO)</span>
+        </section>
         <Divider />
-        <section>XP</section>
+        <section>
+          <span>XP (TODO)</span>
+        </section>
         <Divider />
-        <section>CONTACTS</section>
+        <section>
+          <span>CONTACTS (TODO)</span>
+        </section>
       </div>
       <div class="upgrades-and-cohorts">
-        <section>UPGRADES</section>
+        <section>
+          <span>UPGRADES (TODO)</span>
+        </section>
         <Divider />
-        <section>COHORTS</section>
+        <section>
+          <span>COHORTS (TODO)</span>
+        </section>
       </div>
     </div>
     <div class="row center mobile-nav">
@@ -282,9 +302,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
 function scrollToIndex(index: number) {
   if (!carouselRef.value) return;
   carouselRef.value.scrollTo({
-    left: index * carouselRef.value.clientWidth,
-    top: 0,
-    behavior: 'smooth'
+    left: carouselRef.value.clientWidth * index,
+    top: 0
   });
 }
 
