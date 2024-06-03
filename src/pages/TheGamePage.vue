@@ -1,28 +1,7 @@
 <template>
   <div class="page">
-    <div class="sheet-layout" v-if="currentSheet">
-      <div class="row">
-        <button class="btn btn--icon" @click="currentSheet = null">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <h2>{{ currentSheet.sheetType }}</h2>
-        <button class="btn btn--icon delete" @click="onClickDeleteSheet">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-
-      <TheCrewSheet
-        :sheet="(currentSheet as Crew)"
-        v-if="currentSheet?.sheetType === 'crew'"
-      />
-      <TheCharacterSheet
-        :sheet="(currentSheet as Character)"
-        v-if="currentSheet?.sheetType === 'character'"
-      />
-    </div>
-
-    <div class="sheet-select-layout" v-else>
-      <div class="row center sheet-type-select">
+    <div class="controls">
+      <div class="row" v-if="!currentSheet">
         <button
           class="btn btn--tab"
           :class="{ active: sheetType === 'crew' }"
@@ -40,6 +19,37 @@
           <span>Character Sheets</span>
         </button>
       </div>
+      <div class="row sheet-controls" v-else>
+        <button class="btn btn--icon" @click="currentSheet = null">
+          <i class="fas fa-arrow-left"></i>
+          <span class="mobile-hidden">Back</span>
+        </button>
+        <h2 class="breadcrumbs">
+          <span>{{ currentSheet.sheetType }} Sheets</span>
+          <i class="fas fa-angle-right"></i>
+          <span>{{ currentSheet.name }}</span>
+        </h2>
+        <button class="btn btn--icon delete" @click="onClickDeleteSheet">
+          <i class="fas fa-trash"></i>
+          <span class="mobile-hidden">Delete</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sheet-layout" v-if="currentSheet">
+      <div v-if="currentSheet">
+        <TheCrewSheet
+          :sheet="(currentSheet as Crew)"
+          v-if="currentSheet?.sheetType === 'crew'"
+        />
+        <TheCharacterSheet
+          :sheet="(currentSheet as Character)"
+          v-if="currentSheet?.sheetType === 'character'"
+        />
+      </div>
+    </div>
+
+    <div class="sheet-select-layout" v-else>
       <ul class="sheet-list">
         <li v-for="sheet in (sheets as Crew[] | Character[])" :key="sheet.id">
           <SheetCard :sheet="sheet" @click="currentSheet = sheet" />
@@ -74,7 +84,9 @@
 <script setup lang="ts">
 import SheetCard from '@/components/SheetCard.vue';
 import PlayerBar from '@/components/game/PlayerBar.vue';
+import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
 import { connectToGame, patch } from '@/controllers/game-controller';
+import ModalController from '@/controllers/modal-controller';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Assassins, Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
@@ -140,14 +152,22 @@ function onClickNewSheet() {
 function onClickDeleteSheet() {
   if (!currentSheet.value) return;
 
-  patch([
-    {
-      op: 'remove',
-      path: `/data/sheets/${currentSheet.value.id}`
-    }
-  ]);
+  ModalController.open(ConfirmModal, {
+    title: 'Delete Sheet',
+    message: `Are you sure you want to delete <em>${currentSheet.value.name}</em>?`,
+    confirmText: 'Yes, delete it',
+    onConfirm: () => {
+      patch([
+        {
+          op: 'remove',
+          path: `/data/sheets/${currentSheet.value?.id}`
+        }
+      ]);
 
-  currentSheet.value = null;
+      currentSheet.value = null;
+      ModalController.close();
+    }
+  });
 }
 </script>
 
@@ -193,7 +213,7 @@ button.debug {
   bottom: 1rem;
 }
 
-.sheet-type-select {
+.controls {
   padding: 1rem;
   margin-bottom: 0.4rem;
   box-shadow: var(--shadow);
@@ -245,16 +265,33 @@ ul.sheet-list {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  > .row {
-    justify-content: center;
+}
+
+.controls {
+  width: 100%;
+  > div.sheet-controls {
+    justify-content: space-between;
+  }
+}
+
+h2.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--translucent-light);
+  padding: 0.8rem 1.6rem;
+  border-radius: 99px;
+  text-transform: capitalize;
+
+  > span:last-of-type {
+    font-style: italic;
+  }
+
+  > i {
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .sheet-layout {
-    > .row {
-      justify-content: space-between;
-    }
-  }
 }
 </style>

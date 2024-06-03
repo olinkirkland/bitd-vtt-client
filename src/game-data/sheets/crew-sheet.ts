@@ -11,11 +11,11 @@ export type Upgrade = Effectable & {
 };
 
 export class Crew extends Sheet {
-  name: string = '';
-  reputationType: string = ''; // Ambitious, Brutal, Daring, Honorable, Professional, Savvy, Subtle, or Strange
+  name: string = 'Untitled Crew';
+  reputationType: string = 'Ambitious'; // Ambitious, Brutal, Daring, Honorable, Professional, Savvy, Subtle, or Strange
   lair: string = 'An abandoned warehouse';
-  lairDistrict: string = 'crows-foot';
-  huntingGroundsDistrict: string = 'crows-foot';
+  lairDistrict: string = "Crow's Foot";
+  huntingGroundsDistrict: string = "Crow's Foot";
 
   reputation: number = 0; // 0-6
   turf: number = 0; // 0-6

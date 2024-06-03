@@ -2,8 +2,10 @@ import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { initializeConnection } from './api/connection';
-import { router } from './router';
 import Divider from './components/Divider.vue';
+import { router } from './router';
+
+initializeConnection();
 
 // Create the app
 const app = createApp(App);
@@ -15,7 +17,5 @@ app.component('divider', Divider);
 const pinia = createPinia();
 app.use(pinia);
 app.use(router);
-
-initializeConnection();
 
 app.mount('#app');

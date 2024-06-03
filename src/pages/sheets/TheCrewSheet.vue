@@ -31,30 +31,39 @@
             "
           />
         </div>
-        <div class="input-group">
-          <label for="crew-lair">Lair</label>
-          <input
-            id="crew-lair"
-            type="text"
-            :value="props.sheet.lair"
-            @change="
-              onChangeValue(($event.target as HTMLInputElement)?.value, 'lair')
-            "
-          />
-        </div>
-        <div class="input-group">
-          <label for="crew-lair-district">Lair District</label>
-          <input
-            id="crew-lair-district"
-            type="text"
-            :value="props.sheet.lairDistrict"
-            @change="
-              onChangeValue(
-                ($event.target as HTMLInputElement)?.value,
-                'lair-district'
-              )
-            "
-          />
+        <div class="block">
+          <div class="row">
+            <h2>Lair</h2>
+            <button class="btn btn--icon"></button>
+          </div>
+          <div class="input-group">
+            <label for="crew-lair">Structure</label>
+            <input
+              id="crew-lair"
+              type="text"
+              :value="props.sheet.lair"
+              @change="
+                onChangeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'lair'
+                )
+              "
+            />
+          </div>
+          <div class="input-group">
+            <label for="crew-lair-district">District</label>
+            <input
+              id="crew-lair-district"
+              type="text"
+              :value="props.sheet.lairDistrict"
+              @change="
+                onChangeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'lair-district'
+                )
+              "
+            />
+          </div>
         </div>
       </section>
       <Divider />
@@ -141,7 +150,7 @@ function scrollToIndex(index: number) {
 
     section {
       padding: 1rem;
-      color: white;
+      color: yellow;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -151,6 +160,20 @@ function scrollToIndex(index: number) {
 
 .mobile-nav {
   display: none;
+}
+
+.block {
+  background: var(--translucent-light);
+  border: 1px solid var(--dark);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  > h2 {
+    text-transform: capitalize;
+    font-style: italic;
+  }
 }
 
 @media (max-width: 768px) {

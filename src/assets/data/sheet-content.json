@@ -1,65 +1,52 @@
 {
   "sheets": {
     "crew": {
-      "lair": [
-        
-      ]
+      "lair": []
     }
   },
   "encyclopedia": {
     "districts": [
       {
-        "slug": "brightstone",
         "name": "Brightstone",
         "blurb": "The grand mansions and luxury shops of the wealthy elite."
       },
       {
-        "slug": "charterhall",
         "name": "Charterhall",
-        "blurb": "The city’s civic offices and the hub for shops, artisans, and commerce."
+        "blurb": "The city's civic offices and the hub for shops, artisans, and commerce."
       },
       {
-        "slug": "six-towers",
         "name": "Six Towers",
         "blurb": "A formerly rich district, now worn down and dilapidated."
       },
       {
-        "slug": "silkshore",
         "name": "Silkshore",
         "blurb": "The 'red lamp district' and artist community."
       },
       {
-        "slug": "nightmarket",
         "name": "Nightmarket",
         "blurb": "The trade center for exotic goods imported by rail. Many vendors also trade in illicit goods."
       },
       {
-        "slug": "crows-foot",
-        "name": "Crow’s Foot",
+        "name": "Crow's Foot",
         "blurb": "A cramped neighborhood of multi-level streets, ruled by gangs."
       },
       {
-        "slug": "the-docks",
         "name": "The Docks",
         "blurb": "Rough taverns, tattoo parlors, fighting pits, and warehouses."
       },
       {
-        "slug": "barrowcleft",
         "name": "Barrowcleft",
         "blurb": "Residences and markets for the farmers who work the fields and eeleries."
       },
       {
-        "slug": "coalridge",
         "name": "Coalridge",
-        "blurb": "The remnants of Doskvol’s original hilltop mining settlement, now home to laborers and industrial factories."
+        "blurb": "The remnants of Doskvol's original hilltop mining settlement, now home to laborers and industrial factories."
       },
       {
-        "slug": "charhollow",
         "name": "Charhollow",
         "blurb": "A maze of tenements and squalid row houses."
       },
       {
-        "slug": "dunslough",
         "name": "Dunslough",
         "blurb": "A labor camp served by convicts and a ghetto for the destitute poor."
       }
