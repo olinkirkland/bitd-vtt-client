@@ -252,6 +252,7 @@ function randomizeLair() {
 
   background-color: var(--dark);
   box-shadow: var(--shadow);
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
