@@ -1,4 +1,27 @@
 <template>
+  <div class="row center mobile-nav">
+    <button
+      class="btn btn--tab"
+      @click="scrollToIndex(0)"
+      :class="{ active: currentIndex == 0 }"
+    >
+      1 <i class="fas fa-file-alt"></i>
+    </button>
+    <button
+      class="btn btn--tab"
+      @click="scrollToIndex(1)"
+      :class="{ active: currentIndex == 1 }"
+    >
+      2 <i class="fas fa-file-alt"></i>
+    </button>
+    <button
+      class="btn btn--tab"
+      @click="scrollToIndex(2)"
+      :class="{ active: currentIndex == 2 }"
+    >
+      3 <i class="fas fa-file-alt"></i>
+    </button>
+  </div>
   <div
     class="crew-layout"
     ref="carouselRef"
@@ -68,7 +91,7 @@
             </button>
           </CollapsingShelf>
           <div class="input-group">
-            <label for="crew-lair-district">Lair District</label>
+            <label for="crew-lair-district">District</label>
             <input
               id="crew-lair-district"
               type="text"
@@ -86,7 +109,7 @@
               <div class="text-list">
                 <button
                   class="btn btn--text"
-                  v-for="district in codex.lexicon.districts.map(d => d.name)"
+                  v-for="district in codex.lexicon.districts.map((d:any) => d.name)"
                   @click="onChangeValue(district, 'lairDistrict')"
                 >
                   {{ district }}
@@ -115,11 +138,6 @@
       <Divider />
       <section>COHORTS</section>
     </div>
-  </div>
-  <div class="row center mobile-nav">
-    <button class="btn" @click="scrollToIndex(0)">Main</button>
-    <button class="btn" @click="scrollToIndex(1)">Abilities</button>
-    <button class="btn" @click="scrollToIndex(2)">Upgrades</button>
   </div>
 </template>
 
@@ -188,6 +206,10 @@ function scrollToIndex(index: number) {
     left: index * carouselRef.value.clientWidth,
     behavior: 'smooth'
   });
+
+  // Scroll closest .sheet-layout to TOP (there is only one)
+  const sheetLayout = carouselRef.value.closest('.sheet-layout');
+  if (sheetLayout) sheetLayout.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function randomizeLair() {
@@ -221,6 +243,15 @@ function randomizeLair() {
 
 .mobile-nav {
   display: none;
+
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+  background-color: var(--dark);
+  box-shadow: var(--shadow);
 }
 
 @media (max-width: 768px) {
@@ -231,14 +262,12 @@ function randomizeLair() {
       min-width: 100%;
       scroll-snap-align: start;
     }
+
+    margin-bottom: 6.4rem;
   }
 
   .mobile-nav {
     display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
   }
 }
 </style>
