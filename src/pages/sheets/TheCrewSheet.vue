@@ -26,12 +26,12 @@
             </CollapsingShelf>
           </div>
           <div class="input-group">
-            <label for="crew-reputation">Reputation</label>
+            <label for="reputation-type">Reputation</label>
             <input
-              id="crew-reputation"
+              id="reputation-type"
               type="text"
               :value="props.sheet.reputationType"
-              @focus="focus = 'reputation'"
+              @focus="focus = 'reputation-type'"
               @change="
                 onChangeValue(
                   ($event.target as HTMLInputElement)?.value,
@@ -39,7 +39,7 @@
                 )
               "
             />
-            <CollapsingShelf :show="focus == 'reputation'">
+            <CollapsingShelf :show="focus == 'reputation-type'">
               <p>Choose how other underworld factions see you.</p>
               <div class="text-list">
                 <button
@@ -104,7 +104,88 @@
           </div>
         </section>
         <Divider />
-        <section>REP, TURF, HOLD, TIER</section>
+        <section>
+          <div class="input-block">
+            <div class="input-group">
+              <label for="crew-rep">Rep</label>
+              <input
+                id="crew-rep"
+                type="number"
+                :value="props.sheet.reputation"
+                @focus="focus = 'reputation'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'reputation'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'reputation'">
+                <p>How much rep does your crew have?</p>
+              </CollapsingShelf>
+            </div>
+            <div class="input-group">
+              <label for="crew-turf">Turf</label>
+              <input
+                id="crew-turf"
+                type="number"
+                :value="props.sheet.turf"
+                @focus="focus = 'turf'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'turf'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'turf'">
+                <p>How much turf does your crew control?</p>
+              </CollapsingShelf>
+            </div>
+          </div>
+          <div class="input-block">
+            <div class="input-group">
+              <label for="crew-hold">Hold</label>
+              <div class="row">
+                <button
+                  class="btn btn--tab"
+                  @click="onChangeValue('weak', 'hold')"
+                  :class="{ active: props.sheet.hold == 'weak' }"
+                >
+                  Weak
+                </button>
+                <button
+                  class="btn btn--tab"
+                  @click="onChangeValue('strong', 'hold')"
+                  :class="{ active: props.sheet.hold == 'strong' }"
+                >
+                  Strong
+                </button>
+              </div>
+              <CollapsingShelf :show="focus == 'hold'">
+                <p>How strong is your crew's hold on its turf?</p>
+              </CollapsingShelf>
+            </div>
+            <div class="input-group">
+              <label for="crew-tier">Tier</label>
+              <input
+                id="crew-tier"
+                type="number"
+                :value="props.sheet.tier"
+                @focus="focus = 'tier'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'tier'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'tier'">
+                <p>What tier is your crew?</p>
+              </CollapsingShelf>
+            </div>
+          </div>
+        </section>
         <Divider />
         <section>CLAIMS</section>
         <Divider />
@@ -244,6 +325,14 @@ function randomizeLair() {
       gap: 1rem;
     }
   }
+}
+
+.input-block {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .mobile-nav {

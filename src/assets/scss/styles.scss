@@ -175,6 +175,7 @@ input[type='number'] {
   border: 1px solid var(--dark);
   transition: all 0.2s;
   border-radius: 5px;
+  width: 100%;
 
   &::placeholder {
     color: var(--light);
