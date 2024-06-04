@@ -148,6 +148,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     align-items: center;
 
     .template-card {
