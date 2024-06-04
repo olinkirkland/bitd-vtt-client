@@ -94,6 +94,7 @@
                   <button
                     class="btn btn--text"
                     v-for="district in codex.lexicon.districts.map((d:any) => d.name)"
+                    :key="district"
                     @click="onChangeValue(district, 'lairDistrict')"
                   >
                     {{ district }}
@@ -204,10 +205,25 @@
       <div class="abilities-xp-and-contacts">
         <section>
           <label for="crew-abilities">Special Abilities</label>
+          <div class="row">
+            <button class="btn">
+              <i class="fas fa-edit"></i>
+              <span>New</span>
+            </button>
+            <Checkbox
+              v-model="showOnlySelectedAbilities"
+              label="Show only selected"
+            />
+          </div>
           <AbilityTile
-            v-for="(index, ability) in props.sheet.specialAbilities"
+            v-for="ability in specialAbilities"
+            :key="ability.id"
             :ability="ability"
+            :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
           />
+          <CollapsingShelf :show="specialAbilities.length === 0">
+            <p>No special abilities available.</p>
+          </CollapsingShelf>
         </section>
         <Divider />
         <section>
@@ -256,13 +272,14 @@
 
 <script setup lang="ts">
 import AbilityTile from '@/components/AbilityTile.vue';
+import Checkbox from '@/components/Checkbox.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
 import { patch } from '@/controllers/game-controller';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
-import { defineProps, onMounted, onUnmounted, ref } from 'vue';
+import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 
 const codex = useGameStore().game?.codex;
 
@@ -321,6 +338,28 @@ function randomizeLair() {
   onChangeValue(name, 'lair');
   onChangeValue(district, 'lairDistrict');
 }
+
+function onChangeSpecialAbility(ability: any, quantity: number) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === ability.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
+
+const showOnlySelectedAbilities = ref(false);
+
+const specialAbilities = computed(() => {
+  return showOnlySelectedAbilities.value
+    ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
+    : props.sheet.specialAbilities;
+});
 </script>
 
 <style scoped lang="scss">
