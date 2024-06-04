@@ -10,7 +10,7 @@ export type Harm = {
 
 export class Character extends Sheet {
   name: string;
-  
+
   book: PlayBook;
 
   choices: {
@@ -32,6 +32,8 @@ export class Character extends Sheet {
     trauma: Effectable[];
     maxTrauma: number;
   };
+
+  characterType: string = '';
 
   constructor(book: PlayBook) {
     super();
@@ -91,4 +93,8 @@ function getDefaultChoices() {
     trauma: [],
     maxTrauma: 4
   };
+}
+
+export function createCharacterTemplates() {
+  return [];
 }

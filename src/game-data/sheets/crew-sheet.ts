@@ -39,9 +39,12 @@ export class Crew extends Sheet implements CrewBook {
 
   crewExperience: number = 0; // 0-10
 
+  image: string = '';
+
   // This is overridden by the specific crew type
   crewType: string = '';
   crewTypeDescription: string = '';
+  crewTypeImage: string = '/images/crews/bravos.jpg';
   specialAbilities: Effectable[] = [];
   contacts: Person[] = [];
   upgrades: Effectable[] = [];
@@ -178,14 +181,12 @@ export class Shadows extends Crew {
   }
 }
 
-export function getCrewTemplateById(id: string) {
-  const crewTemplates = {
+export function createCrewTemplates() {
+  return {
     assassins: new Assassins(),
     bravos: new Bravos(),
     cult: new Cult(),
     hawkers: new Hawkers(),
     shadows: new Shadows()
   };
-
-  return crewTemplates[id] || null;
 }

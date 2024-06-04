@@ -89,11 +89,13 @@
 import SheetCard from '@/components/SheetCard.vue';
 import PlayerBar from '@/components/game/PlayerBar.vue';
 import ConfirmModal from '@/components/modals/modal-content/ConfirmModal.vue';
+import SheetTemplatePickerModal from '@/components/modals/modal-content/SheetTemplatePickerModal.vue';
 import { connectToGame, patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Character } from '@/game-data/sheets/character-sheet';
-import { Assassins, Crew } from '@/game-data/sheets/crew-sheet';
+import { Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
+import { createTemplates } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
@@ -126,22 +128,13 @@ onMounted(() => {
 function onClickNewSheet() {
   ModalController.open(SheetTemplatePickerModal, {
     sheetType: sheetType.value,
+    templateTypeKey: 'crewType',
+    templates: createTemplates(sheetType.value),
     onConfirm: createNewSheet
   });
 }
 
-function createNewSheet(sheetType: string, templateId?: string) {  
-  let sheet: Sheet | null = null;
-
-  switch (sheetType) {
-    case 'crew':
-      sheet = new Assassins();
-      break;
-    case 'character':
-      // sheet = new Cutter();
-      break;
-  }
-
+function createNewSheet(sheetType: string, sheet: Sheet) {
   if (!sheet) return console.error('Sheet not found');
 
   if (!useGameStore().game?.data?.sheets) {

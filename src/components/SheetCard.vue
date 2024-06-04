@@ -4,9 +4,7 @@
     <div class="sheet-card__content">
       <h2>{{ props.sheet.name }}</h2>
       <div class="row info">
-        <span class="tag">
-          {{ useGameStore().game?.players[props.sheet.createdBy]?.username }}
-        </span>
+        <span class="tag">{{ templateType }}</span>
       </div>
     </div>
   </div>
@@ -28,6 +26,13 @@ const props = defineProps({
 const coverImage = computed(() => {
   // return coverImages.find((image) => image.id === props.game.coverImage);
   return coverImages[0];
+});
+
+const templateType = computed(() => {
+  const sheetType = props.sheet.sheetType;
+  if (sheetType === 'crew') return (props.sheet as Crew).crewType;
+  else if (sheetType === 'character')
+    return (props.sheet as Character).characterType;
 });
 </script>
 
@@ -61,10 +66,9 @@ const coverImage = computed(() => {
     color: var(--light);
 
     > .info {
-      gap: 2rem;
+      gap: 0.4rem;
       .tag {
         white-space: nowrap;
-        margin-right: auto;
       }
       p.date-created {
         letter-spacing: 1.5px;

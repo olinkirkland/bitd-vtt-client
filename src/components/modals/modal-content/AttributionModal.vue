@@ -42,14 +42,18 @@
           Blades in the Dark™ is a trademark of One Seven Design. The Forged in
           the Dark Logo is © One Seven Design, and is used with permission
         </p>
+
         <Divider />
         <p class="images-description">
-          Icons are from
-          <a class="anchor-link" href="https://fontawesome.com/" target="_blank"
-            >Font Awesome</a
+          Illustrations are by
+          <a
+            class="anchor-link"
+            href="https://www.reddit.com/user/perryphery/submitted/"
+            target="_blank"
+            >u/perryphery on Reddit</a
           >
-          and <a class="anchor-link" href="https://icons8.com/">Icons8</a>
         </p>
+
         <Divider />
         <p class="images-description">
           Cover images are from
@@ -68,6 +72,16 @@
             </a>
           </li>
         </ul>
+
+        <Divider />
+        <p class="images-description">
+          Icons are from
+          <a class="anchor-link" href="https://fontawesome.com/" target="_blank"
+            >Font Awesome</a
+          >
+          and <a class="anchor-link" href="https://icons8.com/">Icons8</a>
+        </p>
+        &nbsp;
       </div>
     </template>
   </ModalFrame>
