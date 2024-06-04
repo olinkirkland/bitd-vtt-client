@@ -166,7 +166,8 @@ button.btn--tab {
 input[type='text'],
 input[type='email'],
 input[type='password'],
-input[type='number'] {
+input[type='number'],
+textarea {
   background-color: var(--dark-2);
   padding: 1.2rem;
   color: var(--primary);
@@ -187,6 +188,22 @@ input[type='number'] {
     box-shadow: var(--shadow);
     outline: none;
   }
+}
+
+// tetx-area
+textarea {
+  height: 8rem;
+  max-height: 16rem;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.input-block {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 .input-group {
@@ -210,6 +227,10 @@ label {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  flex: 1;
+}
+
+.stretch {
   flex: 1;
 }
 

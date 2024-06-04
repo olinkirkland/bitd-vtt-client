@@ -206,8 +206,14 @@
         <section>
           <label for="crew-abilities">Special Abilities</label>
           <div class="row">
-            <button class="btn">
-              <i class="fas fa-edit"></i>
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditAbilityModal, {
+                  onCreateNew: onCreateAbility
+                })
+              "
+            >
               <span>New</span>
             </button>
             <Checkbox
@@ -220,6 +226,8 @@
             :key="ability.id"
             :ability="ability"
             :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
+            :onEdit="onEditAbility"
+            :onDelete="onDeleteAbility"
           />
           <CollapsingShelf :show="specialAbilities.length === 0">
             <p>No special abilities available.</p>
@@ -275,7 +283,10 @@ import AbilityTile from '@/components/AbilityTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
+import EditAbilityModal from '@/components/modals/modal-content/EditAbilityModal.vue';
 import { patch } from '@/controllers/game-controller';
+import ModalController from '@/controllers/modal-controller';
+import { Effectable } from '@/game-data/game-data-types';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
@@ -360,6 +371,41 @@ const specialAbilities = computed(() => {
     ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
     : props.sheet.specialAbilities;
 });
+
+function onEditAbility(ability: Effectable) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === ability.id
+  );
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}`,
+      value: ability
+    }
+  ]);
+}
+
+function onDeleteAbility(id: string) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === id
+  );
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}`
+    }
+  ]);
+}
+
+function onCreateAbility(ability: Effectable) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/-`,
+      value: ability
+    }
+  ]);
+}
 </script>
 
 <style scoped lang="scss">
@@ -390,14 +436,6 @@ const specialAbilities = computed(() => {
       gap: 1rem;
     }
   }
-}
-
-.input-block {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  width: 100%;
-  overflow: hidden;
 }
 
 .mobile-nav {

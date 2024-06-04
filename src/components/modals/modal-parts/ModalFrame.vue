@@ -15,7 +15,7 @@
   flex-direction: column;
   animation: animate-in 0.2s ease;
   min-width: 36rem;
-  max-width: 56rem;
+  max-width: 48rem;
   background-color: var(--dark);
   border: 1px solid var(--dark-2);
   color: var(--light);
@@ -23,6 +23,7 @@
   box-shadow: var(--close-shadow);
 
   .modal__content {
+    display: flex;
     padding: 2rem;
     flex: 1;
     max-width: 100%;

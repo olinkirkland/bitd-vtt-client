@@ -9,13 +9,15 @@
       <div class="confirm">
         <p v-html="props.message"></p>
 
-        <div class="column center">
-          <button class="btn" @click="onClickCancel">
-            <span>{{ props.cancelText || 'No, I changed my mind' }}</span>
+        <div class="row wrap">
+          <button
+            class="btn btn--alt mobile-full-width"
+            @click="props.onConfirm"
+          >
+            <span>{{ props.confirmText || 'Yes' }}</span>
           </button>
-          <span class="muted">or</span>
-          <button class="btn btn--text" @click="props.onConfirm">
-            <span>{{ props.confirmText || 'Yes, continue' }}</span>
+          <button class="btn mobile-full-width" @click="onClickCancel">
+            <span>{{ props.cancelText || 'No, I changed my mind' }}</span>
           </button>
         </div>
       </div>
@@ -47,5 +49,6 @@ function onClickCancel() {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  justify-content: space-between;
 }
 </style>

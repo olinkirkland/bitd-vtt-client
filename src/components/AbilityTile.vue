@@ -1,7 +1,21 @@
 <template>
   <div class="ability-tile" :class="{ active: props.ability.quantity > 0 }">
     <div class="header">
-      <h2>{{ props.ability.name }}</h2>
+      <div class="row">
+        <button
+          class="btn btn--icon"
+          @click="
+            ModalController.open(EditModal, {
+              ability: props.ability,
+              onDelete: onDeleteAbility,
+              onEdit: onEditAbility
+            })
+          "
+        >
+          <i class="fas fa-edit"></i>
+        </button>
+        <h2>{{ props.ability.name }}</h2>
+      </div>
       <div class="row">
         <Checkbox
           v-for="i in ability.maxQuantity"
@@ -19,13 +33,17 @@
 </template>
 
 <script setup lang="ts">
+import ModalController from '@/controllers/modal-controller';
 import { defineProps, ref } from 'vue';
 import { Effectable } from '../game-data/game-data-types';
 import Checkbox from './Checkbox.vue';
+import EditModal from './modals/modal-content/EditAbilityModal.vue';
 
 const props = defineProps<{
   ability: Effectable;
   change: (quantity: number) => void;
+  onEdit: (ability: Effectable) => void;
+  onDelete: (id: string) => void;
 }>();
 
 const checkboxValues = ref<string[]>(
@@ -53,6 +71,14 @@ function updateQuantity(lastClicked: string) {
 
 function checkboxValuesFromQuantity(quantity: number) {
   return Array.from({ length: quantity }, (_, i) => (i + 1).toString());
+}
+
+function onEditAbility(ability: Effectable) {
+  props.onEdit(ability);
+}
+
+function onDeleteAbility(id: string) {
+  props.onDelete(id);
 }
 </script>
 
@@ -90,7 +116,7 @@ function checkboxValuesFromQuantity(quantity: number) {
 .ability-tile.active {
   border: 1px solid var(--primary);
 
-  :deep(.checkbox-group > i) {
+  :deep(.checkbox-group.checked > i) {
     color: var(--primary);
   }
 }

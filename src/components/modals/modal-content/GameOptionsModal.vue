@@ -82,6 +82,8 @@ function onChangeGameName() {
     return;
   }
 
+  nameError.value = null;
+
   patch([
     {
       op: 'replace',
@@ -126,9 +128,11 @@ function onClickAbandonGame() {
 }
 
 .options {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  min-height: 100%;
 
   > section {
     display: flex;
@@ -142,10 +146,15 @@ function onClickAbandonGame() {
 }
 
 .row.invite-block {
+  max-width: 100%;
+
   > .row {
-    max-width: 100%;
+    flex: 1;
+    overflow: hidden;
     background-color: var(--translucent-light);
-    padding: 0.8rem 1.2rem;
+    height: 4rem;
+    padding-left: 1rem;
+    border-radius: 5px;
 
     p {
       overflow-x: auto;

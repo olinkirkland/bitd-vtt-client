@@ -71,13 +71,13 @@ function handleChange(event: Event) {
   }
 
   > i {
-    transition: transform 0.2s;
+    transition-property: transform, color;
+    transition-duration: 0.2s;
     transform: scale(0.8);
     font-size: 1.6rem;
     // color: var(--primary-3);
     // Don't flex shrink
     flex: 0 0 auto;
-    transition: color 0.2s;
   }
 
   > p {

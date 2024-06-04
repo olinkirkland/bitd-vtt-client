@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="controls">
-      <div class="row" v-if="!currentSheet">
+      <div class="row center" v-if="!currentSheet">
         <button
           v-for="buttonSheet in ['crew', 'character']"
           class="btn btn--tab"
@@ -163,7 +163,7 @@ function onClickDeleteSheet() {
 
   ModalController.open(ConfirmModal, {
     title: 'Delete Sheet',
-    message: `Are you sure you want to delete <em>${currentSheet.value.name}</em>?`,
+    message: `Are you sure you want to delete <em>${currentSheet.value.name}</em> ${currentSheet.value.sheetType} sheet?`,
     confirmText: 'Yes, delete it',
     onConfirm: () => {
       patch([

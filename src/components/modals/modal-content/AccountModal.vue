@@ -23,14 +23,22 @@
 
         <!-- Account Management -->
         <section class="account-management" v-else>
-          <button class="btn mobile-full-width" @click="onClickChangeUsername">
-            <i class="fas fa-user-edit"></i>
-            <span>Change Username</span>
-          </button>
-          <button class="btn mobile-full-width" @click="onClickChangePassword">
-            <i class="fas fa-key"></i>
-            <span>Change Password</span>
-          </button>
+          <div class="row wrap">
+            <button
+              class="btn mobile-full-width"
+              @click="onClickChangeUsername"
+            >
+              <i class="fas fa-user-edit"></i>
+              <span>Change Username</span>
+            </button>
+            <button
+              class="btn mobile-full-width"
+              @click="onClickChangePassword"
+            >
+              <i class="fas fa-key"></i>
+              <span>Change Password</span>
+            </button>
+          </div>
         </section>
 
         <divider />
@@ -171,13 +179,6 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-}
-
-section.account-management {
-  flex-direction: row;
-  > button {
-    flex: 1;
-  }
 }
 
 .id-block > button {
