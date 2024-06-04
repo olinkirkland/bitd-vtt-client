@@ -136,11 +136,15 @@ async function onClickCreate() {
 </script>
 
 <style scoped lang="scss">
+.modal {
+  min-width: 64rem;
+}
+
 .game {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  min-width: 52rem;
+  width: 100%;
 
   .inputs {
     display: flex;

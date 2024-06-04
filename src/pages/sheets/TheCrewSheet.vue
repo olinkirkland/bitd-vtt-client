@@ -312,12 +312,27 @@
             :onDelete="onDeleteAbility"
           />
           <p v-if="specialAbilities.length == 0">
-            No special abilities selected.
+            <em> No special abilities selected.</em>
           </p>
         </section>
         <Divider />
         <section>
-          <span>XP (TODO)</span>
+          <div class="input-group">
+            <label for="crew-xp">Crew XP</label>
+            <input
+              id="crew-xp"
+              type="number"
+              pattern="[0-9]*"
+              :value="props.sheet.crewExperience"
+              @focus="focus = 'xp'"
+              @change="
+                onChangeValue(($event.target as HTMLInputElement)?.value, 'xp')
+              "
+            />
+            <CollapsingShelf :show="focus == 'xp'">
+              <p>How much experience has your crew accumulated?</p>
+            </CollapsingShelf>
+          </div>
         </section>
         <Divider />
         <section>

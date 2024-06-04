@@ -45,11 +45,17 @@ const showRibbon = ref(!localStorage.getItem('ribbon.' + props.id));
     color: var(--translucent-heavy);
     box-shadow: var(--shadow);
     gap: 1rem;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
 
     > p {
       font-size: 1.4rem;
       font-style: italic;
       cursor: pointer;
+      max-width: 96rem;
+      margin-right: 2.4rem;
 
       :deep(em) {
         font-size: inherit;
@@ -60,6 +66,8 @@ const showRibbon = ref(!localStorage.getItem('ribbon.' + props.id));
     }
 
     > button {
+      position: absolute;
+      right: 0.6rem;
       height: min-content;
       width: auto;
       padding: 0.4rem;

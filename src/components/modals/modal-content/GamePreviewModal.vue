@@ -95,6 +95,7 @@ function onClickJoinGame() {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  width: 100%;
 
   .title-block {
     position: relative;
