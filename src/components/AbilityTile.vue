@@ -5,8 +5,9 @@
         <button
           class="btn btn--icon"
           @click="
-            ModalController.open(EditModal, {
+            ModalController.open(EditAbilityModal, {
               ability: props.ability,
+              idPrefix: props.idPrefix,
               onDelete: onDeleteAbility,
               onEdit: onEditAbility
             })
@@ -37,10 +38,12 @@ import ModalController from '@/controllers/modal-controller';
 import { defineProps, ref } from 'vue';
 import { Effectable } from '../game-data/game-data-types';
 import Checkbox from './Checkbox.vue';
-import EditModal from './modals/modal-content/EditAbilityModal.vue';
+import EditAbilityModal from './modals/modal-content/EditAbilityModal.vue';
+import Sheet from '@/game-data/sheets/sheet';
 
 const props = defineProps<{
   ability: Effectable;
+  idPrefix: string;
   change: (quantity: number) => void;
   onEdit: (ability: Effectable) => void;
   onDelete: (id: string) => void;

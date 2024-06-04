@@ -24,6 +24,7 @@
             id="name"
             v-model="ability.name"
             placeholder="The name of the special ability"
+            @input="updateIdFromName(ability.name)"
           />
         </div>
 
@@ -101,6 +102,7 @@ const props = defineProps<{
   ability: Effectable;
   onEdit: (ability: Effectable) => void;
   onDelete: (id: string) => void;
+  idPrefix?: string;
 
   // There are two ways to use this modal:
   // Edit an existing ability or create a new one.
@@ -116,7 +118,22 @@ const blankAbility: Effectable = {
   quantity: 0,
   maxQuantity: 1
 };
+
 const ability = ref({ ...(props.ability || blankAbility) });
+
+function updateIdFromName(name: string) {
+  // Create a hyphenated ID from the name
+  // Start with the id prefix, if it exists
+  let newId = (props.idPrefix || '') + '-' + name;
+
+  // Replace only spaces with hyphens, everything else that's not a letter or number, delete
+  newId = newId
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+  ability.value.id = newId;
+}
 
 function onClickCreate() {
   if (!props.onCreateNew) return;

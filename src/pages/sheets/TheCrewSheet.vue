@@ -290,6 +290,7 @@
               class="btn"
               @click="
                 ModalController.open(EditAbilityModal, {
+                  idPrefix: sheet.crewType,
                   onCreateNew: onCreateAbility
                 })
               "
@@ -305,12 +306,13 @@
             v-for="ability in specialAbilities"
             :key="ability.id"
             :ability="ability"
+            :idPrefix="props.sheet.crewType"
             :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
             :onEdit="onEditAbility"
             :onDelete="onDeleteAbility"
           />
           <p v-if="specialAbilities.length == 0">
-            <em>No special abilities selected.</em>
+            No special abilities selected.
           </p>
         </section>
         <Divider />
