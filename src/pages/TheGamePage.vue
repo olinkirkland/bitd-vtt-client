@@ -124,10 +124,16 @@ onMounted(() => {
 });
 
 function onClickNewSheet() {
-  // TODO rework this to let users pick the crew/character type
+  ModalController.open(SheetTemplatePickerModal, {
+    sheetType: sheetType.value,
+    onConfirm: createNewSheet
+  });
+}
+
+function createNewSheet(sheetType: string, templateId?: string) {  
   let sheet: Sheet | null = null;
 
-  switch (sheetType.value) {
+  switch (sheetType) {
     case 'crew':
       sheet = new Assassins();
       break;

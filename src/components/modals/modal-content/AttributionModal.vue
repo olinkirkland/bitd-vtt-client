@@ -89,10 +89,15 @@ const shortenAuthor = (author: string) => {
 </script>
 
 <style scoped lang="scss">
+.modal {
+  min-width: 64rem;
+}
+
 .attribution {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  width: 100%;
 
   > img {
     max-width: 20rem;

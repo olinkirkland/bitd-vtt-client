@@ -177,3 +177,15 @@ export class Shadows extends Crew {
     this.claims = [];
   }
 }
+
+export function getCrewTemplateById(id: string) {
+  const crewTemplates = {
+    assassins: new Assassins(),
+    bravos: new Bravos(),
+    cult: new Cult(),
+    hawkers: new Hawkers(),
+    shadows: new Shadows()
+  };
+
+  return crewTemplates[id] || null;
+}

@@ -45,7 +45,7 @@
                 <button
                   class="btn btn--text"
                   v-for="reputation in codex.sheets.crew.reputations"
-                  @click="onChangeValue(reputation, 'reputationType')"
+                  @mousedown="onChangeValue(reputation, 'reputationType')"
                 >
                   {{ reputation }}
                 </button>
@@ -69,7 +69,7 @@
             />
             <CollapsingShelf :show="focus == 'lair'">
               <p>What does your lair look like?</p>
-              <button class="btn btn--icon" @click="randomizeLair">
+              <button class="btn btn--icon" @mousedown="randomizeLair">
                 <i class="fas fa-random"></i>
                 <span>Randomize</span>
               </button>
@@ -95,7 +95,7 @@
                     class="btn btn--text"
                     v-for="district in codex.lexicon.districts.map((d:any) => d.name)"
                     :key="district"
-                    @click="onChangeValue(district, 'lairDistrict')"
+                    @mousedown="onChangeValue(district, 'lairDistrict')"
                   >
                     {{ district }}
                   </button>
