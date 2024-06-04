@@ -138,7 +138,71 @@ export class Bravos extends Crew {
     super();
     this.crewType = 'Bravos';
     this.crewTypeDescription = 'Mercenaries, thugs, & killers';
-    this.specialAbilities = [];
+    this.specialAbilities = [
+      {
+        id: 'dangerous',
+        name: 'Dangerous',
+        description:
+          'Each PC may add +1 action rating to Hunt, Skirmish, or Wreck (up to a max rating of 3).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'blood-brothers',
+        name: 'Blood Brothers',
+        description:
+          "When you fight alongside your cohorts in combat, they get +1d for teamwork rolls (setup and group actions). All of your cohorts get the Thugs type for free (if they're already Thugs, add another type).",
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'door-kickers',
+        name: 'Door Kickers',
+        description:
+          'When you execute an assault plan, take +1d to the engagement roll.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'fiends',
+        name: 'Fiends',
+        description:
+          'Fear is as good as respect. You may count each wanted level as if it was turf.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'forged-in-the-fire',
+        name: 'Forged in the Fire',
+        description:
+          'Each PC has been toughened by cruel experience. You get +1d to resistance rolls.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'patron',
+        name: 'Patron',
+        description:
+          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'war-dogs',
+        name: 'War Dogs',
+        description:
+          'When you’re at war (-3 faction status), your crew does not suffer -1 hold and PCs still get two downtime activities, instead of just one.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'veteran',
+        name: 'Veteran',
+        description: 'Choose a special ability from another crew.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
     this.contacts = [];
     this.upgrades = [];
     this.claims = [];
@@ -150,7 +214,71 @@ export class Cult extends Crew {
     super();
     this.crewType = 'Cult';
     this.crewTypeDescription = 'Acolytes of a deity';
-    this.specialAbilities = [];
+    this.specialAbilities = [
+      {
+        id: 'chosen',
+        name: 'Chosen',
+        description:
+          'Each PC may add +1 action rating to Attune, Study, or Sway (up to a max rating of 3).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'anointed',
+        name: 'Anointed',
+        description:
+          'You get +1d to resistance rolls against supernatural threats. You get +1d to healing rolls when you have supernatural harm.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'bound-in-darkness',
+        name: 'Bound in Darkness',
+        description:
+          'You may use teamwork with any cult member, regardless of the distance separating you. By taking 1 stress, your whispered message is heard by every cultist.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'conviction',
+        name: 'Conviction',
+        description:
+          "Each PC gains an additional Vice: Worship. When you indulge this vice and bring a pleasing sacrifice, you don't overindulge if you clear excess stress. In addition, your deity will assist any one action roll you make—from now until you indulge this vice again.",
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'glory-incarnate',
+        name: 'Glory Incarnate',
+        description:
+          'Your deity sometimes manifests in the physical world. This can be a great boon, but the priorities and values of a god are not those of mortals. You have been warned.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'sealed-in-blood',
+        name: 'Sealed in Blood',
+        description:
+          'Each human sacrifice yields -3 stress cost for any ritual you perform.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'zealotry',
+        name: 'Zealotry',
+        description:
+          'Your cohorts have abandoned their reason to devote themselves to the cult. They will undertake any service, no matter how dangerous or strange. They gain +1d to rolls against enemies of the faith.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'veteran',
+        name: 'Veteran',
+        description: 'Choose a special ability from another crew.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
     this.contacts = [];
     this.upgrades = [];
     this.claims = [];
@@ -162,7 +290,71 @@ export class Hawkers extends Crew {
     super();
     this.crewType = 'Hawkers';
     this.crewTypeDescription = 'Vice dealers';
-    this.specialAbilities = [];
+    this.specialAbilities = [
+      {
+        id: 'silver-tongues',
+        name: 'Silver Tongues',
+        description:
+          'Each PC may add +1 action rating to Command, Consort, or Sway (up to a max rating of 3).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'accord',
+        name: 'Accord',
+        description:
+          'Sometimes friends are as good as territory. You may count up to three +3 faction statuses you hold as if they are turf.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'the-good-stuff',
+        name: 'The Good Stuff',
+        description:
+          'Your merchandise is exquisite. The product quality is equal to your Tier+2. When you deal with a crew or faction, the GM will tell you who among them is hooked on your product (one, a few, many, or all).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ghost-market',
+        name: 'Ghost Market',
+        description:
+          'Through arcane ritual or hard-won experience, you have discovered how to prepare your product for sale to ghosts and/or demons. They do not pay in coin. What do they pay with?',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'high-society',
+        name: 'High Society',
+        description:
+          "It's all about who you know. Take -1 heat during downtime and +1d to gather info about the city's elite.",
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'hooked',
+        name: 'Hooked',
+        description:
+          'Your gang members use your product. Add the savage, unreliable, or wild flaw to your gangs to give them +1 quality.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'patron',
+        name: 'Patron',
+        description:
+          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'veteran',
+        name: 'Veteran',
+        description: 'Choose a special ability from another crew.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
     this.contacts = [];
     this.upgrades = [];
     this.claims = [];
@@ -174,8 +366,148 @@ export class Shadows extends Crew {
     super();
     this.crewType = 'Shadows';
     this.crewTypeDescription = 'Thieves, spies, and saboteurs';
-    this.specialAbilities = [];
+    this.specialAbilities = [
+      {
+        id: 'everyone-steals',
+        name: 'Everyone Steals',
+        description:
+          'Each PC may add +1 action rating to Prowl, Finesse, or Tinker (up to a max rating of 3).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ghost-echoes',
+        name: 'Ghost Echoes',
+        description:
+          'From weird experience or occult ritual, all crew members gain the ability to see and interact with the ghostly structures, streets, and objects within the echo of Doskvol that exists in the ghost field.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'pack-rats',
+        name: 'Pack Rats',
+        description:
+          'Your lair is a jumble of stolen items. When you roll to acquire an asset, take +1d.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'patron',
+        name: 'Patron',
+        description:
+          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'second-story',
+        name: 'Second Story',
+        description:
+          'When you execute a clandestine infiltration, you get +1d to the engagement roll.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'slippery',
+        name: 'Slippery',
+        description:
+          'When you roll entanglements, roll twice and keep the one you want. When you reduce heat on the crew, take +1d.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'synchronized',
+        name: 'Synchronized',
+        description:
+          'When you perform a group action, you may count multiple 6s from different rolls as a critical success.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'veteran',
+        name: 'Veteran',
+        description: 'Choose a special ability from another crew.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
     this.contacts = [];
+    this.upgrades = [];
+    this.claims = [];
+  }
+}
+
+export class Smugglers extends Crew {
+  constructor() {
+    super();
+    this.crewType = 'Smugglers';
+    this.crewTypeDescription = 'Suppliers of illicit goods';
+    (this.specialAbilities = [
+      {
+        id: 'like-part-of-the-family',
+        name: 'Like Part of the Family',
+        description:
+          'Create one of your vehicles as a cohort (use the vehicle edges and flaws, below). Its quality is equal to your Tier +1.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'all-hands',
+        name: 'All Hands',
+        description:
+          'During downtime, one of your cohorts may perform a downtime activity for the crew to acquire an asset, reduce heat, or work on a long-term project.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ghost-passage',
+        name: 'Ghost Passage',
+        description:
+          'From harsh experience or occult ritual, all crew members become immune to possession by spirits, but may choose to "carry" a second ghost as a passenger within their body.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'just-passing-through',
+        name: 'Just Passing Through',
+        description:
+          'During downtime, take -1 heat. When your heat is 4 or less, you get +1d to deceive people when you pass yourselves off as ordinary citizens.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'leverage',
+        name: 'Leverage',
+        description:
+          'Your crew supplies contraband for other factions. Your success is good for them. Whenever you gain rep, gain +1 rep.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'reavers',
+        name: 'Reavers',
+        description:
+          'When you go into conflict aboard a vehicle, you gain +1 effect for vehicle damage and speed. Your vehicle gains armor.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'renegades',
+        name: 'Renegades',
+        description:
+          'Each PC may add +1 action rating to Finesse, Prowl, or Skirmish (up to a max rating of 3).',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'veteran',
+        name: 'Veteran',
+        description: 'Choose a special ability from another crew.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ]),
+      (this.contacts = []);
     this.upgrades = [];
     this.claims = [];
   }
@@ -187,6 +519,7 @@ export function createCrewTemplates() {
     bravos: new Bravos(),
     cult: new Cult(),
     hawkers: new Hawkers(),
-    shadows: new Shadows()
+    shadows: new Shadows(),
+    smugglers: new Smugglers()
   };
 }
