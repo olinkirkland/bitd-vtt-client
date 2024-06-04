@@ -8,17 +8,6 @@
     <template v-slot:content>
       <div class="attribution">
         <p>
-          This website is made and maintained by me,
-          <a class="anchor-link" href="https://olinkirk.land" target="_blank">
-            Olin&nbsp;Kirkland
-          </a>
-          .<br />
-          <span class="muted"
-            >© {{ currentYear }} Olin Kirkland | All rights reserved.</span
-          >
-        </p>
-        <Divider />
-        <p>
           This work is based on
           <a
             class="anchor-link"
@@ -36,13 +25,22 @@
           >
             Creative Commons Attribution 3.0 Unported license
           </a>
-          .
+        </p>
+        <Divider />
+        <p>
+          This website is made and maintained by
+          <a class="anchor-link" href="https://olinkirk.land" target="_blank"
+            >Olin&nbsp;Kirkland</a
+          ><br />
+          <span class="muted"
+            >© {{ currentYear }} Olin Kirkland | All rights reserved</span
+          >
         </p>
         <Divider />
         <img src="/images/fitd-logo.webp" />
         <p>
           Blades in the Dark™ is a trademark of One Seven Design. The Forged in
-          the Dark Logo is © One Seven Design, and is used with permission.
+          the Dark Logo is © One Seven Design, and is used with permission
         </p>
         <Divider />
         <p class="images-description">
@@ -50,14 +48,14 @@
           <a class="anchor-link" href="https://fontawesome.com/" target="_blank"
             >Font Awesome</a
           >
-          and <a class="anchor-link" href="https://icons8.com/">Icons8</a>.
+          and <a class="anchor-link" href="https://icons8.com/">Icons8</a>
         </p>
         <Divider />
         <p class="images-description">
           Cover images are from
           <a class="anchor-link" href="https://unsplash.com/" target="_blank"
             >Unsplash</a
-          >.
+          >
         </p>
         <ul class="images">
           <li v-for="image in coverImages" :key="image.id">

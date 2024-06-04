@@ -7,42 +7,6 @@
     </template>
     <template v-slot:content>
       <div class="account">
-        <section v-if="useUserStore().isGuest">
-          <p>You are currently logged in as a guest.</p>
-
-          <div class="row" v-if="useUserStore().isGuest">
-            <button class="btn" @click="onClickRegister">
-              <span>Register Account</span>
-            </button>
-            <button class="btn btn--alt" @click="onClickLogin">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Login</span>
-            </button>
-          </div>
-        </section>
-
-        <!-- Account Management -->
-        <section class="account-management" v-else>
-          <div class="row wrap">
-            <button
-              class="btn mobile-full-width"
-              @click="onClickChangeUsername"
-            >
-              <i class="fas fa-user-edit"></i>
-              <span>Change Username</span>
-            </button>
-            <button
-              class="btn mobile-full-width"
-              @click="onClickChangePassword"
-            >
-              <i class="fas fa-key"></i>
-              <span>Change Password</span>
-            </button>
-          </div>
-        </section>
-
-        <divider />
-
         <!-- Portrait Selection -->
         <section>
           <p>Choose a portrait from the list below.</p>
@@ -66,7 +30,85 @@
           </ul>
         </section>
 
-        <divider />
+        <Divider />
+
+        <!-- Account Management -->
+        <section v-if="useUserStore().isGuest">
+          <p>You are currently logged in as a guest.</p>
+
+          <div class="row" v-if="useUserStore().isGuest">
+            <button class="btn" @click="onClickRegister">
+              <span>Register Account</span>
+            </button>
+            <button class="btn btn--alt" @click="onClickLogin">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Login</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="account-management" v-else>
+          <div class="input-group">
+            <p>
+              Change your username. This will also change your display name in
+              all games.
+            </p>
+            <button
+              class="btn mobile-full-width"
+              @click="onClickChangeUsername"
+            >
+              <i class="fas fa-user-edit"></i>
+              <span>Change Username</span>
+            </button>
+          </div>
+          <div class="input-group">
+            <p>Change your password.</p>
+            <button
+              class="btn mobile-full-width"
+              @click="onClickChangePassword"
+            >
+              <i class="fas fa-key"></i>
+              <span>Change Password</span>
+            </button>
+          </div>
+        </section>
+
+        <Divider />
+
+        <section class="attribution">
+          <p>
+            <span class="muted"
+              >© {{ currentYear }} Olin Kirkland | All rights reserved</span
+            >
+          </p>
+          <p>
+            This work is based on
+            <a
+              class="anchor-link"
+              href="http://www.bladesinthedark.com/"
+              target="_blank"
+            >
+              Blades in the Dark
+            </a>
+            , product of One Seven Design, developed and authored by John
+            Harper, and licensed for our use under the
+            <a
+              class="anchor-link"
+              href="http://creativecommons.org/licenses/by/3.0/"
+              target="_blank"
+            >
+              Creative Commons Attribution 3.0 Unported license
+            </a>
+          </p>
+          <button
+            class="btn btn--alt mobile-full-width"
+            @click="() => ModalController.open(AttributionModal)"
+          >
+            <span>View Full Attribution</span>
+          </button>
+        </section>
+
+        <Divider />
 
         <!-- Footer -->
         <section class="center">
@@ -111,6 +153,7 @@ import { getServerVersion } from '@/util/version';
 import { onMounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import AttributionModal from './AttributionModal.vue';
 import ChangePasswordModal from './ChangePasswordModal.vue';
 import ChangeUsernameModal from './ChangeUsernameModal.vue';
 import ConfirmDeleteAccountModal from './ConfirmDeleteAccountModal.vue';
@@ -123,6 +166,8 @@ onMounted(() => {
     (v) => (version.value = `${packageJson.version} • ${v}`)
   );
 });
+
+const currentYear = new Date().getFullYear();
 
 function onClickLogout() {
   ModalController.open(ConfirmModal, {
@@ -227,6 +272,13 @@ section {
       background-color: var(--translucent-heavy);
       opacity: 0.5;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .id-block {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 }
 </style>

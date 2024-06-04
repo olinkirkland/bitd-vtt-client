@@ -32,6 +32,10 @@
   }
 }
 
+:deep(section:last-of-type) {
+  padding-bottom: 2rem;
+}
+
 @media (max-width: 768px) {
   .modal {
     border: none;

@@ -11,7 +11,7 @@ initializeConnection();
 const app = createApp(App);
 
 // Components
-app.component('divider', Divider);
+app.component('Divider', Divider);
 
 // Plugins
 const pinia = createPinia();

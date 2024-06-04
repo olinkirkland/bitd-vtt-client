@@ -196,10 +196,90 @@
         </section>
         <Divider />
         <section>
-          <span>HEAT (TODO)</span>
-          <span>WANTED LEVEL (TODO)</span>
-          <span>COINS (TODO)</span>
-          <span>VAULTS (TODO)</span>
+          <div class="input-block">
+            <div class="input-group">
+              <label for="crew-heat">Heat</label>
+              <input
+                id="crew-heat"
+                type="number"
+                pattern="[0-9]*"
+                :value="props.sheet.heat"
+                @focus="focus = 'heat'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'heat'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'heat'">
+                <p>How much heat is your crew generating?</p>
+              </CollapsingShelf>
+            </div>
+
+            <div class="input-group">
+              <label for="crew-wanted-level">Wanted Level</label>
+              <input
+                id="crew-wanted-level"
+                type="number"
+                pattern="[0-9]*"
+                :value="props.sheet.wantedLevel"
+                @focus="focus = 'wanted-level'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'wantedLevel'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'wanted-level'">
+                <p>How much attention is the law giving your crew?</p>
+              </CollapsingShelf>
+            </div>
+          </div>
+          <div class="input-block">
+            <div class="input-group">
+              <label for="crew-coin">Coin</label>
+              <input
+                id="crew-coin"
+                type="number"
+                pattern="[0-9]*"
+                :value="props.sheet.coin"
+                @focus="focus = 'coin'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'coin'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'coin'">
+                <p>How much coin does your crew have squirreled away?</p>
+              </CollapsingShelf>
+            </div>
+
+            <div class="input-group">
+              <label for="crew-vaults">Vaults</label>
+              <input
+                id="crew-vaults"
+                type="number"
+                pattern="[0-9]*"
+                :value="props.sheet.vaults"
+                @focus="focus = 'vaults'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'vaults'
+                  )
+                "
+              />
+              <CollapsingShelf :show="focus == 'vaults'">
+                <p>
+                  Vaults represent the storage capacity for your crew's coin.
+                </p>
+              </CollapsingShelf>
+            </div>
+          </div>
         </section>
       </div>
       <div class="abilities-xp-and-contacts">
@@ -229,9 +309,9 @@
             :onEdit="onEditAbility"
             :onDelete="onDeleteAbility"
           />
-          <CollapsingShelf :show="specialAbilities.length === 0">
-            <p>No special abilities available.</p>
-          </CollapsingShelf>
+          <p v-if="specialAbilities.length == 0">
+            <em>No special abilities selected.</em>
+          </p>
         </section>
         <Divider />
         <section>
