@@ -19,10 +19,14 @@ import TheModalContainer from './components/modals/TheModalContainer.vue';
 .page-layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  max-height: 100vh;
-  max-height: -webkit-fill-available;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh; // Old browsers
+  min-height: 100dvh; // New browsers
+  min-height: -webkit-fill-available; // iOS
+  max-height: 100vh; // Old browsers
+  max-height: 100dvh; // New browsers
+  max-height: -webkit-fill-available; // iOS
   > .page-layout__content {
     flex: 1;
     overflow: hidden;
