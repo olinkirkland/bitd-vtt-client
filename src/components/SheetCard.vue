@@ -1,6 +1,6 @@
 <template>
-  <div class="sheet-card" :style="{ backgroundColor: coverImage?.commonColor }">
-    <img :src="coverImage?.url" />
+  <div class="sheet-card" :style="{ backgroundColor: '#ff0000' }">
+    <img :src="image" />
     <div class="sheet-card__content">
       <h2>{{ props.sheet.name }}</h2>
       <div class="row info">
@@ -11,10 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import coverImages from '@/assets/data/cover-images.json';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
-import { useGameStore } from '@/stores/game-store';
 import { PropType, computed } from 'vue';
 const props = defineProps({
   sheet: {
@@ -23,16 +21,18 @@ const props = defineProps({
   }
 });
 
-const coverImage = computed(() => {
-  // return coverImages.find((image) => image.id === props.game.coverImage);
-  return coverImages[0];
-});
-
 const templateType = computed(() => {
   const sheetType = props.sheet.sheetType;
   if (sheetType === 'crew') return (props.sheet as Crew).crewType;
   else if (sheetType === 'character')
     return (props.sheet as Character).characterType;
+});
+
+const image = computed(() => {
+  const sheetType = props.sheet.sheetType;
+  if (sheetType === 'crew') return (props.sheet as Crew).image;
+  else if (sheetType === 'character')
+    return (props.sheet as Character).image;
 });
 </script>
 

@@ -6,11 +6,13 @@ export default class Sheet {
   sheetType: string;
   createdBy: string; // The id of the player who created the sheet
   createdAt: number; // The timestamp of when the sheet was created
+  image: string;
 
   constructor() {
     this.id = uuidv4();
     this.sheetType = 'sheet';
     this.createdBy = useUserStore().id;
     this.createdAt = Date.now();
+    this.image = '';
   }
 }

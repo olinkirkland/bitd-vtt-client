@@ -39,13 +39,11 @@ export class Crew extends Sheet implements CrewBook {
 
   crewExperience: number = 0; // 0-10
 
-  image: string = '';
-
   // This is overridden by the specific crew type
   crewType: string = '';
   crewTypeDescription: string = '';
-  crewTypeImage: string = '/images/crews/bravos.jpg';
   specialAbilities: Effectable[] = [];
+  image: string = '/images/crews/bravos.jpg';
   contacts: Person[] = [];
   upgrades: Effectable[] = [];
   claims: Claim[] = [];
@@ -60,6 +58,7 @@ export class Assassins extends Crew {
   constructor() {
     super();
 
+    this.name = 'Untitled Assassins';
     this.crewType = 'Assassins';
     this.crewTypeDescription = 'Murderers for hire';
     this.specialAbilities = [
@@ -136,8 +135,11 @@ export class Assassins extends Crew {
 export class Bravos extends Crew {
   constructor() {
     super();
+
+    this.name = 'Untitled Bravos';
     this.crewType = 'Bravos';
     this.crewTypeDescription = 'Mercenaries, thugs, & killers';
+    this.image = '/images/crews/bravos.jpg';
     this.specialAbilities = [
       {
         id: 'dangerous',
@@ -212,8 +214,11 @@ export class Bravos extends Crew {
 export class Cult extends Crew {
   constructor() {
     super();
+
+    this.name = 'Untitled Cult';
     this.crewType = 'Cult';
     this.crewTypeDescription = 'Acolytes of a deity';
+    this.image = '/images/crews/bravos.jpg';
     this.specialAbilities = [
       {
         id: 'chosen',
@@ -288,8 +293,11 @@ export class Cult extends Crew {
 export class Hawkers extends Crew {
   constructor() {
     super();
+
+    this.name = 'Untitled Hawkers';
     this.crewType = 'Hawkers';
     this.crewTypeDescription = 'Vice dealers';
+    this.image = '/images/crews/bravos.jpg';
     this.specialAbilities = [
       {
         id: 'silver-tongues',
@@ -364,8 +372,11 @@ export class Hawkers extends Crew {
 export class Shadows extends Crew {
   constructor() {
     super();
+
+    this.name = 'Untitled Shadows';
     this.crewType = 'Shadows';
     this.crewTypeDescription = 'Thieves, spies, and saboteurs';
+    this.image = '/images/crews/bravos.jpg';
     this.specialAbilities = [
       {
         id: 'everyone-steals',
@@ -440,9 +451,12 @@ export class Shadows extends Crew {
 export class Smugglers extends Crew {
   constructor() {
     super();
+
+    this.name = 'Untitled Smugglers';
     this.crewType = 'Smugglers';
     this.crewTypeDescription = 'Suppliers of illicit goods';
-    (this.specialAbilities = [
+    this.image = '/images/crews/bravos.jpg';
+    this.specialAbilities = [
       {
         id: 'like-part-of-the-family',
         name: 'Like Part of the Family',
@@ -506,8 +520,8 @@ export class Smugglers extends Crew {
         quantity: 0,
         maxQuantity: 3
       }
-    ]),
-      (this.contacts = []);
+    ];
+    this.contacts = [];
     this.upgrades = [];
     this.claims = [];
   }

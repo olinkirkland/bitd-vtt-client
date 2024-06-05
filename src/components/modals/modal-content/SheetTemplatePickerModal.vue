@@ -23,7 +23,7 @@
             @click="onClickChooseTemplate(template)"
             :class="{ active: currentIndex == index }"
           >
-            <img :src="template[templateTypeKey + 'Image']" />
+            <img :src="template.image" />
             <h3>{{ template[templateTypeKey as keyof typeof template] }}</h3>
             <div class="template-card__content">
               <p>
@@ -80,6 +80,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  overflow-y: auto;
 
   .scroll-container {
     width: 100%;
@@ -109,7 +110,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 50%;
+    // object-position: 50% 50%;
     filter: brightness(0.8);
   }
 
@@ -117,7 +118,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
     text-align: center;
     width: 100%;
     color: var(--light);
-    margin: 2.4rem 0;
+    margin: 3.2rem 0;
     font-size: 3.2rem;
     font-weight: bold;
     text-shadow: 2px 2px 2px var(--dark);
@@ -155,9 +156,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
     align-items: center;
 
     .template-card {
-      min-width: calc(100% - 4rem);
-      // min-width: 100%;
-      transition: height 0.2s;
+      min-width: calc(100% - 2.4rem);
+      transition: height 0.5s;
       scroll-snap-align: start;
       > h3 {
         margin-top: 3.2rem;
