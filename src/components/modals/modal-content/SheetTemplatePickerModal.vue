@@ -11,21 +11,26 @@
           The crew type you choose determines the group's purpose, their special
           abilities, and how they advance.
         </p>
-        <div
+        <ul
           class="scroll-container"
           ref="carouselRef"
           @scroll="updateCurrentIndex($event.target as HTMLElement)"
         >
-          <div
-            class="template-card"
-            v-for="(template, key, index) in templates"
-            :key="template.id"
-            @click="onClickChooseTemplate(template)"
-            :class="{ active: currentIndex == index }"
-          >
-            <img :src="template.image" />
-            <h3>{{ template[templateTypeKey as keyof typeof template] }}</h3>
-            <div class="template-card__content">
+          <li v-for="(template, key, index) in templates">
+            <div
+              class="template-card"
+              :key="template.id"
+              @click="onClickChooseTemplate(template)"
+              :class="{
+                active: currentIndex == index,
+                'left-of-active': currentIndex > index,
+                'right-of-active': currentIndex < index
+              }"
+            >
+              <img :src="template.image" />
+              <h3>
+                {{ template[templateTypeKey as keyof typeof template] }}
+              </h3>
               <p>
                 {{
                   template[
@@ -34,8 +39,8 @@
                 }}
               </p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </template>
   </ModalFrame>
@@ -64,12 +69,11 @@ function onClickChooseTemplate(template: any) {
 
 const currentIndex = ref(0);
 function updateCurrentIndex(carousel: HTMLElement) {
+  const listItemWidth = carousel.children[0].clientWidth;
   // Get the current index from the scroll position
-  const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
-  currentIndex.value = index;
-  // If it's at the bottom, set the index to the last possible index
-  if (carousel.scrollLeft + carousel.clientWidth === carousel.scrollWidth)
-    currentIndex.value = carousel.children.length - 1;
+  // Add half the width of the list item to get the index of the center of the item
+  const index = (carousel.scrollLeft + listItemWidth / 2) / listItemWidth;
+  currentIndex.value = Math.floor(index);
 }
 </script>
 
@@ -85,11 +89,15 @@ function updateCurrentIndex(carousel: HTMLElement) {
   gap: 1.6rem;
   overflow-y: auto;
 
-  .scroll-container {
+  ul.scroll-container {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
     gap: 1.6rem;
+
+    > li {
+      width: 100%;
+    }
   }
 }
 
@@ -97,11 +105,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
   position: relative;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
   cursor: pointer;
-
+  box-shadow: var(-shadow);
+  border-radius: 5px;
   overflow: hidden;
-  box-shadow: var(--shadow);
 
   &:hover {
     filter: brightness(1.2);
@@ -126,26 +133,20 @@ function updateCurrentIndex(carousel: HTMLElement) {
     text-shadow: 2px 2px 2px var(--dark);
   }
 
-  > .template-card__content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    z-index: 1;
-    margin-top: auto;
+  > p {
     width: 100%;
+    margin-top: auto;
     background-color: var(--translucent-heavy);
-    padding: 1rem;
-    color: var(--light);
-
-    > p {
-      font-style: italic;
-      text-align: center;
-    }
+    padding: 2rem;
+    font-style: italic;
+    text-align: center;
+    z-index: 1;
   }
 }
 
 @media (max-width: 768px) {
-  .template-picker > .scroll-container {
+  .template-picker > ul.scroll-container {
+    padding: 1rem 0;
     display: flex;
     height: calc(100% - 2rem);
     overflow-x: auto;
@@ -156,22 +157,44 @@ function updateCurrentIndex(carousel: HTMLElement) {
       display: none;
     }
     align-items: center;
+    gap: 0;
 
-    .template-card {
-      min-width: calc(100% - 4rem);
-      transition: height 0.5s;
-      scroll-snap-align: start;
+    > li {
+      scroll-snap-align: center;
 
-      > h3 {
-        margin-top: 3.2rem;
-      }
+      min-width: 80%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      .template-card {
+        width: 100%;
+        height: calc(100% - 4rem);
+        transition-property: transform, filter, height;
+        transition-duration: 0.3s;
+        box-shadow: var(--shadow);
+        display: flex;
+        align-items: center;
 
-      filter: brightness(0.4);
-      height: calc(100% - 3.2rem);
+        filter: brightness(0.4);
 
-      &.active {
-        filter: brightness(1);
-        height: 100%;
+        > h3 {
+          margin-top: 3.2rem;
+          font-size: 2.4rem;
+        }
+
+        &.left-of-active {
+          transform: rotateZ(-3deg);
+        }
+
+        &.right-of-active {
+          transform: rotateZ(3deg);
+        }
+
+        &.active {
+          z-index: 1;
+          filter: brightness(1);
+          height: 100%;
+        }
       }
     }
   }

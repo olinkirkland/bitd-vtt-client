@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import coverImages from '@/assets/data/cover-images.json';
-import { Game, PlayerRole } from '@/types/game';
 import { useUserStore } from '@/stores/user-store';
+import { Game } from '@/types/game';
 import { PropType, computed } from 'vue';
 const props = defineProps({
   game: {
