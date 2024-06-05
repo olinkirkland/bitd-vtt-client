@@ -67,6 +67,9 @@ function updateCurrentIndex(carousel: HTMLElement) {
   // Get the current index from the scroll position
   const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
   currentIndex.value = index;
+  // If it's at the bottom, set the index to the last possible index
+  if (carousel.scrollLeft + carousel.clientWidth === carousel.scrollWidth)
+    currentIndex.value = carousel.children.length - 1;
 }
 </script>
 
@@ -119,7 +122,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
     width: 100%;
     color: var(--light);
     margin: 3.2rem 0;
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     font-weight: bold;
     text-shadow: 2px 2px 2px var(--dark);
   }
@@ -144,8 +147,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
 
 @media (max-width: 768px) {
   .template-picker > .scroll-container {
-    height: 100%;
     display: flex;
+    height: calc(100% - 2rem);
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -156,7 +159,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
     align-items: center;
 
     .template-card {
-      min-width: calc(100% - 2.4rem);
+      min-width: calc(100% - 4rem);
       transition: height 0.5s;
       scroll-snap-align: start;
       > h3 {
@@ -164,7 +167,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
       }
 
       filter: brightness(0.4);
-      height: calc(100% - 4rem);
+      height: calc(100% - 3.2rem);
 
       &.active {
         filter: brightness(1);
