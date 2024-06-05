@@ -317,7 +317,7 @@
             :onDelete="onDeleteAbility"
           />
           <p v-if="specialAbilities.length == 0">
-            <em> No special abilities selected.</em>
+            <em>❖ No special abilities selected</em>
           </p>
         </section>
         <Divider />
@@ -385,7 +385,7 @@
             :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
           />
           <p v-if="crewUpgrades.length == 0">
-            <em> No crew upgrades selected.</em>
+            <em>❖ No crew upgrades selected</em>
           </p>
         </section>
 
@@ -431,7 +431,7 @@
             :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
           />
           <p v-if="lairUpgrades.length == 0">
-            <em> No lair upgrades selected.</em>
+            <em>❖ No lair upgrades selected</em>
           </p>
         </section>
 
@@ -477,7 +477,7 @@
             :onDelete="(id) => onDeleteUpgrade(id, 'training')"
           />
           <p v-if="trainingUpgrades.length == 0">
-            <em> No training upgrades selected.</em>
+            <em>❖ No training upgrades selected</em>
           </p>
         </section>
 
@@ -523,7 +523,7 @@
             :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
           />
           <p v-if="qualityUpgrades.length == 0">
-            <em> No quality upgrades selected.</em>
+            <em>❖ No quality upgrades selected</em>
           </p>
         </section>
 

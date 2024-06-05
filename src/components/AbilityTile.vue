@@ -27,9 +27,7 @@
         @update:modelValue="updateQuantity(i.toString())"
       />
     </div>
-    <p>
-      {{ props.ability.description }}
-    </p>
+    <p v-html="props.ability.description"></p>
   </div>
 </template>
 
@@ -115,7 +113,7 @@ function onDeleteAbility(id: string) {
   }
 
   > p {
-    opacity: 0.6;
+    opacity: 0.8;
     font-size: 1.4rem;
   }
 

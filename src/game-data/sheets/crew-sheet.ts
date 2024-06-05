@@ -314,14 +314,14 @@ export class Assassins extends Crew {
       {
         id: 'elite-skulks',
         name: 'Elite Skulks',
-        description: 'Your Skulks are elite.',
+        description: '',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'elite-thugs',
         name: 'Elite Thugs',
-        description: 'Your Thugs are elite.',
+        description: '',
         quantity: 0,
         maxQuantity: 1
       },
@@ -330,7 +330,7 @@ export class Assassins extends Crew {
         name: 'Hardened',
         description: '+1 trauma box.',
         quantity: 0,
-        maxQuantity: 1
+        maxQuantity: 3
       }
     ];
 
@@ -414,7 +414,43 @@ export class Bravos extends Crew {
       }
     ];
     this.contacts = [];
-    this.crewUpgrades = [];
+    this.crewUpgrades = [
+      {
+        id: 'bravos-rigging',
+        name: 'Bravos Rigging',
+        description: '2 free load of weapons or armor.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-skulks',
+        name: 'Elite Skulks',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-thugs',
+        name: 'Elite Thugs',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'hardened',
+        name: 'Hardened',
+        description: '+1 trauma box.',
+        quantity: 0,
+        maxQuantity: 3
+      },
+      {
+        id: 'ironhook-contacts',
+        name: 'Ironhook Contacts',
+        description: '+1 Tier in prison.',
+        quantity: 0,
+        maxQuantity: 1
+      }
+    ];
 
     this.applyUpgradesDescriptionsFromCodex();
 
@@ -496,7 +532,43 @@ export class Cult extends Crew {
       }
     ];
     this.contacts = [];
-    this.crewUpgrades = [];
+    this.crewUpgrades = [
+      {
+        id: 'cult-rigging',
+        name: 'Cult Rigging',
+        description: '2 free load of documents or implements.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ritual-sanctum-in-lair',
+        name: 'Ritual Sanctum in Lair',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-adepts',
+        name: 'Elite Adepts',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-thugs',
+        name: 'Elite Thugs',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ordained',
+        name: 'Ordained',
+        description: '+1 trauma box.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
 
     this.applyUpgradesDescriptionsFromCodex();
 
@@ -578,7 +650,43 @@ export class Hawkers extends Crew {
       }
     ];
     this.contacts = [];
-    this.crewUpgrades = [];
+    this.crewUpgrades = [
+      {
+        id: 'hawkers-rigging',
+        name: 'Hawkers Rigging',
+        description: '1 carried item is concealed and has no load',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ironhook-contacts',
+        name: 'Ironhook Contacts',
+        description: '+1 Tier in prison.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-rooks',
+        name: 'Elite Rooks',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-thugs',
+        name: 'Elite Thugs',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'composed',
+        name: 'Composed',
+        description: '+1 stress box.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
 
     this.applyUpgradesDescriptionsFromCodex();
 
@@ -660,7 +768,43 @@ export class Shadows extends Crew {
       }
     ];
     this.contacts = [];
-    this.crewUpgrades = [];
+    this.crewUpgrades = [
+      {
+        id: 'thief-rigging',
+        name: 'Thief Rigging',
+        description: '2 free load of tools or gear.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'underground-maps-and-passkeys',
+        name: 'Underground Maps and Passkeys',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-rooks',
+        name: 'Elite Rooks',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-skulks',
+        name: 'Elite Skulks',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'steady',
+        name: 'Steady',
+        description: '+1 stress box.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
 
     this.applyUpgradesDescriptionsFromCodex();
 
@@ -742,7 +886,43 @@ export class Smugglers extends Crew {
       }
     ];
     this.contacts = [];
-    this.crewUpgrades = [];
+    this.crewUpgrades = [
+      {
+        id: 'smugglers-rigging',
+        name: 'Smugglers Rigging',
+        description: '2 items carried are perfectly concealed.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'camoflage',
+        name: 'Camoflage',
+        description: 'Vehicles are perfectly concealed at rest',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-rovers',
+        name: 'Elite Rovers',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'barge',
+        name: 'Barge',
+        description: '',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'steady',
+        name: 'Steady',
+        description: '+1 stress box.',
+        quantity: 0,
+        maxQuantity: 3
+      }
+    ];
 
     this.applyUpgradesDescriptionsFromCodex();
 
