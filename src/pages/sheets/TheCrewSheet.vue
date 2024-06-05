@@ -5,7 +5,7 @@
       ref="carouselRef"
       @scroll="updateCurrentIndex($event.target as HTMLElement)"
     >
-      <div class="main-and-claims">
+      <div class="main-and-claims" :class="{ active: currentIndex == 0 }">
         <section>
           <div class="input-group">
             <label for="crew-name">Name</label>
@@ -282,7 +282,10 @@
           </div>
         </section>
       </div>
-      <div class="abilities-xp-and-contacts">
+      <div
+        class="abilities-xp-and-contacts"
+        :class="{ active: currentIndex == 1 }"
+      >
         <section>
           <label for="crew-abilities">Special Abilities</label>
           <div class="row">
@@ -341,7 +344,7 @@
           <span>CONTACTS (TODO)</span>
         </section>
       </div>
-      <div class="upgrades-and-cohorts">
+      <div class="upgrades-and-cohorts" :class="{ active: currentIndex == 2 }">
         <section>
           <label for="crew-upgrades">Upgrades</label>
           <div class="row">
@@ -472,8 +475,11 @@ function updateCurrentIndex(carousel: HTMLElement) {
 function scrollToIndex(index: number) {
   if (!carouselRef.value) return;
   carouselRef.value.scrollTo({
+    top: 0
+  });
+
+  carouselRef.value.scrollTo({
     left: carouselRef.value.clientWidth * index,
-    top: 0,
     behavior: 'smooth'
   });
 }
@@ -637,7 +643,6 @@ function onCreateAbility(ability: Effectable) {
   height: 100%;
   flex: 1;
   overflow-y: auto;
-  overflow-x: hidden;
 
   > div {
     padding: 1rem;
@@ -667,9 +672,12 @@ function onCreateAbility(ability: Effectable) {
 @media (max-width: 768px) {
   .crew-layout {
     display: flex;
+    overflow-x: hidden;
 
     > div {
       min-width: 100%;
+      height: 100%;
+      overflow-y: auto;
     }
   }
 
