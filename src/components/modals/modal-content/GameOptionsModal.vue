@@ -159,6 +159,10 @@ function onClickAbandonGame() {
     p {
       overflow-x: auto;
       white-space: nowrap;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
