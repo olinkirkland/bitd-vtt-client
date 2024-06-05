@@ -1,0 +1,50 @@
+[
+  {
+    "id": "e52f27b1-e5f6-42de-9889-c2d9aeeb3b0d",
+    "name": "Assassin Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/assassins.jpg",
+    "commonColor": "#a27043"
+  },
+  {
+    "id": "ab9c33a6-2710-41ff-a814-edf6b648af54",
+    "name": "Bravos Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/bravos.jpg",
+    "commonColor": "#e88b62"
+  },
+  {
+    "id": "7544b3a4-0e4d-4758-9870-cd5b8f7774cb",
+    "name": "Cult Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/cult.jpg",
+    "commonColor": "#c94c34"
+  },
+  {
+    "id": "13867125-73d8-4399-a550-db499a4eedfe",
+    "name": "Hawkers Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/hawkers.jpg",
+    "commonColor": "#bfa53f"
+  },
+  {
+    "id": "bbc1bf16-dc4d-4e97-a898-0bf9e688d327",
+    "name": "Shadows Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/shadows.jpg",
+    "commonColor": "#a27043"
+  },
+  {
+    "id": "de509b5c-f37c-4975-9768-5e123d24e19b",
+    "name": "Smugglers Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/smugglers.jpg",
+    "commonColor": "#dac684"
+  }
+]

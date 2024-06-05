@@ -1,7 +1,10 @@
 import fs from 'fs';
 import Vibrant from 'node-vibrant';
 
-const indexPaths = ['src/assets/data/cover-images.json'];
+const indexPaths = [
+  'src/assets/data/cover-images.json',
+  'src/assets/data/sheet-images.json'
+];
 
 indexPaths.forEach(async (indexFile) => {
   const index = JSON.parse(fs.readFileSync(indexFile, 'utf-8'));

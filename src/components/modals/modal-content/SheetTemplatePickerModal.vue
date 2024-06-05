@@ -26,8 +26,9 @@
                 'left-of-active': currentIndex > index,
                 'right-of-active': currentIndex < index
               }"
+              :background-color="getImage(template.image)?.commonColor"
             >
-              <img :src="template.image" />
+              <img :src="getImage(template.image)?.url" alt="template image" />
               <h3>
                 {{ template[templateTypeKey as keyof typeof template] }}
               </h3>
@@ -47,6 +48,7 @@
 </template>
 
 <script lang="ts" setup>
+import sheetImages from '@/assets/data/sheet-images.json';
 import ModalController from '@/controllers/modal-controller';
 import { PropType, defineProps, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
@@ -61,6 +63,10 @@ const props = defineProps({
     required: true
   }
 });
+
+function getImage(imageId: string) {
+  return sheetImages.find((image) => image.id === imageId);
+}
 
 function onClickChooseTemplate(template: any) {
   props.onConfirm(props.sheetType as string, template);

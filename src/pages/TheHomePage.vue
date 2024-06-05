@@ -35,10 +35,6 @@ import { useUserStore } from '@/stores/user-store';
 import { Game } from '@/types/game';
 import { computed, onMounted } from 'vue';
 
-function hasSeenAlert() {
-  return false;
-}
-
 async function onClickNewGame() {
   ModalController.open(CreateGameModal);
 }

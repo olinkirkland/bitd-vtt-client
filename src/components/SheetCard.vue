@@ -1,6 +1,6 @@
 <template>
-  <div class="sheet-card" :style="{ backgroundColor: '#ff0000' }">
-    <img :src="image" />
+  <div class="sheet-card" :style="{ backgroundColor: image?.commonColor }">
+    <img :src="image?.url" />
     <div class="sheet-card__content">
       <h2>{{ props.sheet.name }}</h2>
       <div class="row info">
@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import sheetImages from '@/assets/data/sheet-images.json';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import { PropType, computed } from 'vue';
@@ -28,12 +29,9 @@ const templateType = computed(() => {
     return (props.sheet as Character).characterType;
 });
 
-const image = computed(() => {
-  const sheetType = props.sheet.sheetType;
-  if (sheetType === 'crew') return (props.sheet as Crew).image;
-  else if (sheetType === 'character')
-    return (props.sheet as Character).image;
-});
+const image = computed(() =>
+  sheetImages.find((sheetImage) => sheetImage.id === props.sheet.image)
+);
 </script>
 
 <style lang="scss" scoped>
