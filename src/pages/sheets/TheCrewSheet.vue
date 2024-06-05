@@ -289,7 +289,8 @@
             <button
               class="btn"
               @click="
-                ModalController.open(EditAbilityModal, {
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Special Ability',
                   idPrefix: sheet.crewType,
                   onCreateNew: onCreateAbility
                 })
@@ -307,6 +308,7 @@
             :key="ability.id"
             :ability="ability"
             :idPrefix="props.sheet.crewType"
+            :propertyName="'Special Ability'"
             :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
             :onEdit="onEditAbility"
             :onDelete="onDeleteAbility"
@@ -341,7 +343,44 @@
       </div>
       <div class="upgrades-and-cohorts">
         <section>
-          <span>UPGRADES (TODO)</span>
+          <label for="crew-upgrades">Upgrades</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Upgrade',
+                  idPrefix: sheet.crewType + '-upgrade',
+                  onCreateNew: (upgrade: Effectable) =>
+                    onCreateUpgrade(upgrade, 'crew')
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              v-model="showOnlySelectedUpgrades"
+              label="Show only selected"
+            />
+          </div>
+          <AbilityTile
+            v-for="upgrade in crewUpgrades"
+            :key="upgrade.id"
+            :ability="upgrade"
+            :idPrefix="props.sheet.crewType + '-upgrade'"
+            :propertyName="'Upgrade'"
+            :change="
+              (quantity) => {
+                onChangeUpgrade(upgrade, quantity, 'crew');
+              }
+            "
+            :onEdit="
+              (ability) => {
+                onEditUpgrade(ability, 'crew');
+              }
+            "
+            :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
+          />
         </section>
         <Divider />
         <section>
@@ -380,7 +419,7 @@ import AbilityTile from '@/components/AbilityTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import Divider from '@/components/Divider.vue';
-import EditAbilityModal from '@/components/modals/modal-content/EditAbilityModal.vue';
+import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable } from '@/game-data/game-data-types';
@@ -461,14 +500,94 @@ function onChangeSpecialAbility(ability: any, quantity: number) {
   ]);
 }
 
-const showOnlySelectedAbilities = ref(false);
+const showOnlySelectedUpgrades = ref(false);
+const crewUpgrades = computed(() => {
+  return showOnlySelectedUpgrades.value
+    ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.crewUpgrades;
+});
 
+const lairUpgrades = computed(() => {
+  return showOnlySelectedUpgrades.value
+    ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.lairUpgrades;
+});
+
+const trainingUpgrades = computed(() => {
+  return showOnlySelectedUpgrades.value
+    ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.trainingUpgrades;
+});
+
+const qualityUpgrades = computed(() => {
+  return showOnlySelectedUpgrades.value
+    ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.qualityUpgrades;
+});
+
+function onEditUpgrade(
+  upgrade: Effectable,
+  upgradeType: 'crew' | 'lair' | 'training' | 'quality'
+) {
+  const upgradeIndex = props.sheet.crewUpgrades.findIndex(
+    (a) => a.id === upgrade.id
+  );
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/${upgradeType}Upgrades/${upgradeIndex}`,
+      value: upgrade
+    }
+  ]);
+}
+function onDeleteUpgrade(
+  id: string,
+  upgradeType: 'crew' | 'lair' | 'training' | 'quality'
+) {
+  const upgradeIndex = props.sheet.crewUpgrades.findIndex((a) => a.id === id);
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/${upgradeType}Upgrades/${upgradeIndex}`
+    }
+  ]);
+}
+function onChangeUpgrade(
+  upgrade: any,
+  quantity: number,
+  upgradeType: 'crew' | 'lair' | 'training' | 'quality'
+) {
+  const upgradeIndex = props.sheet.crewUpgrades.findIndex(
+    (a) => a.id === upgrade.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/${upgradeType}Upgrades/${upgradeIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
+function onCreateUpgrade(
+  upgrade: Effectable,
+  upgradeType: 'crew' | 'lair' | 'training' | 'quality'
+) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/${upgradeType}Upgrades/-`,
+      value: upgrade
+    }
+  ]);
+}
+
+const showOnlySelectedAbilities = ref(false);
 const specialAbilities = computed(() => {
   return showOnlySelectedAbilities.value
     ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
     : props.sheet.specialAbilities;
 });
-
 function onEditAbility(ability: Effectable) {
   const abilityIndex = props.sheet.specialAbilities.findIndex(
     (a) => a.id === ability.id
@@ -481,7 +600,6 @@ function onEditAbility(ability: Effectable) {
     }
   ]);
 }
-
 function onDeleteAbility(id: string) {
   const abilityIndex = props.sheet.specialAbilities.findIndex(
     (a) => a.id === id
@@ -493,7 +611,6 @@ function onDeleteAbility(id: string) {
     }
   ]);
 }
-
 function onCreateAbility(ability: Effectable) {
   patch([
     {

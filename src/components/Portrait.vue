@@ -9,7 +9,7 @@ import { getPortrait } from '@/util/portrait';
 import { computed } from 'vue';
 
 const props = defineProps<{
-  portraitId: string;
+  portraitId?: string;
 }>();
 
 const portrait = computed(() => {

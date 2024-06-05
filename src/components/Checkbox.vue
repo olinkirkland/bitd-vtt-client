@@ -4,7 +4,7 @@
     :class="{ compact: !label?.length, checked }"
     @click="handleChange"
   >
-    <i class="fas" :class="checked ? 'fa-check-square' : 'fa-square'"></i>
+    <i class="fas" :class="checked ? 'fa-check-circle' : 'fa-circle'"></i>
     <p>{{ label }}</p>
   </div>
 </template>

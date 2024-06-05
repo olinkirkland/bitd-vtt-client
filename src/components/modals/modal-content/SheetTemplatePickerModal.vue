@@ -2,7 +2,7 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>What kind of {{ sheetType }} do you want to create?</h2>
+        <h2>Choose a {{ sheetType }} template</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
@@ -87,7 +87,6 @@ function updateCurrentIndex(carousel: HTMLElement) {
 
   .scroll-container {
     width: 100%;
-
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
     gap: 1.6rem;
@@ -162,6 +161,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
       min-width: calc(100% - 4rem);
       transition: height 0.5s;
       scroll-snap-align: start;
+
       > h3 {
         margin-top: 3.2rem;
       }

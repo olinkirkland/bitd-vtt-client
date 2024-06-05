@@ -2,29 +2,32 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>{{ props.onCreateNew ? 'Create New' : 'Edit' }} Special Ability</h2>
+        <h2>{{ props.onCreateNew ? 'Create' : 'Edit' }} {{ propertyName }}</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
       <div class="edit">
         <div class="input-group">
-          <label for="id">ID</label>
-          <input
-            type="text"
-            id="id"
-            v-model="ability.id"
-            placeholder="A hyphenated identifier"
-          />
-        </div>
-
-        <div class="input-group">
           <label for="name">Name</label>
           <input
             type="text"
             id="name"
-            v-model="ability.name"
-            placeholder="The name of the special ability"
-            @input="updateIdFromName(ability.name)"
+            v-model="effectable.name"
+            placeholder="Enter a memorable name"
+            @input="updateIdFromName(effectable.name)"
+          />
+        </div>
+
+        <div class="input-group" :class="{ disabled: !props.onCreateNew }">
+          <label for="id"
+            >ID
+            <label class="muted">(permanent)</label>
+          </label>
+          <input
+            type="text"
+            id="id"
+            v-model="effectable.id"
+            placeholder="A hyphenated identifier"
           />
         </div>
 
@@ -32,38 +35,24 @@
           <label for="description"
             >Description
             <label class="muted"
-              >({{ ability.description.length }} / 400)
+              >({{ effectable.description.length }} / 400)
             </label>
           </label>
           <textarea
             id="description"
-            v-model="ability.description"
-            placeholder="A brief description of the special ability"
+            v-model="effectable.description"
+            placeholder="A brief description"
           ></textarea>
         </div>
 
-        <div class="input-block">
-          <div class="input-group">
-            <label for="quantity">Quantity</label>
-            <input
-              type="number"
-              pattern="[0-9]*"
-              inputmode="numeric"
-              id="quantity"
-              v-model="ability.quantity"
-              placeholder="0, 1, 2..."
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="maxQuantity">Max Quantity</label>
-            <input
-              type="number"
-              id="maxQuantity"
-              v-model="ability.maxQuantity"
-              placeholder="1, 2, 3..."
-            />
-          </div>
+        <div class="input-group">
+          <label for="maxQuantity">Max Quantity</label>
+          <input
+            type="number"
+            id="maxQuantity"
+            v-model="effectable.maxQuantity"
+            placeholder="1, 2, 3..."
+          />
         </div>
 
         <div class="row" v-if="props.onCreateNew">
@@ -74,7 +63,7 @@
             <span>Cancel</span>
           </button>
           <button class="btn mobile-full-width" @click="onClickCreate">
-            <span>Create</span>
+            <span>New</span>
           </button>
         </div>
         <div class="row" v-else>
@@ -99,19 +88,20 @@ import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 
 const props = defineProps<{
-  ability: Effectable;
-  onEdit: (ability: Effectable) => void;
+  propertyName: string;
+  effectable: Effectable;
+  onEdit: (eff: Effectable) => void;
   onDelete: (id: string) => void;
   idPrefix?: string;
 
   // There are two ways to use this modal:
-  // Edit an existing ability or create a new one.
-  // The default is to edit an existing ability. To create a new one, pass a function to onCreateNew.
+  // Edit an existing effectable or create a new one.
+  // The default is to edit an existing effectable. To create a new one, pass a function to onCreateNew.
   // All other props will be ignored in this case.
-  onCreateNew?: (ability: Effectable) => void;
+  onCreateNew?: (effectable: Effectable) => void;
 }>();
 
-const blankAbility: Effectable = {
+const blankEffectable: Effectable = {
   id: '',
   name: '',
   description: '',
@@ -119,9 +109,11 @@ const blankAbility: Effectable = {
   maxQuantity: 1
 };
 
-const ability = ref({ ...(props.ability || blankAbility) });
+const effectable = ref({ ...(props.effectable || blankEffectable) });
 
 function updateIdFromName(name: string) {
+  if (!props.onCreateNew) return;
+
   // Create a hyphenated ID from the name
   // Start with the id prefix, if it exists
   let newId = (props.idPrefix || '') + '-' + name;
@@ -132,22 +124,22 @@ function updateIdFromName(name: string) {
     .replace(/ /g, '-')
     .replace(/[^a-z0-9-]/g, '');
 
-  ability.value.id = newId;
+  effectable.value.id = newId;
 }
 
 function onClickCreate() {
   if (!props.onCreateNew) return;
-  props.onCreateNew(ability.value);
+  props.onCreateNew(effectable.value);
   ModalController.close();
 }
 
 function onClickSave() {
-  props.onEdit(ability.value);
+  props.onEdit(effectable.value);
   ModalController.close();
 }
 
 function onClickDelete() {
-  props.onDelete(ability.value.id);
+  props.onDelete(effectable.value.id);
   ModalController.close();
 }
 </script>
@@ -161,6 +153,7 @@ function onClickDelete() {
     flex-direction: column;
     gap: 1.6rem;
     min-height: 100%;
+    width: 100%;
 
     textarea {
       resize: vertical;

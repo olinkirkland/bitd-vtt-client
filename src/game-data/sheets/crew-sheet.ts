@@ -1,3 +1,4 @@
+import { useGameStore } from '@/stores/game-store';
 import { Effectable, Person } from '../game-data-types';
 import Sheet from './sheet';
 
@@ -6,16 +7,12 @@ export type Claim = Effectable & {
   prerequisites: string[]; // IDs of other claims, which must be owned first
 };
 
-export type Upgrade = Effectable & {
-  upgradeType: 'book' | 'lair' | 'quality' | 'training' | 'cohorts';
-};
-
 interface CrewBook {
   crewType: string;
   crewTypeDescription: string;
   specialAbilities: Effectable[];
   contacts: Person[];
-  upgrades: Effectable[];
+  crewUpgrades: Effectable[];
   claims: Claim[];
 }
 
@@ -45,12 +42,182 @@ export class Crew extends Sheet implements CrewBook {
   specialAbilities: Effectable[] = [];
   image: string = '/images/crews/bravos.jpg';
   contacts: Person[] = [];
-  upgrades: Effectable[] = [];
+  crewUpgrades: Effectable[] = [];
+  lairUpgrades: Effectable[] = [
+    {
+      id: 'carriage-house',
+      name: 'Carriage',
+      description: '',
+      quantity: 0,
+      maxQuantity: 2
+    },
+    {
+      id: 'boat-house',
+      name: 'Boat',
+      description: '',
+      quantity: 0,
+      maxQuantity: 2
+    },
+    {
+      id: 'hidden-lair',
+      name: 'Hidden',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'quarters',
+      name: 'Quarters',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'secure-lair',
+      name: 'Secure',
+      description: '',
+      quantity: 0,
+      maxQuantity: 2
+    },
+    {
+      id: 'vault',
+      name: 'Vault',
+      description: '',
+      quantity: 0,
+      maxQuantity: 2
+    },
+    {
+      id: 'workshop',
+      name: 'Workshop',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    }
+  ];
+  trainingUpgrades: Effectable[] = [
+    {
+      id: 'insight',
+      name: 'Insight',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'prowess',
+      name: 'Prowess',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'resolve',
+      name: 'Resolve',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'personal',
+      name: 'Personal',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'mastery',
+      name: 'Mastery',
+      description: '',
+      quantity: 0,
+      maxQuantity: 4
+    }
+  ];
+  qualityUpgrades: Effectable[] = [
+    {
+      id: 'documents',
+      name: 'Documents',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'gear',
+      name: 'Gear',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'implements',
+      name: 'Implements',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'supplies',
+      name: 'Supplies',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'tools',
+      name: 'Tools',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'weapons',
+      name: 'Weapons',
+      description: '',
+      quantity: 0,
+      maxQuantity: 1
+    }
+  ];
+
   claims: Claim[] = [];
 
   constructor() {
     super();
     this.sheetType = 'crew';
+  }
+
+  applyUpgradesDescriptionsFromCodex() {
+    const descriptions =
+      useGameStore().game?.codex.sheets.crew['upgrade-descriptions'];
+
+    // Crew Upgrades
+    this.crewUpgrades.forEach((upgrade: Effectable) => {
+      const upgradeDescription = descriptions?.crew?.[upgrade.id];
+      if (upgradeDescription) upgrade.description = upgradeDescription;
+      else if (!upgrade.description)
+        upgrade.description = 'no description found for ' + upgrade.id;
+    });
+
+    // Lair Upgrades
+    this.lairUpgrades.forEach((upgrade: Effectable) => {
+      const upgradeDescription = descriptions.lair[upgrade.id];
+      if (upgradeDescription) upgrade.description = upgradeDescription;
+      else if (!upgrade.description)
+        upgrade.description = 'no description found for ' + upgrade.id;
+    });
+
+    // Training Upgrades
+    this.trainingUpgrades.forEach((upgrade: Effectable) => {
+      const upgradeDescription = descriptions.training[upgrade.id];
+      if (upgradeDescription) upgrade.description = upgradeDescription;
+      else if (!upgrade.description)
+        upgrade.description = 'no description found for ' + upgrade.id;
+    });
+
+    // Quality Upgrades
+    this.qualityUpgrades.forEach((upgrade: Effectable) => {
+      const upgradeDescription = descriptions.quality[upgrade.id];
+      if (upgradeDescription) upgrade.description = upgradeDescription;
+      else if (!upgrade.description)
+        upgrade.description = 'no description found for ' + upgrade.id;
+    });
   }
 }
 
@@ -127,7 +294,47 @@ export class Assassins extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+
+    this.crewUpgrades = [
+      {
+        id: 'assassin-rigging',
+        name: 'Assassin Rigging',
+        description: '2 free load of weapons or gear.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'ironhook-contacts',
+        name: 'Ironhook Contacts',
+        description: '+1 Tier in prison.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-skulks',
+        name: 'Elite Skulks',
+        description: 'Your Skulks are elite.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'elite-thugs',
+        name: 'Elite Thugs',
+        description: 'Your Thugs are elite.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'hardened',
+        name: 'Hardened',
+        description: '+1 trauma box.',
+        quantity: 0,
+        maxQuantity: 1
+      }
+    ];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
@@ -206,7 +413,10 @@ export class Bravos extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+    this.crewUpgrades = [];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
@@ -285,7 +495,10 @@ export class Cult extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+    this.crewUpgrades = [];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
@@ -364,7 +577,10 @@ export class Hawkers extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+    this.crewUpgrades = [];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
@@ -443,7 +659,10 @@ export class Shadows extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+    this.crewUpgrades = [];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
@@ -522,7 +741,10 @@ export class Smugglers extends Crew {
       }
     ];
     this.contacts = [];
-    this.upgrades = [];
+    this.crewUpgrades = [];
+
+    this.applyUpgradesDescriptionsFromCodex();
+
     this.claims = [];
   }
 }
