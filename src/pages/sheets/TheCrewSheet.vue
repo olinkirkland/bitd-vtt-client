@@ -346,7 +346,7 @@
       </div>
       <div class="upgrades-and-cohorts" :class="{ active: currentIndex == 2 }">
         <section>
-          <label for="crew-upgrades">Upgrades</label>
+          <label for="crew-upgrades">Crew Upgrades</label>
           <div class="row">
             <button
               class="btn"
@@ -362,7 +362,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              v-model="showOnlySelectedUpgrades"
+              v-model="showOnlySelectedCrewUpgrades"
               label="Show only selected"
             />
           </div>
@@ -384,8 +384,151 @@
             "
             :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
           />
+          <p v-if="crewUpgrades.length == 0">
+            <em> No crew upgrades selected.</em>
+          </p>
         </section>
+
         <Divider />
+
+        <section>
+          <label for="crew-lair-upgrades">Lair Upgrades</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Upgrade',
+                  idPrefix: sheet.crewType + '-lair-upgrade',
+                  onCreateNew: (upgrade: Effectable) =>
+                    onCreateUpgrade(upgrade, 'lair')
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              v-model="showOnlySelectedLairUpgrades"
+              label="Show only selected"
+            />
+          </div>
+          <AbilityTile
+            v-for="upgrade in lairUpgrades"
+            :key="upgrade.id"
+            :ability="upgrade"
+            :idPrefix="props.sheet.crewType + '-lair-upgrade'"
+            :propertyName="'Upgrade'"
+            :change="
+              (quantity) => {
+                onChangeUpgrade(upgrade, quantity, 'lair');
+              }
+            "
+            :onEdit="
+              (ability) => {
+                onEditUpgrade(ability, 'lair');
+              }
+            "
+            :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
+          />
+          <p v-if="lairUpgrades.length == 0">
+            <em> No lair upgrades selected.</em>
+          </p>
+        </section>
+
+        <Divider />
+
+        <section>
+          <label for="crew-training-upgrades">Training Upgrades</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Upgrade',
+                  idPrefix: sheet.crewType + '-training-upgrade',
+                  onCreateNew: (upgrade: Effectable) =>
+                    onCreateUpgrade(upgrade, 'training')
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              v-model="showOnlySelectedTrainingUpgrades"
+              label="Show only selected"
+            />
+          </div>
+          <AbilityTile
+            v-for="upgrade in trainingUpgrades"
+            :key="upgrade.id"
+            :ability="upgrade"
+            :idPrefix="props.sheet.crewType + '-training-upgrade'"
+            :propertyName="'Upgrade'"
+            :change="
+              (quantity) => {
+                onChangeUpgrade(upgrade, quantity, 'training');
+              }
+            "
+            :onEdit="
+              (ability) => {
+                onEditUpgrade(ability, 'training');
+              }
+            "
+            :onDelete="(id) => onDeleteUpgrade(id, 'training')"
+          />
+          <p v-if="trainingUpgrades.length == 0">
+            <em> No training upgrades selected.</em>
+          </p>
+        </section>
+
+        <Divider />
+
+        <section>
+          <label for="crew-quality-upgrades">Quality Upgrades</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Upgrade',
+                  idPrefix: sheet.crewType + '-quality-upgrade',
+                  onCreateNew: (upgrade: Effectable) =>
+                    onCreateUpgrade(upgrade, 'quality')
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              v-model="showOnlySelectedQualityUpgrades"
+              label="Show only selected"
+            />
+          </div>
+          <AbilityTile
+            v-for="upgrade in qualityUpgrades"
+            :key="upgrade.id"
+            :ability="upgrade"
+            :idPrefix="props.sheet.crewType + '-quality-upgrade'"
+            :propertyName="'Upgrade'"
+            :change="
+              (quantity) => {
+                onChangeUpgrade(upgrade, quantity, 'quality');
+              }
+            "
+            :onEdit="
+              (ability) => {
+                onEditUpgrade(ability, 'quality');
+              }
+            "
+            :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
+          />
+          <p v-if="qualityUpgrades.length == 0">
+            <em> No quality upgrades selected.</em>
+          </p>
+        </section>
+
+        <Divider />
+
         <section>
           <span>COHORTS (TODO)</span>
         </section>
@@ -506,27 +649,30 @@ function onChangeSpecialAbility(ability: any, quantity: number) {
   ]);
 }
 
-const showOnlySelectedUpgrades = ref(false);
+const showOnlySelectedCrewUpgrades = ref(false);
 const crewUpgrades = computed(() => {
-  return showOnlySelectedUpgrades.value
+  return showOnlySelectedCrewUpgrades.value
     ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
     : props.sheet.crewUpgrades;
 });
 
+const showOnlySelectedLairUpgrades = ref(false);
 const lairUpgrades = computed(() => {
-  return showOnlySelectedUpgrades.value
+  return showOnlySelectedLairUpgrades.value
     ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
     : props.sheet.lairUpgrades;
 });
 
+const showOnlySelectedTrainingUpgrades = ref(false);
 const trainingUpgrades = computed(() => {
-  return showOnlySelectedUpgrades.value
+  return showOnlySelectedTrainingUpgrades.value
     ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
     : props.sheet.trainingUpgrades;
 });
 
+const showOnlySelectedQualityUpgrades = ref(false);
 const qualityUpgrades = computed(() => {
-  return showOnlySelectedUpgrades.value
+  return showOnlySelectedQualityUpgrades.value
     ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
     : props.sheet.qualityUpgrades;
 });
@@ -558,14 +704,18 @@ function onDeleteUpgrade(
     }
   ]);
 }
+
 function onChangeUpgrade(
   upgrade: any,
   quantity: number,
   upgradeType: 'crew' | 'lair' | 'training' | 'quality'
 ) {
-  const upgradeIndex = props.sheet.crewUpgrades.findIndex(
+  const upgradeIndex = props.sheet[`${upgradeType}Upgrades`].findIndex(
     (a) => a.id === upgrade.id
   );
+
+  if (upgradeIndex === -1) return console.error('Upgrade not found', upgrade);
+
   const path = `/data/sheets/${props.sheet.id}/${upgradeType}Upgrades/${upgradeIndex}/quantity`;
   patch([
     {
@@ -575,6 +725,7 @@ function onChangeUpgrade(
     }
   ]);
 }
+
 function onCreateUpgrade(
   upgrade: Effectable,
   upgradeType: 'crew' | 'lair' | 'training' | 'quality'

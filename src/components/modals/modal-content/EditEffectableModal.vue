@@ -88,10 +88,10 @@ import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 
 const props = defineProps<{
-  propertyName: string;
-  effectable: Effectable;
-  onEdit: (eff: Effectable) => void;
-  onDelete: (id: string) => void;
+  propertyName?: string;
+  effectable?: Effectable;
+  onEdit?: (eff: Effectable) => void;
+  onDelete?: (id: string) => void;
   idPrefix?: string;
 
   // There are two ways to use this modal:
@@ -134,11 +134,13 @@ function onClickCreate() {
 }
 
 function onClickSave() {
+  if (!props.onEdit) return;
   props.onEdit(effectable.value);
   ModalController.close();
 }
 
 function onClickDelete() {
+  if (!props.onDelete) return;
   props.onDelete(effectable.value.id);
   ModalController.close();
 }

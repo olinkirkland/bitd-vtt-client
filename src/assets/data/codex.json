@@ -80,8 +80,8 @@
         "quality": {
           "documents": "Improves the quality rating of all the crew's documents.",
           "gear": "Improves the quality rating of all the crew's Burglary Gear and Climbing Gear.",
-          "arcane-implements": "Improves the quality rating of all the crew's Arcane Implements.",
-          "subterfuge supplies": "Improves the quality rating of all the crew's Subterfuge Supplies.",
+          "implements": "Improves the quality rating of all the crew's Arcane Implements.",
+          "supplies": "Improves the quality rating of all the crew's Subterfuge Supplies.",
           "tools": "Improves the quality rating of all the crew's Demolitions Tools and Tinkering Tools.",
           "weapons": "Improves the quality rating of all the crew's weapons."
         }
