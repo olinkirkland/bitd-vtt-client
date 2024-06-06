@@ -32,6 +32,10 @@
   }
 }
 
+:deep(.modal__content > div) {
+  width: 100%;
+}
+
 :deep(section:last-of-type) {
   padding-bottom: 2rem;
 }

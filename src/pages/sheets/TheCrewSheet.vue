@@ -193,6 +193,7 @@
         <Divider />
         <section>
           <span>CLAIMS (TODO)</span>
+          <pre>{{ props.sheet.claims }}</pre>
         </section>
         <Divider />
         <section>
