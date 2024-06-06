@@ -31,9 +31,6 @@
           This website is made and maintained by
           <a class="anchor-link" href="https://olinkirk.land" target="_blank"
             >Olin&nbsp;Kirkland</a
-          ><br />
-          <span class="muted"
-            >© {{ currentYear }} Olin Kirkland | All rights reserved</span
           >
         </p>
         <Divider />

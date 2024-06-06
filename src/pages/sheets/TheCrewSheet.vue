@@ -307,16 +307,22 @@
               label="Show only selected"
             />
           </div>
-          <AbilityTile
-            v-for="ability in specialAbilities"
-            :key="ability.id"
-            :ability="ability"
-            :idPrefix="props.sheet.crewType"
-            :propertyName="'Special Ability'"
-            :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
-            :onEdit="onEditAbility"
-            :onDelete="onDeleteAbility"
-          />
+          <div class="tile-list">
+            <AbilityTile
+              v-for="ability in specialAbilities"
+              :key="ability.id"
+              :ability="ability"
+              :idPrefix="props.sheet.crewType"
+              :propertyName="'Special Ability'"
+              :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
+              :onEdit="onEditAbility"
+              :onDelete="onDeleteAbility"
+              :class="{
+                'wide-tile':
+                  ability.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
+              }"
+            />
+          </div>
           <p v-if="specialAbilities.length == 0">
             <em>❖ No special abilities selected</em>
           </p>
@@ -342,7 +348,28 @@
         </section>
         <Divider />
         <section>
-          <span>CONTACTS (TODO)</span>
+          <label for="contacts">Crew Contacts</label>
+          <div class="row">
+            <button class="btn">
+              <span>New</span>
+            </button>
+            <Checkbox
+              icon="fa-check"
+              v-model="showOnlySelectedContacts"
+              label="Show only selected"
+            />
+          </div>
+          <div class="tile-list">
+            <PersonTile
+              v-for="contact in contacts"
+              :key="contact.id"
+              :idPrefix="props.sheet.crewType + '-contact'"
+              :person="contact"
+              :change="onChangeContact"
+              :onEdit="onEditContact"
+              :onDelete="onDeleteContact"
+            />
+          </div>
         </section>
       </div>
       <div class="upgrades-and-cohorts" :class="{ active: currentIndex == 2 }">
@@ -368,7 +395,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list tile-list--wide">
+          <div class="tile-list">
             <AbilityTile
               v-for="upgrade in crewUpgrades"
               :key="upgrade.id"
@@ -386,6 +413,10 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
+              :class="{
+                'wide-tile':
+                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
+              }"
             />
           </div>
           <p v-if="crewUpgrades.length == 0">
@@ -417,7 +448,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list tile-list--wide">
+          <div class="tile-list">
             <AbilityTile
               v-for="upgrade in lairUpgrades"
               :key="upgrade.id"
@@ -435,6 +466,10 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
+              :class="{
+                'wide-tile':
+                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
+              }"
             />
           </div>
           <p v-if="lairUpgrades.length == 0">
@@ -466,7 +501,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list tile-list--narrow">
+          <div class="tile-list">
             <AbilityTile
               v-for="upgrade in trainingUpgrades"
               :key="upgrade.id"
@@ -484,7 +519,10 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'training')"
-              :class="{ 'wide-tile': upgrade.maxQuantity > 2 }"
+              :class="{
+                'wide-tile':
+                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
+              }"
             />
           </div>
           <p v-if="trainingUpgrades.length == 0">
@@ -516,7 +554,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list tile-list--narrow">
+          <div class="tile-list">
             <AbilityTile
               v-for="upgrade in qualityUpgrades"
               :key="upgrade.id"
@@ -534,7 +572,10 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
-              :class="{ 'wide-tile': upgrade.maxQuantity > 2 }"
+              :class="{
+                'wide-tile':
+                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
+              }"
             />
           </div>
           <p v-if="qualityUpgrades.length == 0">
@@ -579,16 +620,17 @@
 import AbilityTile from '@/components/AbilityTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
-import Divider from '@/components/Divider.vue';
+import PersonTile from '@/components/PersonTile.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Effectable } from '@/game-data/game-data-types';
+import { Effectable, Person } from '@/game-data/game-data-types';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
 import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 
+const WIDE_TILE_DESCRIPTION_THRESHOLD = 200;
 const codex = useGameStore().game?.codex;
 
 onMounted(() => {
@@ -666,30 +708,47 @@ function onChangeSpecialAbility(ability: any, quantity: number) {
 
 const showOnlySelectedCrewUpgrades = ref(false);
 const crewUpgrades = computed(() => {
-  return showOnlySelectedCrewUpgrades.value
-    ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
-    : props.sheet.crewUpgrades;
+  return (
+    showOnlySelectedCrewUpgrades.value
+      ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
+      : props.sheet.crewUpgrades
+  ).sort((a, b) => b.description.length - a.description.length);
 });
 
 const showOnlySelectedLairUpgrades = ref(false);
 const lairUpgrades = computed(() => {
-  return showOnlySelectedLairUpgrades.value
-    ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
-    : props.sheet.lairUpgrades;
+  return (
+    showOnlySelectedLairUpgrades.value
+      ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
+      : props.sheet.lairUpgrades
+  ).sort((a, b) => b.description.length - a.description.length);
 });
 
 const showOnlySelectedTrainingUpgrades = ref(false);
 const trainingUpgrades = computed(() => {
-  return showOnlySelectedTrainingUpgrades.value
-    ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
-    : props.sheet.trainingUpgrades;
+  return (
+    showOnlySelectedTrainingUpgrades.value
+      ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
+      : props.sheet.trainingUpgrades
+  ).sort((a, b) => b.description.length - a.description.length);
 });
 
 const showOnlySelectedQualityUpgrades = ref(false);
 const qualityUpgrades = computed(() => {
-  return showOnlySelectedQualityUpgrades.value
-    ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
-    : props.sheet.qualityUpgrades;
+  return (
+    showOnlySelectedQualityUpgrades.value
+      ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
+      : props.sheet.qualityUpgrades
+  ).sort((a, b) => b.description.length - a.description.length);
+});
+
+const showOnlySelectedContacts = ref(false);
+const contacts = computed(() => {
+  return (
+    showOnlySelectedContacts.value
+      ? props.sheet.contacts.filter((a) => a.attitude !== 0)
+      : props.sheet.contacts
+  ).sort((a, b) => b.description.length - a.description.length);
 });
 
 function onEditUpgrade(
@@ -719,7 +778,6 @@ function onDeleteUpgrade(
     }
   ]);
 }
-
 function onChangeUpgrade(
   upgrade: any,
   quantity: number,
@@ -740,7 +798,6 @@ function onChangeUpgrade(
     }
   ]);
 }
-
 function onCreateUpgrade(
   upgrade: Effectable,
   upgradeType: 'crew' | 'lair' | 'training' | 'quality'
@@ -754,11 +811,57 @@ function onCreateUpgrade(
   ]);
 }
 
+function onEditContact(contact: Person) {
+  const contactIndex = props.sheet.contacts.findIndex(
+    (a) => a.id === contact.id
+  );
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/contacts/${contactIndex}`,
+      value: contact
+    }
+  ]);
+}
+function onDeleteContact(id: string) {
+  const contactIndex = props.sheet.contacts.findIndex((a) => a.id === id);
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/contacts/${contactIndex}`
+    }
+  ]);
+}
+function onChangeContact(contact: Person, attitude: number) {
+  const contactIndex = props.sheet.contacts.findIndex(
+    (a) => a.id === contact.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/contacts/${contactIndex}/attitude`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: attitude
+    }
+  ]);
+}
+function onCreateContact(contact: Person) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/contacts/-`,
+      value: contact
+    }
+  ]);
+}
+
 const showOnlySelectedAbilities = ref(false);
 const specialAbilities = computed(() => {
-  return showOnlySelectedAbilities.value
-    ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
-    : props.sheet.specialAbilities;
+  return (
+    showOnlySelectedAbilities.value
+      ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
+      : props.sheet.specialAbilities
+  ).sort((a, b) => b.description.length - a.description.length);
 });
 function onEditAbility(ability: Effectable) {
   const abilityIndex = props.sheet.specialAbilities.findIndex(
@@ -838,15 +941,15 @@ function onCreateAbility(ability: Effectable) {
 .tile-list {
   display: grid;
   gap: 1rem;
-
-  &--wide {
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  grid-template-columns: 1fr;
+  > .wide-tile {
+    grid-column: 1 / -1;
   }
-  &--narrow {
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-    > .wide-tile {
-      grid-column: span 2;
-    }
+}
+
+@media (min-width: 1280px) {
+  .tile-list {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }
 

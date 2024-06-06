@@ -7,16 +7,7 @@ export type Claim = Effectable & {
   prerequisites: string[]; // IDs of other claims, which must be owned first
 };
 
-interface CrewBook {
-  crewType: string;
-  crewTypeDescription: string;
-  specialAbilities: Effectable[];
-  contacts: Person[];
-  crewUpgrades: Effectable[];
-  claims: Claim[];
-}
-
-export class Crew extends Sheet implements CrewBook {
+export class Crew extends Sheet {
   name: string = 'Untitled Crew';
   reputationType: string = 'Ambitious'; // Ambitious, Brutal, Daring, Honorable, Professional, Savvy, Subtle, or Strange
   lair: string = 'An abandoned warehouse';
@@ -294,8 +285,6 @@ export class Assassins extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
-
     this.crewUpgrades = [
       {
         id: 'assassin-rigging',
@@ -331,6 +320,44 @@ export class Assassins extends Crew {
         description: '+1 trauma box.',
         quantity: 0,
         maxQuantity: 3
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'assassins-trev',
+        name: 'Trev',
+        description: 'A gang boss',
+        attitude: 0
+      },
+      {
+        id: 'assassins-contact-lydra',
+        name: 'Lydra',
+        description: 'A deal broker',
+        attitude: 0
+      },
+      {
+        id: 'assassins-contact-irimina',
+        name: 'Irimina',
+        description: 'A vicious noble',
+        attitude: 0
+      },
+      {
+        id: 'assassins-contact-karlos',
+        name: 'Karlos',
+        description: 'A bounty hunter',
+        attitude: 0
+      },
+      {
+        id: 'assassins-contact-exeter',
+        name: 'Exeter',
+        description: 'A spirit warden',
+        attitude: 0
+      },
+      {
+        id: 'assassins-contact-sevoy',
+        name: 'Sevoy',
+        description: 'A merchant lord',
+        attitude: 0
       }
     ];
 
@@ -413,7 +440,6 @@ export class Bravos extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
     this.crewUpgrades = [
       {
         id: 'bravos-rigging',
@@ -449,6 +475,44 @@ export class Bravos extends Crew {
         description: '+1 Tier in prison.',
         quantity: 0,
         maxQuantity: 1
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'bravos-contact-meg',
+        name: 'Meg',
+        description: 'A pit-fighter',
+        attitude: 0
+      },
+      {
+        id: 'bravos-contact-conway',
+        name: 'Conway',
+        description: 'A bluecoat',
+        attitude: 0
+      },
+      {
+        id: 'bravos-contact-keller',
+        name: 'Keller',
+        description: 'A blacksmith',
+        attitude: 0
+      },
+      {
+        id: 'bravos-contact-tomas',
+        name: 'Tomas',
+        description: 'A physicker',
+        attitude: 0
+      },
+      {
+        id: 'bravos-contact-walker',
+        name: 'Walker',
+        description: 'A ward boss',
+        attitude: 0
+      },
+      {
+        id: 'bravos-contact-lutes',
+        name: 'Lutes',
+        description: 'A tavern owner',
+        attitude: 0
       }
     ];
 
@@ -531,7 +595,6 @@ export class Cult extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
     this.crewUpgrades = [
       {
         id: 'cult-rigging',
@@ -567,6 +630,44 @@ export class Cult extends Crew {
         description: '+1 trauma box.',
         quantity: 0,
         maxQuantity: 3
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'cult-contact-gagan',
+        name: 'Gagan',
+        description: 'An academic',
+        attitude: 0
+      },
+      {
+        id: 'cult-contact-adikin',
+        name: 'Adikin',
+        description: 'An occultist',
+        attitude: 0
+      },
+      {
+        id: 'cult-contact-hutchins',
+        name: 'Hutchins',
+        description: 'An antiquarian',
+        attitude: 0
+      },
+      {
+        id: 'cult-contact-moriya',
+        name: 'Moriya',
+        description: 'A spirit trafficker',
+        attitude: 0
+      },
+      {
+        id: 'cult-contact-mateas-kline',
+        name: 'Mateas Kline',
+        description: 'A noble',
+        attitude: 0
+      },
+      {
+        id: 'cult-bennett',
+        name: 'Bennett',
+        description: 'An astronomer',
+        attitude: 0
       }
     ];
 
@@ -649,7 +750,6 @@ export class Hawkers extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
     this.crewUpgrades = [
       {
         id: 'hawkers-rigging',
@@ -685,6 +785,44 @@ export class Hawkers extends Crew {
         description: '+1 stress box.',
         quantity: 0,
         maxQuantity: 3
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'hawkers-contact-rolan-wott',
+        name: 'Rolan Wott',
+        description: 'A magistrate',
+        attitude: 0
+      },
+      {
+        id: 'hawkers-contact-laroze',
+        name: 'Laroze',
+        description: 'A bluecoat',
+        attitude: 0
+      },
+      {
+        id: 'hawkers-contact-lydra',
+        name: 'Lydra',
+        description: 'A deal broker',
+        attitude: 0
+      },
+      {
+        id: 'hawkers-contact-hoxley',
+        name: 'Hoxley',
+        description: 'A smuggler',
+        attitude: 0
+      },
+      {
+        id: 'hawkers-contact-anya',
+        name: 'Anya',
+        description: 'A dilettante',
+        attitude: 0
+      },
+      {
+        id: 'hawkers-contact-marlo',
+        name: 'Marlo',
+        description: 'A gang boss',
+        attitude: 0
       }
     ];
 
@@ -767,7 +905,6 @@ export class Shadows extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
     this.crewUpgrades = [
       {
         id: 'thief-rigging',
@@ -803,6 +940,44 @@ export class Shadows extends Crew {
         description: '+1 stress box.',
         quantity: 0,
         maxQuantity: 3
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'shadows-contact-dowler',
+        name: 'Dowler',
+        description: 'An explorer',
+        attitude: 0
+      },
+      {
+        id: 'shadows-contact-laroze',
+        name: 'Laroze',
+        description: 'A bluecoat',
+        attitude: 0
+      },
+      {
+        id: 'shadows-contact-amancio',
+        name: 'Amancio',
+        description: 'A deal broker',
+        attitude: 0
+      },
+      {
+        id: 'shadows-contact-fitz',
+        name: 'Fitz',
+        description: 'A collector',
+        attitude: 0
+      },
+      {
+        id: 'shadows-contact-adelaide-phroaig',
+        name: 'Adelaide Phroaig',
+        description: 'A noble',
+        attitude: 0
+      },
+      {
+        id: 'shadows-contact-rigney',
+        name: 'Rigney',
+        description: 'A tavern owner',
+        attitude: 0
       }
     ];
 
@@ -885,7 +1060,6 @@ export class Smugglers extends Crew {
         maxQuantity: 3
       }
     ];
-    this.contacts = [];
     this.crewUpgrades = [
       {
         id: 'smugglers-rigging',
@@ -921,6 +1095,44 @@ export class Smugglers extends Crew {
         description: '+1 stress box.',
         quantity: 0,
         maxQuantity: 3
+      }
+    ];
+    this.contacts = [
+      {
+        id: 'smugglers-contact-elynn',
+        name: 'Elynn',
+        description: 'A dock worker',
+        attitude: 0
+      },
+      {
+        id: 'smugglers-contact-rolan',
+        name: 'Rolan',
+        description: 'A drug dealer',
+        attitude: 0
+      },
+      {
+        id: 'smugglers-contact-sera',
+        name: 'Sera',
+        description: 'An arms dealer',
+        attitude: 0
+      },
+      {
+        id: 'smugglers-contact-nyelle',
+        name: 'Nyelle',
+        description: 'A spirit trafficker',
+        attitude: 0
+      },
+      {
+        id: 'smugglers-contact-decker',
+        name: 'Decker',
+        description: 'An anarchist',
+        attitude: 0
+      },
+      {
+        id: 'smugglers-contact-esme',
+        name: 'Esme',
+        description: 'A tavern owner',
+        attitude: 0
       }
     ];
 

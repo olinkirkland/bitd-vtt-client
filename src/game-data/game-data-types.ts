@@ -24,8 +24,7 @@ export type Person = Thing & {
   attitude: number; // -3 to 3
 };
 
-export type Faction = Thing & {
-  attitude: number; // -3 to 3
+export type Faction = Person & {
   friends: string[];
   rivals: string[];
   clocks: Clock[];

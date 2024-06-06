@@ -69,13 +69,13 @@
     </div>
   </div>
 
-  <button
+  <!-- <button
     class="btn btn--icon debug"
     @click="showModelOverlay = true"
     v-if="!showModelOverlay"
   >
     <i class="fas fa-cogs"></i>
-  </button>
+  </button> -->
 
   <div class="model-overlay" v-if="showModelOverlay">
     <pre>{{ JSON.stringify(useGameStore().game, null, 2) }}</pre>
