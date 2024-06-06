@@ -3,15 +3,19 @@
     <div class="controls">
       <div class="row center" v-if="!currentSheet">
         <button
-          v-for="buttonSheet in ['crew', 'character']"
+          v-for="buttonSheet in [
+            { name: 'crew', text: 'Crews' },
+            { name: 'character', text: 'Characters', disabled: true },
+            { name: 'world', text: 'World', disabled: true }
+          ]"
           class="btn btn--tab"
           :class="{
-            active: sheetType === buttonSheet,
-            disabled: buttonSheet === 'character'
+            active: sheetType === buttonSheet.name,
+            disabled: buttonSheet.disabled
           }"
-          @click="sheetType = buttonSheet"
+          @click="sheetType = buttonSheet.name"
         >
-          <span>{{ buttonSheet }}s</span>
+          <span>{{ buttonSheet.text }}</span>
         </button>
       </div>
       <div class="row sheet-controls" v-else>
