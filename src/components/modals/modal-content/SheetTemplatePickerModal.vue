@@ -19,11 +19,7 @@
           <li v-for="(template, key, index) in templates">
             <div
               class="template-card prevent-click-on-mobile"
-              @click="
-                onClickChooseTemplate(
-                  Object.values(props.templates as any)[currentIndex]
-                )
-              "
+              @click="onClickChooseTemplate(template)"
               :key="template.id"
               :class="{
                 active: currentIndex == index,
