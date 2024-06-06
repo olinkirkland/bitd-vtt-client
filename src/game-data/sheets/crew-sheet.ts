@@ -27,7 +27,7 @@ export class Crew extends Sheet {
 
   crewExperience: number = 0; // 0-10
 
-  // This is overridden by the specific crew type
+  // This is modified by the specific crew type
   crewType: string = '';
   crewTypeDescription: string = '';
   specialAbilities: Effectable[] = [];
@@ -166,7 +166,6 @@ export class Crew extends Sheet {
       maxQuantity: 1
     }
   ];
-
   claims: Claim[] = [];
 
   constructor() {
@@ -363,7 +362,143 @@ export class Assassins extends Crew {
 
     this.applyUpgradesDescriptionsFromCodex();
 
-    this.claims = [];
+    this.claims = [
+      {
+        id: 'assassins-training-room',
+        name: 'Training Room',
+        description: '+1 scale for your Skulks cohorts',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-vice-den',
+        name: 'Vice Den',
+        description: '(Tier roll) - Heat = coin in downtime',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-fixer',
+        name: 'Fixer',
+        description: '+2 coin for lower-class targets',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-informants',
+        name: 'Informants',
+        description: '+1d gather info for scores',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-hagfish-farm',
+        name: 'Hagfish Farm',
+        description: 'Body disposal, +1d to reduce heat after killing',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-victim-trophies',
+        name: 'Victim Trophies',
+        description: '+1 rep per score',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-turf-1',
+        name: 'Turf',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-lair',
+        name: 'Lair',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 1,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-turf-2',
+        name: 'Turf',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-cover-operation',
+        name: 'Cover Operation',
+        description: '-2 heat per score',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-protection-racket',
+        name: 'Protection Racket',
+        description: '(Tier roll) - Heat = coin in downtime',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-infirmary',
+        name: 'Infirmary',
+        description: '+1d to healing rolls',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-envoy',
+        name: 'Envoy',
+        description: '+2 coin for high-class targets',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-cover-identities',
+        name: 'Cover Identities',
+        description: '+1d engagement for deception and social plans',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: 'assassins-city-records',
+        name: 'City Records',
+        description: '+1d engagement for stealth plans',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
   }
 }
 
@@ -518,7 +653,143 @@ export class Bravos extends Crew {
 
     this.applyUpgradesDescriptionsFromCodex();
 
-    this.claims = [];
+    this.claims = [
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
   }
 }
 
@@ -673,7 +944,143 @@ export class Cult extends Crew {
 
     this.applyUpgradesDescriptionsFromCodex();
 
-    this.claims = [];
+    this.claims = [
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
   }
 }
 
@@ -828,7 +1235,143 @@ export class Hawkers extends Crew {
 
     this.applyUpgradesDescriptionsFromCodex();
 
-    this.claims = [];
+    this.claims = [
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
   }
 }
 
@@ -981,9 +1524,145 @@ export class Shadows extends Crew {
       }
     ];
 
-    this.applyUpgradesDescriptionsFromCodex();
+    this.claims = [
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
 
-    this.claims = [];
+    this.applyUpgradesDescriptionsFromCodex();
   }
 }
 
@@ -1138,7 +1817,143 @@ export class Smugglers extends Crew {
 
     this.applyUpgradesDescriptionsFromCodex();
 
-    this.claims = [];
+    this.claims = [
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 0 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 1 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 0, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 1, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 2, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 3, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      },
+      {
+        id: '',
+        name: '',
+        description: '',
+        position: { x: 4, y: 2 },
+        quantity: 0,
+        maxQuantity: 1,
+        prerequisites: []
+      }
+    ];
   }
 }
 

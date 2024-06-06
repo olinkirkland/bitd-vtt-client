@@ -20,7 +20,6 @@
 import ModalController from '@/controllers/modal-controller';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import { router, PageName } from '@/router';
 
 const props = defineProps<{
   title: string;

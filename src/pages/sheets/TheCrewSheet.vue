@@ -192,8 +192,35 @@
         </section>
         <Divider />
         <section>
-          <span>CLAIMS (TODO)</span>
-          <pre>{{ props.sheet.claims }}</pre>
+          <label for="claims">Claims</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditClaimsModal, {
+                  sheetId: props.sheet.id,
+                  claims: props.sheet.claims
+                })
+              "
+            >
+              <span>Edit Claims</span>
+            </button>
+            <Checkbox
+              icon="fa-check"
+              v-model="lockClaimDependencies"
+              label="Enforce roadmap"
+            />
+          </div>
+          <div class="claims-list">
+            <ClaimTile
+              v-for="claim in props.sheet.claims"
+              :key="claim.id"
+              :claim="claim"
+              :idPrefix="props.sheet.crewType"
+              propertyName="Claim"
+              :change="(quantity: number) => onChangeClaim(claim, quantity)"
+            />
+          </div>
         </section>
         <Divider />
         <section>
@@ -309,7 +336,7 @@
             />
           </div>
           <div class="tile-list">
-            <AbilityTile
+            <EffectableTile
               v-for="ability in specialAbilities"
               :key="ability.id"
               :ability="ability"
@@ -412,7 +439,7 @@
             />
           </div>
           <div class="tile-list">
-            <AbilityTile
+            <EffectableTile
               v-for="upgrade in crewUpgrades"
               :key="upgrade.id"
               :ability="upgrade"
@@ -465,7 +492,7 @@
             />
           </div>
           <div class="tile-list">
-            <AbilityTile
+            <EffectableTile
               v-for="upgrade in lairUpgrades"
               :key="upgrade.id"
               :ability="upgrade"
@@ -518,7 +545,7 @@
             />
           </div>
           <div class="tile-list">
-            <AbilityTile
+            <EffectableTile
               v-for="upgrade in trainingUpgrades"
               :key="upgrade.id"
               :ability="upgrade"
@@ -571,7 +598,7 @@
             />
           </div>
           <div class="tile-list">
-            <AbilityTile
+            <EffectableTile
               v-for="upgrade in qualityUpgrades"
               :key="upgrade.id"
               :ability="upgrade"
@@ -633,10 +660,12 @@
 </template>
 
 <script setup lang="ts">
-import AbilityTile from '@/components/AbilityTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
+import ClaimTile from '@/components/ClaimTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
+import EffectableTile from '@/components/EffectableTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
+import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
@@ -709,7 +738,7 @@ function randomizeLair() {
   onChangeValue(district, 'lairDistrict');
 }
 
-/** Computed Upgrades */
+/** Upgrades */
 
 const showOnlySelectedCrewUpgrades = ref(false);
 const crewUpgrades = computed(() => {
@@ -932,6 +961,24 @@ function sortByDescription(a: Effectable, b: Effectable) {
   if (bExceeds && !aExceeds) return 1;
   return 0;
 }
+
+/** Claims */
+
+const lockClaimDependencies = ref(true);
+
+/** Claims Functions */
+
+function onChangeClaim(claim: any, quantity: number) {
+  const claimIndex = props.sheet.claims.findIndex((a) => a.id === claim.id);
+  const path = `/data/sheets/${props.sheet.id}/claims/${claimIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
 </script>
 
 <style scoped lang="scss">
@@ -984,13 +1031,22 @@ function sortByDescription(a: Effectable, b: Effectable) {
   }
 }
 
-@media (min-width: 1280px) {
+.claims-list {
+  // Claim must always be a 3x5 grid
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 1080px) {
   .tile-list {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1079px) {
   .crew-layout {
     display: flex;
     overflow-x: hidden;
