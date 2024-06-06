@@ -712,7 +712,7 @@ const crewUpgrades = computed(() => {
     showOnlySelectedCrewUpgrades.value
       ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
       : props.sheet.crewUpgrades
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 
 const showOnlySelectedLairUpgrades = ref(false);
@@ -721,7 +721,7 @@ const lairUpgrades = computed(() => {
     showOnlySelectedLairUpgrades.value
       ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
       : props.sheet.lairUpgrades
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 
 const showOnlySelectedTrainingUpgrades = ref(false);
@@ -730,7 +730,7 @@ const trainingUpgrades = computed(() => {
     showOnlySelectedTrainingUpgrades.value
       ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
       : props.sheet.trainingUpgrades
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 
 const showOnlySelectedQualityUpgrades = ref(false);
@@ -739,7 +739,7 @@ const qualityUpgrades = computed(() => {
     showOnlySelectedQualityUpgrades.value
       ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
       : props.sheet.qualityUpgrades
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 
 const showOnlySelectedContacts = ref(false);
@@ -748,7 +748,7 @@ const contacts = computed(() => {
     showOnlySelectedContacts.value
       ? props.sheet.contacts.filter((a) => a.attitude !== 0)
       : props.sheet.contacts
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 
 function onEditUpgrade(
@@ -861,7 +861,7 @@ const specialAbilities = computed(() => {
     showOnlySelectedAbilities.value
       ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
       : props.sheet.specialAbilities
-  ).sort((a, b) => b.description.length - a.description.length);
+  ).sort(sortByDescription);
 });
 function onEditAbility(ability: Effectable) {
   const abilityIndex = props.sheet.specialAbilities.findIndex(
@@ -894,6 +894,14 @@ function onCreateAbility(ability: Effectable) {
       value: ability
     }
   ]);
+}
+
+function sortByDescription(a: Effectable, b: Effectable) {
+  const aExceeds = a.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
+  const bExceeds = b.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
+  if (aExceeds && !bExceeds) return -1;
+  if (bExceeds && !aExceeds) return 1;
+  return 0;
 }
 </script>
 
