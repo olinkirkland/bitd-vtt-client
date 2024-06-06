@@ -19,7 +19,7 @@
       /> -->
       </div>
 
-      <p v-html="props.person.description"></p>
+      <p>{{ props.person.description }}</p>
     </div>
   </div>
 </template>

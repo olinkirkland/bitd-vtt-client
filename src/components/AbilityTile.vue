@@ -27,7 +27,7 @@
         @update:modelValue="updateQuantity(i.toString())"
       />
     </div>
-    <p v-html="props.ability.description"></p>
+    <p>{{ props.ability.description }}</p>
   </div>
 </template>
 
