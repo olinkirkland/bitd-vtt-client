@@ -29,6 +29,7 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-height: 10rem;
   overflow-x: hidden;
   gap: 0.4rem;
   background-color: var(--translucent-light);
@@ -47,12 +48,16 @@ const props = defineProps<{
       height: 100%;
       text-align: center;
       align-items: center;
+      > h2 {
+        font-size: 1.6rem;
+      }
     }
 
     h2 {
       flex: 1;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       overflow: hidden;
+      text-align: center;
       text-overflow: ellipsis;
     }
 
@@ -69,7 +74,7 @@ const props = defineProps<{
   > p {
     opacity: 0.8;
     font-size: 1.2rem;
-    height: 4.8rem;
+    flex: 1;
     overflow: auto;
   }
 }
