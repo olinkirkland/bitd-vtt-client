@@ -302,6 +302,7 @@
               <span>New</span>
             </button>
             <Checkbox
+              icon="fa-check"
               v-model="showOnlySelectedAbilities"
               label="Show only selected"
             />
@@ -362,28 +363,31 @@
               <span>New</span>
             </button>
             <Checkbox
+              icon="fa-check"
               v-model="showOnlySelectedCrewUpgrades"
               label="Show only selected"
             />
           </div>
-          <AbilityTile
-            v-for="upgrade in crewUpgrades"
-            :key="upgrade.id"
-            :ability="upgrade"
-            :idPrefix="props.sheet.crewType + '-upgrade'"
-            :propertyName="'Upgrade'"
-            :change="
-              (quantity) => {
-                onChangeUpgrade(upgrade, quantity, 'crew');
-              }
-            "
-            :onEdit="
-              (ability) => {
-                onEditUpgrade(ability, 'crew');
-              }
-            "
-            :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
-          />
+          <div class="tile-list tile-list--wide">
+            <AbilityTile
+              v-for="upgrade in crewUpgrades"
+              :key="upgrade.id"
+              :ability="upgrade"
+              :idPrefix="props.sheet.crewType + '-upgrade'"
+              :propertyName="'Upgrade'"
+              :change="
+                (quantity) => {
+                  onChangeUpgrade(upgrade, quantity, 'crew');
+                }
+              "
+              :onEdit="
+                (ability) => {
+                  onEditUpgrade(ability, 'crew');
+                }
+              "
+              :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
+            />
+          </div>
           <p v-if="crewUpgrades.length == 0">
             <em>❖ No crew upgrades selected</em>
           </p>
@@ -408,28 +412,31 @@
               <span>New</span>
             </button>
             <Checkbox
+              icon="fa-check"
               v-model="showOnlySelectedLairUpgrades"
               label="Show only selected"
             />
           </div>
-          <AbilityTile
-            v-for="upgrade in lairUpgrades"
-            :key="upgrade.id"
-            :ability="upgrade"
-            :idPrefix="props.sheet.crewType + '-lair-upgrade'"
-            :propertyName="'Upgrade'"
-            :change="
-              (quantity) => {
-                onChangeUpgrade(upgrade, quantity, 'lair');
-              }
-            "
-            :onEdit="
-              (ability) => {
-                onEditUpgrade(ability, 'lair');
-              }
-            "
-            :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
-          />
+          <div class="tile-list tile-list--wide">
+            <AbilityTile
+              v-for="upgrade in lairUpgrades"
+              :key="upgrade.id"
+              :ability="upgrade"
+              :idPrefix="props.sheet.crewType + '-lair-upgrade'"
+              :propertyName="'Upgrade'"
+              :change="
+                (quantity) => {
+                  onChangeUpgrade(upgrade, quantity, 'lair');
+                }
+              "
+              :onEdit="
+                (ability) => {
+                  onEditUpgrade(ability, 'lair');
+                }
+              "
+              :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
+            />
+          </div>
           <p v-if="lairUpgrades.length == 0">
             <em>❖ No lair upgrades selected</em>
           </p>
@@ -454,28 +461,32 @@
               <span>New</span>
             </button>
             <Checkbox
+              icon="fa-check"
               v-model="showOnlySelectedTrainingUpgrades"
               label="Show only selected"
             />
           </div>
-          <AbilityTile
-            v-for="upgrade in trainingUpgrades"
-            :key="upgrade.id"
-            :ability="upgrade"
-            :idPrefix="props.sheet.crewType + '-training-upgrade'"
-            :propertyName="'Upgrade'"
-            :change="
-              (quantity) => {
-                onChangeUpgrade(upgrade, quantity, 'training');
-              }
-            "
-            :onEdit="
-              (ability) => {
-                onEditUpgrade(ability, 'training');
-              }
-            "
-            :onDelete="(id) => onDeleteUpgrade(id, 'training')"
-          />
+          <div class="tile-list tile-list--narrow">
+            <AbilityTile
+              v-for="upgrade in trainingUpgrades"
+              :key="upgrade.id"
+              :ability="upgrade"
+              :idPrefix="props.sheet.crewType + '-training-upgrade'"
+              :propertyName="'Upgrade'"
+              :change="
+                (quantity) => {
+                  onChangeUpgrade(upgrade, quantity, 'training');
+                }
+              "
+              :onEdit="
+                (ability) => {
+                  onEditUpgrade(ability, 'training');
+                }
+              "
+              :onDelete="(id) => onDeleteUpgrade(id, 'training')"
+              :class="{ 'wide-tile': upgrade.maxQuantity > 2 }"
+            />
+          </div>
           <p v-if="trainingUpgrades.length == 0">
             <em>❖ No training upgrades selected</em>
           </p>
@@ -500,28 +511,32 @@
               <span>New</span>
             </button>
             <Checkbox
+              icon="fa-check"
               v-model="showOnlySelectedQualityUpgrades"
               label="Show only selected"
             />
           </div>
-          <AbilityTile
-            v-for="upgrade in qualityUpgrades"
-            :key="upgrade.id"
-            :ability="upgrade"
-            :idPrefix="props.sheet.crewType + '-quality-upgrade'"
-            :propertyName="'Upgrade'"
-            :change="
-              (quantity) => {
-                onChangeUpgrade(upgrade, quantity, 'quality');
-              }
-            "
-            :onEdit="
-              (ability) => {
-                onEditUpgrade(ability, 'quality');
-              }
-            "
-            :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
-          />
+          <div class="tile-list tile-list--narrow">
+            <AbilityTile
+              v-for="upgrade in qualityUpgrades"
+              :key="upgrade.id"
+              :ability="upgrade"
+              :idPrefix="props.sheet.crewType + '-quality-upgrade'"
+              :propertyName="'Upgrade'"
+              :change="
+                (quantity) => {
+                  onChangeUpgrade(upgrade, quantity, 'quality');
+                }
+              "
+              :onEdit="
+                (ability) => {
+                  onEditUpgrade(ability, 'quality');
+                }
+              "
+              :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
+              :class="{ 'wide-tile': upgrade.maxQuantity > 2 }"
+            />
+          </div>
           <p v-if="qualityUpgrades.length == 0">
             <em>❖ No quality upgrades selected</em>
           </p>
@@ -818,6 +833,21 @@ function onCreateAbility(ability: Effectable) {
   background-color: var(--dark);
   box-shadow: var(--shadow);
   z-index: 1;
+}
+
+.tile-list {
+  display: grid;
+  gap: 1rem;
+
+  &--wide {
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  }
+  &--narrow {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    > .wide-tile {
+      grid-column: span 2;
+    }
+  }
 }
 
 @media (max-width: 768px) {

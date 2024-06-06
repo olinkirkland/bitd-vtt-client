@@ -4,7 +4,10 @@
     :class="{ compact: !label?.length, checked }"
     @click="handleChange"
   >
-    <i class="fas" :class="checked ? 'fa-check-circle' : 'fa-circle'"></i>
+    <div class="icon">
+      <i class="fas" :class="icon"></i>
+      <span v-if="!icon">{{ text }}</span>
+    </div>
     <p>{{ label }}</p>
   </div>
 </template>
@@ -22,6 +25,15 @@ const props = defineProps({
     required: false
   },
   value: {
+    type: String,
+    required: false
+  },
+  text: {
+    type: String,
+    required: false,
+    default: '❖'
+  },
+  icon: {
     type: String,
     required: false
   }
@@ -70,14 +82,33 @@ function handleChange(event: Event) {
     }
   }
 
-  > i {
-    transition-property: transform, color;
-    transition-duration: 0.2s;
-    transform: scale(0.8);
-    font-size: 1.6rem;
-    // color: var(--primary-3);
-    // Don't flex shrink
-    flex: 0 0 auto;
+  &:active {
+    > .icon {
+      scale: 0.8;
+    }
+  }
+
+  .icon {
+    transition: all 0.2s ease;
+    background-color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+
+    > span {
+      font-size: 1.4rem;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    > i {
+      color: var(--dark);
+      font-size: 1.2rem;
+      flex: 0 0 auto;
+    }
   }
 
   > p {
@@ -91,9 +122,11 @@ function handleChange(event: Event) {
   }
 
   &.checked {
-    > i {
-      transform: scale(1);
-      // color: var(--primary);
+    p {
+      color: var(--primary);
+    }
+    .icon {
+      background-color: var(--primary);
     }
   }
 }

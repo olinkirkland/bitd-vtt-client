@@ -90,17 +90,21 @@ function onDeleteAbility(id: string) {
   flex-direction: column;
   gap: 0.4rem;
   background-color: var(--translucent-light);
-  padding: 1rem;
-  padding-top: 1.6rem;
+  padding: 1.6rem;
+  padding-top: 2.2rem;
   color: var(--light);
   border: 1px solid transparent;
   transition: border 0.2s;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    h2 {
+      text-align: center;
+    }
 
     button {
       height: auto;
@@ -138,13 +142,23 @@ function onDeleteAbility(id: string) {
     }
 
     .checkbox-group {
-      padding: 0.4rem;
+      padding: 0.6rem 0.4rem;
+      z-index: 1;
+
+      // First and last, padding left or right 0.8
+      &:first-child {
+        padding-left: 0.6rem;
+      }
+      &:last-child {
+        padding-right: 0.6rem;
+      }
     }
   }
 }
 
 .ability-tile.active {
   border: 1px solid var(--primary);
+  background-color: var(--translucent-primary-light);
 
   :deep(.checkbox-group.checked > i) {
     color: var(--primary);
