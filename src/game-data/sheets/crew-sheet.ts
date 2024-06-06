@@ -655,17 +655,17 @@ export class Bravos extends Crew {
 
     this.claims = [
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-barracks',
+        name: 'Barracks',
+        description: '+1 scale for your Thug cohorts',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'bravos-turf-1',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 0 },
         quantity: 0,
@@ -673,44 +673,44 @@ export class Bravos extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-terrorized-citizens',
+        name: 'Terrorized Citizens',
+        description: '+2 coin for battle or extortion',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-informants',
+        name: 'Informants',
+        description: '+1 gather info for scores',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-protection-racket',
+        name: 'Protection Racket',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-fighting-pits',
+        name: 'Fighting Pits',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'bravos-turf-2',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 1 },
         quantity: 0,
@@ -718,8 +718,8 @@ export class Bravos extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'bravos-lair',
+        name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
         quantity: 0,
@@ -727,8 +727,8 @@ export class Bravos extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'bravos-turf-3',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 1 },
         quantity: 0,
@@ -736,8 +736,8 @@ export class Bravos extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'bravos-turf-4',
+        name: 'Turf',
         description: '',
         position: { x: 4, y: 1 },
         quantity: 0,
@@ -745,45 +745,45 @@ export class Bravos extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-infirmary',
+        name: 'Infirmary',
+        description: '+1d to healing rolls',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-bluecoat-intimidation',
+        name: 'Bluecoat Intimidation',
+        description: '-2 heat per score',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-street-fence',
+        name: 'Street Fence',
+        description: '+2 coin for lower-class targets',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-warehouses',
+        name: 'Warehouses',
+        description: 'Stockpiles give you +1d to acquire assets',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'bravos-bluecoat-confederates',
+        name: 'Bluecoat Confederates',
+        description: '+1d engagemnt for assault plans',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -946,53 +946,53 @@ export class Cult extends Crew {
 
     this.claims = [
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-cloister',
+        name: 'Cloister',
+        description: '+1 scale for your Adept cohorts',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-vice-den',
+        name: 'Vice Den',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-offertory',
+        name: 'Offertory',
+        description: '+2 coin for occult operations',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-ancient-obelisk',
+        name: 'Ancient Obelisk',
+        description: '-1 stress cost for all arcane powers and rituals',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-ancient-tower',
+        name: 'Ancient Tower',
+        description: '+1d to Consort w/ arcane entities on site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'cult-turf-1',
+        name: 'Turf',
         description: '',
         position: { x: 0, y: 1 },
         quantity: 0,
@@ -1000,8 +1000,8 @@ export class Cult extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'cult-turf-2',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 1 },
         quantity: 0,
@@ -1009,8 +1009,8 @@ export class Cult extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'cult-lair',
+        name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
         quantity: 0,
@@ -1018,8 +1018,8 @@ export class Cult extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'cult-turf-3',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 1 },
         quantity: 0,
@@ -1027,8 +1027,8 @@ export class Cult extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
+        id: 'cult-turf-4',
+        name: 'Turf',
         description: '',
         position: { x: 4, y: 1 },
         quantity: 0,
@@ -1036,45 +1036,45 @@ export class Cult extends Crew {
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-spirit-well',
+        name: 'Spirit Well',
+        description: '+1d to Attune on site',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-ancient-gate',
+        name: 'Ancient Gate',
+        description: 'Safe passage in the Deathlands',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-sanctuary',
+        name: 'Sanctuary',
+        description: '+1d to Command and Sway on site',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-sacred-nexus',
+        name: 'Sacred Nexus',
+        description: '+1d to healing rolls',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
         prerequisites: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'cult-ancient-altar',
+        name: 'Ancient Altar',
+        description: '+1d engagement for occult plans',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
