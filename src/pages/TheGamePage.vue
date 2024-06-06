@@ -5,10 +5,13 @@
         <button
           v-for="buttonSheet in ['crew', 'character']"
           class="btn btn--tab"
-          :class="{ active: sheetType === buttonSheet }"
+          :class="{
+            active: sheetType === buttonSheet,
+            disabled: buttonSheet === 'character'
+          }"
           @click="sheetType = buttonSheet"
         >
-          <span>{{ buttonSheet }} Sheets</span>
+          <span>{{ buttonSheet }}s</span>
         </button>
       </div>
       <div class="row sheet-controls" v-else>
