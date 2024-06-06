@@ -18,7 +18,12 @@
         >
           <li v-for="(template, key, index) in templates">
             <div
-              class="template-card"
+              class="template-card prevent-click-on-mobile"
+              @click="
+                onClickChooseTemplate(
+                  Object.values(props.templates as any)[currentIndex]
+                )
+              "
               :key="template.id"
               :class="{
                 active: currentIndex == index,
@@ -65,10 +70,10 @@
 <script lang="ts" setup>
 import sheetImages from '@/assets/data/sheet-images.json';
 import ModalController from '@/controllers/modal-controller';
-import { PropType, computed, defineProps, ref } from 'vue';
+import { capitalize } from '@/util/string';
+import { PropType, defineProps, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import { capitalize } from '@/util/string';
 
 const props = defineProps({
   sheetType: String,
@@ -217,6 +222,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
           z-index: 1;
           filter: brightness(1);
           height: 100%;
+        }
+
+        &.prevent-click-on-mobile {
+          pointer-events: none;
         }
       }
     }

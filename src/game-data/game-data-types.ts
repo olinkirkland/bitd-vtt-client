@@ -12,6 +12,7 @@ export type Chooseable = {
 export type Item = Thing &
   Chooseable & {
     load: number; // 0-3
+    maxLoad: number; // 1-3
   };
 
 export type Effectable = Thing &
