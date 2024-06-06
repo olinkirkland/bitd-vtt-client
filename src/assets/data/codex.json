@@ -56,7 +56,7 @@
       "upgrade-descriptions": {
         "crew": {
           "assassin-rigging": "You get 2 free load worth of weapon or gear items. For example, you could carry a pistol (a weapon) and burglary tools (gear) for zero load.",
-          "ironhook-contacts": "Your Tier is effectively +1 higher in prison. This counts for any Tier-related element in prison, including the incarceration roll (see page 148).",
+          "ironhook-contacts": "Your Tier is effectively +1 higher in prison. This counts for any Tier-related element in prison, including the incarceration roll.",
           "elite-skulks": "All of your cohorts with the Skulks type get +1d to quality rolls for Skulk-related actions.",
           "elite-thugs": "All of your cohorts with the Thugs type get +1d to quality rolls for Thug-related actions.",
           "hardened": "Each PC gets +1 trauma box. This costs three upgrades to unlock, not just one. This may bring a PC with 4 trauma back into play if you wish.",
@@ -84,7 +84,7 @@
         "lair": {
           "boat-house": "You have a boat, a dock on a waterway, and a small shack to store boating supplies. A second upgrade improves the boat with armor and more cargo capacity.",
           "carriage-house": "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats. Horses are very rare in Doskvol—most carriages in the city use the large Akorosian goat as their draft animal.",
-          "cohort": "A cohort is a gang or a single expert NPC who works for your crew. For all the details on cohorts, see the following pages.",
+          "cohort": "A cohort is a gang or a single expert NPC who works for your crew.",
           "hidden-lair": "Your lair has a secret location and is disguised to hide it from view. If your lair is discovered, use two downtime activities and pay coin equal to your Tier to relocate it and hide it once again.",
           "quarters": "Your lair includes living quarters for the crew. Without this upgrade, each PC sleeps elsewhere, and is vulnerable when they do so.",
           "secure-lair": "Your lair has locks, alarms, and traps to thwart intruders. A second upgrade improves the defenses to include arcane measures that work against spirits. You might roll your crew's Tier if these measures are ever put to the test, to see how well they thwart an intruder.",
@@ -93,10 +93,10 @@
           "quality": "Each upgrade improves the quality rating of all the PCs' items of that type, beyond the quality established by the crew's Tier and fine items. You can improve the quality of Documents, Gear (covers Burglary Gear and Climbing Gear), Arcane Implements, Subterfuge Supplies, Tools (covers Demolitions Tools and Tinkering Tools), and Weapons. So, if you are Tier 0, with fine lockpicks (+1) and the Quality upgrade for gear (+1), you could contend equally with a Tier II quality lock."
         },
         "training": {
-          "insight": "Earn 2 xp (instead of 1) when you train your <em>Insight</em> during downtime.",
-          "prowess": "Earn 2 xp (instead of 1) when you train your <em>Prowess</em> during downtime.",
-          "resolve": "Earn 2 xp (instead of 1) when you train your <em>Resolve</em> during downtime.",
-          "personal": "Earn 2 xp (instead of 1) when you train your <em>Playbook</em> during downtime.",
+          "insight": "Earn 2 xp (instead of 1) when you train your Insight during downtime.",
+          "prowess": "Earn 2 xp (instead of 1) when you train your Prowess during downtime.",
+          "resolve": "Earn 2 xp (instead of 1) when you train your Resolve during downtime.",
+          "personal": "Earn 2 xp (instead of 1) when you train your Playbook during downtime.",
           "mastery": "Your crew has access to master level training. You may advance your action ratings to 4 (until you unlock this upgrade, PC action ratings are capped at 3). This costs four upgrade boxes to unlock."
         },
         "quality": {
