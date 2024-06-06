@@ -433,6 +433,12 @@ a.anchor-link {
   }
 }
 
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 // Animations
 
 @keyframes slideUp {

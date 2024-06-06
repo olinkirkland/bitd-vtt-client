@@ -20,7 +20,6 @@
             <div
               class="template-card"
               :key="template.id"
-              @click="onClickChooseTemplate(template)"
               :class="{
                 active: currentIndex == index,
                 'left-of-active': currentIndex > index,
@@ -42,6 +41,22 @@
             </div>
           </li>
         </ul>
+        <div class="row mobile-only">
+          <button
+            class="btn mobile-full-width"
+            @click="
+              onClickChooseTemplate(
+                Object.values(props.templates as any)[currentIndex]
+              )
+            "
+          >
+            <span
+              >New
+              {{ capitalize(Object.keys(props.templates || [])[currentIndex]) }}
+              {{ capitalize(sheetType || 'sheet') }}</span
+            >
+          </button>
+        </div>
       </div>
     </template>
   </ModalFrame>
@@ -50,9 +65,10 @@
 <script lang="ts" setup>
 import sheetImages from '@/assets/data/sheet-images.json';
 import ModalController from '@/controllers/modal-controller';
-import { PropType, defineProps, ref } from 'vue';
+import { PropType, computed, defineProps, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import { capitalize } from '@/util/string';
 
 const props = defineProps({
   sheetType: String,
@@ -69,6 +85,7 @@ function getImage(imageId: string) {
 }
 
 function onClickChooseTemplate(template: any) {
+  console.log('template', template);
   props.onConfirm(props.sheetType as string, template);
   ModalController.close();
 }
