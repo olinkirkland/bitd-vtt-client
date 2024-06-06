@@ -12,9 +12,9 @@
           <input
             type="text"
             id="name"
-            v-model="effectable.name"
+            v-model="person.name"
             placeholder="Enter a memorable name"
-            @input="updateIdFromName(effectable.name)"
+            @input="updateIdFromName(person.name)"
           />
         </div>
 
@@ -26,7 +26,7 @@
           <input
             type="text"
             id="id"
-            v-model="effectable.id"
+            v-model="person.id"
             placeholder="A hyphenated identifier"
           />
         </div>
@@ -35,23 +35,23 @@
           <label for="description"
             >Description
             <label class="muted"
-              >({{ effectable.description.length }} / 400)
+              >({{ person.description.length }} / 400)
             </label>
           </label>
           <textarea
             id="description"
-            v-model="effectable.description"
+            v-model="person.description"
             placeholder="A brief description"
           ></textarea>
         </div>
 
         <div class="input-group">
-          <label for="maxQuantity">Max Quantity</label>
+          <label for="attitude">Attitude</label>
           <input
             type="number"
-            id="maxQuantity"
-            v-model="effectable.maxQuantity"
-            placeholder="1, 2, 3..."
+            id="attitude"
+            v-model="person.attitude"
+            placeholder="-1, 0, 1..."
           />
         </div>
 
@@ -82,34 +82,33 @@
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
-import { Effectable } from '@/game-data/game-data-types';
+import { Person } from '@/game-data/game-data-types';
 import { ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 
 const props = defineProps<{
   propertyName?: string;
-  effectable?: Effectable;
-  onEdit?: (eff: Effectable) => void;
+  person?: Person;
+  onEdit?: (person: Person) => void;
   onDelete?: (id: string) => void;
   idPrefix?: string;
 
   // There are two ways to use this modal:
-  // Edit an existing effectable or create a new one.
-  // The default is to edit an existing effectable. To create a new one, pass a function to onCreateNew.
+  // Edit an existing person or create a new one.
+  // The default is to edit an existing person. To create a new one, pass a function to onCreateNew.
   // All other props will be ignored in this case.
-  onCreateNew?: (effectable: Effectable) => void;
+  onCreateNew?: (person: Person) => void;
 }>();
 
-const blankEffectable: Effectable = {
+const blankPerson: Person = {
   id: '',
   name: '',
   description: '',
-  quantity: 0,
-  maxQuantity: 1
+  attitude: 0
 };
 
-const effectable = ref({ ...(props.effectable || blankEffectable) });
+const person = ref({ ...(props.person || blankPerson) });
 
 function updateIdFromName(name: string) {
   if (!props.onCreateNew) return;
@@ -124,24 +123,24 @@ function updateIdFromName(name: string) {
     .replace(/ /g, '-')
     .replace(/[^a-z0-9-]/g, '');
 
-  effectable.value.id = newId;
+  person.value.id = newId;
 }
 
 function onClickCreate() {
   if (!props.onCreateNew) return;
-  props.onCreateNew(effectable.value);
+  props.onCreateNew(person.value);
   ModalController.close();
 }
 
 function onClickSave() {
   if (!props.onEdit) return;
-  props.onEdit(effectable.value);
+  props.onEdit(person.value);
   ModalController.close();
 }
 
 function onClickDelete() {
   if (!props.onDelete) return;
-  props.onDelete(effectable.value.id);
+  props.onDelete(person.value.id);
   ModalController.close();
 }
 </script>

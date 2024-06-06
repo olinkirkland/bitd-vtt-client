@@ -103,7 +103,7 @@ function onDeleteAbility(id: string) {
     align-items: center;
 
     h2 {
-      text-align: center;
+      flex: 1;
     }
 
     button {

@@ -5,18 +5,31 @@
       <div class="header">
         <h2>{{ props.person.name }}</h2>
 
-        <button class="btn btn--icon disabled">
+        <button
+          class="btn btn--icon"
+          @click="
+            ModalController.open(EditPersonModal, {
+              propertyName,
+              person: props.person,
+              idPrefix: props.idPrefix,
+              onDelete: onDeletePerson,
+              onEdit: onEditPerson
+            })
+          "
+        >
           <i class="fas fa-edit"></i>
         </button>
       </div>
       <div class="row selection-bar">
-        <!-- <Checkbox
-        v-for="i in availableAttitudes"
-        :key="person.id + i"
-        v-model="checkboxValues"
-        :value="i.toString()"
-        @update:modelValue="updateQuantity(i.toString())"
-      /> -->
+        <Checkbox
+          v-for="option in options"
+          :key="option.value"
+          v-model="checkboxValues"
+          :value="option.value.toString()"
+          @update:modelValue="updateAttitude(option.value)"
+          :icon="option.icon"
+          :text="option.text"
+        />
       </div>
 
       <p>{{ props.person.description }}</p>
@@ -25,42 +38,33 @@
 </template>
 
 <script setup lang="ts">
+import ModalController from '@/controllers/modal-controller';
 import { defineProps, ref } from 'vue';
 import { Person } from '../game-data/game-data-types';
+import Checkbox from './Checkbox.vue';
+import EditPersonModal from './modals/modal-content/EditPersonModal.vue';
 
 const props = defineProps<{
   person: Person;
+  propertyName: string;
   idPrefix: string;
   change: (person: Person, attitude: number) => void;
   onEdit: (person: Person) => void;
   onDelete: (id: string) => void;
+  options: { value: number; icon?: string; text?: string }[];
 }>();
 
-const checkboxValues = ref<string[]>(
-  checkboxValuesFromQuantity(props.person.attitude)
-);
+const checkboxValues = ref<string[]>([props.person.attitude.toString()]); // Can only be one value at a time
 
 // Watch for changes in the checkboxValues array
-function updateQuantity(lastClicked: string) {
-  let values = checkboxValues.value;
-
-  // Uncheck all checkboxes larger than the last clicked checkbox
-  values = values.filter((v) => parseInt(v) <= parseInt(lastClicked));
-
-  const largest = Math.max(...values.map((v) => parseInt(v)));
-  // Check all checkboxes smaller than the largest checkbox
-  values = values.map((v) => (parseInt(v) <= largest ? v : lastClicked));
-
-  // Set the checkboxValues array to a new array, equal to a range from 1 to the largest checkbox
-  checkboxValues.value = Array.from({ length: largest }, (_, i) =>
-    (i + 1).toString()
-  );
-
-  // props.change(largest);
-}
-
-function checkboxValuesFromQuantity(quantity: number) {
-  return Array.from({ length: quantity }, (_, i) => (i + 1).toString());
+function updateAttitude(clickedAttitude: number) {
+  // If there's more than one value in the array, remove the ones that aren't the one clicked
+  if (checkboxValues.value.length > 1)
+    checkboxValues.value = [clickedAttitude.toString()];
+  // New Attitude is the only value in the array or zero
+  const newAttitude =
+    checkboxValues.value.length > 0 ? parseInt(checkboxValues.value[0]) : 0;
+  props.change(props.person, newAttitude);
 }
 
 function onEditPerson(person: Person) {
@@ -103,9 +107,10 @@ function onDeletePerson(id: string) {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 
     h2 {
-      text-align: center;
+      flex: 1;
     }
 
     button {

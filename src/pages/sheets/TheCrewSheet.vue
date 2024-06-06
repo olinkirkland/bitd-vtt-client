@@ -314,7 +314,7 @@
               :ability="ability"
               :idPrefix="props.sheet.crewType"
               :propertyName="'Special Ability'"
-              :change="(quantity: number) => onChangeSpecialAbility(ability, quantity)"
+              :change="(quantity: number) => onChangeAbility(ability, quantity)"
               :onEdit="onEditAbility"
               :onDelete="onDeleteAbility"
               :class="{
@@ -350,7 +350,16 @@
         <section>
           <label for="contacts">Crew Contacts</label>
           <div class="row">
-            <button class="btn">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditPersonModal, {
+                  propertyName: 'Crew Contact',
+                  idPrefix: sheet.crewType + '-contact',
+                  onCreateNew: onCreateContact
+                })
+              "
+            >
               <span>New</span>
             </button>
             <Checkbox
@@ -364,10 +373,16 @@
               v-for="contact in contacts"
               :key="contact.id"
               :idPrefix="props.sheet.crewType + '-contact'"
+              propertyName="Crew Contact"
               :person="contact"
               :change="onChangeContact"
               :onEdit="onEditContact"
               :onDelete="onDeleteContact"
+              :options="[
+                // { value: -1, icon: 'fas fa-caret-down' },
+                // { value: 1, icon: 'fas fa-caret-up' },
+                { value: 1, text: '❖' }
+              ]"
             />
           </div>
         </section>
@@ -622,6 +637,7 @@ import Checkbox from '@/components/Checkbox.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
+import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable, Person } from '@/game-data/game-data-types';
@@ -692,19 +708,7 @@ function randomizeLair() {
   onChangeValue(district, 'lairDistrict');
 }
 
-function onChangeSpecialAbility(ability: any, quantity: number) {
-  const abilityIndex = props.sheet.specialAbilities.findIndex(
-    (a) => a.id === ability.id
-  );
-  const path = `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}/quantity`;
-  patch([
-    {
-      op: 'replace',
-      path,
-      value: quantity
-    }
-  ]);
-}
+/** Computed Upgrades */
 
 const showOnlySelectedCrewUpgrades = ref(false);
 const crewUpgrades = computed(() => {
@@ -742,14 +746,7 @@ const qualityUpgrades = computed(() => {
   ).sort(sortByDescription);
 });
 
-const showOnlySelectedContacts = ref(false);
-const contacts = computed(() => {
-  return (
-    showOnlySelectedContacts.value
-      ? props.sheet.contacts.filter((a) => a.attitude !== 0)
-      : props.sheet.contacts
-  ).sort(sortByDescription);
-});
+/** Upgrades Functions */
 
 function onEditUpgrade(
   upgrade: Effectable,
@@ -811,6 +808,17 @@ function onCreateUpgrade(
   ]);
 }
 
+/** Contacts */
+
+const showOnlySelectedContacts = ref(false);
+const contacts = computed(() => {
+  return showOnlySelectedContacts.value
+    ? props.sheet.contacts.filter((a) => a.attitude !== 0)
+    : props.sheet.contacts;
+});
+
+/** Contacts Functions */
+
 function onEditContact(contact: Person) {
   const contactIndex = props.sheet.contacts.findIndex(
     (a) => a.id === contact.id
@@ -855,6 +863,8 @@ function onCreateContact(contact: Person) {
   ]);
 }
 
+/** Special Abilities */
+
 const showOnlySelectedAbilities = ref(false);
 const specialAbilities = computed(() => {
   return (
@@ -863,6 +873,22 @@ const specialAbilities = computed(() => {
       : props.sheet.specialAbilities
   ).sort(sortByDescription);
 });
+
+/** Special Abilities Functions */
+
+function onChangeAbility(ability: any, quantity: number) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === ability.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
 function onEditAbility(ability: Effectable) {
   const abilityIndex = props.sheet.specialAbilities.findIndex(
     (a) => a.id === ability.id
@@ -895,6 +921,8 @@ function onCreateAbility(ability: Effectable) {
     }
   ]);
 }
+
+/** Helper Functions */
 
 function sortByDescription(a: Effectable, b: Effectable) {
   const aExceeds = a.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
