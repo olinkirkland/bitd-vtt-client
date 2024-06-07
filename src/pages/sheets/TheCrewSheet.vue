@@ -7,6 +7,20 @@
     >
       <div class="main-and-claims" :class="{ active: currentIndex == 0 }">
         <section>
+          <div
+            class="crew-type-card"
+            :style="{
+              backgroundColor: getSheetImage(sheet.image)?.commonColor
+            }"
+          >
+            <img :src="getSheetImage(sheet.image)?.url" />
+            <h2>Crew sheet</h2>
+            <h1>{{ sheet.crewType }}</h1>
+            <p>
+              {{ sheet.crewTypeDescription }}
+            </p>
+          </div>
+
           <div class="input-group">
             <label for="crew-name">Name</label>
             <input
@@ -192,39 +206,6 @@
         </section>
         <Divider />
         <section>
-          <label for="claims">Claims</label>
-          <div class="row">
-            <button
-              class="btn"
-              @click="
-                ModalController.open(EditClaimsModal, {
-                  sheetId: props.sheet.id,
-                  claims: props.sheet.claims
-                })
-              "
-            >
-              <span>Edit Claims</span>
-            </button>
-            <!-- <Checkbox
-              icon="fa-check"
-              v-model="lockClaimDependencies"
-              label="Enforce roadmap"
-            />| -->
-          </div>
-          <div class="claims-list">
-            <ClaimTile
-              v-for="claim in claims"
-              :key="claim.id"
-              :claim="claim"
-              :idPrefix="props.sheet.crewType"
-              propertyName="Claim"
-              :neighborClaims="getNeighborClaims(claim)"
-              :change="(quantity: number) => onChangeClaim(claim, quantity)"
-            />
-          </div>
-        </section>
-        <Divider />
-        <section>
           <div class="input-block">
             <div class="input-group">
               <label for="crew-heat">Heat</label>
@@ -308,6 +289,39 @@
                 </p>
               </CollapsingShelf>
             </div>
+          </div>
+        </section>
+        <Divider />
+        <section>
+          <label for="claims">Claims</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditClaimsModal, {
+                  sheetId: props.sheet.id,
+                  claims: props.sheet.claims
+                })
+              "
+            >
+              <span>Edit Claims</span>
+            </button>
+            <!-- <Checkbox
+              icon="fa-check"
+              v-model="lockClaimDependencies"
+              label="Enforce roadmap"
+            />| -->
+          </div>
+          <div class="claims-list">
+            <ClaimTile
+              v-for="claim in claims"
+              :key="claim.id"
+              :claim="claim"
+              :idPrefix="props.sheet.crewType"
+              propertyName="Claim"
+              :neighborClaims="getNeighborClaims(claim)"
+              :change="(quantity: number) => onChangeClaim(claim, quantity)"
+            />
           </div>
         </section>
       </div>
@@ -673,6 +687,7 @@ import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable, Person } from '@/game-data/game-data-types';
 import { Claim, Crew, Direction } from '@/game-data/sheets/crew-sheet';
+import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
 import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
@@ -1074,6 +1089,49 @@ function onChangeClaim(claim: any, quantity: number) {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 1.6rem;
+}
+
+.crew-type-card {
+  position: relative;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border-radius: 5px;
+  height: 20rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  > h1,
+  h2,
+  p {
+    z-index: 1;
+    color: var(--light);
+  }
+
+  h1 {
+    font-size: 4.8rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    opacity: 0.6;
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    z-index: 0;
+    filter: brightness(0.6);
+  }
 }
 
 @media (min-width: 1080px) {

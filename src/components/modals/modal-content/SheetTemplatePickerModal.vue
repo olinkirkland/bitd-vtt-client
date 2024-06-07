@@ -27,10 +27,10 @@
                 'right-of-active': currentIndex < index
               }"
               :style="{
-                'background-color': getImage(template.image)?.commonColor
+                'background-color': getSheetImage(template.image)?.commonColor
               }"
             >
-              <img :src="getImage(template.image)?.url" />
+              <img :src="getSheetImage(template.image)?.url" />
               <h3>
                 {{ template[templateTypeKey as keyof typeof template] }}
               </h3>
@@ -66,12 +66,12 @@
 </template>
 
 <script lang="ts" setup>
-import sheetImages from '@/assets/data/sheet-images.json';
 import ModalController from '@/controllers/modal-controller';
 import { capitalize } from '@/util/string';
 import { PropType, defineProps, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
+import { getSheetImage } from '@/game-data/sheets/sheet-util';
 
 const props = defineProps({
   sheetType: String,
@@ -82,10 +82,6 @@ const props = defineProps({
     required: true
   }
 });
-
-function getImage(imageId: string) {
-  return sheetImages.find((image) => image.id === imageId);
-}
 
 function onClickChooseTemplate(template: any) {
   console.log('template', template);
