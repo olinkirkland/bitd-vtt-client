@@ -450,7 +450,7 @@
             />
           </div>
         </section>
-        
+
         <Divider />
 
         <section>
@@ -1089,6 +1089,11 @@ function onEditHuntingGround(ground: Thing) {
 
   > div {
     padding: 1rem;
+
+    // dividing vertical lines between divs
+    &:not(:last-child) {
+      border-right: 1px solid var(--dark-2);
+    }
 
     section {
       padding: 1rem;

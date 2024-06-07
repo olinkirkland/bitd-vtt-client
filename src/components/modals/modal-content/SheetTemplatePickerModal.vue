@@ -67,11 +67,11 @@
 
 <script lang="ts" setup>
 import ModalController from '@/controllers/modal-controller';
+import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { capitalize } from '@/util/string';
 import { PropType, defineProps, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import { getSheetImage } from '@/game-data/sheets/sheet-util';
 
 const props = defineProps({
   sheetType: String,
@@ -220,6 +220,13 @@ function updateCurrentIndex(carousel: HTMLElement) {
         > h3 {
           margin-top: 3.2rem;
           font-size: 2.4rem;
+        }
+
+        > p {
+          // I want it to hang off the bottom; to overlap the edge
+          position: relative;
+          top: 1rem;
+          padding-bottom: 3rem;
         }
 
         &.left-of-active {
