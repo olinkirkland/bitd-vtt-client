@@ -28,7 +28,7 @@
               }"
               :background-color="getImage(template.image)?.commonColor"
             >
-              <img :src="getImage(template.image)?.url" alt="template image" />
+              <img :src="getImage(template.image)?.url" />
               <h3>
                 {{ template[templateTypeKey as keyof typeof template] }}
               </h3>
@@ -169,8 +169,26 @@ function updateCurrentIndex(carousel: HTMLElement) {
 }
 
 @media (max-width: 768px) {
+  .modal :deep(.modal__content) {
+    padding: 0;
+  }
+
+  .template-picker {
+    gap: 0;
+    > :not(ul) {
+      padding: 0 2rem;
+
+      &:first-child {
+        padding-top: 2rem;
+      }
+
+      &:last-child {
+        padding-bottom: 2rem;
+      }
+    }
+  }
   .template-picker > ul.scroll-container {
-    padding: 1rem 0;
+    padding: 2rem 2rem;
     display: flex;
     height: calc(100% - 2rem);
     overflow-x: auto;
