@@ -673,7 +673,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'bravos-turf-1',
@@ -682,7 +682,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.EAST]
       },
       {
         id: 'bravos-terrorized-citizens',
@@ -691,7 +691,7 @@ export class Bravos extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'bravos-informants',
@@ -700,7 +700,7 @@ export class Bravos extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'bravos-protection-racket',
@@ -709,7 +709,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'bravos-fighting-pits',
@@ -718,7 +718,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'bravos-turf-2',
@@ -727,7 +727,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'bravos-lair',
@@ -736,7 +736,12 @@ export class Bravos extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.EAST,
+          Direction.SOUTH,
+          Direction.WEST
+        ]
       },
       {
         id: 'bravos-turf-3',
@@ -745,7 +750,12 @@ export class Bravos extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'bravos-turf-4',
@@ -754,7 +764,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'bravos-infirmary',
@@ -763,7 +773,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'bravos-bluecoat-intimidation',
@@ -772,7 +782,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       },
       {
         id: 'bravos-street-fence',
@@ -781,7 +791,7 @@ export class Bravos extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'bravos-warehouses',
@@ -790,7 +800,7 @@ export class Bravos extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.EAST]
       },
       {
         id: 'bravos-bluecoat-confederates',
@@ -799,7 +809,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
   }
@@ -964,7 +974,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'cult-vice-den',
@@ -973,7 +983,7 @@ export class Cult extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH, Direction.EAST]
       },
       {
         id: 'cult-offertory',
@@ -982,7 +992,7 @@ export class Cult extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'cult-ancient-obelisk',
@@ -991,7 +1001,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST]
       },
       {
         id: 'cult-ancient-tower',
@@ -1000,7 +1010,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'cult-turf-1',
@@ -1009,7 +1019,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'cult-turf-2',
@@ -1018,7 +1028,12 @@ export class Cult extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'cult-lair',
@@ -1027,7 +1042,12 @@ export class Cult extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'cult-turf-3',
@@ -1036,7 +1056,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.SOUTH, Direction.WEST, Direction.EAST]
       },
       {
         id: 'cult-turf-4',
@@ -1045,7 +1065,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'cult-spirit-well',
@@ -1054,7 +1074,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST]
       },
       {
         id: 'cult-ancient-gate',
@@ -1063,7 +1083,7 @@ export class Cult extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.NORTH]
       },
       {
         id: 'cult-sanctuary',
@@ -1072,7 +1092,7 @@ export class Cult extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH]
       },
       {
         id: 'cult-sacred-nexus',
@@ -1081,7 +1101,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'cult-ancient-altar',
@@ -1090,7 +1110,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
   }
@@ -1255,7 +1275,7 @@ export class Hawkers extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'hawkers-personal-clothier',
@@ -1264,7 +1284,7 @@ export class Hawkers extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'hawkers-local-graft',
@@ -1273,7 +1293,7 @@ export class Hawkers extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.SOUTH]
       },
       {
         id: 'hawkers-lookouts',
@@ -1282,7 +1302,7 @@ export class Hawkers extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'hawkers-informants',
@@ -1291,7 +1311,7 @@ export class Hawkers extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'hawkers-turf-2',
@@ -1300,7 +1320,7 @@ export class Hawkers extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.SOUTH]
       },
       {
         id: 'hawkers-turf-3',
@@ -1309,7 +1329,7 @@ export class Hawkers extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'lair',
@@ -1318,7 +1338,12 @@ export class Hawkers extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.EAST,
+          Direction.SOUTH,
+          Direction.WEST
+        ]
       },
       {
         id: 'hawkers-turf-4',
@@ -1327,7 +1352,12 @@ export class Hawkers extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'hawkers-luxury-venue',
@@ -1336,7 +1366,7 @@ export class Hawkers extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       },
       {
         id: 'hawkers-foreign-market',
@@ -1345,7 +1375,7 @@ export class Hawkers extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.NORTH]
       },
       {
         id: 'hawkers-vice-den',
@@ -1354,7 +1384,7 @@ export class Hawkers extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       },
       {
         id: 'hawkers-surplus-caches',
@@ -1363,7 +1393,7 @@ export class Hawkers extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH]
       },
       {
         id: 'hawkers-cover-operation',
@@ -1372,7 +1402,7 @@ export class Hawkers extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'hawkers-cover-identities',
@@ -1381,7 +1411,7 @@ export class Hawkers extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST]
       }
     ];
   }
@@ -1544,7 +1574,7 @@ export class Shadows extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'shadows-turf-1',
@@ -1553,7 +1583,7 @@ export class Shadows extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.EAST]
       },
       {
         id: 'shadows-loyal-fence',
@@ -1562,7 +1592,7 @@ export class Shadows extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'shadows-gambling-den',
@@ -1571,7 +1601,7 @@ export class Shadows extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'shadows-tavern',
@@ -1580,7 +1610,7 @@ export class Shadows extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'shadows-drug-den',
@@ -1589,7 +1619,7 @@ export class Shadows extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'shadows-informants',
@@ -1598,7 +1628,7 @@ export class Shadows extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.SOUTH, Direction.WEST, Direction.EAST]
       },
       {
         id: 'shadows-lair',
@@ -1607,7 +1637,12 @@ export class Shadows extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'shadows-turf-2',
@@ -1616,7 +1651,7 @@ export class Shadows extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.EAST]
       },
       {
         id: 'shadows-lookouts',
@@ -1625,7 +1660,7 @@ export class Shadows extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'shadows-hagfish-farm',
@@ -1634,7 +1669,7 @@ export class Shadows extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.NORTH]
       },
       {
         id: 'shadows-infirmary',
@@ -1643,7 +1678,7 @@ export class Shadows extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.NORTH]
       },
       {
         id: 'shadows-covert-drops',
@@ -1652,7 +1687,7 @@ export class Shadows extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'shadows-turf-3',
@@ -1661,7 +1696,7 @@ export class Shadows extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.EAST]
       },
       {
         id: 'shadows-secret-pathways',
@@ -1670,7 +1705,7 @@ export class Shadows extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.NORTH]
       }
     ];
 
@@ -1837,7 +1872,7 @@ export class Smugglers extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'smugglers-side-business',
@@ -1846,7 +1881,7 @@ export class Smugglers extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'smugglers-luxury-fence',
@@ -1855,7 +1890,7 @@ export class Smugglers extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.SOUTH]
       },
       {
         id: 'smugglers-vice-den',
@@ -1864,7 +1899,7 @@ export class Smugglers extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'smugglers-tavern',
@@ -1873,7 +1908,7 @@ export class Smugglers extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'smugglers-ancient-gate',
@@ -1882,7 +1917,7 @@ export class Smugglers extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.SOUTH, Direction.NORTH]
       },
       {
         id: 'smugglers-turf-2',
@@ -1891,7 +1926,7 @@ export class Smugglers extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'smugglers-lair',
@@ -1900,7 +1935,12 @@ export class Smugglers extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'smugglers-turf-3',
@@ -1909,7 +1949,12 @@ export class Smugglers extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.WEST,
+          Direction.EAST,
+          Direction.SOUTH
+        ]
       },
       {
         id: 'smugglers-turf-4',
@@ -1918,7 +1963,7 @@ export class Smugglers extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'smugglers-secret-routes',
@@ -1927,7 +1972,7 @@ export class Smugglers extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.EAST, Direction.NORTH]
       },
       {
         id: 'smugglers-informants',
@@ -1936,7 +1981,7 @@ export class Smugglers extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.WEST, Direction.NORTH]
       },
       {
         id: 'smugglers-fleet',
@@ -1945,7 +1990,7 @@ export class Smugglers extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH]
       },
       {
         id: 'smugglers-cover-operation',
@@ -1954,7 +1999,7 @@ export class Smugglers extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'smugglers-warehouse',
@@ -1963,7 +2008,7 @@ export class Smugglers extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        adjacent: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
   }

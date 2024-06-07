@@ -108,6 +108,7 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
       font-size: 1.6rem;
       overflow: hidden;
       text-align: center;
+      text-transform: capitalize;
       word-break: break-word;
     }
   }
@@ -117,18 +118,47 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
   border: 1px solid var(--primary);
   background-color: var(--translucent-primary-light);
 
-  :deep(.checkbox-group.checked > i) {
-    color: var(--primary);
+  li.north::after {
+    background: linear-gradient(
+      to bottom,
+      var(--translucent-light),
+      var(--primary)
+    );
+  }
+
+  li.east::after {
+    background: linear-gradient(
+      to left,
+      var(--translucent-light),
+      var(--primary)
+    );
+  }
+
+  li.south::after {
+    background: linear-gradient(
+      to top,
+      var(--translucent-light),
+      var(--primary)
+    );
+  }
+
+  li.west::after {
+    background: linear-gradient(
+      to right,
+      var(--translucent-light),
+      var(--primary)
+    );
   }
 }
 
 .claim-tile.small {
+  padding: 0.4rem;
   h2 {
     font-size: 1.2rem;
   }
 }
 
-ul.roadmap {
+.claim-tile .roadmap {
   position: absolute;
   top: 0;
   left: 0;
@@ -138,16 +168,17 @@ ul.roadmap {
   li {
     position: absolute;
 
-    &.active {
-      background-color: var(--primary);
-    }
-
     &::after {
       content: '';
       display: block;
-      width: calc(0.8rem);
-      height: calc(0.8rem);
+      width: 0.8rem;
+      height: 0.8rem;
       background-color: var(--translucent-light);
+    }
+
+    &.active::after {
+      background: unset;
+      background-color: var(--primary);
     }
 
     &.north {
@@ -155,7 +186,7 @@ ul.roadmap {
       left: 50%;
       transform: translate(-50%, -100%);
       &::after {
-        width: 1.2rem;
+        width: 0.8rem;
       }
     }
 
@@ -164,7 +195,7 @@ ul.roadmap {
       right: -1px;
       transform: translate(100%, -50%);
       &::after {
-        height: 1.2rem;
+        height: 0.8rem;
       }
     }
 
@@ -173,7 +204,7 @@ ul.roadmap {
       left: 50%;
       transform: translate(-50%, 100%);
       &::after {
-        width: 1.2rem;
+        width: 0.8rem;
       }
     }
 
@@ -182,7 +213,7 @@ ul.roadmap {
       left: -1px;
       transform: translate(-100%, -50%);
       &::after {
-        height: 1.2rem;
+        height: 0.8rem;
       }
     }
   }
