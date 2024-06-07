@@ -117,7 +117,10 @@
               </CollapsingShelf>
             </div>
           </div>
-          <label>{{ sheet.huntingGroundsLabel }}</label>
+          <label
+            >{{ sheet.huntingGroundsLabel }}
+            <label class="muted">(Operations)</label>
+          </label>
           <div class="tile-list tile-list--mini">
             <ThingTile
               v-for="ground in sheet.huntingGrounds"
