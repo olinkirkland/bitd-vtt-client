@@ -128,12 +128,13 @@
             >
           </label>
           <div class="tile-list tile-list--mini">
-            <ThingTile
+            <EffectableTile
               v-for="ground in sheet.huntingGrounds"
+              :ability="ground"
               :key="ground.id"
               :idPrefix="props.sheet.crewType"
-              :thing="ground"
               :propertyName="sheet.huntingGroundsLabel"
+              :change="(quantity: number) => onChangeHuntingGround(ground, quantity)"
               :onEdit="onEditHuntingGround"
               :onDelete="() => {}"
             />
@@ -701,13 +702,12 @@ import ClaimTile from '@/components/ClaimTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
-import ThingTile from '@/components/ThingTile.vue';
 import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Effectable, Person, Thing } from '@/game-data/game-data-types';
+import { Effectable, Person } from '@/game-data/game-data-types';
 import { Claim, Crew, Direction } from '@/game-data/sheets/crew-sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
@@ -1054,9 +1054,25 @@ function onChangeClaim(claim: any, quantity: number) {
 }
 
 /** Hunting Grounds */
+const huntingGrounds = computed(() => {
+  return props.sheet.huntingGrounds;
+});
+function onChangeHuntingGround(ground: Effectable, quantity: number) {
+  const huntingGroundIndex = props.sheet.huntingGrounds.findIndex(
+    (a) => a.id === ground.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/huntingGrounds/${huntingGroundIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
 
 /** Hunting Grounds Functions */
-function onEditHuntingGround(ground: Thing) {
+function onEditHuntingGround(ground: Effectable) {
   const huntingGroundIndex = props.sheet.huntingGrounds.findIndex(
     (a) => a.id === ground.id
   );
