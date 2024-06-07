@@ -127,9 +127,16 @@
               >(Hunting Grounds)</label
             >
           </label>
+          <div class="row">
+            <Checkbox
+              icon="fa-check"
+              v-model="showOnlySelectedHuntingGrounds"
+              label="Show only selected"
+            />
+          </div>
           <div class="tile-list tile-list--mini">
             <EffectableTile
-              v-for="ground in sheet.huntingGrounds"
+              v-for="ground in huntingGrounds"
               :ability="ground"
               :key="ground.id"
               :idPrefix="props.sheet.crewType"
@@ -1054,8 +1061,13 @@ function onChangeClaim(claim: any, quantity: number) {
 }
 
 /** Hunting Grounds */
+const showOnlySelectedHuntingGrounds = ref(false);
 const huntingGrounds = computed(() => {
-  return props.sheet.huntingGrounds;
+  return (
+    showOnlySelectedHuntingGrounds.value
+      ? props.sheet.huntingGrounds.filter((a) => a.quantity > 0)
+      : props.sheet.huntingGrounds
+  ).sort(sortByDescription);
 });
 function onChangeHuntingGround(ground: Effectable, quantity: number) {
   const huntingGroundIndex = props.sheet.huntingGrounds.findIndex(
