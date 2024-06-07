@@ -119,7 +119,13 @@
           </div>
           <label
             >{{ sheet.huntingGroundsLabel }}
-            <label class="muted">(Operations)</label>
+            <label
+              v-if="
+                sheet.huntingGroundsLabel.toLowerCase() !== 'hunting grounds'
+              "
+              class="muted"
+              >(Hunting Grounds)</label
+            >
           </label>
           <div class="tile-list tile-list--mini">
             <ThingTile
@@ -128,7 +134,7 @@
               :idPrefix="props.sheet.crewType"
               :thing="ground"
               :propertyName="sheet.huntingGroundsLabel"
-              :onEdit="() => {}"
+              :onEdit="onEditHuntingGround"
               :onDelete="() => {}"
             />
           </div>
@@ -701,7 +707,7 @@ import EditEffectableModal from '@/components/modals/modal-content/EditEffectabl
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Effectable, Person } from '@/game-data/game-data-types';
+import { Effectable, Person, Thing } from '@/game-data/game-data-types';
 import { Claim, Crew, Direction } from '@/game-data/sheets/crew-sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
@@ -1043,6 +1049,23 @@ function onChangeClaim(claim: any, quantity: number) {
       op: 'replace',
       path,
       value: quantity
+    }
+  ]);
+}
+
+/** Hunting Grounds */
+
+/** Hunting Grounds Functions */
+function onEditHuntingGround(ground: Thing) {
+  const huntingGroundIndex = props.sheet.huntingGrounds.findIndex(
+    (a) => a.id === ground.id
+  );
+
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/huntingGrounds/${huntingGroundIndex}`,
+      value: ground
     }
   ]);
 }

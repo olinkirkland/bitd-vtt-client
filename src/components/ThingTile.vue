@@ -5,14 +5,17 @@
       <div class="header">
         <h2>{{ props.thing.name }}</h2>
 
-        <button class="btn btn--icon" v-if="false">
-          <!-- @click="
+        <button
+          class="btn btn--icon"
+          @click="
             ModalController.open(EditThingModal, {
               propertyName,
               thing: props.thing,
               idPrefix: props.idPrefix,
+              onEdit: onEditThing,
             })
-          " -->
+          "
+        >
           <i class="fas fa-edit"></i>
         </button>
       </div>
@@ -25,7 +28,8 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { Thing } from '../game-data/game-data-types';
-// import EditThingModal from './modals/modal-content/EditThingModal.vue';
+import EditThingModal from './modals/modal-content/EditThingModal.vue';
+import ModalController from '@/controllers/modal-controller';
 
 const props = defineProps<{
   thing: Thing;
