@@ -123,7 +123,7 @@ function onDeletePerson(id: string) {
     }
   }
 
-  > p {
+  p {
     opacity: 0.8;
     font-size: 1.4rem;
   }

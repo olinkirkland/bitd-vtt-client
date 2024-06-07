@@ -117,6 +117,18 @@
               </CollapsingShelf>
             </div>
           </div>
+          <label>{{ sheet.huntingGroundsLabel }}</label>
+          <div class="tile-list tile-list--mini">
+            <ThingTile
+              v-for="ground in sheet.huntingGrounds"
+              :key="ground.id"
+              :idPrefix="props.sheet.crewType"
+              :thing="ground"
+              :propertyName="sheet.huntingGroundsLabel"
+              :onEdit="() => {}"
+              :onDelete="() => {}"
+            />
+          </div>
         </section>
         <Divider />
         <section>
@@ -680,6 +692,7 @@ import ClaimTile from '@/components/ClaimTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
+import ThingTile from '@/components/ThingTile.vue';
 import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
@@ -1079,6 +1092,9 @@ function onChangeClaim(claim: any, quantity: number) {
   grid-template-columns: 1fr;
   > .wide-tile {
     grid-column: 1 / -1;
+  }
+  &--mini {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   }
 }
 

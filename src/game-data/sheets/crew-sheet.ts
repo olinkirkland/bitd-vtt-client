@@ -1,5 +1,5 @@
 import { useGameStore } from '@/stores/game-store';
-import { Effectable, Person } from '../game-data-types';
+import { Effectable, Person, Thing } from '../game-data-types';
 import Sheet from './sheet';
 
 export enum Direction {
@@ -174,6 +174,8 @@ export class Crew extends Sheet {
     }
   ];
   claims: Claim[] = [];
+  huntingGroundsLabel: string = 'Hunting Grounds';
+  huntingGrounds: Thing[] = [];
 
   constructor() {
     super();
@@ -511,6 +513,30 @@ export class Assassins extends Crew {
         adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
+
+    this.huntingGroundsLabel = 'Hunting Grounds';
+    this.huntingGrounds = [
+      {
+        id: 'assassins-hunting-ground-accident',
+        name: 'Accident',
+        description: 'A killing with no telltale signs of murder.'
+      },
+      {
+        id: 'assassins-hunting-ground-disappearance',
+        name: 'Disappearance',
+        description: 'The victim vanishes without a trace.'
+      },
+      {
+        id: 'assassins-hunting-ground-murder',
+        name: 'Murder',
+        description: 'An obvious killing that sends a message.'
+      },
+      {
+        id: 'assassins-hunting-ground-ransom',
+        name: 'Ransom',
+        description: 'A kidnapping and demand for payment for their return.'
+      }
+    ];
   }
 }
 
@@ -662,9 +688,6 @@ export class Bravos extends Crew {
         attitude: 0
       }
     ];
-
-    this.applyUpgradesDescriptionsFromCodex();
-
     this.claims = [
       {
         id: 'bravos-barracks',
@@ -812,6 +835,32 @@ export class Bravos extends Crew {
         adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
+
+    this.huntingGroundsLabel = 'Hunting Grounds';
+    this.huntingGrounds = [
+      {
+        id: 'bravos-hunting-ground-battle',
+        name: 'Battle',
+        description: 'Defeat an enemy with overwhelming force.'
+      },
+      {
+        id: 'bravos-hunting-ground-extortion',
+        name: 'Extortion',
+        description: 'Threaten violence unless you’re paid off.'
+      },
+      {
+        id: 'bravos-hunting-ground-sabotage',
+        name: 'Sabotage',
+        description: 'Hurt an opponent by destroying something.'
+      },
+      {
+        id: 'bravos-hunting-ground-smash-and-grab',
+        name: 'Smash & Grab',
+        description: 'A fast and violent armed robbery.'
+      }
+    ];
+
+    this.applyUpgradesDescriptionsFromCodex();
   }
 }
 
@@ -963,9 +1012,6 @@ export class Cult extends Crew {
         attitude: 0
       }
     ];
-
-    this.applyUpgradesDescriptionsFromCodex();
-
     this.claims = [
       {
         id: 'cult-cloister',
@@ -1113,6 +1159,33 @@ export class Cult extends Crew {
         adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
+
+    this.huntingGroundsLabel = 'Sacred Sites';
+    this.huntingGrounds = [
+      {
+        id: 'cult-sacred-site-acquisition',
+        name: 'Acquisition',
+        description: 'Procure an arcane artifact and attune it to your god.'
+      },
+      {
+        id: 'cult-sacred-site-augury',
+        name: 'Augury',
+        description:
+          'Do what you must to attract the god’s attention and counsel.'
+      },
+      {
+        id: 'cult-sacred-site-consecration',
+        name: 'Consecration',
+        description: 'Anoint a place for your deity.'
+      },
+      {
+        id: 'cult-sacred-site-sacrifice',
+        name: 'Sacrifice',
+        description: 'Destroy what is valuable or good in honor of your god.'
+      }
+    ];
+
+    this.applyUpgradesDescriptionsFromCodex();
   }
 }
 
@@ -1264,9 +1337,6 @@ export class Hawkers extends Crew {
         attitude: 0
       }
     ];
-
-    this.applyUpgradesDescriptionsFromCodex();
-
     this.claims = [
       {
         id: 'hawkers-turf-1',
@@ -1414,6 +1484,35 @@ export class Hawkers extends Crew {
         adjacent: [Direction.WEST]
       }
     ];
+
+    this.huntingGroundsLabel = 'Sales Territory';
+    this.huntingGrounds = [
+      {
+        id: 'hawkers-sales-territory-sale',
+        name: 'Sale',
+        description:
+          'A significant transaction with a special buyer of illicit product.'
+      },
+      {
+        id: 'hawkers-sales-territory-supply',
+        name: 'Supply',
+        description:
+          'A transaction to acquire new product or establish a new supplier.'
+      },
+      {
+        id: 'hawkers-sales-territory-show-of-force',
+        name: 'Show of Force',
+        description: 'Make an example of an enemy to dominate territory.'
+      },
+      {
+        id: 'hawkers-sales-territory-socialize',
+        name: 'Socialize',
+        description:
+          'Improve customer and/or supplier relations with a social event.'
+      }
+    ];
+
+    this.applyUpgradesDescriptionsFromCodex();
   }
 }
 
@@ -1565,7 +1664,6 @@ export class Shadows extends Crew {
         attitude: 0
       }
     ];
-
     this.claims = [
       {
         id: 'shadows-interrogation-chamber',
@@ -1706,6 +1804,30 @@ export class Shadows extends Crew {
         quantity: 0,
         maxQuantity: 1,
         adjacent: [Direction.WEST, Direction.NORTH]
+      }
+    ];
+
+    this.huntingGroundsLabel = 'Hunting Grounds';
+    this.huntingGrounds = [
+      {
+        id: 'shadows-hunting-grounds-burglary',
+        name: 'Burglary',
+        description: 'Theft by breaking and entering.'
+      },
+      {
+        id: 'shadows-hunting-grounds-espionage',
+        name: 'Espionage',
+        description: 'Obtain secret information by covert or clandestine means.'
+      },
+      {
+        id: 'shadows-hunting-grounds-robbery',
+        name: 'Robbery',
+        description: 'Theft by force or threats.'
+      },
+      {
+        id: 'shadows-hunting-grounds-sabotage',
+        name: 'Sabotage',
+        description: 'Hurt an opponent by destroying something.'
       }
     ];
 
@@ -1861,9 +1983,6 @@ export class Smugglers extends Crew {
         attitude: 0
       }
     ];
-
-    this.applyUpgradesDescriptionsFromCodex();
-
     this.claims = [
       {
         id: 'smugglers-turf-1',
@@ -2011,6 +2130,32 @@ export class Smugglers extends Crew {
         adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
+
+    this.huntingGroundsLabel = 'Cargo Types';
+    this.huntingGrounds = [
+      {
+        id: 'smugglers-cargo-type-arcane-weird',
+        name: 'Arcane/Weird',
+        description: 'Spirit essences, ghosts, cult materials.'
+      },
+      {
+        id: 'smugglers-cargo-type-arms',
+        name: 'Arms',
+        description: 'Restricted military weapons, heavy ordnance, explosives.'
+      },
+      {
+        id: 'smugglers-cargo-type-contraband',
+        name: 'Contraband',
+        description: 'High-tax luxuries, drugs, banned art, etc.'
+      },
+      {
+        id: 'smugglers-cargo-type-passengers',
+        name: 'Passengers',
+        description: 'People or livestock traveling in secret.'
+      }
+    ];
+
+    this.applyUpgradesDescriptionsFromCodex();
   }
 }
 
