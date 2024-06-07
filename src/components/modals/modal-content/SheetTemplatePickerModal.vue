@@ -26,7 +26,9 @@
                 'left-of-active': currentIndex > index,
                 'right-of-active': currentIndex < index
               }"
-              :background-color="getImage(template.image)?.commonColor"
+              :style="{
+                'background-color': getImage(template.image)?.commonColor
+              }"
             >
               <img :src="getImage(template.image)?.url" />
               <h3>
