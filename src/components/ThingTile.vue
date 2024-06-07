@@ -12,7 +12,7 @@
               propertyName,
               thing: props.thing,
               idPrefix: props.idPrefix,
-              onEdit: onEditThing,
+              onEdit: onEditThing
             })
           "
         >
@@ -71,6 +71,7 @@ function onDeleteThing(id: string) {
     flex-direction: column;
     gap: 0.4rem;
     flex: 1;
+    width: 100%;
   }
 
   .header {
@@ -78,9 +79,13 @@ function onDeleteThing(id: string) {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    width: 100%;
 
     h2 {
       flex: 1;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     button {
