@@ -2,9 +2,16 @@ import { useGameStore } from '@/stores/game-store';
 import { Effectable, Person } from '../game-data-types';
 import Sheet from './sheet';
 
+export enum Direction {
+  NORTH = 'north',
+  EAST = 'east',
+  SOUTH = 'south',
+  WEST = 'west'
+}
+
 export type Claim = Effectable & {
   position: { x: number; y: number };
-  prerequisites: string[]; // IDs of other claims, which must be owned first
+  adjacent: Direction[];
 };
 
 export class Crew extends Sheet {
@@ -370,7 +377,7 @@ export class Assassins extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'assassins-vice-den',
@@ -379,7 +386,7 @@ export class Assassins extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'assassins-fixer',
@@ -388,7 +395,7 @@ export class Assassins extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.SOUTH]
       },
       {
         id: 'assassins-informants',
@@ -397,7 +404,7 @@ export class Assassins extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'assassins-hagfish-farm',
@@ -406,7 +413,7 @@ export class Assassins extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'assassins-victim-trophies',
@@ -415,7 +422,7 @@ export class Assassins extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.SOUTH]
       },
       {
         id: 'assassins-turf-1',
@@ -424,7 +431,7 @@ export class Assassins extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
         id: 'assassins-lair',
@@ -433,7 +440,12 @@ export class Assassins extends Crew {
         position: { x: 2, y: 1 },
         quantity: 1,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [
+          Direction.NORTH,
+          Direction.EAST,
+          Direction.SOUTH,
+          Direction.WEST
+        ]
       },
       {
         id: 'assassins-turf-2',
@@ -442,7 +454,7 @@ export class Assassins extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.EAST]
       },
       {
         id: 'assassins-cover-operation',
@@ -451,7 +463,7 @@ export class Assassins extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.WEST, Direction.SOUTH]
       },
       {
         id: 'assassins-protection-racket',
@@ -460,7 +472,7 @@ export class Assassins extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.EAST]
       },
       {
         id: 'assassins-infirmary',
@@ -469,7 +481,7 @@ export class Assassins extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       },
       {
         id: 'assassins-envoy',
@@ -478,7 +490,7 @@ export class Assassins extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH]
       },
       {
         id: 'assassins-cover-identities',
@@ -487,7 +499,7 @@ export class Assassins extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.EAST]
       },
       {
         id: 'assassins-city-records',
@@ -496,7 +508,7 @@ export class Assassins extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: [Direction.NORTH, Direction.WEST]
       }
     ];
   }
@@ -661,7 +673,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-turf-1',
@@ -670,7 +682,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-terrorized-citizens',
@@ -679,7 +691,7 @@ export class Bravos extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-informants',
@@ -688,7 +700,7 @@ export class Bravos extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-protection-racket',
@@ -697,7 +709,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-fighting-pits',
@@ -706,7 +718,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-turf-2',
@@ -715,7 +727,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-lair',
@@ -724,7 +736,7 @@ export class Bravos extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-turf-3',
@@ -733,7 +745,7 @@ export class Bravos extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-turf-4',
@@ -742,7 +754,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-infirmary',
@@ -751,7 +763,7 @@ export class Bravos extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-bluecoat-intimidation',
@@ -760,7 +772,7 @@ export class Bravos extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-street-fence',
@@ -769,7 +781,7 @@ export class Bravos extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-warehouses',
@@ -778,7 +790,7 @@ export class Bravos extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'bravos-bluecoat-confederates',
@@ -787,7 +799,7 @@ export class Bravos extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       }
     ];
   }
@@ -952,7 +964,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-vice-den',
@@ -961,7 +973,7 @@ export class Cult extends Crew {
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-offertory',
@@ -970,7 +982,7 @@ export class Cult extends Crew {
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-ancient-obelisk',
@@ -979,7 +991,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-ancient-tower',
@@ -988,7 +1000,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-turf-1',
@@ -997,7 +1009,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-turf-2',
@@ -1006,7 +1018,7 @@ export class Cult extends Crew {
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-lair',
@@ -1015,7 +1027,7 @@ export class Cult extends Crew {
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-turf-3',
@@ -1024,7 +1036,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-turf-4',
@@ -1033,7 +1045,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-spirit-well',
@@ -1042,7 +1054,7 @@ export class Cult extends Crew {
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-ancient-gate',
@@ -1051,7 +1063,7 @@ export class Cult extends Crew {
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-sanctuary',
@@ -1060,7 +1072,7 @@ export class Cult extends Crew {
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-sacred-nexus',
@@ -1069,7 +1081,7 @@ export class Cult extends Crew {
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
         id: 'cult-ancient-altar',
@@ -1078,7 +1090,7 @@ export class Cult extends Crew {
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       }
     ];
   }
@@ -1237,139 +1249,139 @@ export class Hawkers extends Crew {
 
     this.claims = [
       {
-        id: '',
-        name: '',
+        id: 'hawkers-turf-1',
+        name: 'Turf',
         description: '',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-personal-clothier',
+        name: 'Personal Clothier',
+        description: '+1d engagement roll for social plans',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-local-graft',
+        name: 'Local Graft',
+        description: '+2 coin for show of force or socialize',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-lookouts',
+        name: 'Lookouts',
+        description: '+1d to Survey or Hunt on your turf',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-informants',
+        name: 'Informants',
+        description: '+1 gather info for scores',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'hawkers-turf-2',
+        name: 'Turf',
         description: '',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'hawkers-turf-3',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'lair',
+        name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'hawkers-turf-4',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-luxury-venue',
+        name: 'Luxury Venue',
+        description: '+1d to Consort or Sway on site',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-foreign-market',
+        name: 'Foreign Market',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-vice-den',
+        name: 'Vice Den',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-surplus-caches',
+        name: 'Surplus Caches',
+        description: '+2 coin for product sale or supply',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-cover-operation',
+        name: 'Cover Operation',
+        description: '-2 heat per score',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'hawkers-cover-identities',
+        name: 'Cover Identities',
+        description: '+1 engagement roll for deception or transport plans',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       }
     ];
   }
@@ -1526,139 +1538,139 @@ export class Shadows extends Crew {
 
     this.claims = [
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-interrogation-chamber',
+        name: 'Interrogation Chamber',
+        description: '+1d to Command and Sway on site',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'shadows-turf-1',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-loyal-fence',
+        name: 'Loyal Fence',
+        description: '+2 coin for burglary or robbery',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-gambling-den',
+        name: 'Gambling Den',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-tavern',
+        name: 'Tavern',
+        description: '+1d to Consort and Sway on site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-drug-den',
+        name: 'Drug Den',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-informants',
+        name: 'Informants',
+        description: '+1 gather info for scores',
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'shadows-lair',
+        name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'shadows-turf-2',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-lookouts',
+        name: 'Lookouts',
+        description: '+1d to Survey or Hunt on your turf',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-hagfish-farm',
+        name: 'Hagfish Farm',
+        description: 'Body disposal, +1d to reduce heat after killing',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-infirmary',
+        name: 'Infirmary',
+        description: '+1d to healing rolls',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-covert-drops',
+        name: 'Covert Drops',
+        description: '+2 coin for espionage or sabotage',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'shadows-turf-3',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'shadows-secret-pathways',
+        name: 'Secret Pathways',
+        description: '+1d engagement for stealth plans',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       }
     ];
 
@@ -1819,139 +1831,139 @@ export class Smugglers extends Crew {
 
     this.claims = [
       {
-        id: '',
-        name: '',
+        id: 'smugglers-turf-1',
+        name: 'Turf',
         description: '',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-side-business',
+        name: 'Side Business',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-luxury-fence',
+        name: 'Luxury Fence',
+        description: '+2 coin for high-class targets',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-vice-den',
+        name: 'Vice Den',
+        description: '(Tier roll) - Heat = coin in downtime',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-tavern',
+        name: 'Tavern',
+        description: '+1d to Consort and Sway on site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-ancient-gate',
+        name: 'Ancient Gate',
+        description: 'Safe passage in the Deathlands',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'smugglers-turf-2',
+        name: 'Turf',
         description: '',
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'smugglers-lair',
+        name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'smugglers-turf-3',
+        name: 'Turf',
         description: '',
         position: { x: 3, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
+        id: 'smugglers-turf-4',
+        name: 'Turf',
         description: '',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-secret-routes',
+        name: 'Secret Routes',
+        description: '+1d engagement for transport plans',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-informants',
+        name: 'Informants',
+        description: '+1 gather info for scores',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-fleet',
+        name: 'Fleet',
+        description: 'Your cohorts have their own vehicles',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-cover-operation',
+        name: 'Cover Operation',
+        description: '-2 heat per score',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       },
       {
-        id: '',
-        name: '',
-        description: '',
+        id: 'smugglers-warehouse',
+        name: 'Warehouse',
+        description: 'Stockpiles give you +1d to acquire assets',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
-        prerequisites: []
+        adjacent: []
       }
     ];
   }

@@ -1,26 +1,83 @@
 <template>
   <div
+    ref="claimTile"
     class="claim-tile"
-    :class="{ active: props.claim.quantity > 0 }"
+    :class="{ small: claimTileIsSmall, active: props.claim.quantity > 0 }"
     @click="props.change(!props.claim.quantity ? 1 : 0)"
   >
-    <div class="header" :class="{ 'no-description': !props.claim.description }">
+    <div class="header">
       <h2>{{ props.claim.name }}</h2>
     </div>
-    <p v-if="props.claim.description">{{ props.claim.description }}</p>
+
+    <ul class="roadmap">
+      <li
+        v-for="direction in rotatedDirections"
+        :class="{
+          [direction]: true,
+          active:
+            props.claim.quantity > 0 &&
+            isNeighborActive(rotateDirection(direction, -1))
+        }"
+      ></li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Claim } from '@/game-data/sheets/crew-sheet';
-import { defineProps } from 'vue';
+import { Claim, Direction } from '@/game-data/sheets/crew-sheet';
+import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps<{
   claim: Claim;
   idPrefix: string;
   propertyName: string;
+  neighborClaims: { [key: string]: Claim }; // where the key is a Direction
   change: (quantity: number) => void;
 }>();
+
+const claimTile = ref<HTMLElement | null>(null);
+const claimTileIsSmall = ref(false);
+
+onMounted(() => {
+  calculateSize();
+  window.addEventListener('resize', calculateSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', calculateSize);
+});
+
+function calculateSize() {
+  claimTileIsSmall.value =
+    (claimTile.value?.clientWidth && claimTile.value.clientWidth < 140) ||
+    false;
+}
+
+function isNeighborActive(direction: Direction): boolean {
+  const neighbor = props.neighborClaims[direction];
+  if (!neighbor) return false;
+  return neighbor.quantity > 0;
+}
+
+const rotatedDirections = computed(() => {
+  return props.claim.adjacent.map((direction) => {
+    return rotateDirection(direction);
+  });
+});
+
+function rotateDirection(direction: Direction, clockwise = 1): Direction {
+  const cardinalDirections = [
+    Direction.NORTH,
+    Direction.EAST,
+    Direction.SOUTH,
+    Direction.WEST
+  ];
+  const index = cardinalDirections.indexOf(direction);
+  if (index === -1) return direction;
+  return cardinalDirections[
+    (index + clockwise + cardinalDirections.length) % cardinalDirections.length
+  ];
+}
 </script>
 
 <style lang="scss" scoped>
@@ -29,8 +86,8 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 6rem;
   max-height: 10rem;
-  overflow-x: hidden;
   gap: 0.4rem;
   background-color: var(--translucent-light);
   padding: 1.2rem;
@@ -42,40 +99,17 @@ const props = defineProps<{
   .header {
     display: flex;
     gap: 0.4rem;
-
-    &.no-description {
-      display: flex;
-      height: 100%;
-      text-align: center;
-      align-items: center;
-      > h2 {
-        font-size: 1.6rem;
-      }
-    }
+    height: 100%;
+    text-align: center;
+    align-items: center;
 
     h2 {
       flex: 1;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       overflow: hidden;
       text-align: center;
-      text-overflow: ellipsis;
+      word-break: break-word;
     }
-
-    button {
-      height: auto;
-      padding: 0.4rem;
-
-      &.checked {
-        color: var(--primary);
-      }
-    }
-  }
-
-  > p {
-    opacity: 0.8;
-    font-size: 1.2rem;
-    flex: 1;
-    overflow: auto;
   }
 }
 
@@ -85,6 +119,72 @@ const props = defineProps<{
 
   :deep(.checkbox-group.checked > i) {
     color: var(--primary);
+  }
+}
+
+.claim-tile.small {
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+ul.roadmap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  li {
+    position: absolute;
+
+    &.active {
+      background-color: var(--primary);
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: calc(0.8rem);
+      height: calc(0.8rem);
+      background-color: var(--translucent-light);
+    }
+
+    &.north {
+      top: -1px;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      &::after {
+        width: 1.2rem;
+      }
+    }
+
+    &.east {
+      top: 50%;
+      right: -1px;
+      transform: translate(100%, -50%);
+      &::after {
+        height: 1.2rem;
+      }
+    }
+
+    &.south {
+      bottom: -1px;
+      left: 50%;
+      transform: translate(-50%, 100%);
+      &::after {
+        width: 1.2rem;
+      }
+    }
+
+    &.west {
+      top: 50%;
+      left: -1px;
+      transform: translate(-100%, -50%);
+      &::after {
+        height: 1.2rem;
+      }
+    }
   }
 }
 </style>

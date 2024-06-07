@@ -205,19 +205,20 @@
             >
               <span>Edit Claims</span>
             </button>
-            <Checkbox
+            <!-- <Checkbox
               icon="fa-check"
               v-model="lockClaimDependencies"
               label="Enforce roadmap"
-            />
+            />| -->
           </div>
           <div class="claims-list">
             <ClaimTile
-              v-for="claim in props.sheet.claims"
+              v-for="claim in claims"
               :key="claim.id"
               :claim="claim"
               :idPrefix="props.sheet.crewType"
               propertyName="Claim"
+              :neighborClaims="getNeighborClaims(claim)"
               :change="(quantity: number) => onChangeClaim(claim, quantity)"
             />
           </div>
@@ -671,7 +672,7 @@ import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.v
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable, Person } from '@/game-data/game-data-types';
-import { Crew } from '@/game-data/sheets/crew-sheet';
+import { Claim, Crew, Direction } from '@/game-data/sheets/crew-sheet';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
 import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
@@ -962,12 +963,47 @@ function sortByDescription(a: Effectable, b: Effectable) {
   return 0;
 }
 
+function sortClaimsByPosition(a: Claim, b: Claim) {
+  if (a.position.x !== b.position.x) return a.position.x - b.position.x;
+  return b.position.y - a.position.y;
+}
+
 /** Claims */
 
 const lockClaimDependencies = ref(true);
+const claims = computed(() => {
+  return props.sheet.claims.sort(sortClaimsByPosition);
+});
 
 /** Claims Functions */
 
+function getNeighborClaims(claim: Claim): { [key: string]: Claim } {
+  const neighbors: { [key: string]: Claim } = {};
+  const relativePositions = {
+    [Direction.NORTH]: { x: 0, y: -1 },
+    [Direction.EAST]: { x: 1, y: 0 },
+    [Direction.SOUTH]: { x: 0, y: 1 },
+    [Direction.WEST]: { x: -1, y: 0 }
+  };
+
+  claim.adjacent.forEach((direction) => {
+    const relativePosition = relativePositions[direction];
+    const neighborPosition = {
+      x: claim.position.x + relativePosition.x,
+      y: claim.position.y + relativePosition.y
+    };
+
+    const neighborClaim = props.sheet.claims.find(
+      (c) =>
+        c.position.x === neighborPosition.x &&
+        c.position.y === neighborPosition.y
+    );
+
+    if (neighborClaim) neighbors[direction] = neighborClaim;
+  });
+
+  return neighbors;
+}
 function onChangeClaim(claim: any, quantity: number) {
   const claimIndex = props.sheet.claims.findIndex((a) => a.id === claim.id);
   const path = `/data/sheets/${props.sheet.id}/claims/${claimIndex}/quantity`;
@@ -1037,7 +1073,7 @@ function onChangeClaim(claim: any, quantity: number) {
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 1rem;
+  gap: 1.6rem;
 }
 
 @media (min-width: 1080px) {
