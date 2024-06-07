@@ -351,6 +351,25 @@
         :class="{ active: currentIndex == 1 }"
       >
         <section>
+          <div class="input-group">
+            <label for="crew-xp">Crew XP</label>
+            <input
+              id="crew-xp"
+              type="number"
+              pattern="[0-9]*"
+              :value="props.sheet.crewExperience"
+              @focus="focus = 'xp'"
+              @change="
+                onChangeValue(($event.target as HTMLInputElement)?.value, 'xp')
+              "
+            />
+            <CollapsingShelf :show="focus == 'xp'">
+              <p>How much experience has your crew accumulated?</p>
+            </CollapsingShelf>
+          </div>
+        </section>
+        <Divider />
+        <section>
           <label for="crew-abilities">Special Abilities</label>
           <div class="row">
             <button
@@ -393,25 +412,6 @@
         </section>
         <Divider />
         <section>
-          <div class="input-group">
-            <label for="crew-xp">Crew XP</label>
-            <input
-              id="crew-xp"
-              type="number"
-              pattern="[0-9]*"
-              :value="props.sheet.crewExperience"
-              @focus="focus = 'xp'"
-              @change="
-                onChangeValue(($event.target as HTMLInputElement)?.value, 'xp')
-              "
-            />
-            <CollapsingShelf :show="focus == 'xp'">
-              <p>How much experience has your crew accumulated?</p>
-            </CollapsingShelf>
-          </div>
-        </section>
-        <Divider />
-        <section>
           <label for="contacts">Crew Contacts</label>
           <div class="row">
             <button
@@ -450,8 +450,14 @@
             />
           </div>
         </section>
+        
+        <Divider />
+
+        <section>
+          <span>COHORTS (TODO)</span>
+        </section>
       </div>
-      <div class="upgrades-and-cohorts" :class="{ active: currentIndex == 2 }">
+      <div class="upgrades" :class="{ active: currentIndex == 2 }">
         <section>
           <label for="crew-upgrades">Crew Upgrades</label>
           <div class="row">
@@ -660,12 +666,6 @@
           <p v-if="qualityUpgrades.length == 0">
             <em>❖ No quality upgrades selected</em>
           </p>
-        </section>
-
-        <Divider />
-
-        <section>
-          <span>COHORTS (TODO)</span>
         </section>
       </div>
     </div>
