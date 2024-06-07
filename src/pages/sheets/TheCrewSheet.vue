@@ -1137,6 +1137,10 @@ function onEditHuntingGround(ground: Effectable) {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr;
+
+  > * {
+    min-width: 100%;
+  }
   > .wide-tile {
     grid-column: 1 / -1;
   }

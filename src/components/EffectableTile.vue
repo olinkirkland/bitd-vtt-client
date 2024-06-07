@@ -104,6 +104,8 @@ function onDeleteAbility(id: string) {
 
     h2 {
       flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     button {
