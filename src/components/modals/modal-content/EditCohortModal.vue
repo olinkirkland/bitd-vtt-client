@@ -1,0 +1,458 @@
+<template>
+  <ModalFrame>
+    <template v-slot:header>
+      <ModalHeader closeButton>
+        <h2>
+          {{ props.onCreateNew ? 'Create' : 'Edit' }} {{ props.propertyName }}
+        </h2>
+      </ModalHeader>
+    </template>
+    <template v-slot:content>
+      <div class="edit">
+        <!-- Gang Type (Gang) -->
+        <div class="input-group" v-if="props.propertyName === 'gang'">
+          <label for="gangType"
+            >Gang Type
+            <label class="muted"
+              >(Choose one. A second Gang Type costs 2 upgrades)</label
+            >
+          </label>
+          <div class="tile-list tile-list--mini">
+            <EffectableTile
+              v-for="gangType in cohort.gangType"
+              :ability="gangType"
+              :key="gangType.id"
+              :idPrefix="props.idPrefix + '-gangType'"
+              :propertyName="gangType.name"
+              :change="
+                (quantity) => {
+                  gangType.quantity = quantity;
+                }
+              "
+            />
+          </div>
+        </div>
+
+        <!-- Name (Expert) -->
+        <div class="input-group" v-if="props.propertyName === 'expert'">
+          <label for="name">Name</label>
+          <input
+            class="ignore-initial-focus"
+            type="text"
+            id="name"
+            v-model="cohort.name"
+            placeholder="A name for your Expert"
+            @focus="focus = 'name'"
+            @blur="updateIdFromName(cohort.name)"
+          />
+          <CollapsingShelf :show="focus === 'name'">
+            <p>Choose a name for your Expert.</p>
+            <button class="btn btn--icon" @mousedown="randomizeName">
+              <i class="fas fa-random"></i>
+              <span>Randomize</span>
+            </button>
+          </CollapsingShelf>
+        </div>
+
+        <!-- Expertise (Expert) -->
+        <div class="input-group" v-if="props.propertyName === 'expert'">
+          <label for="expertise1">Expertise</label>
+          <input
+            class="ignore-initial-focus"
+            type="text"
+            id="expertise1"
+            v-model="cohort.expertise1"
+            placeholder="An area of expertise"
+            @focus="focus = 'expertise1'"
+          />
+          <CollapsingShelf :show="focus === 'expertise1'">
+            <p>Choose your Expert's area of expertise.</p>
+            <div class="text-list">
+              <button
+                class="btn btn--text"
+                v-for="expertise in codex?.sheets?.crew?.cohorts?.expertise"
+                @mousedown="cohort.expertise1 = expertise"
+              >
+                {{ expertise }}
+              </button>
+            </div>
+          </CollapsingShelf>
+        </div>
+
+        <!-- Expertise 2 (Expert) -->
+        <div class="input-group" v-if="props.propertyName === 'expert'">
+          <label for="expertise2"
+            >Additional Expertise
+            <label class="muted">(Costs 2 upgrades)</label>
+          </label>
+          <input
+            class="ignore-initial-focus"
+            type="text"
+            id="expertise2"
+            v-model="cohort.expertise2"
+            placeholder="An additional area of expertise"
+            @focus="focus = 'expertise2'"
+          />
+          <CollapsingShelf :show="focus === 'expertise2'">
+            <p>Choose an additional area of expertise for your Expert.</p>
+            <div class="text-list">
+              <button
+                class="btn btn--text"
+                v-for="expertise in codex?.sheets?.crew?.cohorts?.expertise"
+                @mousedown="cohort.expertise2 = expertise"
+              >
+                {{ expertise }}
+              </button>
+            </div>
+          </CollapsingShelf>
+        </div>
+
+        <div class="input-block">
+          <div class="input-group">
+            <label for="quality">Quality</label>
+            <input
+              class="ignore-initial-focus"
+              type="number"
+              id="quality"
+              v-model="cohort.quality"
+              @focus="focus = 'quality'"
+            />
+            <CollapsingShelf :show="focus === 'quality'">
+              <p v-if="props.propertyName === 'gang'">
+                A Gang's quality is equal to your current Crew Tier and
+                increases with your Crew Tier.
+              </p>
+              <p v-else>
+                An Expert's quality is equal to your current Crew Tier +1 and
+                increases with your Crew Tier.
+              </p>
+            </CollapsingShelf>
+          </div>
+
+          <div class="input-group" v-if="props.propertyName === 'gang'">
+            <label for="scale">Scale</label>
+            <input
+              class="ignore-initial-focus"
+              type="number"
+              id="scale"
+              v-model="cohort.scale"
+              placeholder="scale"
+              @focus="focus = 'scale'"
+            />
+            <CollapsingShelf :show="focus === 'scale'">
+              <p>
+                A Gang's scale is equal to your current Crew Tier and increases
+                with your Crew Tier.
+              </p>
+            </CollapsingShelf>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="edges"
+            >Edges
+            <label class="muted">(Choose at least one)</label>
+          </label>
+          <div class="tile-list tile-list--mini">
+            <EffectableTile
+              v-for="edge in cohort.edges"
+              :ability="edge"
+              :key="edge.id"
+              :idPrefix="props.idPrefix + '-edge'"
+              :propertyName="edge.name"
+              :change="
+                (quantity) => {
+                  edge.quantity = quantity;
+                }
+              "
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="flaws"
+            >Flaws
+            <label class="muted"
+              >(Choose at least
+              {{
+                numberWord(
+                  Math.max(cohort.edges.filter((e) => e.quantity > 0).length, 1)
+                )
+              }})
+            </label></label
+          >
+          <div class="tile-list tile-list--mini">
+            <EffectableTile
+              v-for="flaw in cohort.flaws"
+              :ability="flaw"
+              :key="flaw.id"
+              :idPrefix="props.idPrefix + '-flaw'"
+              :propertyName="flaw.name"
+              :change="
+                (quantity) => {
+                  flaw.quantity = quantity;
+                }
+              "
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="harm">Harm</label>
+          <div class="tile-list tile-list--mini">
+            <EffectableTile
+              v-for="harm in cohort.harm"
+              :ability="harm"
+              :key="harm.id"
+              :idPrefix="props.idPrefix + '-harm'"
+              :propertyName="harm.name"
+              :change="
+                (quantity) => {
+                  // Change the quantity of all other harms to zero
+                  cohort.harm.forEach((h) => {
+                    h.quantity = 0;
+                  });
+
+                  harm.quantity = quantity;
+                }
+              "
+            />
+          </div>
+        </div>
+
+        <div class="input-group stretch">
+          <label for="description"
+            >Description
+            <label class="muted"
+              >({{ cohort.description.length }} / 400)
+            </label>
+          </label>
+          <textarea
+            id="description"
+            v-model="cohort.description"
+            placeholder="A brief description"
+          ></textarea>
+        </div>
+
+        <section class="row" v-if="props.onCreateNew">
+          <button
+            class="btn btn--alt mobile-full-width"
+            @click="ModalController.close()"
+          >
+            <span>Cancel</span>
+          </button>
+          <button class="btn mobile-full-width" @click="onClickCreate">
+            <span>New</span>
+          </button>
+        </section>
+        <section class="row" v-else>
+          <button class="btn btn--alt mobile-full-width" @click="onClickDelete">
+            <i class="fas fa-trash"></i>
+            <span>Delete</span>
+          </button>
+          <button class="btn mobile-full-width" @click="onClickSave">
+            <span>Save</span>
+          </button>
+        </section>
+      </div>
+    </template>
+  </ModalFrame>
+</template>
+
+<script setup lang="ts">
+import CollapsingShelf from '@/components/CollapsingShelf.vue';
+import EffectableTile from '@/components/EffectableTile.vue';
+import ModalController from '@/controllers/modal-controller';
+import { Cohort } from '@/game-data/sheets/crew-sheet';
+import { useGameStore } from '@/stores/game-store';
+import { pick } from '@/util/rand-helper';
+import { numberWord } from '@/util/string';
+import { v4 as uuidv4 } from 'uuid';
+import { defineProps, onMounted, onUnmounted, ref } from 'vue';
+import ModalFrame from '../modal-parts/ModalFrame.vue';
+import ModalHeader from '../modal-parts/ModalHeader.vue';
+
+const codex = useGameStore().game?.codex;
+const props = defineProps<{
+  propertyName?: string;
+  cohort?: Cohort;
+  onEdit?: (cohort: Cohort) => void;
+  onDelete?: (id: string) => void;
+  idPrefix?: string;
+
+  // There are two ways to use this modal:
+  // Edit an existing cohort or create a new one.
+  // The default is to edit an existing cohort. To create a new one, pass a function to onCreateNew.
+  // All other props will be ignored in this case.
+  onCreateNew?: (cohort: Cohort) => void;
+}>();
+
+onMounted(() => {
+  document.addEventListener('blur', onBlur, true);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('blur', onBlur, true);
+});
+
+const focus = ref();
+function onBlur(event: FocusEvent) {
+  focus.value = null;
+}
+
+function randomizeName() {
+  const firstName = pick(codex?.names?.firstNames);
+  const lastName = pick(codex?.names?.lastNames);
+  cohort.value.name = `${firstName} ${lastName}`;
+  console.log(cohort.value.name);
+}
+
+const blankCohort: Cohort = {
+  id: uuidv4(),
+  name: '',
+  description: '',
+  cohortType: props.propertyName === 'gang' ? 'gang' : 'expert',
+  edges:
+    codex?.sheets?.crew?.cohorts?.edges.map(
+      (edge: { name: string; description: string }) => ({
+        ...edge,
+        id: 'edge-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  flaws:
+    codex?.sheets?.crew?.cohorts?.flaws.map(
+      (flaw: { name: string; description: string }) => ({
+        ...flaw,
+        id: 'flaw-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  gangType:
+    props.propertyName === 'gang'
+      ? [
+          {
+            id: 'gangType-adepts',
+            name: 'Adepts',
+            description: 'Scholars, tinkerers, occultists, and chemists',
+            quantity: 0,
+            maxQuantity: 1
+          },
+          {
+            id: 'gangType-rooks',
+            name: 'Rooks',
+            description: 'Con artists, spies, and socialites',
+            quantity: 0,
+            maxQuantity: 1
+          },
+          {
+            id: 'gangType-rovers',
+            name: 'Rovers',
+            description:
+              'Sailors, carriage drivers, and scavengers',
+            quantity: 0,
+            maxQuantity: 1
+          },
+          {
+            id: 'gangType-skulks',
+            name: 'Skulks',
+            description: 'Scouts, infiltrators, and thieves',
+            quantity: 0,
+            maxQuantity: 1
+          },
+          {
+            id: 'gangType-thugs',
+            name: 'Thugs',
+            description: 'Killers, brawlers, and roustabouts',
+            quantity: 0,
+            maxQuantity: 1
+          }
+        ]
+      : [],
+  expertise1: '',
+  expertise2: '',
+  harm:
+    useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
+      (harm: { name: string; description: string }) => ({
+        ...harm,
+        id: 'harm-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  quality: 0,
+  scale: 0
+};
+
+const cohort = ref({
+  ...(props.cohort || blankCohort)
+});
+
+function updateIdFromName(name: string) {
+  if (!props.onCreateNew) return;
+
+  // Create a hyphenated ID from the name
+  // Start with the id prefix, if it exists
+  let newId = (props.idPrefix || '') + '-' + name;
+
+  // Replace only spaces with hyphens, everything else that's not a letter or number, delete
+  newId = newId
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+  cohort.value.id = newId;
+}
+
+function onClickCreate() {
+  if (!props.onCreateNew) return;
+  props.onCreateNew(cohort.value);
+  ModalController.close();
+}
+
+function onClickSave() {
+  if (!props.onEdit) return;
+  props.onEdit(cohort.value);
+  ModalController.close();
+}
+
+function onClickDelete() {
+  if (!props.onDelete) return;
+  props.onDelete(cohort.value.id);
+  ModalController.close();
+}
+</script>
+
+<style scoped lang="scss">
+.modal {
+  min-width: 72rem;
+
+  .edit {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    min-height: 100%;
+    width: 100%;
+
+    textarea {
+      resize: vertical;
+      max-height: unset;
+      flex: 1;
+    }
+  }
+}
+
+:deep(.modal__header) {
+  h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+:deep(.ability-tile .selection-bar::before) {
+  background-color: var(--dark);
+}
+</style>

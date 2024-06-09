@@ -208,7 +208,6 @@ textarea {
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   width: 100%;
-  overflow: hidden;
 }
 
 .input-group {
@@ -237,6 +236,24 @@ label {
 
 .stretch {
   flex: 1;
+}
+
+.tile-list {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+
+  &--mini {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  }
+
+  > * {
+    min-width: 100%;
+  }
+
+  > .wide-tile {
+    grid-column: 1 / -1;
+  }
 }
 
 .full-width {

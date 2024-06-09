@@ -462,7 +462,44 @@
         <Divider />
 
         <section>
-          <span>COHORTS (TODO)</span>
+          <label for="cohorts">Cohorts</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'gang',
+                  idPrefix: sheet.crewType + '-gang',
+                  onCreateNew: onCreateCohort
+                })
+              "
+            >
+              <span>New Gang</span>
+            </button>
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'expert',
+                  idPrefix: sheet.crewType + '-expert',
+                  onCreateNew: onCreateCohort
+                })
+              "
+            >
+              <span>New Expert</span>
+            </button>
+          </div>
+          <div class="tile-list">
+            <CohortTile
+              class="wide-tile"
+              v-for="cohort in props.sheet.cohorts"
+              :key="cohort.id"
+              :cohort="cohort"
+              :idPrefix="props.sheet.crewType"
+              :onEdit="onEditCohort"
+              :onDelete="onDeleteCohort"
+            />
+          </div>
         </section>
       </div>
       <div class="upgrades" :class="{ active: currentIndex == 2 }">
@@ -706,16 +743,18 @@
 <script setup lang="ts">
 import Checkbox from '@/components/Checkbox.vue';
 import ClaimTile from '@/components/ClaimTile.vue';
+import CohortTile from '@/components/CohortTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
+import EditCohortModal from '@/components/modals/modal-content/EditCohortModal.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable, Person } from '@/game-data/game-data-types';
-import { Claim, Crew, Direction } from '@/game-data/sheets/crew-sheet';
+import { Claim, Cohort, Crew, Direction } from '@/game-data/sheets/crew-sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
@@ -732,10 +771,6 @@ onUnmounted(() => {
   document.removeEventListener('blur', onBlur, true);
 });
 
-function onBlur(event: FocusEvent) {
-  focus.value = null;
-}
-
 const props = defineProps<{
   sheet: Crew;
 }>();
@@ -744,6 +779,9 @@ const currentIndex = ref(0);
 const carouselRef = ref<HTMLElement | null>(null);
 
 const focus = ref();
+function onBlur(event: FocusEvent) {
+  focus.value = null;
+}
 
 function onChangeValue(value: any, partialPath: string) {
   console.log('onChangeValue', value, partialPath);
@@ -1069,6 +1107,7 @@ const huntingGrounds = computed(() => {
       : props.sheet.huntingGrounds
   ).sort(sortByDescription);
 });
+
 function onChangeHuntingGround(ground: Effectable, quantity: number) {
   const huntingGroundIndex = props.sheet.huntingGrounds.findIndex(
     (a) => a.id === ground.id
@@ -1097,6 +1136,47 @@ function onEditHuntingGround(ground: Effectable) {
     }
   ]);
 }
+
+/** Cohorts */
+const gangs = computed(() => {
+  return props.sheet.cohorts.filter((a) => a.cohortType === 'gang');
+});
+
+const experts = computed(() => {
+  return props.sheet.cohorts.filter((a) => a.cohortType === 'expert');
+});
+
+/** Cohorts Functions */
+function onDeleteCohort(id: string) {
+  const cohortIndex = props.sheet.cohorts.findIndex((a) => a.id === id);
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/cohorts/${cohortIndex}`
+    }
+  ]);
+}
+
+function onCreateCohort(cohort: Cohort) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/cohorts/-`,
+      value: cohort
+    }
+  ]);
+}
+
+function onEditCohort(cohort: Cohort) {
+  const cohortIndex = props.sheet.cohorts.findIndex((a) => a.id === cohort.id);
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/cohorts/${cohortIndex}`,
+      value: cohort
+    }
+  ]);
+}
 </script>
 
 <style scoped lang="scss">
@@ -1117,6 +1197,7 @@ function onEditHuntingGround(ground: Effectable) {
 
   > div {
     padding: 1rem;
+    min-width: 100%;
 
     // dividing vertical lines between divs
     &:not(:last-child) {
@@ -1143,22 +1224,6 @@ function onEditHuntingGround(ground: Effectable) {
   background-color: var(--dark);
   box-shadow: var(--shadow);
   z-index: 1;
-}
-
-.tile-list {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr;
-
-  > * {
-    min-width: 100%;
-  }
-  > .wide-tile {
-    grid-column: 1 / -1;
-  }
-  &--mini {
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-  }
 }
 
 .claims-list {

@@ -107,6 +107,63 @@
           "tools": "Improves the quality rating of all the crew's Demolitions Tools and Tinkering Tools.",
           "weapons": "Improves the quality rating of all the crew's weapons."
         }
+      },
+      "cohorts": {
+        "harm": [
+          {
+            "name": "Weakened",
+            "description": "Has reduced effect."
+          },
+          {
+            "name": "Impaired",
+            "description": "Operates with reduced quality (-1d)."
+          },
+          {
+            "name": "Broken",
+            "description": "Can't do anything until they recover."
+          },
+          {
+            "name": "Dead",
+            "description": "Destroyed. Spend Coin equal to your Tier +2 to restore."
+          }
+        ],
+        "expertise": ["Doctor", "Investigator", "Occultist", "Assassin", "Spy"],
+        "edges": [
+          {
+            "name": "Fearsome",
+            "description": "Terrifying in aspect and reputation."
+          },
+          {
+            "name": "Independent",
+            "description": "Can be trusted to make good decisions and act on their own initiative."
+          },
+          {
+            "name": "Loyal",
+            "description": "Can't be bribed or turned against you."
+          },
+          {
+            "name": "Tenacious",
+            "description": "Won't be deterred from a task."
+          }
+        ],
+        "flaws": [
+          {
+            "name": "Principled",
+            "description": "Has an ethic or values that it won't betray."
+          },
+          {
+            "name": "Savage",
+            "description": "Excessively violent and cruel."
+          },
+          {
+            "name": "Unreliable",
+            "description": "Not always available, due to other obligations."
+          },
+          {
+            "name": "Wild",
+            "description": "Drunken and loud-mouthed."
+          }
+        ]
       }
     }
   },
@@ -156,6 +213,143 @@
         "name": "Dunslough",
         "blurb": "A labor camp served by convicts and a ghetto for the destitute poor."
       }
+    ]
+  },
+  "names": {
+    "firstNames": [
+      "Adric",
+      "Aldo",
+      "Amison",
+      "Andrel",
+      "Arcy",
+      "Arden",
+      "Arilyn",
+      "Arquo",
+      "Arvus",
+      "Ashlyn",
+      "Branon",
+      "Brace",
+      "Brance",
+      "Brena",
+      "Bricks",
+      "Candra",
+      "Canter",
+      "Carissa",
+      "Carro",
+      "Casslyn",
+      "Cavelle",
+      "Clave",
+      "Corille",
+      "Cross",
+      "Crowl",
+      "Cyrene",
+      "Daphnia",
+      "Drav",
+      "Edlun",
+      "Emeline",
+      "Grell",
+      "Helles",
+      "Hix",
+      "Holtz",
+      "Kamelin",
+      "Kelyr",
+      "Kobb",
+      "Kristov",
+      "Laudius",
+      "Lauria",
+      "Lenia",
+      "Lizete",
+      "Lorette",
+      "Lucella",
+      "Lynthia",
+      "Mara",
+      "Milos",
+      "Morlan",
+      "Myre",
+      "Narcus",
+      "Naria",
+      "Noggs",
+      "Odrienne",
+      "Orlan",
+      "Phin",
+      "Polonia",
+      "Quess",
+      "Remira",
+      "Ring",
+      "Roethe",
+      "Sesereth",
+      "Sethla",
+      "Skannon",
+      "Stavrul",
+      "Stev",
+      "Syra",
+      "Talitha",
+      "Tesslyn",
+      "Thena",
+      "Timoth",
+      "Tocker",
+      "Una",
+      "Vaurin",
+      "Veleris",
+      "Veretta",
+      "Vestine",
+      "Vey",
+      "Volette",
+      "Vond",
+      "Weaver",
+      "Wester",
+      "Zamira"
+    ],
+    "lastNames": [
+      "Arran",
+      "Athanoch",
+      "Basran",
+      "Boden",
+      "Booker",
+      "Ankhayat",
+      "Bowmore",
+      "Breakiron",
+      "Brogan",
+      "Clelland",
+      "Clermont",
+      "Coleburn",
+      "Comber",
+      "Daava",
+      "Dalmore",
+      "Danfield",
+      "Dunvil",
+      "Edrad",
+      "Farros",
+      "Grine",
+      "Haig",
+      "Helker",
+      "Helles",
+      "Hellyers",
+      "Jayan",
+      "Jeduin",
+      "Kardera",
+      "Karstas",
+      "Keel",
+      "Kessarin",
+      "Kinclaith",
+      "Lomond",
+      "Maroden",
+      "Michter",
+      "Morriston",
+      "Penderyn",
+      "Prichard",
+      "Rowan",
+      "Salkara",
+      "Sevoy",
+      "Skelkallan",
+      "Slane",
+      "Strangford",
+      "Strathmill",
+      "Templeton",
+      "Tyrconnell",
+      "Vale",
+      "Vedat",
+      "Walund"
     ]
   }
 }

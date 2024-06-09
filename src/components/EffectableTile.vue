@@ -4,6 +4,7 @@
       <h2>{{ props.ability.name }}</h2>
 
       <button
+        v-if="props.onEdit"
         class="btn btn--icon"
         @click="
           ModalController.open(EditEffectableModal, {
@@ -33,7 +34,7 @@
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, watch } from 'vue';
 import { Effectable } from '../game-data/game-data-types';
 import Checkbox from './Checkbox.vue';
 import EditEffectableModal from './modals/modal-content/EditEffectableModal.vue';
@@ -43,13 +44,19 @@ const props = defineProps<{
   idPrefix: string;
   propertyName: string;
   change: (quantity: number) => void;
-  onEdit: (ability: Effectable) => void;
-  onDelete: (id: string) => void;
+  onEdit?: (ability: Effectable) => void;
+  onDelete?: (id: string) => void;
 }>();
 
-const checkboxValues = ref<string[]>(
-  checkboxValuesFromQuantity(props.ability.quantity)
-);
+function updateCheckboxes() {
+  checkboxValues.value = checkboxValuesFromQuantity(props.ability.quantity);
+}
+
+const checkboxValues = ref<string[]>([]);
+updateCheckboxes();
+
+// When the ability quantity changes, update the checkboxes
+watch(() => props.ability.quantity, updateCheckboxes);
 
 // Watch for changes in the checkboxValues array
 function updateQuantity(lastClicked: string) {
@@ -75,10 +82,12 @@ function checkboxValuesFromQuantity(quantity: number) {
 }
 
 function onEditAbility(ability: Effectable) {
+  if (!props.onEdit) return;
   props.onEdit(ability);
 }
 
 function onDeleteAbility(id: string) {
+  if (!props.onDelete) return;
   props.onDelete(id);
 }
 </script>

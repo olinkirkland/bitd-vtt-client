@@ -1,5 +1,5 @@
 import { useGameStore } from '@/stores/game-store';
-import { Effectable, Person } from '../game-data-types';
+import { Effectable, Person, Thing } from '../game-data-types';
 import Sheet from './sheet';
 
 export enum Direction {
@@ -12,6 +12,19 @@ export enum Direction {
 export type Claim = Effectable & {
   position: { x: number; y: number };
   adjacent: Direction[];
+};
+
+export type Cohort = Thing & {
+  cohortType: 'gang' | 'expert';
+  gangType?: Effectable[]; // Only for gang cohorts
+  expertise1?: string; // Only for expert cohorts
+  expertise2?: string; // Only for expert cohorts
+
+  edges: Effectable[]; // Fearsome, Independent, Loyal, Tenacious
+  flaws: Effectable[]; // Principled, Savage, Unreliable, Wild
+  harm: Effectable[];
+  quality: number; // Equal to the crew's tier
+  scale: number; // Equal to the crew's tier
 };
 
 export class Crew extends Sheet {
@@ -33,6 +46,8 @@ export class Crew extends Sheet {
   vaults: number = 0; // 0-12
 
   crewExperience: number = 0; // 0-10
+
+  cohorts: Cohort[] = [];
 
   // This is modified by the specific crew type
   crewType: string = '';
