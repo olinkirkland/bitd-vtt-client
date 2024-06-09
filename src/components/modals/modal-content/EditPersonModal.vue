@@ -15,7 +15,15 @@
             v-model="person.name"
             placeholder="Enter a memorable name"
             @input="updateIdFromName(person.name)"
+            @focus="focus = 'name'"
           />
+          <CollapsingShelf :show="focus === 'name'">
+            <p>Choose a name.</p>
+            <button class="btn btn--icon" @mousedown="randomizeName">
+              <i class="fas fa-random"></i>
+              <span>Randomize</span>
+            </button>
+          </CollapsingShelf>
         </div>
 
         <div class="input-group" :class="{ disabled: !props.onCreateNew }">
@@ -81,9 +89,12 @@
 </template>
 
 <script setup lang="ts">
+import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import ModalController from '@/controllers/modal-controller';
 import { Person } from '@/game-data/game-data-types';
-import { ref } from 'vue';
+import { useGameStore } from '@/stores/game-store';
+import { pick } from '@/util/rand-helper';
+import { onMounted, onUnmounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 
@@ -100,6 +111,29 @@ const props = defineProps<{
   // All other props will be ignored in this case.
   onCreateNew?: (person: Person) => void;
 }>();
+
+onMounted(() => {
+  document.addEventListener('blur', onBlur, true);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('blur', onBlur, true);
+});
+
+const codex = useGameStore().game?.codex;
+
+const focus = ref();
+function onBlur(event: FocusEvent) {
+  focus.value = null;
+}
+
+function randomizeName() {
+  const firstName = pick(codex?.names?.firstNames);
+  const lastName = pick(codex?.names?.lastNames);
+  const newName = `${firstName} ${lastName}`;
+  person.value.name = newName;
+  updateIdFromName(newName);
+}
 
 const blankPerson: Person = {
   id: '',
