@@ -77,7 +77,8 @@ function updateQuantity(lastClicked: string) {
     (i + 1).toString()
   );
 
-  props.change(largest);
+  // TODO: Not gonna debug this right now, but largest is Negative Infinity
+  props.change(Math.max(largest, 0));
 }
 
 function checkboxValuesFromQuantity(quantity: number) {

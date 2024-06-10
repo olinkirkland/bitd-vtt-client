@@ -7,7 +7,7 @@
           Gang
         </h3>
         <h1>
-          {{ props.cohort.gangType?.filter((gt) => gt.quantity > 0)[0].name }}
+          {{ gangTypes?.map((gt) => gt.name).join(' & ') }}
         </h1>
         <h2>
           {{
@@ -82,23 +82,32 @@ const props = defineProps<{
   onDelete?: (id: string) => void;
 }>();
 
-const gangTypes = props.cohort.gangType?.filter((gt) => gt.quantity > 0);
-const expertises = [props.cohort.expertise1].concat(
-  props.cohort.expertise2 ? [props.cohort.expertise2] : []
+const gangTypes = computed(() =>
+  props.cohort.gangType?.filter((gt) => gt.quantity > 0)
+);
+
+const expertises = computed(() =>
+  [props.cohort.expertise1].concat(
+    props.cohort.expertise2 ? [props.cohort.expertise2] : []
+  )
 );
 
 const harm = computed(() => {
   return props.cohort.harm.filter((h) => h.quantity > 0)[0]?.name || '';
 });
 
-const edges =
-  props.cohort.edges
-    ?.filter((eff) => eff.quantity > 0)
-    .map((edge) => edge.name) || [];
-const flaws =
-  props.cohort.flaws
-    ?.filter((eff) => eff.quantity > 0)
-    .map((flaw) => flaw.name) || [];
+const edges = computed(
+  () =>
+    props.cohort.edges
+      ?.filter((eff) => eff.quantity > 0)
+      .map((edge) => edge.name) || []
+);
+const flaws = computed(
+  () =>
+    props.cohort.flaws
+      ?.filter((eff) => eff.quantity > 0)
+      .map((flaw) => flaw.name) || []
+);
 
 function onEditCohort(cohort: Cohort) {
   if (!props.onEdit) return;

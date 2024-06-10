@@ -572,7 +572,8 @@
                 })
               "
             >
-              <span>New Gang</span>
+              <i class="fas fa-plus"></i>
+              <span>Gang</span>
             </button>
             <button
               class="btn"
@@ -584,7 +585,8 @@
                 })
               "
             >
-              <span>New Expert</span>
+              <i class="fas fa-plus"></i>
+              <span>Expert</span>
             </button>
             <button
               v-if="props.sheet.crewType === 'Smugglers'"
@@ -600,13 +602,14 @@
                 })
               "
             >
-              <span>New Vehicle</span>
+              <i class="fas fa-plus"></i>
+              <span>Vehicle</span>
             </button>
           </div>
           <div class="tile-list">
             <CohortTile
               class="wide-tile"
-              v-for="cohort in props.sheet.cohorts"
+              v-for="cohort in cohorts"
               :key="cohort.id"
               :cohort="cohort"
               :idPrefix="props.sheet.crewType"
@@ -614,7 +617,7 @@
               :onDelete="onDeleteCohort"
             />
           </div>
-          <p v-if="props.sheet.cohorts.length == 0">
+          <p v-if="cohorts.length == 0">
             <em>❖ Your crew hasn't recruited any cohorts yet</em>
           </p>
         </section>
@@ -870,12 +873,7 @@ import EditEffectableModal from '@/components/modals/modal-content/EditEffectabl
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import {
-  Chooseable,
-  Effectable,
-  Person,
-  Thing
-} from '@/game-data/game-data-types';
+import { Effectable, Person } from '@/game-data/game-data-types';
 import {
   Claim,
   Cohort,
@@ -908,7 +906,6 @@ const carouselRef = ref<HTMLElement | null>(null);
 
 const focus = ref();
 function onBlur(event: FocusEvent) {
-  console.log(event.relatedTarget);
   if ((event.relatedTarget as HTMLElement)?.closest('.shelf')) return;
   focus.value = null;
 }
@@ -1272,6 +1269,9 @@ function onEditHuntingGround(ground: Effectable) {
     }
   ]);
 }
+
+/** Cohorts */
+const cohorts = computed(() => props.sheet.cohorts);
 
 /** Cohorts Functions */
 function onDeleteCohort(id: string) {

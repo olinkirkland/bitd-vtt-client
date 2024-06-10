@@ -339,7 +339,7 @@ const gangCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.edges.map(
       (edge: { name: string; description: string }) => ({
         ...edge,
-        id: 'edge-' + name,
+        id: 'edge-' + edge.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -348,7 +348,7 @@ const gangCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.flaws.map(
       (flaw: { name: string; description: string }) => ({
         ...flaw,
-        id: 'flaw-' + name,
+        id: 'flaw-' + flaw.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -394,7 +394,7 @@ const gangCohort: Cohort = {
     useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
       (harm: { name: string; description: string }) => ({
         ...harm,
-        id: 'harm-' + name,
+        id: 'harm-' + harm.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -411,7 +411,7 @@ const expertCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.edges.map(
       (edge: { name: string; description: string }) => ({
         ...edge,
-        id: 'edge-' + name,
+        id: 'edge-' + edge.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -420,7 +420,7 @@ const expertCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.flaws.map(
       (flaw: { name: string; description: string }) => ({
         ...flaw,
-        id: 'flaw-' + name,
+        id: 'flaw-' + flaw.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -431,7 +431,7 @@ const expertCohort: Cohort = {
     useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
       (harm: { name: string; description: string }) => ({
         ...harm,
-        id: 'harm-' + name,
+        id: 'harm-' + harm.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -448,7 +448,7 @@ const vehicleCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.vehicleEdges.map(
       (edge: { name: string; description: string }) => ({
         ...edge,
-        id: 'edge-' + name,
+        id: 'edge-' + edge.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -457,7 +457,7 @@ const vehicleCohort: Cohort = {
     codex?.sheets?.crew?.cohorts?.vehicleFlaws.map(
       (flaw: { name: string; description: string }) => ({
         ...flaw,
-        id: 'flaw-' + name,
+        id: 'flaw-' + flaw.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -466,7 +466,7 @@ const vehicleCohort: Cohort = {
     useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
       (harm: { name: string; description: string }) => ({
         ...harm,
-        id: 'harm-' + name,
+        id: 'harm-' + harm.name,
         quantity: 0,
         maxQuantity: 1
       })
@@ -508,7 +508,7 @@ function validate() {
     // Must have a gang type
     if (
       cohort.value.gangType?.reduce(
-        (total, type) => total + type.quantity,
+        (total, type) => total + (type.quantity || 0),
         0
       ) === 0
     ) {
@@ -528,18 +528,23 @@ function validate() {
   }
 
   // Must have at least one edge
-  if (
-    cohort.value.edges?.reduce((total, edge) => total + edge.quantity, 0) === 0
-  ) {
-    return 'You must choose at least one Edge.';
-  }
+  const edgesCount = cohort.value.edges?.reduce(
+    (total, edge) => total + (edge.quantity || 0),
+    0
+  );
+
+  if (edgesCount === 0) return 'You must choose at least one Edge.';
 
   // Must have at least the same number of flaws as edges
-  if (
-    cohort.value.flaws?.reduce((total, flaw) => total + flaw.quantity, 0) <
-    cohort.value.edges?.reduce((total, edge) => total + edge.quantity, 0)
-  ) {
-    return 'You must choose at least the same number of Flaws as Edges.';
+  const flawsCount = cohort.value.flaws?.reduce(
+    (total, flaw) => total + (flaw.quantity || 0),
+    0
+  );
+
+  console.log(cohort.value.flaws.map((f) => f.quantity));
+
+  if (edgesCount > 0 && flawsCount < edgesCount) {
+    return `You must choose at least the same number of Flaws (${flawsCount}) as Edges (${edgesCount}).`;
   }
 
   return null;
