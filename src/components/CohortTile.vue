@@ -17,13 +17,21 @@
         </h2>
       </div>
 
-      <div v-else>
+      <div v-else-if="props.cohort.cohortType === 'expert'">
         <h3>
           <span class="harm" v-if="harm">{{ harm }}!</span>
           Expert
         </h3>
         <h1>{{ props.cohort.name }}</h1>
         <h2>{{ expertises.join(' & ') }}</h2>
+      </div>
+
+      <div v-else-if="props.cohort.cohortType === 'vehicle'">
+        <h3>
+          <span class="harm" v-if="harm">{{ harm }}!</span>
+          Vehicle
+        </h3>
+        <h1>{{ props.cohort.name }}</h1>
       </div>
 
       <button

@@ -159,6 +159,34 @@
             "name": "Wild",
             "description": "Drunken and loud-mouthed."
           }
+        ],
+        "vehicleEdges": [
+          {
+            "name": "Nimble",
+            "description": "The vehicle handles easily. Consider this an assist for tricky maneuvers."
+          },
+          {
+            "name": "Simple",
+            "description": "The vehicle is easy to repair. Remove all of its harm during downtime."
+          },
+          {
+            "name": "Sturdy",
+            "description": "The vehicle keeps operating even when broken."
+          }
+        ],
+        "vehicleFlaws": [
+          {
+            "name": "Costly",
+            "description": "The vehicle costs 1 coin per downtime to keep in operation."
+          },
+          {
+            "name": "Distinct",
+            "description": "The vehicle has memorable features. Take +1 heat when you use it on a score."
+          },
+          {
+            "name": "Finicky",
+            "description": "The vehicle has quirks that only one person understands. When operated without them, it has -1 quality."
+          }
         ]
       }
     }

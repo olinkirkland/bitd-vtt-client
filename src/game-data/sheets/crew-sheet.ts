@@ -16,7 +16,7 @@ export type Claim = Effectable & {
 };
 
 export type Cohort = Thing & {
-  cohortType: 'gang' | 'expert';
+  cohortType: 'gang' | 'expert' | 'vehicle';
   gangType?: Effectable[]; // Only for gang cohorts
   expertise1?: string; // Only for expert cohorts
   expertise2?: string; // Only for expert cohorts
@@ -2330,7 +2330,7 @@ export class Smugglers extends Crew {
         description:
           'Either a carriage or a boat, along with the relevant stable or boat-house.',
         quantity: i == 1 ? 1 : 0,
-        maxQuantity: 1
+        maxQuantity: 2
       });
   }
 }

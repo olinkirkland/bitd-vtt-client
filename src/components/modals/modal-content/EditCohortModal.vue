@@ -108,6 +108,20 @@
           </CollapsingShelf>
         </div>
 
+        <!-- Name (Vehicle) -->
+        <div class="input-group" v-if="props.propertyName === 'vehicle'">
+          <label for="name">Name</label>
+          <input
+            class="ignore-initial-focus"
+            type="text"
+            id="name"
+            v-model="cohort.name"
+            placeholder="A name for your Vehicle"
+            @focus="focus = 'name'"
+            @blur="updateIdFromName(cohort.name)"
+          />
+        </div>
+
         <div class="input-block">
           <div class="input-group">
             <label for="quality">Quality</label>
@@ -316,11 +330,11 @@ function randomizeName() {
   console.log(cohort.value.name);
 }
 
-const blankCohort: Cohort = {
+const gangCohort: Cohort = {
   id: uuidv4(),
   name: '',
   description: '',
-  cohortType: props.propertyName === 'gang' ? 'gang' : 'expert',
+  cohortType: 'gang',
   edges:
     codex?.sheets?.crew?.cohorts?.edges.map(
       (edge: { name: string; description: string }) => ({
@@ -339,46 +353,78 @@ const blankCohort: Cohort = {
         maxQuantity: 1
       })
     ) || [],
-  gangType:
-    props.propertyName === 'gang'
-      ? [
-          {
-            id: 'gangType-adepts',
-            name: 'Adepts',
-            description: 'Scholars, tinkerers, occultists, and chemists',
-            quantity: 0,
-            maxQuantity: 1
-          },
-          {
-            id: 'gangType-rooks',
-            name: 'Rooks',
-            description: 'Con artists, spies, and socialites',
-            quantity: 0,
-            maxQuantity: 1
-          },
-          {
-            id: 'gangType-rovers',
-            name: 'Rovers',
-            description: 'Sailors, carriage drivers, and scavengers',
-            quantity: 0,
-            maxQuantity: 1
-          },
-          {
-            id: 'gangType-skulks',
-            name: 'Skulks',
-            description: 'Scouts, infiltrators, and thieves',
-            quantity: 0,
-            maxQuantity: 1
-          },
-          {
-            id: 'gangType-thugs',
-            name: 'Thugs',
-            description: 'Killers, brawlers, and roustabouts',
-            quantity: 0,
-            maxQuantity: 1
-          }
-        ]
-      : [],
+  gangType: [
+    {
+      id: 'gangType-adepts',
+      name: 'Adepts',
+      description: 'Scholars, tinkerers, occultists, and chemists',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'gangType-rooks',
+      name: 'Rooks',
+      description: 'Con artists, spies, and socialites',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'gangType-rovers',
+      name: 'Rovers',
+      description: 'Sailors, carriage drivers, and scavengers',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'gangType-skulks',
+      name: 'Skulks',
+      description: 'Scouts, infiltrators, and thieves',
+      quantity: 0,
+      maxQuantity: 1
+    },
+    {
+      id: 'gangType-thugs',
+      name: 'Thugs',
+      description: 'Killers, brawlers, and roustabouts',
+      quantity: 0,
+      maxQuantity: 1
+    }
+  ],
+  harm:
+    useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
+      (harm: { name: string; description: string }) => ({
+        ...harm,
+        id: 'harm-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  quality: 0,
+  scale: 0
+};
+const expertCohort: Cohort = {
+  id: uuidv4(),
+  name: '',
+  description: '',
+  cohortType: 'expert',
+  edges:
+    codex?.sheets?.crew?.cohorts?.edges.map(
+      (edge: { name: string; description: string }) => ({
+        ...edge,
+        id: 'edge-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  flaws:
+    codex?.sheets?.crew?.cohorts?.flaws.map(
+      (flaw: { name: string; description: string }) => ({
+        ...flaw,
+        id: 'flaw-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
   expertise1: '',
   expertise2: '',
   harm:
@@ -393,9 +439,50 @@ const blankCohort: Cohort = {
   quality: 0,
   scale: 0
 };
+const vehicleCohort: Cohort = {
+  id: uuidv4(),
+  name: '',
+  description: '',
+  cohortType: 'vehicle',
+  edges:
+    codex?.sheets?.crew?.cohorts?.vehicleEdges.map(
+      (edge: { name: string; description: string }) => ({
+        ...edge,
+        id: 'edge-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  flaws:
+    codex?.sheets?.crew?.cohorts?.vehicleFlaws.map(
+      (flaw: { name: string; description: string }) => ({
+        ...flaw,
+        id: 'flaw-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  harm:
+    useGameStore().game?.codex?.sheets?.crew?.cohorts?.harm.map(
+      (harm: { name: string; description: string }) => ({
+        ...harm,
+        id: 'harm-' + name,
+        quantity: 0,
+        maxQuantity: 1
+      })
+    ) || [],
+  quality: 0,
+  scale: 0
+};
+const blankCohorts = {
+  gang: gangCohort,
+  expert: expertCohort,
+  vehicle: vehicleCohort
+};
 
 const cohort = ref({
-  ...(props.cohort || blankCohort)
+  ...(props.cohort ||
+    blankCohorts[props.propertyName as 'gang' | 'expert' | 'vehicle'])
 });
 
 function updateIdFromName(name: string) {

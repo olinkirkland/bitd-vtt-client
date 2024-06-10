@@ -592,6 +592,13 @@
               :class="{
                 disabled: !quantityById('like-part-of-the-family')
               }"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'vehicle',
+                  idPrefix: sheet.crewType + '-vehicle',
+                  onCreateNew: onCreateCohort
+                })
+              "
             >
               <span>New Vehicle</span>
             </button>
