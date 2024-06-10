@@ -618,7 +618,7 @@
             />
           </div>
           <p v-if="cohorts.length == 0">
-            <em>❖ Your crew hasn't recruited any cohorts yet</em>
+            <em>❖ Your crew hasn't recruited any cohorts</em>
           </p>
         </section>
       </div>

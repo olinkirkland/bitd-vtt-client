@@ -4,7 +4,7 @@
       <div v-if="props.cohort.cohortType === 'gang'">
         <h3>
           <span class="harm" v-if="harm">{{ harm }}!</span>
-          Gang
+          <span>{{ scaleText }}</span>
         </h3>
         <h1>
           {{ gangTypes?.map((gt) => gt.name).join(' & ') }}
@@ -74,6 +74,8 @@ import ModalController from '@/controllers/modal-controller';
 import { Cohort } from '@/game-data/sheets/crew-sheet';
 import { computed, defineProps } from 'vue';
 import EditCohortModal from './modals/modal-content/EditCohortModal.vue';
+import { useGameStore } from '@/stores/game-store';
+const codex = useGameStore().game?.codex;
 
 const props = defineProps<{
   cohort: Cohort;
@@ -85,6 +87,15 @@ const props = defineProps<{
 const gangTypes = computed(() =>
   props.cohort.gangType?.filter((gt) => gt.quantity > 0)
 );
+
+const scaleText = computed(() => {
+  const scaleTexts = [...codex.lexicon.gangs];
+  try {
+    return scaleTexts[props.cohort.scale];
+  } catch {
+    return '0-2 people';
+  }
+});
 
 const expertises = computed(() =>
   [props.cohort.expertise1].concat(
@@ -157,6 +168,10 @@ function onDeleteCohort(id: string) {
       text-align: left;
       opacity: 0.8;
       letter-spacing: 2px;
+
+      span {
+        font-size: inherit;
+      }
 
       > .harm {
         font-size: inherit;

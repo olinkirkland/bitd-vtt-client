@@ -192,6 +192,15 @@
     }
   },
   "lexicon": {
+    "gangs": [
+      "a tiny gang (1-2)",
+      "small gang (3-6)",
+      "medium gang (12)",
+      "large gang (20)",
+      "huge gang (40)",
+      "massive gang (80)",
+      "colossal gang (160)"
+    ],
     "districts": [
       {
         "name": "Brightstone",

@@ -145,7 +145,10 @@
           </div>
 
           <div class="input-group" v-if="props.propertyName === 'gang'">
-            <label for="scale">Scale</label>
+            <label for="scale"
+              >Scale
+              <label class="muted">{{ scaleText }}</label>
+            </label>
             <input
               class="ignore-initial-focus"
               type="number"
@@ -291,7 +294,7 @@ import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
 import { numberWord } from '@/util/string';
 import { v4 as uuidv4 } from 'uuid';
-import { defineProps, onMounted, onUnmounted, ref } from 'vue';
+import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 
@@ -329,6 +332,15 @@ function randomizeName() {
   cohort.value.name = `${firstName} ${lastName}`;
   console.log(cohort.value.name);
 }
+
+const scaleText = computed(() => {
+  const scaleTexts = [...codex.lexicon.gangs];
+  try {
+    return scaleTexts[cohort.value.scale];
+  } catch {
+    return '0-2 people';
+  }
+});
 
 const gangCohort: Cohort = {
   id: uuidv4(),
