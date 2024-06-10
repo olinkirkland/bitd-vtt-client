@@ -1,4 +1,5 @@
 import { useGameStore } from '@/stores/game-store';
+import { makeGang } from '../cohort-factory';
 import { Effectable, Person, Thing } from '../game-data-types';
 import Sheet from './sheet';
 
@@ -385,8 +386,6 @@ export class Assassins extends Crew {
       }
     ];
 
-    this.applyUpgradesDescriptionsFromCodex();
-
     this.claims = [
       {
         id: 'assassins-training-room',
@@ -456,7 +455,7 @@ export class Assassins extends Crew {
         name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
-        quantity: 1,
+        quantity: 0,
         maxQuantity: 1,
         adjacent: [
           Direction.NORTH,
@@ -561,6 +560,22 @@ export class Assassins extends Crew {
         maxQuantity: 1
       }
     ];
+
+    this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'assassins-lair')!.quantity = 1;
+
+    // Assassins start with Insight & Prowess training
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'insight'
+    )!.quantity = 1;
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'prowess'
+    )!.quantity = 1;
   }
 }
 
@@ -893,6 +908,20 @@ export class Bravos extends Crew {
     ];
 
     this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'bravos-lair')!.quantity = 1;
+
+    // Bravos start with Prowess
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'prowess'
+    )!.quantity = 1;
+
+    // Bravos start with a Thugs gang cohort
+    this.cohorts.push(makeGang('Thugs'));
   }
 }
 
@@ -1232,6 +1261,20 @@ export class Cult extends Crew {
     this.deityFeatures = '';
 
     this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'cult-lair')!.quantity = 1;
+
+    // Cult starts with Resolve
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'resolve'
+    )!.quantity = 1;
+
+    // Cult starts with a Adepts gang cohort
+    this.cohorts.push(makeGang('Adepts'));
   }
 }
 
@@ -1448,7 +1491,7 @@ export class Hawkers extends Crew {
         adjacent: [Direction.NORTH, Direction.EAST, Direction.SOUTH]
       },
       {
-        id: 'lair',
+        id: 'hawkers-lair',
         name: 'Lair',
         description: '',
         position: { x: 2, y: 1 },
@@ -1567,6 +1610,24 @@ export class Hawkers extends Crew {
     ];
 
     this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'hawkers-lair')!.quantity = 1;
+
+    // Hawkers start with Resolve
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'resolve'
+    )!.quantity = 1;
+
+    // Hawkers start with the Secure-lair upgrade
+    this.lairUpgrades.find(
+      (upgrade) => upgrade.id === 'secure-lair'
+    )!.quantity = 1;
+
+    console.log(this.lairUpgrades);
   }
 }
 
@@ -1895,6 +1956,22 @@ export class Shadows extends Crew {
     ];
 
     this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'shadows-lair')!.quantity = 1;
+
+    // Shadows start with Prowess
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'prowess'
+    )!.quantity = 1;
+
+    // Shadows start with the hidden upgrade
+    this.lairUpgrades.find(
+      (upgrade) => upgrade.id === 'hidden-lair'
+    )!.quantity = 1;
   }
 }
 
@@ -1911,7 +1988,7 @@ export class Smugglers extends Crew {
         id: 'like-part-of-the-family',
         name: 'Like Part of the Family',
         description:
-          'Create one of your vehicles as a cohort (use the vehicle edges and flaws, below). Its quality is equal to your Tier +1.',
+          'Create one of your vehicles as a cohort. Its quality is equal to your Tier +1.',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2227,6 +2304,34 @@ export class Smugglers extends Crew {
     ];
 
     this.applyUpgradesDescriptionsFromCodex();
+    this.applyStartingUpgrades();
+  }
+
+  applyStartingUpgrades() {
+    // Start with the lair
+    this.claims.find((claim) => claim.id === 'smugglers-lair')!.quantity = 1;
+
+    // Smugglers start with Prowess
+    this.trainingUpgrades.find(
+      (upgrade) => upgrade.id === 'prowess'
+    )!.quantity = 1;
+
+    // Remove the carriage and boat upgrades, and replace them with generic vehicles
+    this.lairUpgrades = this.lairUpgrades.filter(
+      (upgrade) =>
+        upgrade.id !== 'carriage-house' && upgrade.id !== 'boat-house'
+    );
+
+    // Smugglers start with one upgrade in one vehicle
+    for (let i = 1; i <= 2; i++)
+      this.lairUpgrades.push({
+        id: `vehicle-${i}`,
+        name: `Vehicle ${i}`,
+        description:
+          'Either a carriage or a boat, along with the relevant stable or boat-house.',
+        quantity: i == 1 ? 1 : 0,
+        maxQuantity: 1
+      });
   }
 }
 

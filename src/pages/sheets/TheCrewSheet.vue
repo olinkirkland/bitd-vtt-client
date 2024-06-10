@@ -586,6 +586,15 @@
             >
               <span>New Expert</span>
             </button>
+            <button
+              v-if="props.sheet.crewType === 'Smugglers'"
+              class="btn"
+              :class="{
+                disabled: !quantityById('like-part-of-the-family')
+              }"
+            >
+              <span>New Vehicle</span>
+            </button>
           </div>
           <div class="tile-list">
             <CohortTile
@@ -854,7 +863,12 @@ import EditEffectableModal from '@/components/modals/modal-content/EditEffectabl
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Effectable, Person } from '@/game-data/game-data-types';
+import {
+  Chooseable,
+  Effectable,
+  Person,
+  Thing
+} from '@/game-data/game-data-types';
 import {
   Claim,
   Cohort,
@@ -1282,6 +1296,25 @@ function onEditCohort(cohort: Cohort) {
       value: cohort
     }
   ]);
+}
+
+function quantityById(id: string) {
+  const { sheet } = props;
+  const list = [
+    ...sheet.crewUpgrades,
+    ...sheet.lairUpgrades,
+    ...sheet.trainingUpgrades,
+    ...sheet.qualityUpgrades,
+    ...sheet.specialAbilities,
+    ...sheet.claims,
+    ...sheet.huntingGrounds
+  ];
+
+  const effectable: Effectable | undefined = list.find(
+    (thing) => thing.id === id
+  );
+  if (!effectable) return -1;
+  return effectable.quantity;
 }
 </script>
 
