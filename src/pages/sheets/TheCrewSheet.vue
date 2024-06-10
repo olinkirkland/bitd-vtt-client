@@ -28,6 +28,7 @@
               type="text"
               :value="props.sheet.name"
               @focus="focus = 'name'"
+              :placeholder="'Untitled ' + sheet.crewType"
               @change="
                 onChangeValue(
                   ($event.target as HTMLInputElement)?.value,
@@ -46,6 +47,7 @@
               type="text"
               :value="props.sheet.reputationType"
               @focus="focus = 'reputation-type'"
+              placeholder="Ambitious"
               @change="
                 onChangeValue(
                   ($event.target as HTMLInputElement)?.value,
@@ -66,39 +68,132 @@
               </div>
             </CollapsingShelf>
           </div>
+          <div class="input-group">
+            <label for="crew-description">Description</label>
+            <textarea
+              id="crew-description"
+              :value="props.sheet.description"
+              @focus="focus = 'description'"
+              placeholder="A group of scoundrels scraping by in the underworld"
+              @change="
+                onChangeValue(
+                  ($event.target as HTMLTextAreaElement)?.value,
+                  'description'
+                )
+              "
+            >
+            </textarea>
+            <CollapsingShelf :show="focus == 'description'">
+              <p>Describe your crew in a few sentences.</p>
+            </CollapsingShelf>
+          </div>
+          <div v-if="props.sheet.crewType === 'Cult'">
+            <!-- deityName   -->
+            <div class="input-group">
+              <label for="deity-name">Deity Name</label>
+              <div class="row">
+                <input
+                  id="deity-name"
+                  type="text"
+                  :value="(props.sheet as Cult).deityName"
+                  placeholder="By what name do you know your deity?"
+                  @focus="focus = 'deity-name'"
+                  @change="
+                    onChangeValue(
+                      ($event.target as HTMLInputElement)?.value,
+                      'deityName'
+                    )
+                  "
+                />
+                <button class="btn btn--icon" @click="randomizeDeityName">
+                  <i class="fas fa-random"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- deityFeatures -->
+            <div class="input-group">
+              <label for="deity-features">Deity Features </label>
+              <input
+                id="deity-features"
+                type="text"
+                @focus="focus = 'deity-features'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'deityFeatures'
+                  )
+                "
+                placeholder="Describe your deity in a few words"
+                :value="(props.sheet as Cult).deityFeatures"
+              />
+              <CollapsingShelf :show="focus == 'deity-features'">
+                <p>Choose two features from the list to describe your deity.</p>
+                <div class="text-list">
+                  <button
+                    class="btn btn--text"
+                    v-for="feature in [
+                      'Alluring',
+                      'Cruel',
+                      'Ferocious',
+                      'Monstrous',
+                      'Radiant',
+                      'Sinister',
+                      'Serene',
+                      'Transcendent'
+                    ]"
+                    :key="feature"
+                    @mousedown="
+                      onChangeValue(
+                        (sheet as Cult).deityFeatures.length
+                          ? (sheet as Cult).deityFeatures +
+                              ', ' +
+                              feature.toLowerCase()
+                          : feature,
+                        'deityFeatures'
+                      )
+                    "
+                  >
+                    {{ feature }}
+                  </button>
+                </div>
+              </CollapsingShelf>
+            </div>
+          </div>
+
           <Divider />
           <div class="input-group">
             <label for="crew-lair">Lair</label>
-            <input
-              id="crew-lair"
-              type="text"
-              :value="props.sheet.lair"
-              @focus="focus = 'lair'"
-              @change="
-                onChangeValue(
-                  ($event.target as HTMLInputElement)?.value,
-                  'lair'
-                )
-              "
-            />
-            <CollapsingShelf :show="focus == 'lair'">
-              <p>What does your lair look like?</p>
-              <button class="btn btn--icon" @mousedown="randomizeLair">
+            <div class="row">
+              <input
+                id="crew-lair"
+                type="text"
+                :value="props.sheet.lair"
+                placeholder="Where your crew hatches its schemes"
+                @focus="focus = 'lair'"
+                @change="
+                  onChangeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'lair'
+                  )
+                "
+              />
+              <button class="btn btn--icon" @click="randomizeLair">
                 <i class="fas fa-random"></i>
-                <span>Randomize</span>
               </button>
-            </CollapsingShelf>
+            </div>
             <div class="input-group">
               <label for="crew-lair-district">District</label>
               <input
                 id="crew-lair-district"
                 type="text"
                 :value="props.sheet.lairDistrict"
+                placeholder="Where do you call home?"
                 @focus="focus = 'lair-district'"
                 @change="
                   onChangeValue(
                     ($event.target as HTMLInputElement)?.value,
-                    'lair-district'
+                    'lairDistrict'
                   )
                 "
               />
@@ -119,17 +214,11 @@
           </div>
           <label
             >{{ sheet.huntingGroundsLabel }}
-            <label
-              v-if="
-                sheet.huntingGroundsLabel.toLowerCase() !== 'hunting grounds'
-              "
-              class="muted"
-              >(Hunting Grounds)</label
-            >
+            <label class="muted">(Choose one)</label>
           </label>
           <div class="row">
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedHuntingGrounds"
               label="Show only selected"
             />
@@ -137,7 +226,7 @@
           <div class="tile-list tile-list--mini">
             <EffectableTile
               v-for="ground in huntingGrounds"
-              :ability="ground"
+              :effectable="ground"
               :key="ground.id"
               :idPrefix="props.sheet.crewType"
               :propertyName="sheet.huntingGroundsLabel"
@@ -146,6 +235,9 @@
               :onDelete="() => {}"
             />
           </div>
+          <p v-if="huntingGrounds.length == 0">
+            <em>❖ No {{ sheet.huntingGroundsLabel }} selected</em>
+          </p>
         </section>
         <Divider />
         <section>
@@ -336,7 +428,7 @@
               <span>Edit Claims</span>
             </button>
             <!-- <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="lockClaimDependencies"
               label="Enforce roadmap"
             />| -->
@@ -368,7 +460,10 @@
               :value="props.sheet.crewExperience"
               @focus="focus = 'xp'"
               @change="
-                onChangeValue(($event.target as HTMLInputElement)?.value, 'xp')
+                onChangeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'crewExperience'
+                )
               "
             />
             <CollapsingShelf :show="focus == 'xp'">
@@ -393,7 +488,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedAbilities"
               label="Show only selected"
             />
@@ -402,7 +497,7 @@
             <EffectableTile
               v-for="ability in specialAbilities"
               :key="ability.id"
-              :ability="ability"
+              :effectable="ability"
               :idPrefix="props.sheet.crewType"
               :propertyName="'Special Ability'"
               :change="(quantity: number) => onChangeAbility(ability, quantity)"
@@ -415,7 +510,7 @@
             />
           </div>
           <p v-if="specialAbilities.length == 0">
-            <em>❖ No special abilities selected</em>
+            <em>❖ No Special Abilities selected</em>
           </p>
         </section>
         <Divider />
@@ -435,7 +530,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedContacts"
               label="Show only selected"
             />
@@ -457,6 +552,9 @@
               ]"
             />
           </div>
+          <p v-if="contacts.length == 0">
+            <em>❖ No Crew Contacts selected</em>
+          </p>
         </section>
 
         <Divider />
@@ -520,7 +618,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedCrewUpgrades"
               label="Show only selected"
             />
@@ -529,7 +627,7 @@
             <EffectableTile
               v-for="upgrade in crewUpgrades"
               :key="upgrade.id"
-              :ability="upgrade"
+              :effectable="upgrade"
               :idPrefix="props.sheet.crewType + '-upgrade'"
               :propertyName="'Upgrade'"
               :change="
@@ -573,7 +671,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedLairUpgrades"
               label="Show only selected"
             />
@@ -582,7 +680,7 @@
             <EffectableTile
               v-for="upgrade in lairUpgrades"
               :key="upgrade.id"
-              :ability="upgrade"
+              :effectable="upgrade"
               :idPrefix="props.sheet.crewType + '-lair-upgrade'"
               :propertyName="'Upgrade'"
               :change="
@@ -626,7 +724,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedTrainingUpgrades"
               label="Show only selected"
             />
@@ -635,7 +733,7 @@
             <EffectableTile
               v-for="upgrade in trainingUpgrades"
               :key="upgrade.id"
-              :ability="upgrade"
+              :effectable="upgrade"
               :idPrefix="props.sheet.crewType + '-training-upgrade'"
               :propertyName="'Upgrade'"
               :change="
@@ -679,7 +777,7 @@
               <span>New</span>
             </button>
             <Checkbox
-              icon="fa-check"
+              icon="fa-low-vision"
               v-model="showOnlySelectedQualityUpgrades"
               label="Show only selected"
             />
@@ -688,7 +786,7 @@
             <EffectableTile
               v-for="upgrade in qualityUpgrades"
               :key="upgrade.id"
-              :ability="upgrade"
+              :effectable="upgrade"
               :idPrefix="props.sheet.crewType + '-quality-upgrade'"
               :propertyName="'Upgrade'"
               :change="
@@ -754,7 +852,13 @@ import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.v
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { Effectable, Person } from '@/game-data/game-data-types';
-import { Claim, Cohort, Crew, Direction } from '@/game-data/sheets/crew-sheet';
+import {
+  Claim,
+  Cohort,
+  Crew,
+  Cult,
+  Direction
+} from '@/game-data/sheets/crew-sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
@@ -780,6 +884,9 @@ const carouselRef = ref<HTMLElement | null>(null);
 
 const focus = ref();
 function onBlur(event: FocusEvent) {
+  console.log(event.relatedTarget);
+  if ((event.relatedTarget as HTMLElement)?.closest('.shelf'))
+    return;
   focus.value = null;
 }
 
@@ -819,6 +926,12 @@ function randomizeLair() {
   const district = pick(districts);
   onChangeValue(name, 'lair');
   onChangeValue(district, 'lairDistrict');
+}
+
+function randomizeDeityName() {
+  const deityNames = codex.names.deityNames;
+  const deityName = pick(deityNames);
+  onChangeValue(deityName, 'deityName');
 }
 
 /** Upgrades */

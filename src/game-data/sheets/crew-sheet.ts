@@ -29,6 +29,7 @@ export type Cohort = Thing & {
 
 export class Crew extends Sheet {
   name: string = 'Untitled Crew';
+  description: string = '';
   reputationType: string = 'Ambitious'; // Ambitious, Brutal, Daring, Honorable, Professional, Savvy, Subtle, or Strange
   lair: string = 'An abandoned warehouse';
   lairDistrict: string = "Crow's Foot";
@@ -896,6 +897,9 @@ export class Bravos extends Crew {
 }
 
 export class Cult extends Crew {
+  public deityName: string;
+  public deityFeatures: string;
+
   constructor() {
     super();
 
@@ -1223,6 +1227,9 @@ export class Cult extends Crew {
         maxQuantity: 1
       }
     ];
+
+    this.deityName = '';
+    this.deityFeatures = '';
 
     this.applyUpgradesDescriptionsFromCodex();
   }

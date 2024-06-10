@@ -1,7 +1,10 @@
 <template>
-  <div class="ability-tile" :class="{ active: props.ability.quantity > 0 }">
+  <div
+    class="effectable-tile"
+    :class="{ active: props.effectable.quantity > 0 }"
+  >
     <div class="header">
-      <h2>{{ props.ability.name }}</h2>
+      <h2>{{ props.effectable.name }}</h2>
 
       <button
         v-if="props.onEdit"
@@ -9,10 +12,10 @@
         @click="
           ModalController.open(EditEffectableModal, {
             propertyName,
-            effectable: props.ability,
+            effectable: props.effectable,
             idPrefix: props.idPrefix,
-            onDelete: onDeleteAbility,
-            onEdit: onEditAbility
+            onDelete: onDeleteEffectable,
+            onEdit: onEditEffectable
           })
         "
       >
@@ -21,14 +24,14 @@
     </div>
     <div class="row selection-bar">
       <Checkbox
-        v-for="i in ability.maxQuantity"
-        :key="ability.id + i"
+        v-for="i in effectable.maxQuantity"
+        :key="effectable.id + i"
         v-model="checkboxValues"
         :value="i.toString()"
         @update:modelValue="updateQuantity(i.toString())"
       />
     </div>
-    <p>{{ props.ability.description }}</p>
+    <p>{{ props.effectable.description }}</p>
   </div>
 </template>
 
@@ -40,23 +43,23 @@ import Checkbox from './Checkbox.vue';
 import EditEffectableModal from './modals/modal-content/EditEffectableModal.vue';
 
 const props = defineProps<{
-  ability: Effectable;
+  effectable: Effectable;
   idPrefix: string;
   propertyName: string;
   change: (quantity: number) => void;
-  onEdit?: (ability: Effectable) => void;
+  onEdit?: (effectable: Effectable) => void;
   onDelete?: (id: string) => void;
 }>();
 
 function updateCheckboxes() {
-  checkboxValues.value = checkboxValuesFromQuantity(props.ability.quantity);
+  checkboxValues.value = checkboxValuesFromQuantity(props.effectable.quantity);
 }
 
 const checkboxValues = ref<string[]>([]);
 updateCheckboxes();
 
-// When the ability quantity changes, update the checkboxes
-watch(() => props.ability.quantity, updateCheckboxes);
+// When the effectable quantity changes, update the checkboxes
+watch(() => props.effectable.quantity, updateCheckboxes);
 
 // Watch for changes in the checkboxValues array
 function updateQuantity(lastClicked: string) {
@@ -81,19 +84,19 @@ function checkboxValuesFromQuantity(quantity: number) {
   return Array.from({ length: quantity }, (_, i) => (i + 1).toString());
 }
 
-function onEditAbility(ability: Effectable) {
+function onEditEffectable(effectable: Effectable) {
   if (!props.onEdit) return;
-  props.onEdit(ability);
+  props.onEdit(effectable);
 }
 
-function onDeleteAbility(id: string) {
+function onDeleteEffectable(id: string) {
   if (!props.onDelete) return;
   props.onDelete(id);
 }
 </script>
 
 <style lang="scss" scoped>
-.ability-tile {
+.effectable-tile {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -167,7 +170,7 @@ function onDeleteAbility(id: string) {
   }
 }
 
-.ability-tile.active {
+.effectable-tile.active {
   border: 1px solid var(--primary);
   background-color: var(--translucent-primary-light);
 

@@ -13,44 +13,40 @@
       ],
       "lairs": [
         {
-          "name": "Abandoned Clock Tower",
+          "name": "A crumbling watch tower",
           "districts": ["Six Towers", "Crow's Foot", "Coalridge"]
         },
         {
-          "name": "Sewers Beneath the City",
+          "name": "A half-sunken grotto beneath the city",
           "districts": ["Charterhall", "Nightmarket", "Barrowcleft"]
         },
         {
-          "name": "Old Lighthouse",
+          "name": "A dilapidated lighthouse",
           "districts": ["The Docks", "Nightmarket", "Crow's Foot"]
         },
         {
-          "name": "Disused Theater",
+          "name": "Backrooms of a merchant's shop",
           "districts": ["Silkshore", "Brightstone", "Six Towers"]
         },
         {
-          "name": "Forgotten Crypt",
+          "name": "A junked rail car",
           "districts": ["Dunslough", "Charhollow", "Coalridge"]
         },
         {
-          "name": "Luxury Bathhouse",
-          "districts": ["Brightstone", "Silkshore", "Charterhall"]
+          "name": "A rickety, tin-roofed shack",
+          "districts": ["Silkshore", "Charterhall"]
         },
         {
-          "name": "Library Catacombs",
+          "name": "A small, abandoned house",
           "districts": ["Charterhall", "Six Towers", "Brightstone"]
         },
         {
-          "name": "Derelict Ship",
+          "name": "Derelict ship, anchored in the canal",
           "districts": ["The Docks", "Nightmarket", "Crow's Foot"]
         },
         {
-          "name": "Tunnels Beneath a Bridge",
+          "name": "Tunnels beneath a bridge",
           "districts": ["Crow's Foot", "Charterhall", "Barrowcleft"]
-        },
-        {
-          "name": "Camouflaged Forest Bunker",
-          "districts": ["Dunslough", "Barrowcleft", "Charhollow"]
         }
       ],
       "upgrade-descriptions": {
@@ -350,6 +346,44 @@
       "Vale",
       "Vedat",
       "Walund"
+    ],
+    "deityNames": [
+      "The One Within Many",
+      "The Silver Fire",
+      "The Rapturous Chord",
+      "The Fallen Star",
+      "The Lord of the Depths",
+      "The Silent Song",
+      "The Lady of Thorns",
+      "Our Blood Spilled in Glory",
+      "The Ram",
+      "The Empty Vessel",
+      "The Closed Eye",
+      "The Hand of Sorrow",
+      "That Which Hungers",
+      "The Thousand Faces",
+      "The Web of Pain",
+      "The Pillars of Night",
+      "The Burned King",
+      "The Father of the Abyss",
+      "The Forsaken Legion",
+      "The Unbroken Sun",
+      "The Revelation",
+      "The Radiant Word",
+      "The Shrouded Queen",
+      "The Reconciler",
+      "The Cloud of Woe",
+      "The Broken Circle",
+      "The Conqueror",
+      "She Who Slays in Darkness",
+      "The Dream Beyond Death",
+      "The Blood Dimmed Tide",
+      "The Guardian of the Gates",
+      "The Maw of the Void",
+      "The Keeper of the Flame",
+      "The Throne of Judgment",
+      "The Lost Crown",
+      "The Golden Stag"
     ]
   }
 }

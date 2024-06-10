@@ -215,6 +215,10 @@ textarea {
   flex-direction: column;
   gap: 0.8rem;
   position: relative;
+
+  > .row {
+    margin-bottom: 1.6rem;
+  }
 }
 
 label {

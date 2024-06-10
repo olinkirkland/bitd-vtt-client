@@ -20,7 +20,7 @@
           <div class="tile-list tile-list--mini">
             <EffectableTile
               v-for="gangType in cohort.gangType"
-              :ability="gangType"
+              :effectable="gangType"
               :key="gangType.id"
               :idPrefix="props.idPrefix + '-gangType'"
               :propertyName="gangType.name"
@@ -156,7 +156,7 @@
           <div class="tile-list tile-list--mini">
             <EffectableTile
               v-for="edge in cohort.edges"
-              :ability="edge"
+              :effectable="edge"
               :key="edge.id"
               :idPrefix="props.idPrefix + '-edge'"
               :propertyName="edge.name"
@@ -184,7 +184,7 @@
           <div class="tile-list tile-list--mini">
             <EffectableTile
               v-for="flaw in cohort.flaws"
-              :ability="flaw"
+              :effectable="flaw"
               :key="flaw.id"
               :idPrefix="props.idPrefix + '-flaw'"
               :propertyName="flaw.name"
@@ -202,7 +202,7 @@
           <div class="tile-list tile-list--mini">
             <EffectableTile
               v-for="harm in cohort.harm"
-              :ability="harm"
+              :effectable="harm"
               :key="harm.id"
               :idPrefix="props.idPrefix + '-harm'"
               :propertyName="harm.name"
@@ -452,7 +452,7 @@ function onClickDelete() {
   }
 }
 
-:deep(.ability-tile .selection-bar::before) {
+:deep(.effectable-tile .selection-bar::before) {
   background-color: var(--dark);
 }
 </style>
