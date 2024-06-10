@@ -2,7 +2,7 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>Edit {{ propertyName }}</h2>
+        <h2>Edit {{ claim.name }}</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>

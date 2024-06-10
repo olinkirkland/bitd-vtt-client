@@ -2,7 +2,7 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>{{ props.onCreateNew ? 'Create' : 'Edit' }} {{ propertyName }}</h2>
+        <h2>{{ props.onCreateNew ? 'Create a new' : 'Edit' }} {{ propertyName }}</h2>
       </ModalHeader>
     </template>
     <template v-slot:content>

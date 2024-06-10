@@ -598,6 +598,9 @@
               :onDelete="onDeleteCohort"
             />
           </div>
+          <p v-if="props.sheet.cohorts.length == 0">
+            <em>❖ Your crew hasn't recruited any cohorts yet</em>
+          </p>
         </section>
       </div>
       <div class="upgrades" :class="{ active: currentIndex == 2 }">
@@ -885,8 +888,7 @@ const carouselRef = ref<HTMLElement | null>(null);
 const focus = ref();
 function onBlur(event: FocusEvent) {
   console.log(event.relatedTarget);
-  if ((event.relatedTarget as HTMLElement)?.closest('.shelf'))
-    return;
+  if ((event.relatedTarget as HTMLElement)?.closest('.shelf')) return;
   focus.value = null;
 }
 
@@ -1249,15 +1251,6 @@ function onEditHuntingGround(ground: Effectable) {
     }
   ]);
 }
-
-/** Cohorts */
-const gangs = computed(() => {
-  return props.sheet.cohorts.filter((a) => a.cohortType === 'gang');
-});
-
-const experts = computed(() => {
-  return props.sheet.cohorts.filter((a) => a.cohortType === 'expert');
-});
 
 /** Cohorts Functions */
 function onDeleteCohort(id: string) {

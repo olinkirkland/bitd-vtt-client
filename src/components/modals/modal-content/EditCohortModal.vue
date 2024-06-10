@@ -3,7 +3,8 @@
     <template v-slot:header>
       <ModalHeader closeButton>
         <h2>
-          {{ props.onCreateNew ? 'Create' : 'Edit' }} {{ props.propertyName }}
+          {{ props.onCreateNew ? 'Create a new' : 'Edit' }}
+          {{ props.propertyName }}
         </h2>
       </ModalHeader>
     </template>
@@ -234,6 +235,14 @@
           ></textarea>
         </div>
 
+        <div class="alert" v-if="errorMessage">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ errorMessage }}</span>
+          <button class="btn btn--icon close" @click="errorMessage = ''">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
         <section class="row" v-if="props.onCreateNew">
           <button
             class="btn btn--alt mobile-full-width"
@@ -350,8 +359,7 @@ const blankCohort: Cohort = {
           {
             id: 'gangType-rovers',
             name: 'Rovers',
-            description:
-              'Sailors, carriage drivers, and scavengers',
+            description: 'Sailors, carriage drivers, and scavengers',
             quantity: 0,
             maxQuantity: 1
           },
@@ -406,14 +414,66 @@ function updateIdFromName(name: string) {
   cohort.value.id = newId;
 }
 
+const errorMessage = ref<string | null>(null);
+
+function validate() {
+  if (cohort.value.cohortType === 'gang') {
+    // Must have a gang type
+    if (
+      cohort.value.gangType?.reduce(
+        (total, type) => total + type.quantity,
+        0
+      ) === 0
+    ) {
+      return 'You must choose a Gang Type.';
+    }
+  }
+  if (cohort.value.cohortType === 'expert') {
+    // Must have a name
+    if (!cohort.value.name) {
+      return 'You must give your Expert a name.';
+    }
+
+    // Must have an expertise
+    if (!cohort.value.expertise1) {
+      return 'You must choose an Expertise.';
+    }
+  }
+
+  // Must have at least one edge
+  if (
+    cohort.value.edges?.reduce((total, edge) => total + edge.quantity, 0) === 0
+  ) {
+    return 'You must choose at least one Edge.';
+  }
+
+  // Must have at least the same number of flaws as edges
+  if (
+    cohort.value.flaws?.reduce((total, flaw) => total + flaw.quantity, 0) <
+    cohort.value.edges?.reduce((total, edge) => total + edge.quantity, 0)
+  ) {
+    return 'You must choose at least the same number of Flaws as Edges.';
+  }
+
+  return null;
+}
+
 function onClickCreate() {
   if (!props.onCreateNew) return;
+
+  errorMessage.value = validate();
+  if (errorMessage.value) return;
+
   props.onCreateNew(cohort.value);
   ModalController.close();
 }
 
 function onClickSave() {
   if (!props.onEdit) return;
+
+  errorMessage.value = validate();
+  if (errorMessage.value) return;
+
   props.onEdit(cohort.value);
   ModalController.close();
 }
