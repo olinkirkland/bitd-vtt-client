@@ -14,8 +14,10 @@
             }"
           >
             <img :src="getSheetImage(sheet.image)?.url" />
-            <h2>Crew sheet</h2>
-            <h1>{{ sheet.crewType }}</h1>
+            <h2>{{ sheet.crewType }} Crew sheet</h2>
+            <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
+              {{ sheet.name }}
+            </h1>
             <p>
               {{ sheet.crewTypeDescription }}
             </p>
@@ -30,10 +32,7 @@
               @focus="focus = 'name'"
               :placeholder="'Untitled ' + sheet.crewType"
               @change="
-                onChangeValue(
-                  ($event.target as HTMLInputElement)?.value,
-                  'name'
-                )
+                changeValue(($event.target as HTMLInputElement)?.value, 'name')
               "
             />
             <CollapsingShelf :show="focus == 'name'">
@@ -49,7 +48,7 @@
               @focus="focus = 'reputation-type'"
               placeholder="Ambitious"
               @change="
-                onChangeValue(
+                changeValue(
                   ($event.target as HTMLInputElement)?.value,
                   'reputationType'
                 )
@@ -61,7 +60,7 @@
                 <button
                   class="btn btn--text"
                   v-for="reputation in codex.sheets.crew.reputations"
-                  @mousedown="onChangeValue(reputation, 'reputationType')"
+                  @mousedown="changeValue(reputation, 'reputationType')"
                 >
                   {{ reputation }}
                 </button>
@@ -76,7 +75,7 @@
               @focus="focus = 'description'"
               placeholder="A group of scoundrels scraping by in the underworld"
               @change="
-                onChangeValue(
+                changeValue(
                   ($event.target as HTMLTextAreaElement)?.value,
                   'description'
                 )
@@ -99,7 +98,7 @@
                   placeholder="By what name do you know your deity?"
                   @focus="focus = 'deity-name'"
                   @change="
-                    onChangeValue(
+                    changeValue(
                       ($event.target as HTMLInputElement)?.value,
                       'deityName'
                     )
@@ -119,7 +118,7 @@
                 type="text"
                 @focus="focus = 'deity-features'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'deityFeatures'
                   )
@@ -144,7 +143,7 @@
                     ]"
                     :key="feature"
                     @mousedown="
-                      onChangeValue(
+                      changeValue(
                         (sheet as Cult).deityFeatures.length
                           ? (sheet as Cult).deityFeatures +
                               ', ' +
@@ -172,7 +171,7 @@
                 placeholder="Where your crew hatches its schemes"
                 @focus="focus = 'lair'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'lair'
                   )
@@ -191,7 +190,7 @@
                 placeholder="Where do you call home?"
                 @focus="focus = 'lair-district'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'lairDistrict'
                   )
@@ -204,7 +203,7 @@
                     class="btn btn--text"
                     v-for="district in codex.lexicon.districts.map((d:any) => d.name)"
                     :key="district"
-                    @mousedown="onChangeValue(district, 'lairDistrict')"
+                    @mousedown="changeValue(district, 'lairDistrict')"
                   >
                     {{ district }}
                   </button>
@@ -251,7 +250,7 @@
                 :value="props.sheet.reputation"
                 @focus="focus = 'reputation'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'reputation'
                   )
@@ -270,7 +269,7 @@
                 :value="props.sheet.turf"
                 @focus="focus = 'turf'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'turf'
                   )
@@ -287,14 +286,14 @@
               <div class="row">
                 <button
                   class="btn btn--tab"
-                  @click="onChangeValue('weak', 'hold')"
+                  @click="changeValue('weak', 'hold')"
                   :class="{ active: props.sheet.hold == 'weak' }"
                 >
                   Weak
                 </button>
                 <button
                   class="btn btn--tab"
-                  @click="onChangeValue('strong', 'hold')"
+                  @click="changeValue('strong', 'hold')"
                   :class="{ active: props.sheet.hold == 'strong' }"
                 >
                   Strong
@@ -313,7 +312,7 @@
                 :value="props.sheet.tier"
                 @focus="focus = 'tier'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'tier'
                   )
@@ -337,7 +336,7 @@
                 :value="props.sheet.heat"
                 @focus="focus = 'heat'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'heat'
                   )
@@ -357,7 +356,7 @@
                 :value="props.sheet.wantedLevel"
                 @focus="focus = 'wanted-level'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'wantedLevel'
                   )
@@ -378,7 +377,7 @@
                 :value="props.sheet.coin"
                 @focus="focus = 'coin'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'coin'
                   )
@@ -398,7 +397,7 @@
                 :value="props.sheet.vaults"
                 @focus="focus = 'vaults'"
                 @change="
-                  onChangeValue(
+                  changeValue(
                     ($event.target as HTMLInputElement)?.value,
                     'vaults'
                   )
@@ -460,7 +459,7 @@
               :value="props.sheet.crewExperience"
               @focus="focus = 'xp'"
               @change="
-                onChangeValue(
+                changeValue(
                   ($event.target as HTMLInputElement)?.value,
                   'crewExperience'
                 )
@@ -884,7 +883,7 @@ import {
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
-import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
+import { computed, defineProps, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const WIDE_TILE_DESCRIPTION_THRESHOLD = 200;
 const codex = useGameStore().game?.codex;
@@ -910,7 +909,7 @@ function onBlur(event: FocusEvent) {
   focus.value = null;
 }
 
-function onChangeValue(value: any, partialPath: string) {
+function changeValue(value: any, partialPath: string) {
   console.log('onChangeValue', value, partialPath);
   const path = `/data/sheets/${props.sheet.id}/${partialPath}`;
   patch([
@@ -944,19 +943,21 @@ function randomizeLair() {
   const lairIdeas = codex.sheets.crew.lairs;
   const { name, districts } = pick(lairIdeas);
   const district = pick(districts);
-  onChangeValue(name, 'lair');
-  onChangeValue(district, 'lairDistrict');
+  changeValue(name, 'lair');
+  changeValue(district, 'lairDistrict');
 }
 
 function randomizeDeityName() {
   const deityNames = codex.names.deityNames;
   const deityName = pick(deityNames);
-  onChangeValue(deityName, 'deityName');
+  changeValue(deityName, 'deityName');
 }
 
 /** Upgrades */
 
-const showOnlySelectedCrewUpgrades = ref(false);
+const showOnlySelectedCrewUpgrades = ref(
+  localStorage.getItem('showOnlySelectedCrewUpgrades') === 'true'
+);
 const crewUpgrades = computed(() => {
   return (
     showOnlySelectedCrewUpgrades.value
@@ -965,7 +966,9 @@ const crewUpgrades = computed(() => {
   ).sort(sortByDescription);
 });
 
-const showOnlySelectedLairUpgrades = ref(false);
+const showOnlySelectedLairUpgrades = ref(
+  localStorage.getItem('showOnlySelectedLairUpgrades') === 'true'
+);
 const lairUpgrades = computed(() => {
   return (
     showOnlySelectedLairUpgrades.value
@@ -974,7 +977,9 @@ const lairUpgrades = computed(() => {
   ).sort(sortByDescription);
 });
 
-const showOnlySelectedTrainingUpgrades = ref(false);
+const showOnlySelectedTrainingUpgrades = ref(
+  localStorage.getItem('showOnlySelectedTrainingUpgrades') === 'true'
+);
 const trainingUpgrades = computed(() => {
   return (
     showOnlySelectedTrainingUpgrades.value
@@ -983,7 +988,9 @@ const trainingUpgrades = computed(() => {
   ).sort(sortByDescription);
 });
 
-const showOnlySelectedQualityUpgrades = ref(false);
+const showOnlySelectedQualityUpgrades = ref(
+  localStorage.getItem('showOnlySelectedQualityUpgrades') === 'true'
+);
 const qualityUpgrades = computed(() => {
   return (
     showOnlySelectedQualityUpgrades.value
@@ -1056,7 +1063,9 @@ function onCreateUpgrade(
 
 /** Contacts */
 
-const showOnlySelectedContacts = ref(false);
+const showOnlySelectedContacts = ref(
+  localStorage.getItem('showOnlySelectedContacts') === 'true'
+);
 const contacts = computed(() => {
   return showOnlySelectedContacts.value
     ? props.sheet.contacts.filter((a) => a.attitude !== 0)
@@ -1111,7 +1120,9 @@ function onCreateContact(contact: Person) {
 
 /** Special Abilities */
 
-const showOnlySelectedAbilities = ref(false);
+const showOnlySelectedAbilities = ref(
+  localStorage.getItem('showOnlySelectedAbilities') === 'true'
+);
 const specialAbilities = computed(() => {
   return (
     showOnlySelectedAbilities.value
@@ -1232,7 +1243,9 @@ function onChangeClaim(claim: any, quantity: number) {
 }
 
 /** Hunting Grounds */
-const showOnlySelectedHuntingGrounds = ref(false);
+const showOnlySelectedHuntingGrounds = ref(
+  localStorage.getItem('showOnlySelectedHuntingGrounds') === 'true'
+);
 const huntingGrounds = computed(() => {
   return (
     showOnlySelectedHuntingGrounds.value
@@ -1323,6 +1336,48 @@ function quantityById(id: string) {
   if (!effectable) return -1;
   return effectable.quantity;
 }
+
+watch(
+  [
+    showOnlySelectedHuntingGrounds,
+    showOnlySelectedAbilities,
+    showOnlySelectedContacts,
+    showOnlySelectedCrewUpgrades,
+    showOnlySelectedLairUpgrades,
+    showOnlySelectedTrainingUpgrades,
+    showOnlySelectedQualityUpgrades
+  ],
+  () => {
+    localStorage.setItem(
+      'showOnlySelectedHuntingGrounds',
+      showOnlySelectedHuntingGrounds.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedAbilities',
+      showOnlySelectedAbilities.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedContacts',
+      showOnlySelectedContacts.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedCrewUpgrades',
+      showOnlySelectedCrewUpgrades.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedLairUpgrades',
+      showOnlySelectedLairUpgrades.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedTrainingUpgrades',
+      showOnlySelectedTrainingUpgrades.value.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedQualityUpgrades',
+      showOnlySelectedQualityUpgrades.value.toString()
+    );
+  }
+);
 </script>
 
 <style scoped lang="scss">
@@ -1403,6 +1458,12 @@ function quantityById(id: string) {
 
   h1 {
     font-size: 4.8rem;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  h1.extra-long {
+    font-size: 3.2rem;
   }
 
   h2 {

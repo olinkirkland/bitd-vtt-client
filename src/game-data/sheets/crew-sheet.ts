@@ -29,6 +29,8 @@ export type Cohort = Thing & {
 };
 
 export class Crew extends Sheet {
+  ui: { [key: string]: boolean } = {};
+
   name: string = 'Untitled Crew';
   description: string = '';
   reputationType: string = 'Ambitious'; // Ambitious, Brutal, Daring, Honorable, Professional, Savvy, Subtle, or Strange

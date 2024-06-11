@@ -48,7 +48,7 @@ export function disconnectFromGame() {
 function onReceivePatch(data: { patches: Operation[] }) {
   try {
     const { patches } = data;
-    console.log('@game-controller: onReceivePatch:', patches);
+    console.log('patch:', patches);
     useGameStore().game = applyPatch(
       useGameStore().game || ({} as Game),
       patches
@@ -60,15 +60,15 @@ function onReceivePatch(data: { patches: Operation[] }) {
 }
 
 function onConnect() {
-  console.log('@game-controller: onOpen');
+  console.log('onOpen');
 }
 
 function onDisconnect() {
-  console.log('@game-controller: onClose');
+  console.log('onClose');
 }
 
 function onError(error: any) {
-  console.log('@game-controller: onError:', error);
+  console.log('onError:', error);
 }
 
 export async function patch(patches: Operation[]) {
