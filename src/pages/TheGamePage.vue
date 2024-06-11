@@ -31,7 +31,7 @@
           <i class="fas fa-angle-right"></i>
           <span>{{ currentSheet.name }}</span>
         </h2>
-        <button class="btn btn--icon delete" @click="onClickDeleteSheet">
+        <button class="btn btn--icon" @click="onClickDeleteSheet">
           <i class="fas fa-trash"></i>
           <span class="mobile-hidden">Delete</span>
         </button>
