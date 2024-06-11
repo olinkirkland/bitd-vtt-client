@@ -24,6 +24,17 @@
           </div>
 
           <div class="input-group">
+            <label for="crew-tier">Tier</label>
+            <NumberStepper
+              id="crew-tier"
+              :value="props.sheet.tier"
+              :min="0"
+              :max="5"
+              @change="changeValue($event, 'tier')"
+            />
+          </div>
+
+          <div class="input-group">
             <label for="crew-name">Name</label>
             <input
               id="crew-name"
@@ -86,11 +97,12 @@
               <p>Describe your crew in a few sentences.</p>
             </CollapsingShelf>
           </div>
-          <div v-if="props.sheet.crewType === 'Cult'">
+          <Divider v-if="props.sheet.crewType === 'Cult'" />
+          <div class="input-group" v-if="props.sheet.crewType === 'Cult'">
             <!-- deityName   -->
             <div class="input-group">
               <label for="deity-name">Deity Name</label>
-              <div class="row">
+              <div class="row flat">
                 <input
                   id="deity-name"
                   type="text"
@@ -112,7 +124,6 @@
 
             <!-- deityFeatures -->
             <div class="input-group">
-              <label for="deity-features">Deity Features </label>
               <input
                 id="deity-features"
                 type="text"
@@ -163,7 +174,7 @@
           <Divider />
           <div class="input-group">
             <label for="crew-lair">Lair</label>
-            <div class="row">
+            <div class="row flat">
               <input
                 id="crew-lair"
                 type="text"
@@ -182,7 +193,6 @@
               </button>
             </div>
             <div class="input-group">
-              <label for="crew-lair-district">District</label>
               <input
                 id="crew-lair-district"
                 type="text"
@@ -301,25 +311,6 @@
               </div>
               <CollapsingShelf :show="focus == 'hold'">
                 <p>How strong is your crew's hold on its turf?</p>
-              </CollapsingShelf>
-            </div>
-            <div class="input-group">
-              <label for="crew-tier">Tier</label>
-              <input
-                id="crew-tier"
-                type="number"
-                pattern="[0-9]*"
-                :value="props.sheet.tier"
-                @focus="focus = 'tier'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'tier'
-                  )
-                "
-              />
-              <CollapsingShelf :show="focus == 'tier'">
-                <p>What tier is your crew?</p>
               </CollapsingShelf>
             </div>
           </div>
@@ -452,22 +443,26 @@
         <section>
           <div class="input-group">
             <label for="crew-xp">Crew XP</label>
-            <input
+            <CheckboxBar
               id="crew-xp"
-              type="number"
-              pattern="[0-9]*"
               :value="props.sheet.crewExperience"
-              @focus="focus = 'xp'"
-              @change="
-                changeValue(
-                  ($event.target as HTMLInputElement)?.value,
-                  'crewExperience'
-                )
-              "
+              :max="9"
+              @change="changeValue($event, 'crewExperience')"
             />
-            <CollapsingShelf :show="focus == 'xp'">
-              <p>How much experience has your crew accumulated?</p>
-            </CollapsingShelf>
+            <div class="crew-xp-labels">
+              <div class="info-box">
+                <i class="fas fa-info"></i>
+                <p>
+                  For each item below, mark 1 xp.<br />If it occurred more than
+                  once, mark 2 xp.
+                </p>
+              </div>
+              <ul>
+                <li v-for="label in sheet.crewExperienceLabels">
+                  <p>{{ label }}</p>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
         <Divider />
@@ -861,10 +856,12 @@
 
 <script setup lang="ts">
 import Checkbox from '@/components/Checkbox.vue';
+import CheckboxBar from '@/components/CheckboxBar.vue';
 import ClaimTile from '@/components/ClaimTile.vue';
 import CohortTile from '@/components/CohortTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
+import NumberStepper from '@/components/NumberStepper.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
 import EditCohortModal from '@/components/modals/modal-content/EditCohortModal.vue';
@@ -1407,10 +1404,58 @@ watch(
 
     section {
       padding: 1rem;
-      color: yellow;
+      color: var(--light);
       display: flex;
       flex-direction: column;
       gap: 1rem;
+    }
+  }
+}
+
+.info-box {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 0.8rem 1.6rem;
+  background-color: var(--dark);
+  border-radius: 5px;
+  width: fit-content;
+
+  > i {
+    color: var(--light);
+    opacity: 0.4;
+    font-size: 2.4rem;
+  }
+  > p {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    opacity: 0.8;
+    font-style: italic;
+  }
+}
+
+.crew-xp-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  > ul {
+    background-color: var(--translucent-light);
+    padding: 1.6rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+
+    li {
+      > p {
+        display: flex;
+        &::before {
+          content: '❖';
+          display: flex;
+          margin-right: 0.4rem;
+        }
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+      }
     }
   }
 }

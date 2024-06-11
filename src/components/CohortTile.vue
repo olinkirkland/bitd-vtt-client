@@ -53,13 +53,13 @@
     <div class="edges-and-flaws">
       <ul>
         <li v-for="edge in edges" :key="edge">
-          <i class="fas fa-chevron-up"></i>
+          <i class="fas fa-angle-up"></i>
           <span>{{ edge }}</span>
         </li>
       </ul>
       <ul>
         <li v-for="flaw in flaws" :key="flaw">
-          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-angle-down"></i>
           <span>{{ flaw }}</span>
         </li>
       </ul>

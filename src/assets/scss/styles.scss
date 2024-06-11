@@ -218,6 +218,10 @@ textarea {
 
   > .row {
     margin-bottom: 1.6rem;
+
+    &.flat {
+      margin-bottom: 0;
+    }
   }
 }
 

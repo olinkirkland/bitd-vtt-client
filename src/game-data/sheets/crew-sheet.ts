@@ -50,6 +50,7 @@ export class Crew extends Sheet {
   vaults: number = 0; // 0-12
 
   crewExperience: number = 0; // 0-10
+  crewExperienceLabels: string[] = [];
 
   cohorts: Cohort[] = [];
 
@@ -247,6 +248,12 @@ export class Assassins extends Crew {
     this.crewType = 'Assassins';
     this.crewTypeDescription = 'Murderers for hire';
     this.image = 'e52f27b1-e5f6-42de-9889-c2d9aeeb3b0d';
+    this.crewExperienceLabels = [
+      'Execute a successful accident, disappearance, murder, or ransom operation.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew'
+    ];
     this.specialAbilities = [
       {
         id: 'assassins-deadly',
@@ -589,6 +596,12 @@ export class Bravos extends Crew {
     this.crewType = 'Bravos';
     this.crewTypeDescription = 'Mercenaries, thugs, & killers';
     this.image = 'ab9c33a6-2710-41ff-a814-edf6b648af54';
+    this.crewExperienceLabels = [
+      'Execute a successful battle, extortion, sabotage, or smash & grab operation.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew'
+    ];
     this.specialAbilities = [
       {
         id: 'dangerous',
@@ -938,6 +951,12 @@ export class Cult extends Crew {
     this.crewType = 'Cult';
     this.crewTypeDescription = 'Acolytes of a deity';
     this.image = '7544b3a4-0e4d-4758-9870-cd5b8f7774cb';
+    this.crewExperienceLabels = [
+      'Advance the agenda of your deity or embody its precepts in action.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+    ];
     this.specialAbilities = [
       {
         id: 'chosen',
@@ -1288,6 +1307,12 @@ export class Hawkers extends Crew {
     this.crewType = 'Hawkers';
     this.crewTypeDescription = 'Vice dealers';
     this.image = '13867125-73d8-4399-a550-db499a4eedfe';
+    this.crewExperienceLabels = [
+      'Acquire product supply, execute clandestine/covert sales, or secure new territory.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+    ];
     this.specialAbilities = [
       {
         id: 'silver-tongues',
@@ -1641,6 +1666,12 @@ export class Shadows extends Crew {
     this.crewType = 'Shadows';
     this.crewTypeDescription = 'Thieves, spies, and saboteurs';
     this.image = 'bbc1bf16-dc4d-4e97-a898-0bf9e688d327';
+    this.crewExperienceLabels = [
+      'Execute a successful espionage, sabotage, or theft operation.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+    ];
     this.specialAbilities = [
       {
         id: 'everyone-steals',
@@ -1985,6 +2016,12 @@ export class Smugglers extends Crew {
     this.crewType = 'Smugglers';
     this.crewTypeDescription = 'Suppliers of illicit goods';
     this.image = 'de509b5c-f37c-4975-9768-5e123d24e19b';
+    this.crewExperienceLabels = [
+      'Execute a successful smuggling or acquire new clients or contraband sources.',
+      'Contend with challenges above your current station.',
+      "Bolster your crew's reputation or develop a new one.",
+      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+    ];
     this.specialAbilities = [
       {
         id: 'like-part-of-the-family',
