@@ -14,13 +14,13 @@
             }"
           >
             <img :src="getSheetImage(sheet.image)?.url" />
-            <h2>{{ sheet.crewType }} Crew sheet</h2>
+            <h2 class="crew-type">{{ sheet.crewType }} Crew sheet</h2>
             <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
               {{ sheet.name }}
             </h1>
-            <p>
+            <h2 class="crew-type-description">
               {{ sheet.crewTypeDescription }}
-            </p>
+            </h2>
             <div class="input-group">
               <label for="crew-tier">Tier</label>
               <NumberStepper
@@ -1516,8 +1516,10 @@ watch(
 
   h1 {
     font-size: 4.8rem;
+    line-height: 0.8;
     overflow: hidden;
     text-align: center;
+    margin: 0.8rem;
   }
 
   h1.extra-long {
@@ -1528,12 +1530,16 @@ watch(
     font-size: 1.2rem;
     letter-spacing: 4px;
     opacity: 0.6;
-  }
+    width: 100%;
+    max-width: 40rem;
 
-  p {
-    opacity: 0.6;
-    font-style: italic;
-    display: none;
+    &.crew-type {
+      text-align: left;
+    }
+
+    &.crew-type-description {
+      text-align: right;
+    }
   }
 
   > img {
@@ -1569,6 +1575,14 @@ watch(
 
   .mobile-nav {
     display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .crew-type-card {
+    h2 {
+      text-align: center !important;
+    }
   }
 }
 </style>
