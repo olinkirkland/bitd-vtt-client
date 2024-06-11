@@ -99,7 +99,7 @@
           <div class="input-group" v-if="props.sheet.crewType === 'Cult'">
             <!-- deityName   -->
             <div class="input-group">
-              <label for="deity-name">Deity Name</label>
+              <label for="deity-name">Deity</label>
               <div class="row flat">
                 <input
                   id="deity-name"
