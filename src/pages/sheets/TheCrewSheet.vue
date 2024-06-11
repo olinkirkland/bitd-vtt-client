@@ -20,16 +20,6 @@
             <h2>
               {{ sheet.crewTypeDescription }}
             </h2>
-            <div class="input-group">
-              <label for="crew-tier">Tier</label>
-              <NumberStepper
-                id="crew-tier"
-                :value="props.sheet.tier"
-                :min="0"
-                :max="5"
-                @change="changeValue($event, 'tier')"
-              />
-            </div>
           </div>
 
           <div class="input-group">
@@ -230,7 +220,10 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list tile-list--mini">
+          <div
+            class="tile-list tile-list--mini"
+            v-if="huntingGrounds.length > 0"
+          >
             <EffectableTile
               v-for="ground in huntingGrounds"
               :effectable="ground"
@@ -242,7 +235,7 @@
               :onDelete="() => {}"
             />
           </div>
-          <p v-if="huntingGrounds.length == 0">
+          <p v-if="huntingGrounds.length == 0" class="no-tiles">
             <em>❖ No {{ sheet.huntingGroundsLabel }} selected</em>
           </p>
         </section>
@@ -269,12 +262,12 @@
               </CollapsingShelf>
             </div>
             <div class="input-group">
-              <label for="crew-turf">Turf</label>
               <NumberStepper
                 id="crew-turf"
                 :value="props.sheet.turf"
                 :min="0"
                 :max="5"
+                label="Turf"
                 @change="changeValue($event, 'turf')"
               />
             </div>
@@ -429,29 +422,41 @@
         class="abilities-xp-and-contacts"
         :class="{ active: currentIndex == 1 }"
       >
-        <section>
-          <div class="input-group">
-            <label for="crew-xp">Crew XP</label>
-            <CheckboxBar
-              id="crew-xp"
-              :value="props.sheet.crewExperience"
-              :max="9"
-              @change="changeValue($event, 'crewExperience')"
-            />
-            <div class="crew-xp-labels">
-              <div class="info-box">
-                <i class="fas fa-info"></i>
-                <p>
-                  For each item below, mark 1 xp.<br />If it occurred more than
-                  once, mark 2 xp.
-                </p>
-              </div>
-              <ul>
-                <li v-for="label in sheet.crewExperienceLabels">
-                  <p>{{ label }}</p>
-                </li>
-              </ul>
+        <section class="crew-tier-and-xp">
+          <div class="row">
+            <div class="input-group crew-tier">
+              <NumberStepper
+                id="crew-tier"
+                label="Tier"
+                :value="props.sheet.tier"
+                :min="0"
+                :max="5"
+                @change="changeValue($event, 'tier')"
+              />
             </div>
+            <div class="input-group crew-xp">
+              <label for="crew-xp">Crew XP</label>
+              <CheckboxBar
+                id="crew-xp"
+                :value="props.sheet.crewExperience"
+                :max="9"
+                @change="changeValue($event, 'crewExperience')"
+              />
+            </div>
+          </div>
+          <div class="crew-xp-labels">
+            <div class="info-box">
+              <i class="fas fa-info"></i>
+              <p>
+                For each item below, mark 1 xp.<br />If it occurred more than
+                once, mark 2 xp.
+              </p>
+            </div>
+            <ul>
+              <li v-for="label in sheet.crewExperienceLabels">
+                <p>{{ label }}</p>
+              </li>
+            </ul>
           </div>
         </section>
         <Divider />
@@ -476,7 +481,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="specialAbilities.length > 0">
             <EffectableTile
               v-for="ability in specialAbilities"
               :key="ability.id"
@@ -492,7 +497,7 @@
               }"
             />
           </div>
-          <p v-if="specialAbilities.length == 0">
+          <p v-if="specialAbilities.length == 0" class="no-tiles">
             <em>❖ No Special Abilities selected</em>
           </p>
         </section>
@@ -518,7 +523,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="contacts.length > 0">
             <PersonTile
               v-for="contact in contacts"
               :key="contact.id"
@@ -535,7 +540,7 @@
               ]"
             />
           </div>
-          <p v-if="contacts.length == 0">
+          <p v-if="contacts.length == 0" class="no-tiles">
             <em>❖ No Crew Contacts selected</em>
           </p>
         </section>
@@ -589,7 +594,7 @@
               <span>Vehicle</span>
             </button>
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="cohorts.length > 0">
             <CohortTile
               class="wide-tile"
               v-for="cohort in cohorts"
@@ -600,7 +605,7 @@
               :onDelete="onDeleteCohort"
             />
           </div>
-          <p v-if="cohorts.length == 0">
+          <p v-if="cohorts.length == 0" class="no-tiles">
             <em>❖ Your crew hasn't recruited any cohorts</em>
           </p>
         </section>
@@ -628,7 +633,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="crewUpgrades.length > 0">
             <EffectableTile
               v-for="upgrade in crewUpgrades"
               :key="upgrade.id"
@@ -652,7 +657,7 @@
               }"
             />
           </div>
-          <p v-if="crewUpgrades.length == 0">
+          <p v-if="crewUpgrades.length == 0" class="no-tiles">
             <em>❖ No crew upgrades selected</em>
           </p>
         </section>
@@ -681,7 +686,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="lairUpgrades.length > 0">
             <EffectableTile
               v-for="upgrade in lairUpgrades"
               :key="upgrade.id"
@@ -705,7 +710,7 @@
               }"
             />
           </div>
-          <p v-if="lairUpgrades.length == 0">
+          <p v-if="lairUpgrades.length == 0" class="no-tiles">
             <em>❖ No lair upgrades selected</em>
           </p>
         </section>
@@ -734,7 +739,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="trainingUpgrades.length > 0">
             <EffectableTile
               v-for="upgrade in trainingUpgrades"
               :key="upgrade.id"
@@ -758,7 +763,7 @@
               }"
             />
           </div>
-          <p v-if="trainingUpgrades.length == 0">
+          <p v-if="trainingUpgrades.length == 0" class="no-tiles">
             <em>❖ No training upgrades selected</em>
           </p>
         </section>
@@ -787,7 +792,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list">
+          <div class="tile-list" v-if="qualityUpgrades.length > 0">
             <EffectableTile
               v-for="upgrade in qualityUpgrades"
               :key="upgrade.id"
@@ -811,7 +816,7 @@
               }"
             />
           </div>
-          <p v-if="qualityUpgrades.length == 0">
+          <p v-if="qualityUpgrades.length == 0" class="no-tiles">
             <em>❖ No quality upgrades selected</em>
           </p>
         </section>
@@ -1437,13 +1442,14 @@ watch(
     li {
       > p {
         display: flex;
+        opacity: 0.8;
         &::before {
           content: '❖';
           display: flex;
           margin-right: 0.4rem;
         }
         font-size: 1.4rem;
-        line-height: 1.8rem;
+        // line-height: 1.8rem;
       }
     }
   }
@@ -1490,11 +1496,6 @@ watch(
       color: var(--primary);
       text-align: center;
     }
-
-    #crew-tier {
-      background-color: transparent;
-      padding: 0;
-    }
   }
 
   > h1,
@@ -1506,7 +1507,7 @@ watch(
 
   h1 {
     font-size: 4.8rem;
-    line-height: 0.8;
+    line-height: 1;
     overflow: hidden;
     text-align: center;
     margin: 0.8rem;
@@ -1533,6 +1534,25 @@ watch(
     object-position: 50% 50%;
     z-index: 0;
     filter: brightness(0.6);
+  }
+}
+
+.crew-tier-and-xp {
+  .row {
+    width: 100%;
+    gap: 0;
+    overflow: hidden;
+    height: 100%;
+
+    > .input-group.crew-xp {
+      gap: 0.6rem;
+      > label {
+        margin-left: 0.8rem;
+      }
+      max-width: 100%;
+      overflow: hidden;
+      align-self: flex-end;
+    }
   }
 }
 

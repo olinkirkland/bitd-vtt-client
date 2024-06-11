@@ -9,7 +9,10 @@
     >
       <i class="fas fa-minus-circle"></i>
     </button>
-    <h1>{{ value }}</h1>
+    <div class="content">
+      <h1>{{ value }}</h1>
+      <h2 v-if="props.label">{{ props.label }}</h2>
+    </div>
     <button
       @click="increase"
       class="btn btn--icon"
@@ -63,20 +66,29 @@ const decrease = () => {
   display: flex;
   align-items: center;
   width: fit-content;
-  background-color: var(--translucent-heavy);
-  height: 4rem;
-  border-radius: 99px;
+  padding: 0.8rem;
+  background-color: var(--translucent-light);
 
-  > h1 {
-    position: relative;
-    width: 2rem;
-    text-align: center;
-    font-size: 3.6rem;
-    top: -0.25rem;
+  > .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-size: 2.4rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+      color: var(--primary);
+    }
   }
 
   > button {
     height: 3.2rem;
+    width: auto;
+    margin: 0 0.4rem;
+    padding: 0.4rem;
   }
 }
 </style>

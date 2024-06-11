@@ -1,6 +1,7 @@
 // 🙥 🙧 ❖
 
 @import 'reset';
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
   // Shades
@@ -37,7 +38,7 @@
   --shadow: rgba(0, 0, 0, 0.5) 0px 2px 12px;
 
   // Font
-  --body-font: 'Georgia', serif;
+  --body-font: 'Libre Baskerville', 'Georgia', serif;
 }
 
 html,
@@ -51,7 +52,7 @@ body {
 
   * {
     font-family: var(--body-font);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 }
 

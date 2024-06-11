@@ -72,8 +72,8 @@ function updateQuantity(lastClicked: string) {
   display: flex;
   padding: 0.4rem 0.6rem;
   background-color: var(--translucent-light);
-  border-radius: 99px;
-  width: fit-content;
+  width: 100%;
+  overflow-x: auto;
 }
 
 h1 {
@@ -89,5 +89,12 @@ ul.checkbox-list {
   .flag {
     padding: 0.2rem;
   }
+}
+
+:deep(.flag .icon) {
+  border-radius: 0;
+  margin: 0;
+  width: 1.6rem;
+  height: 2.4rem;
 }
 </style>
