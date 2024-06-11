@@ -21,17 +21,16 @@
             <p>
               {{ sheet.crewTypeDescription }}
             </p>
-          </div>
-
-          <div class="input-group">
-            <label for="crew-tier">Tier</label>
-            <NumberStepper
-              id="crew-tier"
-              :value="props.sheet.tier"
-              :min="0"
-              :max="5"
-              @change="changeValue($event, 'tier')"
-            />
+            <div class="input-group">
+              <label for="crew-tier">Tier</label>
+              <NumberStepper
+                id="crew-tier"
+                :value="props.sheet.tier"
+                :min="0"
+                :max="5"
+                @change="changeValue($event, 'tier')"
+              />
+            </div>
           </div>
 
           <div class="input-group">
@@ -1486,13 +1485,27 @@ watch(
   box-shadow: var(--shadow);
   overflow: hidden;
   border-radius: 5px;
-  height: 20rem;
+  height: 24rem;
   margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 1rem;
+
+  .input-group {
+    margin-top: 2rem;
+    gap: 0;
+    label {
+      color: var(--primary);
+      text-align: center;
+    }
+
+    #crew-tier {
+      background-color: transparent;
+      padding: 0;
+    }
+  }
 
   > h1,
   h2,
@@ -1515,6 +1528,12 @@ watch(
     font-size: 1.2rem;
     letter-spacing: 4px;
     opacity: 0.6;
+  }
+
+  p {
+    opacity: 0.6;
+    font-style: italic;
+    display: none;
   }
 
   > img {

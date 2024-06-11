@@ -8,6 +8,7 @@
         :value="i.toString()"
         @update:modelValue="updateQuantity(i.toString())"
         :icon="i <= internalValue ? 'fa-check' : 'N/A'"
+        class="flag"
       />
     </ul>
   </div>
@@ -69,7 +70,10 @@ function updateQuantity(lastClicked: string) {
 <style scoped lang="scss">
 .checkbox-bar {
   display: flex;
-  padding: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background-color: var(--translucent-light);
+  border-radius: 99px;
+  width: fit-content; 
 }
 
 h1 {
@@ -80,17 +84,10 @@ h1 {
 
 ul.checkbox-list {
   display: flex;
-  gap: 0.2rem;
+  gap: 0;
 
-  li.flag {
-    position: relative;
-    width: 1.6rem;
-    height: 3.2rem;
-    border: 1px solid var(--light);
-
-    &.active {
-      background-color: red;
-    }
+  .flag {
+    padding: 0.2rem;
   }
 }
 </style>

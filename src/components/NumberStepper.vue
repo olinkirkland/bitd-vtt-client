@@ -57,13 +57,19 @@ const decrease = () => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .checkbox-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--translucent-light);
   padding: 1rem;
+  max-width: 24rem;
+
+  > button {
+    height: 3.2rem;
+    padding-top: 0.8rem;
+  }
 }
 
 h1 {
