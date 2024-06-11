@@ -29,6 +29,7 @@ const props = defineProps<{
   value: number;
   min?: number;
   max?: number;
+  label?: string;
 }>();
 
 const emit = defineEmits<{
@@ -61,20 +62,21 @@ const decrease = () => {
 .checkbox-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: var(--translucent-light);
-  padding: 1rem;
-  max-width: 24rem;
+  width: fit-content;
+  background-color: var(--translucent-heavy);
+  height: 4rem;
+  border-radius: 99px;
+
+  > h1 {
+    position: relative;
+    width: 2rem;
+    text-align: center;
+    font-size: 3.6rem;
+    top: -0.25rem;
+  }
 
   > button {
     height: 3.2rem;
-    padding-top: 0.8rem;
   }
-}
-
-h1 {
-  width: 2rem;
-  text-align: center;
-  font-size: 3.6rem;
 }
 </style>

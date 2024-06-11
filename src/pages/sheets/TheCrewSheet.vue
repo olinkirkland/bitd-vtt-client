@@ -270,22 +270,13 @@
             </div>
             <div class="input-group">
               <label for="crew-turf">Turf</label>
-              <input
+              <NumberStepper
                 id="crew-turf"
-                type="number"
-                pattern="[0-9]*"
                 :value="props.sheet.turf"
-                @focus="focus = 'turf'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'turf'
-                  )
-                "
+                :min="0"
+                :max="5"
+                @change="changeValue($event, 'turf')"
               />
-              <CollapsingShelf :show="focus == 'turf'">
-                <p>How much turf does your crew control?</p>
-              </CollapsingShelf>
             </div>
           </div>
           <div class="input-block">

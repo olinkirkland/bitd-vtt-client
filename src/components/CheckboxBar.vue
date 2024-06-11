@@ -70,10 +70,10 @@ function updateQuantity(lastClicked: string) {
 <style scoped lang="scss">
 .checkbox-bar {
   display: flex;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 0.6rem;
   background-color: var(--translucent-light);
   border-radius: 99px;
-  width: fit-content; 
+  width: fit-content;
 }
 
 h1 {
