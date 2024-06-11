@@ -14,11 +14,10 @@
             }"
           >
             <img :src="getSheetImage(sheet.image)?.url" />
-            <h2 class="crew-type">{{ sheet.crewType }} Crew sheet</h2>
             <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
               {{ sheet.name }}
             </h1>
-            <h2 class="crew-type-description">
+            <h2>
               {{ sheet.crewTypeDescription }}
             </h2>
             <div class="input-group">
@@ -1530,16 +1529,7 @@ watch(
     font-size: 1.2rem;
     letter-spacing: 4px;
     opacity: 0.6;
-    width: 100%;
-    max-width: 40rem;
-
-    &.crew-type {
-      text-align: left;
-    }
-
-    &.crew-type-description {
-      text-align: right;
-    }
+    text-align: center;
   }
 
   > img {
@@ -1575,14 +1565,6 @@ watch(
 
   .mobile-nav {
     display: flex;
-  }
-}
-
-@media (max-width: 767px) {
-  .crew-type-card {
-    h2 {
-      text-align: center !important;
-    }
   }
 }
 </style>
