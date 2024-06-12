@@ -165,7 +165,7 @@ button.btn--tab {
 
   &.active {
     background-color: var(--translucent-light);
-    filter: brightness(1.1);
+    filter: brightness(1.2);
   }
 }
 
@@ -186,6 +186,7 @@ textarea {
 
   &::placeholder {
     color: var(--light);
+    opacity: 0.4;
     font-style: italic;
   }
 
@@ -245,6 +246,10 @@ label {
 
 .stretch {
   flex: 1;
+}
+
+.split {
+  justify-content: space-between;
 }
 
 .tile-list {

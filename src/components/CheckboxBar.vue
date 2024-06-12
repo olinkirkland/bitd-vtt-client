@@ -1,14 +1,14 @@
 <template>
-  <div class="checkbox-bar">
+  <div class="checkbox-bar" :class="{ 'coin-mode': props.coinMode }">
     <ul class="checkbox-list">
       <Checkbox
         v-for="i in props.max"
+        :class="{ locked: i > props.max - (props.locked ?? 0) }"
         :key="i"
         v-model="checkboxValues"
         :value="i.toString()"
         @update:modelValue="updateQuantity(i.toString())"
-        :icon="i <= internalValue ? 'fa-check' : 'N/A'"
-        class="flag"
+        :icon="getIcon(i)"
       />
     </ul>
   </div>
@@ -20,7 +20,9 @@ import Checkbox from './Checkbox.vue';
 
 const props = defineProps<{
   value: number;
+  locked?: number;
   max: number;
+  coinMode?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -45,6 +47,21 @@ watch(
     internalValue.value = newValue;
   }
 );
+
+function getIcon(i: number) {
+  // Is it locked?
+  if (i > props.max - (props.locked ?? 0)) return 'fas fa-lock';
+
+  // Is it checked AND coinMode?
+  if (props.coinMode && checkboxValues.value.includes(i.toString()))
+    return 'fas fa-crown';
+
+  // Is it checked?
+  if (checkboxValues.value.includes(i.toString())) return 'fas fa-check';
+
+  // Otherwise, return a blank icon (has to be some string)
+  return 'N/A';
+}
 
 function updateQuantity(lastClicked: string) {
   let values = checkboxValues.value;
@@ -73,28 +90,54 @@ function updateQuantity(lastClicked: string) {
   padding: 0.4rem 0.6rem;
   background-color: var(--translucent-light);
   width: 100%;
-  overflow-x: auto;
-}
 
-h1 {
-  width: 2rem;
-  text-align: center;
-  font-size: 3.6rem;
-}
-
-ul.checkbox-list {
-  display: flex;
-  gap: 0;
-
-  .flag {
-    padding: 0.2rem;
+  h1 {
+    width: 2rem;
+    text-align: center;
+    font-size: 3.6rem;
   }
-}
 
-:deep(.flag .icon) {
-  border-radius: 0;
-  margin: 0;
-  width: 1.6rem;
-  height: 2.4rem;
+  ul.checkbox-list {
+    display: flex;
+    gap: 0;
+
+    .checkbox-group {
+      padding: 0.2rem;
+    }
+  }
+
+  .locked {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  &.coin-mode {
+    // padding: 2rem 2.4rem;
+    // padding-bottom: 3.2rem;
+    padding-bottom: 1.4rem;
+    background: none;
+    width: fit-content;
+    ul.checkbox-list {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+
+      .checkbox-group {
+        border: 1px solid transparent;
+
+        &:nth-child(2n) {
+          transform: translateY(1rem);
+        }
+      }
+    }
+  }
+
+  &:not(.coin-mode) {
+    :deep(.icon) {
+      border-radius: 0;
+      margin: 0;
+      width: 1.6rem;
+      height: 2.4rem;
+    }
+  }
 }
 </style>

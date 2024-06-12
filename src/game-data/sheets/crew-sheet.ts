@@ -46,8 +46,7 @@ export class Crew extends Sheet {
   heat: number = 0; // 0-9
   wantedLevel: number = 0; // 0-4
 
-  coin: number = 0; // 0-4
-  vaults: number = 0; // 0-12
+  coin: number = 0; // 0-16
 
   crewExperience: number = 0; // 0-10
   crewExperienceLabels: string[] = [];
@@ -952,7 +951,7 @@ export class Cult extends Crew {
     this.crewTypeDescription = 'Acolytes of a deity';
     this.image = '7544b3a4-0e4d-4758-9870-cd5b8f7774cb';
     this.crewExperienceLabels = [
-      'Advance the agenda of your deity or embody its precepts in action.',
+      'Advance the agenda of your deity or embody its precepts.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
       'Express the goals, drives, inner conflict, or essential nature of the crew.'

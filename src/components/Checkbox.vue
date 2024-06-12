@@ -5,7 +5,7 @@
     @click="handleChange"
   >
     <div class="icon">
-      <i class="fas" :class="icon"></i>
+      <i class="fas" :class="icon" v-if="checked || !emptyWhenUnchecked"></i>
       <span v-if="!icon">{{ text }}</span>
     </div>
     <p>{{ label }}</p>
@@ -36,6 +36,11 @@ const props = defineProps({
   icon: {
     type: String,
     required: false
+  },
+  emptyWhenUnchecked: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 });
 
@@ -106,7 +111,7 @@ function handleChange(event: Event) {
 
     > i {
       color: var(--dark);
-      font-size: 1.2rem;
+      font-size: 1rem;
       flex: 0 0 auto;
     }
   }

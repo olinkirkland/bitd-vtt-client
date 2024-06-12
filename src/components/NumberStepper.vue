@@ -76,6 +76,8 @@ const decrease = () => {
 
     h1 {
       font-size: 2.4rem;
+      min-width: 2rem;
+      text-align: center;
     }
 
     h2 {

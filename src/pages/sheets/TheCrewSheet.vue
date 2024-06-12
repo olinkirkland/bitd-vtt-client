@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <div class="input-group">
+          <div class="input-group name-and-description">
             <label for="crew-name">Name</label>
             <input
               id="crew-name"
@@ -47,7 +47,24 @@
             <CollapsingShelf :show="focus == 'name'">
               <p>Choose a name for your crew.</p>
             </CollapsingShelf>
+            <textarea
+              id="crew-description"
+              :value="props.sheet.description"
+              @focus="focus = 'description'"
+              placeholder="A group of scoundrels scraping by in the underworld"
+              @change="
+                changeValue(
+                  ($event.target as HTMLTextAreaElement)?.value,
+                  'description'
+                )
+              "
+            >
+            </textarea>
+            <CollapsingShelf :show="focus == 'description'">
+              <p>Describe your crew in a few sentences.</p>
+            </CollapsingShelf>
           </div>
+
           <div class="input-group">
             <label for="reputation-type">Reputation</label>
             <input
@@ -74,25 +91,6 @@
                   {{ reputation }}
                 </button>
               </div>
-            </CollapsingShelf>
-          </div>
-          <div class="input-group">
-            <label for="crew-description">Description</label>
-            <textarea
-              id="crew-description"
-              :value="props.sheet.description"
-              @focus="focus = 'description'"
-              placeholder="A group of scoundrels scraping by in the underworld"
-              @change="
-                changeValue(
-                  ($event.target as HTMLTextAreaElement)?.value,
-                  'description'
-                )
-              "
-            >
-            </textarea>
-            <CollapsingShelf :show="focus == 'description'">
-              <p>Describe your crew in a few sentences.</p>
             </CollapsingShelf>
           </div>
           <Divider v-if="props.sheet.crewType === 'Cult'" />
@@ -219,6 +217,7 @@
               </CollapsingShelf>
             </div>
           </div>
+          <Divider />
           <label
             >{{ sheet.huntingGroundsLabel }}
             <label class="muted">(Choose one)</label>
@@ -253,24 +252,17 @@
         <section>
           <div class="input-block">
             <div class="input-group">
-              <label for="crew-rep">Rep</label>
-              <input
+              <label for="crew-rep">Rep & Turf</label>
+              <CheckboxBar
                 id="crew-rep"
-                type="number"
-                pattern="[0-9]*"
                 :value="props.sheet.reputation"
-                @focus="focus = 'reputation'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'reputation'
-                  )
-                "
+                :locked="props.sheet.turf"
+                :max="12"
+                @change="changeValue($event, 'reputation')"
               />
-              <CollapsingShelf :show="focus == 'reputation'">
-                <p>How much rep does your crew have?</p>
-              </CollapsingShelf>
             </div>
+          </div>
+          <div class="input-block turf-and-hold">
             <div class="input-group">
               <NumberStepper
                 id="crew-turf"
@@ -281,11 +273,9 @@
                 @change="changeValue($event, 'turf')"
               />
             </div>
-          </div>
-          <div class="input-block">
             <div class="input-group">
               <label for="crew-hold">Hold</label>
-              <div class="row">
+              <div class="row flat">
                 <button
                   class="btn btn--tab"
                   @click="changeValue('weak', 'hold')"
@@ -306,92 +296,69 @@
               </CollapsingShelf>
             </div>
           </div>
+          <InfoBox>
+            <p>
+              Completing a score earns your Crew 2 Rep.<br />Take +1 Rep per
+              Tier higher than your target, or -1 Rep per Tier lower.
+            </p>
+          </InfoBox>
+          <InfoBox>
+            <p>
+              When you fill the tracker, you can't earn more Rep until you do
+              one of the following, and reset the tracker.
+            </p>
+            <ul>
+              <li>
+                If your Hold is strong, increase your Tier by paying Coin equal
+                to 8x your new Tier. Reduce your Hold to Weak.
+              </li>
+              <li>If your Hold is weak, it becomes strong.</li>
+            </ul>
+          </InfoBox>
         </section>
         <Divider />
         <section>
-          <div class="input-block">
+          <div class="input-block heat-and-wanted-level">
             <div class="input-group">
-              <label for="crew-heat">Heat</label>
-              <input
+              <label for="crew-heat">Heat & Wanted Level</label>
+              <CheckboxBar
                 id="crew-heat"
-                type="number"
-                pattern="[0-9]*"
                 :value="props.sheet.heat"
-                @focus="focus = 'heat'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'heat'
-                  )
-                "
+                :max="9"
+                @change="changeValue($event, 'heat')"
               />
-              <CollapsingShelf :show="focus == 'heat'">
-                <p>How much heat is your crew generating?</p>
-              </CollapsingShelf>
             </div>
-
-            <div class="input-group">
-              <label for="crew-wanted-level">Wanted Level</label>
-              <input
-                id="crew-wanted-level"
-                type="number"
-                pattern="[0-9]*"
-                :value="props.sheet.wantedLevel"
-                @focus="focus = 'wanted-level'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'wantedLevel'
-                  )
-                "
-              />
-              <CollapsingShelf :show="focus == 'wanted-level'">
-                <p>How much attention is the law giving your crew?</p>
-              </CollapsingShelf>
-            </div>
+            <NumberStepper
+              id="crew-wanted-level"
+              :value="props.sheet.wantedLevel"
+              :min="0"
+              :max="5"
+              @change="changeValue($event, 'wantedLevel')"
+            />
           </div>
-          <div class="input-block">
+          <InfoBox>
+            <p>
+              When the tracker is full, increase the Wanted Level and clear all
+              the Heat.
+            </p>
+          </InfoBox>
+          <Divider />
+          <div class="input-block treasury">
             <div class="input-group">
-              <label for="crew-coin">Coin</label>
-              <input
+              <label for="crew-coin"
+                >Crew Treasury
+                <label class="muted">{{ vaultsText }}</label>
+              </label>
+              <CheckboxBar
                 id="crew-coin"
-                type="number"
-                pattern="[0-9]*"
                 :value="props.sheet.coin"
-                @focus="focus = 'coin'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'coin'
-                  )
-                "
+                :max="16"
+                :locked="16 - maxCoin"
+                :coinMode="true"
+                @change="changeValue($event, 'coin')"
               />
-              <CollapsingShelf :show="focus == 'coin'">
-                <p>How much coin does your crew have squirreled away?</p>
-              </CollapsingShelf>
             </div>
-
-            <div class="input-group">
-              <label for="crew-vaults">Vaults</label>
-              <input
-                id="crew-vaults"
-                type="number"
-                pattern="[0-9]*"
-                :value="props.sheet.vaults"
-                @focus="focus = 'vaults'"
-                @change="
-                  changeValue(
-                    ($event.target as HTMLInputElement)?.value,
-                    'vaults'
-                  )
-                "
-              />
-              <CollapsingShelf :show="focus == 'vaults'">
-                <p>
-                  Vaults represent the storage capacity for your crew's coin.
-                </p>
-              </CollapsingShelf>
-            </div>
+            <h1>{{ props.sheet.coin }}</h1>
           </div>
         </section>
         <Divider />
@@ -433,32 +400,26 @@
         :class="{ active: currentIndex == 1 }"
       >
         <section class="crew-xp-section">
-          <div class="row">
-            <i class="fas fa-angle-double-up"></i>
-            <div class="input-group crew-xp">
-              <label for="crew-xp">Crew XP</label>
-              <CheckboxBar
-                id="crew-xp"
-                :value="props.sheet.crewExperience"
-                :max="9"
-                @change="changeValue($event, 'crewExperience')"
-              />
-            </div>
+          <div class="input-group crew-xp">
+            <label for="crew-xp">Crew XP</label>
+            <CheckboxBar
+              id="crew-xp"
+              :value="props.sheet.crewExperience"
+              :max="9"
+              @change="changeValue($event, 'crewExperience')"
+            />
           </div>
-          <div class="crew-xp-labels">
-            <div class="info-box">
-              <i class="fas fa-info"></i>
-              <p>
-                For each item below, mark 1 xp.<br />If it occurred more than
-                once, mark 2 xp.
-              </p>
-            </div>
+          <InfoBox>
+            <p>
+              For each item below, mark 1 xp.<br />If it occurred more than
+              once, mark 2 xp.
+            </p>
             <ul>
               <li v-for="label in sheet.crewExperienceLabels">
-                <p>{{ label }}</p>
+                {{ label }}
               </li>
             </ul>
-          </div>
+          </InfoBox>
         </section>
         <Divider />
         <section>
@@ -856,6 +817,7 @@ import ClaimTile from '@/components/ClaimTile.vue';
 import CohortTile from '@/components/CohortTile.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
+import InfoBox from '@/components/InfoBox.vue';
 import NumberStepper from '@/components/NumberStepper.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditClaimsModal from '@/components/modals/modal-content/EditClaimsModal.vue';
@@ -912,6 +874,21 @@ function changeValue(value: any, partialPath: string) {
     }
   ]);
 }
+
+const maxCoin = computed(() => {
+  const vaults = quantityById('vault');
+  console.log('vault:', vaults);
+  if (vaults === 1) return 8;
+  if (vaults === 2) return 16;
+  return 4;
+});
+
+const vaultsText = computed(() => {
+  const vaults = quantityById('vault');
+  if (vaults === 1) return '& one Vault';
+  if (vaults === 2) return '& two Vaults';
+  return '';
+});
 
 function updateCurrentIndex(carousel: HTMLElement) {
   // Get the current index from the scroll position
@@ -1407,55 +1384,6 @@ watch(
   }
 }
 
-.info-box {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  padding: 0.8rem 1.6rem;
-  background-color: var(--dark);
-  border-radius: 5px;
-  width: fit-content;
-
-  > i {
-    color: var(--light);
-    opacity: 0.4;
-    font-size: 2.4rem;
-  }
-  > p {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    opacity: 0.8;
-    font-style: italic;
-  }
-}
-
-.crew-xp-labels {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  > ul {
-    background-color: var(--translucent-light);
-    padding: 1.6rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-
-    li {
-      > p {
-        display: flex;
-        opacity: 0.8;
-        &::before {
-          content: '❖';
-          display: flex;
-          margin-right: 0.4rem;
-        }
-        font-size: 1.4rem;
-        // line-height: 1.8rem;
-      }
-    }
-  }
-}
-
 .mobile-nav {
   display: none;
 
@@ -1507,7 +1435,7 @@ watch(
   }
 
   h1 {
-    font-size: 4.8rem;
+    font-size: 4rem;
     line-height: 1;
     overflow: hidden;
     text-align: center;
@@ -1539,21 +1467,42 @@ watch(
 }
 
 section.crew-xp-section {
-  .row {
-    > i {
-      margin-right: 0.4rem;
-      font-size: 4rem;
-      color: var(--translucent-primary-heavy);
+  .input-group.crew-xp {
+    gap: 0.6rem;
+    > label {
+      margin-left: 0.8rem;
     }
-    .input-group.crew-xp {
-      gap: 0.6rem;
-      > label {
-        margin-left: 0.8rem;
-      }
-      width: fit-content;
-      max-width: 100%;
-      overflow: hidden;
-    }
+    width: fit-content;
+    max-width: 100%;
+    overflow: hidden;
+  }
+}
+
+.turf-and-hold {
+  gap: 1;
+  display: flex;
+}
+
+.heat-and-wanted-level {
+  display: flex;
+  gap: 0;
+}
+
+.input-group.name-and-description {
+  #crew-name + .shelf {
+    margin-bottom: -0.8rem;
+  }
+}
+
+.input-block.treasury {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 6.4rem;
+    opacity: 0.6;
   }
 }
 

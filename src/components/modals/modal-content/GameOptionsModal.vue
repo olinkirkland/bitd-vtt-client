@@ -46,6 +46,17 @@
           </div>
         </section>
         <Divider />
+        <section>
+          <div class="input-group">
+            <label for="show-hints">Show Hints</label>
+            <Checkbox
+              v-model="useOptionsStore().options.showHints"
+              icon="fa-check"
+              :emptyWhenUnchecked="true"
+              label="Show rules hints on the Sheets"
+            />
+          </div>
+        </section>
         <button class="btn btn--alt" @click="onClickAbandonGame">
           <span> Leave Game </span>
         </button>
@@ -55,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import Checkbox from '@/components/Checkbox.vue';
 import { leaveGame } from '@/api/games';
 import Divider from '@/components/Divider.vue';
 import { patch } from '@/controllers/game-controller';
@@ -68,6 +80,7 @@ import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import ConfirmModal from './ConfirmModal.vue';
 import LoadingModal from './LoadingModal.vue';
+import { useOptionsStore } from '@/stores/options-store';
 
 const nameError = ref<string | null>(null);
 const gameName = ref(useGameStore().game?.name);
