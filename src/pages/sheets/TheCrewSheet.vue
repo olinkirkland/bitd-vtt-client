@@ -20,6 +20,16 @@
             <h2>
               {{ sheet.crewTypeDescription }}
             </h2>
+            <div class="input-group crew-tier">
+              <NumberStepper
+                id="crew-tier"
+                label="Tier"
+                :value="props.sheet.tier"
+                :min="0"
+                :max="5"
+                @change="changeValue($event, 'tier')"
+              />
+            </div>
           </div>
 
           <div class="input-group">
@@ -422,18 +432,9 @@
         class="abilities-xp-and-contacts"
         :class="{ active: currentIndex == 1 }"
       >
-        <section class="crew-tier-and-xp">
+        <section class="crew-xp-section">
           <div class="row">
-            <div class="input-group crew-tier">
-              <NumberStepper
-                id="crew-tier"
-                label="Tier"
-                :value="props.sheet.tier"
-                :min="0"
-                :max="5"
-                @change="changeValue($event, 'tier')"
-              />
-            </div>
+            <i class="fas fa-angle-double-up"></i>
             <div class="input-group crew-xp">
               <label for="crew-xp">Crew XP</label>
               <CheckboxBar
@@ -502,115 +503,6 @@
           </p>
         </section>
         <Divider />
-        <section>
-          <label for="contacts">Crew Contacts</label>
-          <div class="row">
-            <button
-              class="btn"
-              @click="
-                ModalController.open(EditPersonModal, {
-                  propertyName: 'Crew Contact',
-                  idPrefix: sheet.crewType + '-contact',
-                  onCreateNew: onCreateContact
-                })
-              "
-            >
-              <span>New</span>
-            </button>
-            <Checkbox
-              icon="fa-low-vision"
-              v-model="showOnlySelectedContacts"
-              label="Show only selected"
-            />
-          </div>
-          <div class="tile-list" v-if="contacts.length > 0">
-            <PersonTile
-              v-for="contact in contacts"
-              :key="contact.id"
-              :idPrefix="props.sheet.crewType + '-contact'"
-              propertyName="Crew Contact"
-              :person="contact"
-              :change="onChangeContact"
-              :onEdit="onEditContact"
-              :onDelete="onDeleteContact"
-              :options="[
-                // { value: -1, icon: 'fas fa-caret-down' },
-                // { value: 1, icon: 'fas fa-caret-up' },
-                { value: 1, text: '❖' }
-              ]"
-            />
-          </div>
-          <p v-if="contacts.length == 0" class="no-tiles">
-            <em>❖ No Crew Contacts selected</em>
-          </p>
-        </section>
-
-        <Divider />
-
-        <section>
-          <label for="cohorts">Cohorts</label>
-          <div class="row">
-            <button
-              class="btn"
-              @click="
-                ModalController.open(EditCohortModal, {
-                  propertyName: 'gang',
-                  idPrefix: sheet.crewType + '-gang',
-                  onCreateNew: onCreateCohort
-                })
-              "
-            >
-              <i class="fas fa-plus"></i>
-              <span>Gang</span>
-            </button>
-            <button
-              class="btn"
-              @click="
-                ModalController.open(EditCohortModal, {
-                  propertyName: 'expert',
-                  idPrefix: sheet.crewType + '-expert',
-                  onCreateNew: onCreateCohort
-                })
-              "
-            >
-              <i class="fas fa-plus"></i>
-              <span>Expert</span>
-            </button>
-            <button
-              v-if="props.sheet.crewType === 'Smugglers'"
-              class="btn"
-              :class="{
-                disabled: !quantityById('like-part-of-the-family')
-              }"
-              @click="
-                ModalController.open(EditCohortModal, {
-                  propertyName: 'vehicle',
-                  idPrefix: sheet.crewType + '-vehicle',
-                  onCreateNew: onCreateCohort
-                })
-              "
-            >
-              <i class="fas fa-plus"></i>
-              <span>Vehicle</span>
-            </button>
-          </div>
-          <div class="tile-list" v-if="cohorts.length > 0">
-            <CohortTile
-              class="wide-tile"
-              v-for="cohort in cohorts"
-              :key="cohort.id"
-              :cohort="cohort"
-              :idPrefix="props.sheet.crewType"
-              :onEdit="onEditCohort"
-              :onDelete="onDeleteCohort"
-            />
-          </div>
-          <p v-if="cohorts.length == 0" class="no-tiles">
-            <em>❖ Your crew hasn't recruited any cohorts</em>
-          </p>
-        </section>
-      </div>
-      <div class="upgrades" :class="{ active: currentIndex == 2 }">
         <section>
           <label for="crew-upgrades">Crew Upgrades</label>
           <div class="row">
@@ -818,6 +710,115 @@
           </div>
           <p v-if="qualityUpgrades.length == 0" class="no-tiles">
             <em>❖ No quality upgrades selected</em>
+          </p>
+        </section>
+      </div>
+      <div class="upgrades" :class="{ active: currentIndex == 2 }">
+        <section>
+          <label for="contacts">Crew Contacts</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditPersonModal, {
+                  propertyName: 'Crew Contact',
+                  idPrefix: sheet.crewType + '-contact',
+                  onCreateNew: onCreateContact
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              icon="fa-low-vision"
+              v-model="showOnlySelectedContacts"
+              label="Show only selected"
+            />
+          </div>
+          <div class="tile-list" v-if="contacts.length > 0">
+            <PersonTile
+              v-for="contact in contacts"
+              :key="contact.id"
+              :idPrefix="props.sheet.crewType + '-contact'"
+              propertyName="Crew Contact"
+              :person="contact"
+              :change="onChangeContact"
+              :onEdit="onEditContact"
+              :onDelete="onDeleteContact"
+              :options="[
+                // { value: -1, icon: 'fas fa-caret-down' },
+                // { value: 1, icon: 'fas fa-caret-up' },
+                { value: 1, text: '❖' }
+              ]"
+            />
+          </div>
+          <p v-if="contacts.length == 0" class="no-tiles">
+            <em>❖ No Crew Contacts selected</em>
+          </p>
+        </section>
+
+        <Divider />
+
+        <section>
+          <label for="cohorts">Cohorts</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'gang',
+                  idPrefix: sheet.crewType + '-gang',
+                  onCreateNew: onCreateCohort
+                })
+              "
+            >
+              <i class="fas fa-plus"></i>
+              <span>Gang</span>
+            </button>
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'expert',
+                  idPrefix: sheet.crewType + '-expert',
+                  onCreateNew: onCreateCohort
+                })
+              "
+            >
+              <i class="fas fa-plus"></i>
+              <span>Expert</span>
+            </button>
+            <button
+              v-if="props.sheet.crewType === 'Smugglers'"
+              class="btn"
+              :class="{
+                disabled: !quantityById('like-part-of-the-family')
+              }"
+              @click="
+                ModalController.open(EditCohortModal, {
+                  propertyName: 'vehicle',
+                  idPrefix: sheet.crewType + '-vehicle',
+                  onCreateNew: onCreateCohort
+                })
+              "
+            >
+              <i class="fas fa-plus"></i>
+              <span>Vehicle</span>
+            </button>
+          </div>
+          <div class="tile-list" v-if="cohorts.length > 0">
+            <CohortTile
+              class="wide-tile"
+              v-for="cohort in cohorts"
+              :key="cohort.id"
+              :cohort="cohort"
+              :idPrefix="props.sheet.crewType"
+              :onEdit="onEditCohort"
+              :onDelete="onDeleteCohort"
+            />
+          </div>
+          <p v-if="cohorts.length == 0" class="no-tiles">
+            <em>❖ Your crew hasn't recruited any cohorts</em>
           </p>
         </section>
       </div>
@@ -1537,21 +1538,21 @@ watch(
   }
 }
 
-.crew-tier-and-xp {
+section.crew-xp-section {
   .row {
-    width: 100%;
-    gap: 0;
-    overflow: hidden;
-    height: 100%;
-
-    > .input-group.crew-xp {
+    > i {
+      margin-right: 0.4rem;
+      font-size: 4rem;
+      color: var(--translucent-primary-heavy);
+    }
+    .input-group.crew-xp {
       gap: 0.6rem;
       > label {
         margin-left: 0.8rem;
       }
+      width: fit-content;
       max-width: 100%;
       overflow: hidden;
-      align-self: flex-end;
     }
   }
 }
