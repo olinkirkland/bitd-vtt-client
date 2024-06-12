@@ -343,22 +343,19 @@
             </p>
           </InfoBox>
           <Divider />
-          <div class="input-block treasury">
-            <div class="input-group">
-              <label for="crew-coin"
-                >Crew Treasury
-                <label class="muted">{{ vaultsText }}</label>
-              </label>
-              <CheckboxBar
-                id="crew-coin"
-                :value="props.sheet.coin"
-                :max="16"
-                :locked="16 - maxCoin"
-                :coinMode="true"
-                @change="changeValue($event, 'coin')"
-              />
-            </div>
-            <h1>{{ props.sheet.coin }}</h1>
+          <div class="input-group">
+            <label for="crew-coin"
+              >Crew Treasury
+              <label class="muted">{{ vaultsText }}</label>
+            </label>
+            <CheckboxBar
+              id="crew-coin"
+              :value="props.sheet.coin"
+              :max="16"
+              :locked="16 - maxCoin"
+              :coinMode="true"
+              @change="changeValue($event, 'coin')"
+            />
           </div>
         </section>
         <Divider />
@@ -376,17 +373,18 @@
             >
               <span>Edit Claims</span>
             </button>
-            <!-- <Checkbox
+            <Checkbox
               icon="fa-low-vision"
-              v-model="lockClaimDependencies"
-              label="Enforce roadmap"
-            />| -->
+              v-model="showClaimsDetails"
+              label="Show details"
+            />
           </div>
           <div class="claims-list">
             <ClaimTile
               v-for="claim in claims"
               :key="claim.id"
               :claim="claim"
+              :showDetails="showClaimsDetails"
               :idPrefix="props.sheet.crewType"
               propertyName="Claim"
               :neighborClaims="getNeighborClaims(claim)"
@@ -1165,7 +1163,7 @@ function sortClaimsByPosition(a: Claim, b: Claim) {
 
 /** Claims */
 
-const lockClaimDependencies = ref(true);
+const showClaimsDetails = ref(true);
 const claims = computed(() => {
   return props.sheet.claims.sort(sortClaimsByPosition);
 });

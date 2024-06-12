@@ -9,6 +9,8 @@
       <h2>{{ props.claim.name }}</h2>
     </div>
 
+    <p v-if="props.showDetails">{{ props.claim.description }}</p>
+
     <ul class="roadmap">
       <li
         v-for="direction in rotatedDirections"
@@ -29,6 +31,7 @@ import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps<{
   claim: Claim;
+  showDetails: boolean;
   idPrefix: string;
   propertyName: string;
   neighborClaims: { [key: string]: Claim }; // where the key is a Direction
@@ -87,7 +90,6 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
   flex-direction: column;
   width: 100%;
   min-height: 6rem;
-  max-height: 10rem;
   gap: 0.4rem;
   background-color: var(--translucent-light);
   padding: 1.2rem;
@@ -112,6 +114,12 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
       word-break: break-word;
     }
   }
+}
+
+p {
+  font-size: 1rem;
+  opacity: 0.8;
+  text-align: center;
 }
 
 .claim-tile.active {
@@ -152,7 +160,7 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
 }
 
 .claim-tile.small {
-  padding: 0.4rem;
+  padding: 0.8rem 0.4rem;
   h2 {
     font-size: 1.2rem;
   }
