@@ -9,7 +9,7 @@
       <h2>{{ props.claim.name }}</h2>
     </div>
 
-    <p v-if="props.showDetails">{{ props.claim.description }}</p>
+    <p v-if="props.showDetails" v-html="text(props.claim.description)"></p>
 
     <ul class="roadmap">
       <li
@@ -28,6 +28,7 @@
 <script setup lang="ts">
 import { Claim, Direction } from '@/game-data/sheets/crew-sheet';
 import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
+import { text } from '@/util/string';
 
 const props = defineProps<{
   claim: Claim;
@@ -89,6 +90,7 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 100%;
   min-height: 6rem;
   gap: 0.4rem;
   background-color: var(--translucent-light);
@@ -117,9 +119,13 @@ function rotateDirection(direction: Direction, clockwise = 1): Direction {
 }
 
 p {
-  font-size: 1rem;
   opacity: 0.8;
   text-align: center;
+  line-height: 1;
+
+  :deep(span) {
+    font-size: 1rem;
+  }
 }
 
 .claim-tile.active {

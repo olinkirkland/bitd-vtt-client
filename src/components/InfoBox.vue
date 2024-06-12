@@ -43,7 +43,7 @@ const props = defineProps<{
   :deep(ul) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 1.2rem;
 
     li {
       display: flex;
@@ -53,13 +53,6 @@ const props = defineProps<{
   :deep(*) {
     font-size: 1.2rem;
     line-height: 1.4;
-  }
-}
-
-@media (max-width: 768px) {
-  .info-box {
-    flex-direction: column;
-    gap: 1.6rem;
   }
 }
 </style>

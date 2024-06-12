@@ -37,15 +37,25 @@ export function text(str: string): string {
       pattern: /(\*|_)(.*?)\1/g,
       replacement: '<span class="em">$2</span>'
     },
+    // Paragraph end
+    {
+      pattern: /\n\n/g,
+      replacement: '<br class="paragraph-break" />'
+    },
     // Line break
     {
       pattern: /\n/g,
       replacement: '<br />'
     },
-    // Tagged: [/t foo] or [/tag bar] or [/rep baz] or [/anything qux]
+    // Tagged: [/dice bar]
+    {
+      pattern: /\[\/dice\s+([^\]]+)\]/g,
+      replacement: `<span class="t t--dice">$1<i class="fas fa-dice-three"></i></span>`
+    },
+    // Tagged: [/foo bar]
     {
       pattern: /\[\/(\w+)\s+([^\]]+)\]/g,
-      replacement: '<span class="t t--$1">$2</span>'
+      replacement: `<span class="t t--$1">$2</span>`
     }
   ];
 

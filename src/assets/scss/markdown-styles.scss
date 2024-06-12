@@ -15,19 +15,33 @@ span.markdown-text {
 
   > .t {
     white-space: nowrap;
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
 
     padding: 0.2rem 0.4rem;
     opacity: 0.8;
     border-radius: 3px;
     background-color: var(--light);
     color: var(--dark);
+
+    line-height: 1;
+
+    &--dice {
+      padding-right: 0.1rem;
+      background-color: transparent;
+      color: var(--light);
+      > i {
+        font-size: 1rem;
+      }
+    }
   }
 
-  > br {
-    margin-bottom: 0.6rem;
+  > br.paragraph-break {
+    margin-bottom: 1rem;
   }
 }

@@ -51,7 +51,7 @@
       ],
       "upgrade-descriptions": {
         "crew": {
-          "assassin-rigging": "You get 2 free load worth of weapon or gear items. For example, you could carry a pistol (a weapon) and burglary tools (gear) for zero load.",
+          "assassin-rigging": "[/load 2 free load] of weapon or gear items. For example, you could carry a pistol (a weapon) and burglary tools (gear) for zero load.",
           "ironhook-contacts": "Your Tier is effectively +1 higher in prison. This counts for any Tier-related element in prison, including the incarceration roll.",
           "elite-skulks": "All of your cohorts with the Skulks type get +1d to quality rolls for Skulk-related actions.",
           "elite-thugs": "All of your cohorts with the Thugs type get +1d to quality rolls for Thug-related actions.",

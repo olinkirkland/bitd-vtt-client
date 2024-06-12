@@ -288,16 +288,13 @@
                   Strong
                 </button>
               </div>
-              <CollapsingShelf :show="focus == 'hold'">
-                <p>How strong is your crew's hold on its turf?</p>
-              </CollapsingShelf>
             </div>
           </div>
           <InfoBox>
             <p
               v-html="
                 text(
-                  'Completing a score earns your Crew [/rep +2 Rep].\nTake [/rep +1 Rep] per *Tier* higher than your target, or [/rep -1 Rep] per *Tier* lower.'
+                  'Completing a score earns your Crew [/rep +2 Rep]\n\nTake [/rep +1 Rep] per *Tier* higher than your target, or [/rep -1 Rep] per *Tier* lower'
                 )
               "
             ></p>
@@ -306,7 +303,7 @@
             <p
               v-html="
                 text(
-                  `With a full tracker, the Crew can't earn more **Rep** until you do one of the following, then reset the tracker.`
+                  `With a full tracker, the Crew can't earn more **Rep** until you do one of the following, then reset the tracker`
                 )
               "
             ></p>
@@ -315,14 +312,12 @@
               <li
                 v-html="
                   text(
-                    `If your **Hold** is Strong, increase your *Tier* by paying [/coin Coin] equal to 8x your new *Tier*.\nReduce your **Hold** to Weak.`
+                    `If your **Hold** is Strong, increase your *Tier* by paying [/coin Coin] equal to 8x your new *Tier*\nReduce your **Hold** to Weak`
                   )
                 "
               ></li>
               <li
-                v-html="
-                  text(`If your **Hold** is Weak, increase it to Strong.`)
-                "
+                v-html="text(`If your **Hold** is Weak, increase it to Strong`)"
               ></li>
             </ul>
           </InfoBox>
@@ -351,13 +346,13 @@
             <p
               v-html="
                 text(
-                  'When the tracker is full, increase the **Wanted Level** and clear all your *Heat*.'
+                  'When the tracker is full, increase the **Wanted Level** and clear all your *Heat*'
                 )
               "
             ></p>
           </InfoBox>
           <Divider />
-          <div class="input-group">
+          <div class="input-group coin-group">
             <label for="crew-coin"
               >Crew Treasury
               <label class="muted">{{ vaultsText }}</label>
@@ -371,14 +366,13 @@
               @change="changeValue($event, 'coin')"
             />
             <InfoBox>
-              <p>
-                Most districts have crime bosses that expect smaller crews to
-                pay a tithe from their scores.
-              </p>
-              <p>
-                Is there a boss that you should be paying? Subtract Coin equal
-                to your Tier +1 when you pay a tithe.
-              </p>
+              <p
+                v-html="
+                  text(
+                    `Most *Districts* have crime bosses that expect smaller crews to pay a tithe from their scores\n\nIs there a boss that you should be paying? Subtract [/coin Coin] equal to your *Tier +1* when you pay a tithe`
+                  )
+                "
+              ></p>
             </InfoBox>
           </div>
         </section>
@@ -1563,8 +1557,12 @@ section.crew-xp-section {
   .input-block {
     grid-template-columns: 1fr;
     .input-group {
-      width: 100%;
+      // width: 100%;
     }
+  }
+
+  .coin-group {
+    align-items: center;
   }
 
   label {

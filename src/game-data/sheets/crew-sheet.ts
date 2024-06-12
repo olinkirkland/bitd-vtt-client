@@ -398,7 +398,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-training-room',
         name: 'Training Room',
-        description: '+1 scale for your Skulks cohorts',
+        description: '[/scale +1 scale]\nSkulks Cohorts',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -407,7 +407,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-vice-den',
         name: 'Vice Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -416,7 +416,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-fixer',
         name: 'Fixer',
-        description: '+2 coin for lower-class targets',
+        description: '[/coin +2 Coin]\nLower-class targets',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -425,7 +425,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-informants',
         name: 'Informants',
-        description: '+1d gather info for scores',
+        description: '[/dice +1] Gather Information',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -434,7 +434,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-hagfish-farm',
         name: 'Hagfish Farm',
-        description: 'Body disposal, +1d to reduce heat after killing',
+        description: 'Body disposal\n[/dice +1] to reduce *Heat* after killing',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -443,7 +443,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-victim-trophies',
         name: 'Victim Trophies',
-        description: '+1 rep per score',
+        description: '[/rep +1 Rep]\nper score',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -484,7 +484,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-cover-operation',
         name: 'Cover Operation',
-        description: '-2 heat per score',
+        description: '[/heat -2 Heat]\nper score',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -493,7 +493,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-protection-racket',
         name: 'Protection Racket',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -502,7 +502,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-infirmary',
         name: 'Infirmary',
-        description: '+1d to healing rolls',
+        description: '[/dice +1] to Healing',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -511,7 +511,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-envoy',
         name: 'Envoy',
-        description: '+2 coin for high-class targets',
+        description: '[/coin +2 Coin]\nHigh-class targets',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -520,7 +520,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-cover-identities',
         name: 'Cover Identities',
-        description: '+1d engagement for deception and social plans',
+        description: '[/dice +1] Engagement\n*Deception* and *Social plans*',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -529,7 +529,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-city-records',
         name: 'City Records',
-        description: '+1d engagement for stealth plans',
+        description: '[/dice +1] Engagement *Stealth plans*',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
