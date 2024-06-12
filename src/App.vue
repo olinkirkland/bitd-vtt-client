@@ -15,6 +15,7 @@ import TheModalContainer from './components/modals/TheModalContainer.vue';
 
 <style lang="scss">
 @import './assets/scss/styles.scss';
+@import './assets/scss/markdown-styles.scss';
 
 .page-layout {
   display: flex;

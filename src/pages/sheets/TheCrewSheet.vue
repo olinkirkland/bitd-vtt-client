@@ -218,10 +218,7 @@
             </div>
           </div>
           <Divider />
-          <label
-            >{{ sheet.huntingGroundsLabel }}
-            <label class="muted">(Choose one)</label>
-          </label>
+          <label>{{ sheet.huntingGroundsLabel }}</label>
           <div class="row">
             <Checkbox
               icon="fa-low-vision"
@@ -297,22 +294,36 @@
             </div>
           </div>
           <InfoBox>
-            <p>
-              Completing a score earns your Crew 2 Rep.<br />Take +1 Rep per
-              Tier higher than your target, or -1 Rep per Tier lower.
-            </p>
+            <p
+              v-html="
+                text(
+                  'Completing a score earns your Crew [/rep +2 Rep].\nTake [/rep +1 Rep] per *Tier* higher than your target, or [/rep -1 Rep] per *Tier* lower.'
+                )
+              "
+            ></p>
           </InfoBox>
           <InfoBox>
-            <p>
-              When you fill the tracker, you can't earn more Rep until you do
-              one of the following, and reset the tracker.
-            </p>
+            <p
+              v-html="
+                text(
+                  `With a full tracker, the Crew can't earn more **Rep** until you do one of the following, then reset the tracker.`
+                )
+              "
+            ></p>
+
             <ul>
-              <li>
-                If your Hold is strong, increase your Tier by paying Coin equal
-                to 8x your new Tier. Reduce your Hold to Weak.
-              </li>
-              <li>If your Hold is weak, it becomes strong.</li>
+              <li
+                v-html="
+                  text(
+                    `If your **Hold** is Strong, increase your *Tier* by paying [/coin Coin] equal to 8x your new *Tier*.\nReduce your **Hold** to Weak.`
+                  )
+                "
+              ></li>
+              <li
+                v-html="
+                  text(`If your **Hold** is Weak, increase it to Strong.`)
+                "
+              ></li>
             </ul>
           </InfoBox>
         </section>
@@ -337,10 +348,13 @@
             />
           </div>
           <InfoBox>
-            <p>
-              When the tracker is full, increase the Wanted Level and clear all
-              the Heat.
-            </p>
+            <p
+              v-html="
+                text(
+                  'When the tracker is full, increase the **Wanted Level** and clear all your *Heat*.'
+                )
+              "
+            ></p>
           </InfoBox>
           <Divider />
           <div class="input-group">
@@ -356,6 +370,16 @@
               :coinMode="true"
               @change="changeValue($event, 'coin')"
             />
+            <InfoBox>
+              <p>
+                Most districts have crime bosses that expect smaller crews to
+                pay a tithe from their scores.
+              </p>
+              <p>
+                Is there a boss that you should be paying? Subtract Coin equal
+                to your Tier +1 when you pay a tithe.
+              </p>
+            </InfoBox>
           </div>
         </section>
         <Divider />
@@ -407,6 +431,7 @@
               @change="changeValue($event, 'crewExperience')"
             />
           </div>
+
           <InfoBox>
             <p>
               For each item below, mark 1 xp.<br />If it occurred more than
@@ -417,6 +442,12 @@
                 {{ label }}
               </li>
             </ul>
+          </InfoBox>
+          <InfoBox>
+            <p>
+              When the tracker is full, choose a Special Ability or Upgrade and
+              clear the Crew's XP.
+            </p>
           </InfoBox>
         </section>
         <Divider />
@@ -835,6 +866,7 @@ import {
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
+import { text } from '@/util/string';
 import { computed, defineProps, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const WIDE_TILE_DESCRIPTION_THRESHOLD = 200;
@@ -1524,6 +1556,20 @@ section.crew-xp-section {
 
   .mobile-nav {
     display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .input-block {
+    grid-template-columns: 1fr;
+    .input-group {
+      width: 100%;
+    }
+  }
+
+  label {
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

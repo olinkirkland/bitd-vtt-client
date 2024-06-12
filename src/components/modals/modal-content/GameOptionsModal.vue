@@ -25,7 +25,7 @@
           </div>
         </section>
         <section class="invite">
-          <label>Invite Link</label>
+          <label>Invite a Player</label>
           <div class="row invite-block">
             <div class="row">
               <p class="muted text-center">{{ inviteLink }}</p>
@@ -46,9 +46,37 @@
           </div>
         </section>
         <Divider />
+        <section class="codex">
+          <label for="manage-codex">Manage Codex</label>
+
+          <InfoBox ignoreOptions>
+            <p class="muted">
+              The Codex contains descriptions and definitions that are made
+              available on the platform.
+            </p>
+          </InfoBox>
+
+          <p>
+            {{
+              codexHash === onlineCodexHash
+                ? 'The Codex matches the latest version.'
+                : 'A newer version of the Codex is available.'
+            }}
+          </p>
+
+          <button
+            class="btn mobile-full-width"
+            :class="{ disabled: codexHash === onlineCodexHash }"
+            @click="onClickResetCodex"
+          >
+            <i class="fas fa-sync"></i>
+            <span>Reset Codex</span>
+          </button>
+        </section>
+        <Divider />
         <section>
           <div class="input-group">
-            <label for="show-hints">Show Hints</label>
+            <label>Sheets Options</label>
             <Checkbox
               v-model="useOptionsStore().options.showHints"
               icon="fa-check"
@@ -57,36 +85,58 @@
             />
           </div>
         </section>
-        <button class="btn btn--alt" @click="onClickAbandonGame">
-          <span> Leave Game </span>
-        </button>
+        <section>
+          <div class="row">
+            <button
+              class="btn btn--alt mobile-full-width"
+              @click="onClickAbandonGame"
+            >
+              <span> Leave Game </span>
+            </button>
+          </div>
+        </section>
       </div>
     </template>
   </ModalFrame>
 </template>
 
 <script setup lang="ts">
-import Checkbox from '@/components/Checkbox.vue';
 import { leaveGame } from '@/api/games';
+import Checkbox from '@/components/Checkbox.vue';
 import Divider from '@/components/Divider.vue';
+import InfoBox from '@/components/InfoBox.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
 import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
+import { useOptionsStore } from '@/stores/options-store';
 import { PlayerRole } from '@/types/game';
 import { makeGameInviteCode } from '@/util/names';
+import stringHash from 'string-hash';
 import { computed, ref } from 'vue';
+import OnlineCodex from '../../../assets/data/codex.json';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
 import ConfirmModal from './ConfirmModal.vue';
 import LoadingModal from './LoadingModal.vue';
-import { useOptionsStore } from '@/stores/options-store';
 
 const nameError = ref<string | null>(null);
 const gameName = ref(useGameStore().game?.name);
 
 const inviteLink = computed(() => {
   return `${window.location.origin}/invite/${useGameStore().game?.inviteCode}`;
+});
+
+console.log(useGameStore().game?.codex?.sheets?.crew?.cohorts);
+
+const codexHash = computed(() => {
+  // Use string-hash library to hash the codex
+  return stringHash(JSON.stringify(useGameStore().game?.codex) ?? '');
+});
+
+const onlineCodexHash = computed(() => {
+  // Use string-hash library to hash the online codex
+  return stringHash(JSON.stringify(OnlineCodex));
 });
 
 function onChangeGameName() {
@@ -133,6 +183,16 @@ function onClickAbandonGame() {
     }
   });
 }
+
+function onClickResetCodex() {
+  patch([
+    {
+      op: 'replace',
+      path: '/codex',
+      value: OnlineCodex
+    }
+  ]);
+}
 </script>
 
 <style scoped lang="scss">
@@ -141,7 +201,6 @@ function onClickAbandonGame() {
 }
 
 .options {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -163,7 +222,7 @@ function onClickAbandonGame() {
 
   > .row {
     flex: 1;
-    overflow: hidden;
+    overflow-x: auto;
     background-color: var(--translucent-light);
     height: 4rem;
     padding-left: 1rem;
@@ -182,5 +241,15 @@ function onClickAbandonGame() {
   * {
     color: var(--light);
   }
+}
+
+section.codex {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.info-box {
+  background-color: var(--translucent-very-light);
 }
 </style>

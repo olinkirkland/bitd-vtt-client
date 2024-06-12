@@ -251,7 +251,7 @@ export class Assassins extends Crew {
       'Execute a successful accident, disappearance, murder, or ransom operation.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {
@@ -599,7 +599,7 @@ export class Bravos extends Crew {
       'Execute a successful battle, extortion, sabotage, or smash & grab operation.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {
@@ -954,7 +954,7 @@ export class Cult extends Crew {
       'Advance the agenda of your deity or embody its precepts.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {
@@ -1310,7 +1310,7 @@ export class Hawkers extends Crew {
       'Acquire product supply, execute clandestine/covert sales, or secure new territory.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {
@@ -1669,7 +1669,7 @@ export class Shadows extends Crew {
       'Execute a successful espionage, sabotage, or theft operation.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {
@@ -2019,7 +2019,7 @@ export class Smugglers extends Crew {
       'Execute a successful smuggling or acquire new clients or contraband sources.',
       'Contend with challenges above your current station.',
       "Bolster your crew's reputation or develop a new one.",
-      'Express the goals, drives, inner conflict, or essential nature of the crew.'
+      "Express the crew's goals, drives, inner conflict, or essential nature."
     ];
     this.specialAbilities = [
       {

@@ -1,5 +1,8 @@
 <template>
-  <div class="info-box" v-if="useOptionsStore().options.showHints">
+  <div
+    class="info-box"
+    v-if="useOptionsStore().options.showHints || props.ignoreOptions"
+  >
     <i class="fas fa-info"></i>
     <div>
       <slot></slot>
@@ -9,6 +12,10 @@
 
 <script setup lang="ts">
 import { useOptionsStore } from '@/stores/options-store';
+
+const props = defineProps<{
+  ignoreOptions?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -26,6 +33,7 @@ import { useOptionsStore } from '@/stores/options-store';
     font-size: 2rem;
     opacity: 0.4;
   }
+
   > div {
     display: flex;
     flex-direction: column;
@@ -39,13 +47,19 @@ import { useOptionsStore } from '@/stores/options-store';
 
     li {
       display: flex;
-      opacity: 0.8;
     }
   }
 
   :deep(*) {
     font-size: 1.2rem;
     line-height: 1.4;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-box {
+    flex-direction: column;
+    gap: 1.6rem;
   }
 }
 </style>

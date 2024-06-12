@@ -1,0 +1,33 @@
+span.markdown-text {
+  > .strong {
+    white-space: nowrap;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    border-bottom: 1px solid currentColor;
+  }
+
+  > .em {
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  > .t {
+    white-space: nowrap;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    padding: 0.2rem 0.4rem;
+    opacity: 0.8;
+    border-radius: 3px;
+    background-color: var(--light);
+    color: var(--dark);
+  }
+
+  > br {
+    margin-bottom: 0.6rem;
+  }
+}

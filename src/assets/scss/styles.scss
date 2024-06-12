@@ -12,6 +12,7 @@
   --dark-2: #44475a;
 
   //  Translucent
+  --translucent-very-light: rgba(0, 0, 0, 0.1);
   --translucent-light: rgba(0, 0, 0, 0.2);
   --translucent-heavy: rgba(0, 0, 0, 0.6);
   --translucent-primary-light: rgba(169, 134, 79, 0.1);
@@ -215,6 +216,8 @@ textarea {
 .input-group {
   display: flex;
   flex-direction: column;
+  // width: fit-content;
+  // max-width: 100%;
   gap: 0.8rem;
   position: relative;
 

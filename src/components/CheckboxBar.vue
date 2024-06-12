@@ -89,7 +89,7 @@ function updateQuantity(lastClicked: string) {
   display: flex;
   padding: 0.4rem 0.6rem;
   background-color: var(--translucent-light);
-  width: 100%;
+  width: fit-content;
 
   h1 {
     width: 2rem;
@@ -112,11 +112,8 @@ function updateQuantity(lastClicked: string) {
   }
 
   &.coin-mode {
-    // padding: 2rem 2.4rem;
-    // padding-bottom: 3.2rem;
     padding-bottom: 1.4rem;
     background: none;
-    width: fit-content;
     ul.checkbox-list {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
