@@ -64,128 +64,121 @@
           "elite-adepts": "Adepts Cohorts get [/dice +1] to *Quality Rolls* for Adept-related actions",
           "ironhook-contacts": "You have [/tier +1 Tier] in prison. This counts for any Tier-related element in prison, including the incarceration roll",
           "ritual-sanctum-in-lair": "A sacred and arcane workshop for occult practices and rituals",
-          "hardened": "Each PC gets [/trauma +1 Trauma Box] and may bring a PC with 4 trauma back into play. This costs three upgrades to unlock",
-          "ordained": "Each PC gets [/trauma +1 Trauma Box] and may bring a PC with 4 trauma back into play. This costs three upgrades to unlock",
+          "hardened": "Each PC gets [/trauma +1 Trauma Box] and may bring a PC with 4 *Trauma* back into play. This costs three upgrades to unlock",
+          "ordained": "Each PC gets [/trauma +1 Trauma Box] and may bring a PC with 4 *Trauma* back into play. This costs three upgrades to unlock",
           "composed": "Each PC gets [/stress +1 Stress Box] This costs three upgrades to unlock",
           "steady": "Each PC gets [/stress +1 Stress Box] This costs three upgrades to unlock",
           "underground-maps-and-passkeys": "You have easy passage through the underground canals, tunnels, and basements of the city",
           "camouflage": "Your vehicles are perfectly concealed when at rest. They blend in as part of the environment, or as an uninteresting civilian vehicle (your choice)",
           "barge": "You can move your lair to a new location as a *Downtime Activity"
         },
-        "categories": {
-          "lair": "Lair upgrades improve the crew's lair, making it more secure, more useful, or more comfortable.",
-          "training": "Training upgrades improve the crew's ability to earn xp during downtime.",
-          "quality": "improves the quality rating of all the PCs items of that type, beyond the quality established by the crew's Tier and fine items"
-        },
         "lair": {
-          "boat-house": "You have a boat, a dock on a waterway, and a small shack to store boating supplies. A second upgrade improves the boat with armor and more cargo capacity.",
-          "carriage-house": "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats. Horses are very rare in Doskvol—most carriages in the city use the large Akorosian goat as their draft animal.",
-          "cohort": "A cohort is a gang or a single expert NPC who works for your crew.",
-          "hidden-lair": "Your lair has a secret location and is disguised to hide it from view. If your lair is discovered, use two downtime activities and pay coin equal to your Tier to relocate it and hide it once again.",
-          "quarters": "Your lair includes living quarters for the crew. Without this upgrade, each PC sleeps elsewhere, and is vulnerable when they do so.",
-          "secure-lair": "Your lair has locks, alarms, and traps to thwart intruders. A second upgrade improves the defenses to include arcane measures that work against spirits. You might roll your crew's Tier if these measures are ever put to the test, to see how well they thwart an intruder.",
-          "vault": "Your lair has a secure vault, increasing your storage capacity for coin to 8. A second upgrade increases your capacity to 16. A separate part of your vault can be used as a holding cell.",
-          "workshop": "Your lair has a workshop appointed with tools for tinkering and alchemy, as well as a small library of books, documents, and maps. You may accomplish long-term projects with these assets without leaving your lair.",
-          "quality": "Each upgrade improves the quality rating of all the PCs' items of that type, beyond the quality established by the crew's Tier and fine items. You can improve the quality of Documents, Gear (covers Burglary Gear and Climbing Gear), Arcane Implements, Subterfuge Supplies, Tools (covers Demolitions Tools and Tinkering Tools), and Weapons. So, if you are Tier 0, with fine lockpicks (+1) and the Quality upgrade for gear (+1), you could contend equally with a Tier II quality lock."
+          "boat-house": "You have a boat, a dock on a waterway, and a small shack for storing boating supplies\n\nA second upgrade improves the boat with armor and more cargo capacity",
+          "carriage-house": "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats\n\nHorses are very rare in Doskvol—most carriages in the city use the large Akorosian goat as their draft animal",
+          "hidden-lair": "Your Lair is in a secret, hidden location. If it's discovered, use two *Downtime Activities* and pay [/coin Coin] equal to your *Tier* to relocate it and hide it again",
+          "quarters": "Your Lair includes living quarters for the Crew.\n\nWithout this upgrade, each PC sleeps elsewhere, and is vulnerable when they do so",
+          "secure-lair": "Your Lair has locks, alarms, and traps to thwart intruders. A second upgrade improves the defenses to include arcane measures that work against Spirits\n\nRoll your Crew's *Tier* if these measures are ever put to the test to see how well they thwart an intruder",
+          "vault": "Your Lair has a secure vault, increasing the Crew's storage capacity for *Coin* to 8. A separate part of your vault can be used as a holding cell\n\nA second upgrade increases the capacity to 16",
+          "workshop": "Your Lair has a workshop appointed with tools for tinkering and alchemy, as well as a small library of books, documents, and maps\n\nYou may accomplish long-term projects with these assets without leaving your Lair"
         },
         "training": {
-          "insight": "Earn 2 xp (instead of 1) when you train your Insight during downtime.",
-          "prowess": "Earn 2 xp (instead of 1) when you train your Prowess during downtime.",
-          "resolve": "Earn 2 xp (instead of 1) when you train your Resolve during downtime.",
-          "personal": "Earn 2 xp (instead of 1) when you train your Playbook during downtime.",
-          "mastery": "Your crew has access to master level training. You may advance your action ratings to 4 (until you unlock this upgrade, PC action ratings are capped at 3). This costs four upgrade boxes to unlock."
+          "insight": "Earn [/xp 2 XP] instead of 1 when you train **Insight** during Downtime",
+          "prowess": "Earn [/xp 2 XP] instead of 1 when you train **Prowess** during Downtime",
+          "resolve": "Earn [/xp 2 XP] instead of 1 when you train **Resolve** during Downtime",
+          "personal": "Earn [/xp 2 XP] instead of 1 when you train **Playbook** during Downtime",
+          "mastery": "The Crew gains access to master level training. You may advance your *Action Ratings* to 4\n\nThis costs four upgrades to unlock"
         },
         "quality": {
-          "documents": "Improves the quality rating of all the crew's documents.",
-          "gear": "Improves the quality rating of all the crew's Burglary Gear and Climbing Gear.",
-          "implements": "Improves the quality rating of all the crew's Arcane Implements.",
-          "supplies": "Improves the quality rating of all the crew's Subterfuge Supplies.",
-          "tools": "Improves the quality rating of all the crew's Demolitions Tools and Tinkering Tools.",
-          "weapons": "Improves the quality rating of all the crew's weapons."
+          "documents": "Improves the *Quality Rating* of the Crew's Documents",
+          "gear": "Improves the *Quality Rating* of the Crew's Burglary Gear and Climbing Gear",
+          "implements": "Improves the *Quality Rating* of the Crew's Arcane Implements",
+          "supplies": "Improves the *Quality Rating* of the Crew's Subterfuge Supplies",
+          "tools": "Improves the *Quality Rating* of the Crew's Demolitions Tools and Tinkering Tools",
+          "weapons": "Improves the *Quality Rating* of the Crew's Weapons"
         }
       },
       "cohorts": {
         "harm": [
           {
             "name": "Weakened",
-            "description": "Has reduced effect."
+            "description": "Reduced *Effect*"
           },
           {
             "name": "Impaired",
-            "description": "Operates with reduced quality (-1d)."
+            "description": "Operates with [/dice -1] *Quality*"
           },
           {
             "name": "Broken",
-            "description": "Can't do anything until they recover."
+            "description": "Can't do anything until they recover"
           },
           {
             "name": "Dead",
-            "description": "Destroyed. Spend Coin equal to your Tier +2 to restore."
+            "description": "Destroyed. Spend [/coin Coin] equal to your *Tier* +2 to restore"
           }
         ],
         "expertise": ["Doctor", "Investigator", "Occultist", "Assassin", "Spy"],
         "edges": [
           {
             "name": "Fearsome",
-            "description": "Terrifying in aspect and reputation."
+            "description": "Terrifying in aspect and reputation"
           },
           {
             "name": "Independent",
-            "description": "Can make good decisions and act on their own."
+            "description": "Can make good decisions and act on their own"
           },
           {
             "name": "Loyal",
-            "description": "Can't be bribed or turned against you."
+            "description": "Can't be bribed or turned against you"
           },
           {
             "name": "Tenacious",
-            "description": "Won't be deterred from a task."
+            "description": "Won't be deterred from a task"
           }
         ],
         "flaws": [
           {
             "name": "Principled",
-            "description": "Has an ethic or values that it won't betray."
+            "description": "Has an ethic or values that it won't betray"
           },
           {
             "name": "Savage",
-            "description": "Excessively violent and cruel."
+            "description": "Excessively violent and cruel"
           },
           {
             "name": "Unreliable",
-            "description": "Not always available, due to other obligations."
+            "description": "Not always available, due to other obligations"
           },
           {
             "name": "Wild",
-            "description": "Drunken and loud-mouthed."
+            "description": "Drunken and loud-mouthed"
           }
         ],
         "vehicleEdges": [
           {
             "name": "Nimble",
-            "description": "The vehicle handles easily. Consider this an assist for tricky maneuvers."
+            "description": "The vehicle handles easily. Consider this an assist for tricky maneuvers"
           },
           {
             "name": "Simple",
-            "description": "The vehicle is easy to repair. Remove all of its harm during downtime."
+            "description": "The vehicle is easy to repair. Remove all of its harm during downtime"
           },
           {
             "name": "Sturdy",
-            "description": "The vehicle keeps operating even when broken."
+            "description": "The vehicle keeps operating even when broken"
           }
         ],
         "vehicleFlaws": [
           {
             "name": "Costly",
-            "description": "The vehicle costs 1 coin per downtime to keep in operation."
+            "description": "The vehicle costs [/coin 1 Coin] per Downtime to keep in operation"
           },
           {
             "name": "Distinct",
-            "description": "The vehicle has memorable features. Take +1 heat when you use it on a score."
+            "description": "The vehicle has memorable features. Take +1 *Heat* when you use it on a Score"
           },
           {
             "name": "Finicky",
-            "description": "The vehicle has quirks that only one person understands. When operated without them, it has -1 quality."
+            "description": "The vehicle has quirks that only one person understands. When operated without them, it has [/dice -1] *Quality*"
           }
         ]
       }

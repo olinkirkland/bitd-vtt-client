@@ -260,7 +260,7 @@ export class Assassins extends Crew {
         id: 'assassins-deadly',
         name: 'Deadly',
         description:
-          'Each PC may add +1 action rating to Hunt, Prowl, or Skirmish (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Hunt**, **Prowl**, or **Skirmish** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -268,7 +268,7 @@ export class Assassins extends Crew {
         id: 'assassins-crows-veil',
         name: "Crow's Veil",
         description:
-          "Due to hard-won experience or occult ritual, your activities are hidden from the notice of the death-seeker crows. You don't take extra heat when killing is involved on a score.",
+          "Your activities are hidden from the notice of the Death-seeker Crows and you don't take extra *Heat* when killing is involved on a Score",
         quantity: 0,
         maxQuantity: 1
       },
@@ -276,7 +276,7 @@ export class Assassins extends Crew {
         id: 'assassins-emberdeath',
         name: 'Emberdeath',
         description:
-          "Due to hard-won experience or occult ritual, you know the arcane method to destroy a living victim's spirit at the moment you kill them. Take 3 stress to channel electroplasmic energy from the ghost field to disintegrate the spirit and dead body in a shower of sparking embers.",
+          "You know the arcane method to destroy a living victim's Spirit at the moment you kill them. Take [/stress 3 Stress] to channel electroplasmic energy from the ghost field to disintegrate the Spirit and dead body in a shower of sparking embers",
         quantity: 0,
         maxQuantity: 1
       },
@@ -284,7 +284,7 @@ export class Assassins extends Crew {
         id: 'assassins-no-traces',
         name: 'No Traces',
         description:
-          'When you keep an operation quiet or make it look like an accident, you get half the rep value of the target (round up) instead of zero. When you end downtime with zero heat, take +1 rep.',
+          'When you keep an operation quiet or make it look like an accident, you get half the [/rep Rep] value of the target (round up) instead of zero. When you end downtime with zero *Heat*, take [/rep +1 Rep]',
         quantity: 0,
         maxQuantity: 1
       },
@@ -292,7 +292,7 @@ export class Assassins extends Crew {
         id: 'assassins-patron',
         name: 'Patron',
         description:
-          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+          'When you advance your *Tier*, it costs half the *Coin* it normally would. Who is your patron? Why do they help you?',
         quantity: 0,
         maxQuantity: 1
       },
@@ -300,7 +300,7 @@ export class Assassins extends Crew {
         id: 'assassins-predators',
         name: 'Predators',
         description:
-          'When you use stealth or subterfuge to commit murder, take +1d to the engagement roll.',
+          'When you use stealth or subterfuge to commit murder, add [/dice +1] to the *Engagement* roll.',
         quantity: 0,
         maxQuantity: 1
       },
@@ -308,14 +308,14 @@ export class Assassins extends Crew {
         id: 'assassins-vipers',
         name: 'Vipers',
         description:
-          'When you acquire or craft poisons, you get +1 result level to your roll. When you employ a poison, you are specially prepared to be immune to its effects.',
+          'When you acquire or craft poisons, you get [/result +1 Result Level] to your roll\n\nWhen you employ a poison, you are specially prepared to be immune to its effects',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'assassins-veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
@@ -605,7 +605,7 @@ export class Bravos extends Crew {
         id: 'dangerous',
         name: 'Dangerous',
         description:
-          'Each PC may add +1 action rating to Hunt, Skirmish, or Wreck (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Hunt**, **Skirmish**, or **Wreck** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -613,7 +613,7 @@ export class Bravos extends Crew {
         id: 'blood-brothers',
         name: 'Blood Brothers',
         description:
-          "When you fight alongside your cohorts in combat, they get +1d for teamwork rolls (setup and group actions). All of your cohorts get the Thugs type for free (if they're already Thugs, add another type).",
+          "When you fight alongside your Cohorts in combat, they get [/dice +1] for *Setup* and *Group Action* rolls\n\nAll of your Cohorts get the Thugs type for free. If they're already Thugs, add another type",
         quantity: 0,
         maxQuantity: 1
       },
@@ -621,7 +621,7 @@ export class Bravos extends Crew {
         id: 'door-kickers',
         name: 'Door Kickers',
         description:
-          'When you execute an assault plan, take +1d to the engagement roll.',
+          'When you execute an *Assault plan*, take [/dice +1] to the *Engagement* roll',
         quantity: 0,
         maxQuantity: 1
       },
@@ -629,7 +629,7 @@ export class Bravos extends Crew {
         id: 'fiends',
         name: 'Fiends',
         description:
-          'Fear is as good as respect. You may count each wanted level as if it was turf.',
+          'Fear is as good as respect. You may count each *Wanted Level* as if it was Turf',
         quantity: 0,
         maxQuantity: 1
       },
@@ -637,7 +637,7 @@ export class Bravos extends Crew {
         id: 'forged-in-the-fire',
         name: 'Forged in the Fire',
         description:
-          'Each PC has been toughened by cruel experience. You get +1d to resistance rolls.',
+          'Each PC has been toughened by cruel experience. You get [/dice +1] to *Resistance* rolls',
         quantity: 0,
         maxQuantity: 1
       },
@@ -645,7 +645,7 @@ export class Bravos extends Crew {
         id: 'patron',
         name: 'Patron',
         description:
-          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+          'When you advance your *Tier*, it costs half the *Coin* it normally would. Who is your patron? Why do they help you?',
         quantity: 0,
         maxQuantity: 1
       },
@@ -653,14 +653,14 @@ export class Bravos extends Crew {
         id: 'war-dogs',
         name: 'War Dogs',
         description:
-          'When you’re at war (-3 faction status), your crew does not suffer -1 hold and PCs still get two downtime activities, instead of just one.',
+          "When you're at *War* (-3 *Faction Status*), your Crew does not suffer -1 *Hold* and PCs still get two *Downtime Activities* instead of just one",
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
@@ -957,7 +957,7 @@ export class Cult extends Crew {
         id: 'chosen',
         name: 'Chosen',
         description:
-          'Each PC may add +1 action rating to Attune, Study, or Sway (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Attune**, **Study**, or **Sway** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -965,7 +965,7 @@ export class Cult extends Crew {
         id: 'anointed',
         name: 'Anointed',
         description:
-          'You get +1d to resistance rolls against supernatural threats. You get +1d to healing rolls when you have supernatural harm.',
+          'You get [/dice +1] to *Resistance* rolls against supernatural threats\n\nYou get [/dice +1] to healing rolls when you have supernatural harm',
         quantity: 0,
         maxQuantity: 1
       },
@@ -973,7 +973,7 @@ export class Cult extends Crew {
         id: 'bound-in-darkness',
         name: 'Bound in Darkness',
         description:
-          'You may use teamwork with any cult member, regardless of the distance separating you. By taking 1 stress, your whispered message is heard by every cultist.',
+          'You may use *Teamwork* with any cult member, regardless of the distance separating you\n\nTake [/stress 1 Stress] for your whispered message to be heard by every cultist',
         quantity: 0,
         maxQuantity: 1
       },
@@ -981,7 +981,7 @@ export class Cult extends Crew {
         id: 'conviction',
         name: 'Conviction',
         description:
-          "Each PC gains an additional Vice: Worship. When you indulge this vice and bring a pleasing sacrifice, you don't overindulge if you clear excess stress. In addition, your deity will assist any one action roll you make—from now until you indulge this vice again.",
+          "Each PC gains an additional *Vice*: Worship. When you indulge this Vice and bring a pleasing sacrifice, you don't overindulge if you clear excess *Stress*\n\nIn addition, your deity will assist any one *Action Roll* you make—from now until you indulge this Vice again",
         quantity: 0,
         maxQuantity: 1
       },
@@ -989,7 +989,7 @@ export class Cult extends Crew {
         id: 'glory-incarnate',
         name: 'Glory Incarnate',
         description:
-          'Your deity sometimes manifests in the physical world. This can be a great boon, but the priorities and values of a god are not those of mortals. You have been warned.',
+          'Your deity sometimes manifests in the physical world. This can be a great boon, but the priorities and values of a god are not those of mortals.\n\nYou have been warned',
         quantity: 0,
         maxQuantity: 1
       },
@@ -997,7 +997,7 @@ export class Cult extends Crew {
         id: 'sealed-in-blood',
         name: 'Sealed in Blood',
         description:
-          'Each human sacrifice yields -3 stress cost for any ritual you perform.',
+          'Each human sacrifice yields [/stress -3 Stress Cost] for any ritual you perform',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1005,14 +1005,14 @@ export class Cult extends Crew {
         id: 'zealotry',
         name: 'Zealotry',
         description:
-          'Your cohorts have abandoned their reason to devote themselves to the cult. They will undertake any service, no matter how dangerous or strange. They gain +1d to rolls against enemies of the faith.',
+          'Your Cohorts have abandoned reason in devotion to the cult and will undertake any service, no matter how dangerous or strange\n\nThey gain [/dice +1] to rolls against enemies of the faith',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
@@ -1310,7 +1310,7 @@ export class Hawkers extends Crew {
         id: 'silver-tongues',
         name: 'Silver Tongues',
         description:
-          'Each PC may add +1 action rating to Command, Consort, or Sway (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Command**, **Consort**, or **Sway** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1365,7 +1365,7 @@ export class Hawkers extends Crew {
       {
         id: 'veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
@@ -1667,7 +1667,7 @@ export class Shadows extends Crew {
         id: 'everyone-steals',
         name: 'Everyone Steals',
         description:
-          'Each PC may add +1 action rating to Prowl, Finesse, or Tinker (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Prowl**, **Finesse**, or **Tinker** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1722,7 +1722,7 @@ export class Shadows extends Crew {
       {
         id: 'veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
@@ -2061,14 +2061,14 @@ export class Smugglers extends Crew {
         id: 'renegades',
         name: 'Renegades',
         description:
-          'Each PC may add +1 action rating to Finesse, Prowl, or Skirmish (up to a max rating of 3).',
+          'Each PC may add +1 *Action Rating* to **Finesse**, **Prowl**, or **Skirmish** (up to a max of 3)',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'veteran',
         name: 'Veteran',
-        description: 'Choose a special ability from another crew.',
+        description: 'Choose a *Special Ability* from another crew',
         quantity: 0,
         maxQuantity: 3
       }
