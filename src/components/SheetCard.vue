@@ -1,11 +1,11 @@
 <template>
   <div class="sheet-card" :style="{ backgroundColor: image?.commonColor }">
     <img :src="image?.url" />
+    <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
+      {{ props.sheet.name }}
+    </h1>
     <div class="sheet-card__content">
-      <h2>{{ props.sheet.name }}</h2>
-      <div class="row info">
-        <span class="tag">{{ templateType }}</span>
-      </div>
+      <p>{{ getSubtitle() }}</p>
     </div>
   </div>
 </template>
@@ -22,16 +22,19 @@ const props = defineProps({
   }
 });
 
-const templateType = computed(() => {
-  const sheetType = props.sheet.sheetType;
-  if (sheetType === 'crew') return (props.sheet as Crew).crewType;
-  else if (sheetType === 'character')
-    return (props.sheet as Character).characterType;
-});
-
 const image = computed(() =>
   sheetImages.find((sheetImage) => sheetImage.id === props.sheet.image)
 );
+
+function getSubtitle() {
+  if (props.sheet.sheetType === 'crew') {
+    const crewSheet = props.sheet as Crew;
+    return `Tier ${crewSheet.tier} ❖ ${crewSheet.crewType}`;
+  } else {
+    const characterSheet = props.sheet as Character;
+    return ``;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +55,26 @@ const image = computed(() =>
     object-position: 50% 50%;
   }
 
+  > h1 {
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+    color: var(--light);
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px var(--dark);
+    line-height: 1;
+    z-index: 1;
+
+    &.extra-long {
+      font-size: 2rem;
+    }
+  }
+
   > .sheet-card__content {
     display: flex;
     flex-direction: column;
@@ -63,17 +86,12 @@ const image = computed(() =>
     padding: 1rem;
     color: var(--light);
 
-    > .info {
-      gap: 0.4rem;
-      .tag {
-        white-space: nowrap;
-      }
-      p.date-created {
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        font-size: 1.2rem;
-        opacity: 0.5;
-      }
+    > p {
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      opacity: 0.8;
     }
   }
 }

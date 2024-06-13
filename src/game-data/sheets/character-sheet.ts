@@ -42,6 +42,10 @@ export class Character extends Sheet {
     this.book = book;
     this.choices = getDefaultChoices();
   }
+
+  getTags(): string[] {
+    return [];
+  }
 }
 
 export interface PlayBook {
