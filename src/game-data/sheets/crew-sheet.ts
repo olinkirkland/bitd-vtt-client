@@ -1675,7 +1675,7 @@ export class Shadows extends Crew {
         id: 'ghost-echoes',
         name: 'Ghost Echoes',
         description:
-          'From weird experience or occult ritual, all crew members gain the ability to see and interact with the ghostly structures, streets, and objects within the echo of Doskvol that exists in the ghost field.',
+          'All Crew members gain the ability to see and interact with the ghostly structures, streets, and objects within the echo of Duskwall that exists in the Ghost Field.',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1683,7 +1683,7 @@ export class Shadows extends Crew {
         id: 'pack-rats',
         name: 'Pack Rats',
         description:
-          'Your lair is a jumble of stolen items. When you roll to acquire an asset, take +1d.',
+          'Your Lair is a jumble of stolen items. Take [/dice +1d] when you *Acquire an Asset*',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1691,7 +1691,7 @@ export class Shadows extends Crew {
         id: 'patron',
         name: 'Patron',
         description:
-          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+          'When you advance your *Tier*, it costs half the *Coin* it normally would. Who is your patron? Why do they help you?',
         quantity: 0,
         maxQuantity: 1
       },

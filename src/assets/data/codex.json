@@ -74,7 +74,7 @@
         },
         "lair": {
           "boat-house": "You have a boat, a dock on a waterway, and a small shack for storing boating supplies\n\nA second upgrade improves the boat with armor and more cargo capacity",
-          "carriage-house": "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats\n\nHorses are very rare in Doskvol—most carriages in the city use the large Akorosian goat as their draft animal",
+          "carriage-house": "You have a carriage, two goats to pull it, and a stable. A second upgrade improves the carriage with armor and larger, swifter goats\n\nHorses are very rare in Duskwall—most carriages in the city use the large Akorosian goat as their draft animal",
           "hidden-lair": "Your Lair is in a secret, hidden location. If it's discovered, use two *Downtime Activities* and pay [/coin Coin] equal to your *Tier* to relocate it and hide it again",
           "quarters": "Your Lair includes living quarters for the Crew.\n\nWithout this upgrade, each PC sleeps elsewhere, and is vulnerable when they do so",
           "secure-lair": "Your Lair has locks, alarms, and traps to thwart intruders. A second upgrade improves the defenses to include arcane measures that work against Spirits\n\nRoll your Crew's *Tier* if these measures are ever put to the test to see how well they thwart an intruder",
@@ -229,7 +229,7 @@
       },
       {
         "name": "Coalridge",
-        "blurb": "The remnants of Doskvol's original hilltop mining settlement, now home to laborers and industrial factories."
+        "blurb": "The remnants of Duskwall's original hilltop mining settlement, now home to laborers and industrial factories."
       },
       {
         "name": "Charhollow",

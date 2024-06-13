@@ -369,7 +369,7 @@
               <p
                 v-html="
                   text(
-                    `Most *Districts* have crime bosses that expect smaller crews to pay a tithe from their scores\n\nIs there a boss that you should be paying? Subtract [/coin Coin] equal to your *Tier +1* when you pay a tithe`
+                    `Most *Districts* have crime bosses that expect smaller crews to pay a tithe from their scores\n\nIs there a boss that you should be paying? Subtract [/coin Coin] equal to your *Tier* +1 when you pay a tithe`
                   )
                 "
               ></p>
@@ -1569,9 +1569,9 @@ watch(
     }
   }
 
-    .input-group.crew-xp {
-      align-items: center;
-    }
+  .input-group.crew-xp {
+    align-items: center;
+  }
 
   .input-group.crew-rep {
     align-items: center;
