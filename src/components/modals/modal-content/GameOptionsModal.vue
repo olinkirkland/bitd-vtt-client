@@ -248,8 +248,4 @@ section.codex {
   flex-direction: column;
   gap: 0.8rem;
 }
-
-.info-box {
-  background-color: var(--translucent-very-light);
-}
 </style>

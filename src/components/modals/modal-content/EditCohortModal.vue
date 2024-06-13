@@ -122,49 +122,79 @@
           />
         </div>
 
+        <Divider />
+        <label
+          >Effectiveness
+          <label class="muted"
+            >Quality {{ cohort.quality }}, {{ scaleText }}</label
+          >
+        </label>
         <div class="input-block">
           <div class="input-group">
-            <label for="quality">Quality</label>
-            <input
-              class="ignore-initial-focus"
-              type="number"
-              id="quality"
-              v-model="cohort.quality"
-              @focus="focus = 'quality'"
+            <NumberStepper
+              id="cohort-quality"
+              label="Quality"
+              class="mobile-full-width center"
+              :value="cohort.quality"
+              :min="0"
+              :max="10"
+              @change="cohort.quality = $event"
             />
-            <CollapsingShelf :show="focus === 'quality'">
-              <p v-if="props.propertyName === 'gang'">
-                A Gang's quality is equal to your current Crew Tier and
-                increases with your Crew Tier.
-              </p>
-              <p v-else>
-                An Expert's quality is equal to your current Crew Tier +1 and
-                increases with your Crew Tier.
-              </p>
-            </CollapsingShelf>
+
+            <InfoBox v-if="props.propertyName === 'expert'">
+              <p
+                v-html="
+                  text(
+                    `An Expert's quality is equal to your current *Tier* +1 and increases with your *Tier*.`
+                  )
+                "
+              ></p>
+            </InfoBox>
+            <InfoBox v-if="props.propertyName === 'gang'">
+              <p
+                v-html="
+                  text(
+                    `A Gang's quality is equal to your current *Tier* and increases with your *Tier*.`
+                  )
+                "
+              ></p>
+            </InfoBox>
+            <InfoBox v-if="props.propertyName === 'vehicle'">
+              <p
+                v-html="
+                  text(
+                    `A Vehicle's quality is equal to your current *Tier* +1 and increases with your *Tier*.`
+                  )
+                "
+              ></p>
+            </InfoBox>
           </div>
 
           <div class="input-group" v-if="props.propertyName === 'gang'">
-            <label for="scale"
-              >Scale
-              <label class="muted">{{ scaleText }}</label>
-            </label>
-            <input
-              class="ignore-initial-focus"
-              type="number"
-              id="scale"
-              v-model="cohort.scale"
-              placeholder="scale"
-              @focus="focus = 'scale'"
-            />
-            <CollapsingShelf :show="focus === 'scale'">
-              <p>
-                A Gang's scale is equal to your current Crew Tier and increases
-                with your Crew Tier.
-              </p>
-            </CollapsingShelf>
+            <div class="row flat">
+              <NumberStepper
+                id="cohort-scale"
+                class="mobile-full-width center"
+                :value="cohort.scale"
+                :min="0"
+                :max="10"
+                @change="cohort.scale = $event"
+                label="Scale"
+              />
+            </div>
+            <InfoBox>
+              <p
+                v-html="
+                  text(
+                    `A Gang's *Scale* is equal to your current *Tier* and increases with your *Tier*.`
+                  )
+                "
+              ></p>
+            </InfoBox>
           </div>
         </div>
+
+        <Divider />
 
         <div class="input-group">
           <label for="edges"
@@ -288,11 +318,13 @@
 <script setup lang="ts">
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
+import InfoBox from '@/components/InfoBox.vue';
+import NumberStepper from '@/components/NumberStepper.vue';
 import ModalController from '@/controllers/modal-controller';
 import { Cohort } from '@/game-data/sheets/crew-sheet';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
-import { numberWord } from '@/util/string';
+import { numberWord, text } from '@/util/string';
 import { v4 as uuidv4 } from 'uuid';
 import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';

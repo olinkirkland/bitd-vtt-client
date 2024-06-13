@@ -213,6 +213,12 @@ textarea {
   width: 100%;
 }
 
+@media (max-width: 767px) {
+  .input-block {
+    grid-template-columns: 1fr;
+  }
+}
+
 .input-group {
   display: flex;
   flex-direction: column;

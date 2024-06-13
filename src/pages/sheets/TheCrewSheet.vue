@@ -1523,10 +1523,6 @@ watch(
 
 /** MOBILE */
 @media (max-width: 767px) {
-  .input-block {
-    grid-template-columns: 1fr;
-  }
-
   .input-group.crew-xp {
     align-items: center;
   }

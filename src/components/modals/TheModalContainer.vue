@@ -47,7 +47,9 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
     window.modalChildren = modalChildren;
 
     // Pick the first element that is an input and focus it
-    const firstInput = modalEl.querySelector('input:not(.disabled):not(.ignore-initial-focus)');
+    const firstInput = modalEl.querySelector(
+      'input:not(.disabled):not(.ignore-initial-focus)'
+    );
     if (firstInput) firstInput.focus();
 
     modalChildren.forEach((childEl: any) => childEl.classList.add('hidden'));
@@ -104,6 +106,10 @@ ModalController.getInstance().addEventListener(({ modal, modalConfig }) => {
 :deep(.modal .hidden) {
   opacity: 0;
   transition: none;
+}
+
+:deep(.modal .info-box) {
+  background-color: var(--translucent-very-light);
 }
 
 // Fade in and scale
