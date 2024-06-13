@@ -1,5 +1,5 @@
 <template>
-  <div class="checkbox-bar">
+  <div class="stepper">
     <button
       @click="decrease"
       class="btn btn--icon"
@@ -62,7 +62,7 @@ const decrease = () => {
 </script>
 
 <style scoped lang="scss">
-.checkbox-bar {
+.stepper {
   display: flex;
   align-items: center;
   width: fit-content;

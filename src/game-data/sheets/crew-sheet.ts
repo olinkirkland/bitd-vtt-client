@@ -544,28 +544,28 @@ export class Assassins extends Crew {
       {
         id: 'assassins-hunting-ground-accident',
         name: 'Accident',
-        description: 'A killing with no telltale signs of murder.',
+        description: 'A killing with no telltale signs of murder',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'assassins-hunting-ground-disappearance',
         name: 'Disappearance',
-        description: 'The victim vanishes without a trace.',
+        description: 'The victim vanishes without a trace',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'assassins-hunting-ground-murder',
         name: 'Murder',
-        description: 'An obvious killing that sends a message.',
+        description: 'An obvious killing that sends a message',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'assassins-hunting-ground-ransom',
         name: 'Ransom',
-        description: 'A kidnapping and demand for payment for their return.',
+        description: 'A kidnapping and demand for payment for their return',
         quantity: 0,
         maxQuantity: 1
       }
@@ -893,28 +893,28 @@ export class Bravos extends Crew {
       {
         id: 'bravos-hunting-ground-battle',
         name: 'Battle',
-        description: 'Defeat an enemy with overwhelming force.',
+        description: 'Defeat an enemy with overwhelming force',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'bravos-hunting-ground-extortion',
         name: 'Extortion',
-        description: "Threaten violence unless you're paid off.",
+        description: "Threaten violence unless you're paid off",
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'bravos-hunting-ground-sabotage',
         name: 'Sabotage',
-        description: 'Hurt an opponent by destroying something.',
+        description: 'Hurt an opponent by destroying something',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'bravos-hunting-ground-smash-and-grab',
         name: 'Smash & Grab',
-        description: 'A fast and violent armed robbery.',
+        description: 'A fast and violent armed robbery',
         quantity: 0,
         maxQuantity: 1
       }
@@ -1245,7 +1245,7 @@ export class Cult extends Crew {
       {
         id: 'cult-sacred-site-acquisition',
         name: 'Acquisition',
-        description: 'Procure an arcane artifact and attune it to your god.',
+        description: 'Procure an arcane artifact and attune it to your god',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1253,21 +1253,21 @@ export class Cult extends Crew {
         id: 'cult-sacred-site-augury',
         name: 'Augury',
         description:
-          'Do what you must to attract the god’s attention and counsel.',
+          "Do what you must to attract the god's attention and counsel",
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'cult-sacred-site-consecration',
         name: 'Consecration',
-        description: 'Anoint a place for your deity.',
+        description: 'Anoint a place for your deity',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'cult-sacred-site-sacrifice',
         name: 'Sacrifice',
-        description: 'Destroy what is valuable or good in honor of your god.',
+        description: 'Destroy what is valuable or good in honor of your god',
         quantity: 0,
         maxQuantity: 1
       }
@@ -1372,7 +1372,7 @@ export class Hawkers extends Crew {
     ];
     this.crewUpgrades = [
       {
-        id: 'hawkers-rigging',
+        id: 'hawker-rigging',
         name: 'Hawkers Rigging',
         description: '1 carried item is concealed and has no load',
         quantity: 0,
@@ -1600,7 +1600,7 @@ export class Hawkers extends Crew {
         id: 'hawkers-sales-territory-sale',
         name: 'Sale',
         description:
-          'A significant transaction with a special buyer of illicit product.',
+          'A significant transaction with a special buyer of illicit product',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1608,14 +1608,14 @@ export class Hawkers extends Crew {
         id: 'hawkers-sales-territory-supply',
         name: 'Supply',
         description:
-          'A transaction to acquire new product or establish a new supplier.',
+          'A transaction to acquire new product or establish a new supplier',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'hawkers-sales-territory-show-of-force',
         name: 'Show of Force',
-        description: 'Make an example of an enemy to dominate territory.',
+        description: 'Make an example of an enemy to dominate territory',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1623,7 +1623,7 @@ export class Hawkers extends Crew {
         id: 'hawkers-sales-territory-socialize',
         name: 'Socialize',
         description:
-          'Improve customer and/or supplier relations with a social event.',
+          'Improve customer and/or supplier relations with a social event',
         quantity: 0,
         maxQuantity: 1
       }
@@ -1950,29 +1950,28 @@ export class Shadows extends Crew {
       {
         id: 'shadows-hunting-grounds-burglary',
         name: 'Burglary',
-        description: 'Theft by breaking and entering.',
+        description: 'Theft by breaking and entering',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'shadows-hunting-grounds-espionage',
         name: 'Espionage',
-        description:
-          'Obtain secret information by covert or clandestine means.',
+        description: 'Obtain secret information by covert or clandestine means',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'shadows-hunting-grounds-robbery',
         name: 'Robbery',
-        description: 'Theft by force or threats.',
+        description: 'Theft by force or threats',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'shadows-hunting-grounds-sabotage',
         name: 'Sabotage',
-        description: 'Hurt an opponent by destroying something.',
+        description: 'Hurt an opponent by destroying something',
         quantity: 0,
         maxQuantity: 1
       }
@@ -2303,28 +2302,28 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-cargo-type-arcane-weird',
         name: 'Arcane/Weird',
-        description: 'Spirit essences, ghosts, cult materials.',
+        description: 'Spirit essences, ghosts, cult materials',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'smugglers-cargo-type-arms',
         name: 'Arms',
-        description: 'Restricted military weapons, heavy ordnance, explosives.',
+        description: 'Restricted military weapons, heavy ordnance, explosives',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'smugglers-cargo-type-contraband',
         name: 'Contraband',
-        description: 'High-tax luxuries, drugs, banned art, etc.',
+        description: 'High-tax luxuries, drugs, banned art, etc',
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'smugglers-cargo-type-passengers',
         name: 'Passengers',
-        description: 'People or livestock traveling in secret.',
+        description: 'People or livestock traveling in secret',
         quantity: 0,
         maxQuantity: 1
       }

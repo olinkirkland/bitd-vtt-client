@@ -64,5 +64,5 @@ export function text(str: string): string {
     result = result.replaceAll(rule.pattern, rule.replacement);
   });
 
-  return `<span class="markdown-text">${result}</span>`;
+  return `<span class="markdown">${result}</span>`;
 }

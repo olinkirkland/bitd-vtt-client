@@ -31,12 +31,13 @@
         @update:modelValue="updateQuantity(i.toString())"
       />
     </div>
-    <p>{{ props.effectable.description }}</p>
+    <p v-html="text(props.effectable.description || '')"></p>
   </div>
 </template>
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
+import { text } from '@/util/string';
 import { defineProps, ref, watch } from 'vue';
 import { Effectable } from '../game-data/game-data-types';
 import Checkbox from './Checkbox.vue';
@@ -131,8 +132,11 @@ function onDeleteEffectable(id: string) {
     }
   }
 
-  > p {
+  p {
     opacity: 0.8;
+  }
+
+  :deep(p > span) {
     font-size: 1.2rem;
   }
 

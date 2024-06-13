@@ -248,8 +248,8 @@
         <Divider />
         <section>
           <div class="input-block">
-            <div class="input-group">
-              <label for="crew-rep">Rep & Turf</label>
+            <div class="input-group crew-rep">
+              <label for="crew-rep">Rep</label>
               <CheckboxBar
                 id="crew-rep"
                 :value="props.sheet.reputation"
@@ -445,10 +445,13 @@
             </ul>
           </InfoBox>
           <InfoBox>
-            <p>
-              When the tracker is full, choose a Special Ability or Upgrade and
-              clear the Crew's XP.
-            </p>
+            <p
+              v-html="
+                text(
+                  `When the tracker is full, choose one *Special Ability* or two *Upgrades* and clear the *XP*`
+                )
+              "
+            ></p>
           </InfoBox>
         </section>
         <Divider />
@@ -1497,21 +1500,16 @@ watch(
   }
 }
 
-section.crew-xp-section {
-  .input-group.crew-xp {
-    gap: 0.6rem;
-    > label {
-      margin-left: 0.8rem;
-    }
-    width: fit-content;
-    max-width: 100%;
-    overflow: hidden;
-  }
-}
-
 .turf-and-hold {
-  gap: 1;
+  gap: 0;
   display: flex;
+  background-color: var(--translucent-light);
+  padding: 1rem;
+  padding-left: 0;
+
+  .stepper {
+    background-color: transparent;
+  }
 }
 
 .heat-and-wanted-level {
@@ -1537,12 +1535,14 @@ section.crew-xp-section {
   }
 }
 
+/** WIDE DESKTOP ONLY */
 @media (min-width: 1080px) {
   .tile-list {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
 }
 
+/** TABLET */
 @media (max-width: 1079px) {
   .crew-layout {
     display: flex;
@@ -1560,12 +1560,21 @@ section.crew-xp-section {
   }
 }
 
+/** MOBILE */
 @media (max-width: 767px) {
   .input-block {
     grid-template-columns: 1fr;
     .input-group {
       // width: 100%;
     }
+  }
+
+    .input-group.crew-xp {
+      align-items: center;
+    }
+
+  .input-group.crew-rep {
+    align-items: center;
   }
 
   .coin-group {
