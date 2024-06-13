@@ -33,7 +33,6 @@ const props = defineProps<{
 }
 
 :deep(p) {
-  font-size: 1.4rem;
   font-style: italic;
   color: var(--light);
   opacity: 0.6;

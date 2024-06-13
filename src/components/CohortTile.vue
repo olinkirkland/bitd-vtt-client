@@ -194,7 +194,7 @@ function onDeleteCohort(id: string) {
 
   > p {
     opacity: 0.8;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .edges-and-flaws {

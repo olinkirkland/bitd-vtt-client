@@ -981,7 +981,7 @@ export class Cult extends Crew {
         id: 'conviction',
         name: 'Conviction',
         description:
-          "Each PC gains an additional *Vice*: Worship. When you indulge this Vice and bring a pleasing sacrifice, you don't overindulge if you clear excess *Stress*\n\nIn addition, your deity will assist any one *Action Roll* you make—from now until you indulge this Vice again",
+          "Each PC gains an additional *Vice*: Worship. You don't overindulge when indulging in Worship (if you provide a pleasing sacrifice)\n\nIn addition, your deity will grant [/dice +1] to one *Action Roll* you make—from now until you indulge in Worship again",
         quantity: 0,
         maxQuantity: 1
       },
@@ -989,7 +989,7 @@ export class Cult extends Crew {
         id: 'glory-incarnate',
         name: 'Glory Incarnate',
         description:
-          'Your deity sometimes manifests in the physical world. This can be a great boon, but the priorities and values of a god are not those of mortals.\n\nYou have been warned',
+          'Your deity sometimes manifests in the physical world. This can be a great boon, but the priorities and values of a god are not those of mortals\n\nYou have been warned',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1318,7 +1318,7 @@ export class Hawkers extends Crew {
         id: 'accord',
         name: 'Accord',
         description:
-          'Sometimes friends are as good as territory. You may count up to three +3 faction statuses you hold as if they are turf.',
+          'Sometimes friends are as good as territory. Count up to three +3 *Faction Statuses* as Turf',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1326,7 +1326,7 @@ export class Hawkers extends Crew {
         id: 'the-good-stuff',
         name: 'The Good Stuff',
         description:
-          'Your merchandise is exquisite. The product quality is equal to your Tier+2. When you deal with a crew or faction, the GM will tell you who among them is hooked on your product (one, a few, many, or all).',
+          'Your merchandise is exquisite. The product quality is equal to your *Tier* +2\n\nWhen you deal with a *Faction*, the GM will tell you who among them is hooked on your product (one, a few, many, or all)',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1334,7 +1334,7 @@ export class Hawkers extends Crew {
         id: 'ghost-market',
         name: 'Ghost Market',
         description:
-          'Through arcane ritual or hard-won experience, you have discovered how to prepare your product for sale to ghosts and/or demons. They do not pay in coin. What do they pay with?',
+          'You have discovered how to prepare your product for sale to ghosts and/or demons\n\nThey do not pay in *Coin*. What do they pay with?',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1342,7 +1342,7 @@ export class Hawkers extends Crew {
         id: 'high-society',
         name: 'High Society',
         description:
-          "It's all about who you know. Take -1 heat during downtime and +1d to gather info about the city's elite.",
+          "It's all about who you know\n\nTake [/heat -1 Heat] during Downtime and [/dice +1] to Gather Information about the city's elite",
         quantity: 0,
         maxQuantity: 1
       },
@@ -1350,7 +1350,7 @@ export class Hawkers extends Crew {
         id: 'hooked',
         name: 'Hooked',
         description:
-          'Your gang members use your product. Add the savage, unreliable, or wild flaw to your gangs to give them +1 quality.',
+          'Your Cohorts use your product. Add the savage, unreliable, or wild *Flaw* to your Gangs to give them [/quality +1 Quality]',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1358,7 +1358,7 @@ export class Hawkers extends Crew {
         id: 'patron',
         name: 'Patron',
         description:
-          'When you advance your Tier, it costs half the coin it normally would. Who is your patron? Why do they help you?',
+          'When you advance your *Tier*, it costs half the *Coin* it normally would. Who is your patron? Why do they help you?',
         quantity: 0,
         maxQuantity: 1
       },

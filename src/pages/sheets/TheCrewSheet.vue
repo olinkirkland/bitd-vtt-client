@@ -766,7 +766,7 @@
                 })
               "
             >
-              <i class="fas fa-plus"></i>
+              <i class="fas fa-plus-circle"></i>
               <span>Gang</span>
             </button>
             <button
@@ -779,7 +779,7 @@
                 })
               "
             >
-              <i class="fas fa-plus"></i>
+              <i class="fas fa-plus-circle"></i>
               <span>Expert</span>
             </button>
             <button
@@ -796,7 +796,7 @@
                 })
               "
             >
-              <i class="fas fa-plus"></i>
+              <i class="fas fa-plus-circle"></i>
               <span>Vehicle</span>
             </button>
           </div>

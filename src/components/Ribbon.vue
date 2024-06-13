@@ -51,7 +51,7 @@ const showRibbon = ref(!localStorage.getItem('ribbon.' + props.id));
     justify-content: center;
 
     > p {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-style: italic;
       cursor: pointer;
       max-width: 96rem;

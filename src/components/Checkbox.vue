@@ -104,7 +104,7 @@ function handleChange(event: Event) {
     border-radius: 100%;
 
     > span {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: var(--dark);
       line-height: 1;
     }
@@ -122,7 +122,7 @@ function handleChange(event: Event) {
     text-overflow: ellipsis;
     margin: 0;
     margin-right: 0.2rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: italic;
   }
 
