@@ -36,7 +36,10 @@ span.markdown-text {
       background-color: transparent;
       color: var(--light);
       > i {
-        font-size: 1rem;
+        font-size: 1.4rem;
+        position: relative;
+        transform: translateY(-0.2rem);
+        height: 1rem;
       }
     }
   }

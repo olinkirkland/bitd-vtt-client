@@ -303,7 +303,7 @@
             <p
               v-html="
                 text(
-                  `With a full tracker, the Crew can't earn more **Rep** until you do one of the following, then reset the tracker`
+                  `With a full tracker, the Crew can't earn more *Rep* until you do one of the following, then reset the tracker`
                 )
               "
             ></p>
@@ -312,12 +312,12 @@
               <li
                 v-html="
                   text(
-                    `If your **Hold** is Strong, increase your *Tier* by paying [/coin Coin] equal to 8x your new *Tier*\nReduce your **Hold** to Weak`
+                    `If your *Hold* is Strong, increase your *Tier* by paying [/coin Coin] equal to 8x your new *Tier*\nReduce your *Hold* to Weak`
                   )
                 "
               ></li>
               <li
-                v-html="text(`If your **Hold** is Weak, increase it to Strong`)"
+                v-html="text(`If your *Hold* is Weak, increase it to Strong`)"
               ></li>
             </ul>
           </InfoBox>
@@ -346,7 +346,7 @@
             <p
               v-html="
                 text(
-                  'When the tracker is full, increase the **Wanted Level** and clear all your *Heat*'
+                  'When the tracker is full, increase the *Wanted Level* and clear all your *Heat*'
                 )
               "
             ></p>

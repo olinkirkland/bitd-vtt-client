@@ -434,7 +434,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-hagfish-farm',
         name: 'Hagfish Farm',
-        description: 'Body disposal\n[/dice +1] to reduce *Heat* after killing',
+        description: 'Body disposal\n[/dice +1] Reduce Heat after killing',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -443,7 +443,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-victim-trophies',
         name: 'Victim Trophies',
-        description: '[/rep +1 Rep]\nper score',
+        description: '[/rep +1 Rep]\nper Score',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -484,7 +484,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-cover-operation',
         name: 'Cover Operation',
-        description: '[/heat -2 Heat]\nper score',
+        description: '[/heat -2 Heat]\nper Score',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -502,7 +502,7 @@ export class Assassins extends Crew {
       {
         id: 'assassins-infirmary',
         name: 'Infirmary',
-        description: '[/dice +1] to Healing',
+        description: '[/dice +1] Healing',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -745,7 +745,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-barracks',
         name: 'Barracks',
-        description: '+1 scale for your Thug cohorts',
+        description: '[/scale +1 Scale]\nThug Cohorts',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -763,7 +763,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-terrorized-citizens',
         name: 'Terrorized Citizens',
-        description: '+2 coin for battle or extortion',
+        description: '[/coin +2 Coin]\n*Battle* or *Extortion plans*',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -772,7 +772,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-informants',
         name: 'Informants',
-        description: '+1 gather info for scores',
+        description: '[/dice +1] Gather Information',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -781,7 +781,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-protection-racket',
         name: 'Protection Racket',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -790,7 +790,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-fighting-pits',
         name: 'Fighting Pits',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -845,7 +845,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-infirmary',
         name: 'Infirmary',
-        description: '+1d to healing rolls',
+        description: '[/dice +1] Healing',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -854,7 +854,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-bluecoat-intimidation',
         name: 'Bluecoat Intimidation',
-        description: '-2 heat per score',
+        description: '[/heat -2 Heat]\nper Score',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -863,7 +863,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-street-fence',
         name: 'Street Fence',
-        description: '+2 coin for lower-class targets',
+        description: '[/coin +2 Coin]\nLower-class targets',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -872,7 +872,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-warehouses',
         name: 'Warehouses',
-        description: 'Stockpiles give you +1d to acquire assets',
+        description: 'Stockpiles give [/dice +1] *Acquire Assets*',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -881,7 +881,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-bluecoat-confederates',
         name: 'Bluecoat Confederates',
-        description: '+1d engagemnt for assault plans',
+        description: '[/dice +1] Engagement *Assault plans*',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -901,7 +901,7 @@ export class Bravos extends Crew {
       {
         id: 'bravos-hunting-ground-extortion',
         name: 'Extortion',
-        description: 'Threaten violence unless you’re paid off.',
+        description: "Threaten violence unless you're paid off.",
         quantity: 0,
         maxQuantity: 1
       },
@@ -1100,7 +1100,7 @@ export class Cult extends Crew {
       {
         id: 'cult-cloister',
         name: 'Cloister',
-        description: '+1 scale for your Adept cohorts',
+        description: '[/scale +1 Scale]\nAdept Cohorts',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1109,7 +1109,7 @@ export class Cult extends Crew {
       {
         id: 'cult-vice-den',
         name: 'Vice Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1118,7 +1118,7 @@ export class Cult extends Crew {
       {
         id: 'cult-offertory',
         name: 'Offertory',
-        description: '+2 coin for occult operations',
+        description: '[/coin +2 Coin] *Occult plans*',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1127,7 +1127,7 @@ export class Cult extends Crew {
       {
         id: 'cult-ancient-obelisk',
         name: 'Ancient Obelisk',
-        description: '-1 stress cost for all arcane powers and rituals',
+        description: '[/stress -1 Stress Cost] *Arcane Powers* and *Rituals*',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1136,7 +1136,7 @@ export class Cult extends Crew {
       {
         id: 'cult-ancient-tower',
         name: 'Ancient Tower',
-        description: '+1d to Consort w/ arcane entities on site',
+        description: '[/dice +1] Consort w/ Arcane entities on-site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1200,7 +1200,7 @@ export class Cult extends Crew {
       {
         id: 'cult-spirit-well',
         name: 'Spirit Well',
-        description: '+1d to Attune on site',
+        description: '[/dice +1] **Attune** on-site',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1209,7 +1209,7 @@ export class Cult extends Crew {
       {
         id: 'cult-ancient-gate',
         name: 'Ancient Gate',
-        description: 'Safe passage in the Deathlands',
+        description: 'Safe passage into the Deathlands',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1218,7 +1218,7 @@ export class Cult extends Crew {
       {
         id: 'cult-sanctuary',
         name: 'Sanctuary',
-        description: '+1d to Command and Sway on site',
+        description: '[/dice +1] *Command* and *Sway* on-site',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1227,7 +1227,7 @@ export class Cult extends Crew {
       {
         id: 'cult-sacred-nexus',
         name: 'Sacred Nexus',
-        description: '+1d to healing rolls',
+        description: '[/dice +1] Healing on-site',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1236,7 +1236,7 @@ export class Cult extends Crew {
       {
         id: 'cult-ancient-altar',
         name: 'Ancient Altar',
-        description: '+1d engagement for occult plans',
+        description: '[/dice +1] Engagement *Occult plans*',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1465,7 +1465,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-personal-clothier',
         name: 'Personal Clothier',
-        description: '+1d engagement roll for social plans',
+        description: '[/dice +1] Engagement *Social plans*',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1474,7 +1474,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-local-graft',
         name: 'Local Graft',
-        description: '+2 coin for show of force or socialize',
+        description: '[/coin +2 Coin]\n*Show of Force* or *Socialize plans*',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1483,7 +1483,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-lookouts',
         name: 'Lookouts',
-        description: '+1d to Survey or Hunt on your turf',
+        description: '[/dice +1] **Survey** and **Hunt** on Turf',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1492,7 +1492,8 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-informants',
         name: 'Informants',
-        description: '+1 gather info for scores',
+        // description: '+1 gather info for scores',
+        description: '[/dice +1] Gather Information',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1547,7 +1548,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-luxury-venue',
         name: 'Luxury Venue',
-        description: '+1d to Consort or Sway on site',
+        description: '[/dice +1] **Consort** and **Sway** on-site',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -1556,7 +1557,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-foreign-market',
         name: 'Foreign Market',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1565,7 +1566,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-vice-den',
         name: 'Vice Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1574,7 +1575,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-surplus-caches',
         name: 'Surplus Caches',
-        description: '+2 coin for product sale or supply',
+        description: '[/coin +2 Coin]\n*Sale* or *Supply plans*',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1583,7 +1584,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-cover-operation',
         name: 'Cover Operation',
-        description: '-2 heat per score',
+        description: '[/heat -2 Heat]\nper Score',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1592,7 +1593,7 @@ export class Hawkers extends Crew {
       {
         id: 'hawkers-cover-identities',
         name: 'Cover Identities',
-        description: '+1 engagement roll for deception or transport plans',
+        description: '[/dice +1] Engagement *Deception* or *Transport plans*',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1815,7 +1816,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-interrogation-chamber',
         name: 'Interrogation Chamber',
-        description: '+1d to Command and Sway on site',
+        description: '[/dice +1] **Command** and **Sway** on-site',
         position: { x: 0, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1833,7 +1834,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-loyal-fence',
         name: 'Loyal Fence',
-        description: '+2 coin for burglary or robbery',
+        description: '[/coin +2 Coin] *Burglary* or *Robbery plans*',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1842,7 +1843,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-gambling-den',
         name: 'Gambling Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1851,7 +1852,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-tavern',
         name: 'Tavern',
-        description: '+1d to Consort and Sway on site',
+        description: '[/dice +1] **Consort** and **Sway** on-site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -1860,7 +1861,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-drug-den',
         name: 'Drug Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -1869,7 +1870,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-informants',
         name: 'Informants',
-        description: '+1 gather info for scores',
+        description: '[/dice +1] Gather Information',
         position: { x: 1, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -1901,7 +1902,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-lookouts',
         name: 'Lookouts',
-        description: '+1d to Survey or Hunt on your turf',
+        description: '[/dice +1] **Survey** and **Hunt** on Turf',
         position: { x: 4, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -1910,7 +1911,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-hagfish-farm',
         name: 'Hagfish Farm',
-        description: 'Body disposal, +1d to reduce heat after killing',
+        description: 'Body disposal\n[/dice +1] Reduce Heat after killing',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -1919,7 +1920,7 @@ export class Shadows extends Crew {
       {
         id: 'shadows-infirmary',
         name: 'Infirmary',
-        description: '+1d to healing rolls',
+        description: '[/dice +1] Healing',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -2174,7 +2175,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-side-business',
         name: 'Side Business',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 1, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -2183,7 +2184,8 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-luxury-fence',
         name: 'Luxury Fence',
-        description: '+2 coin for high-class targets',
+        // description: '+2 coin for high-class targets',
+        description: '[/coin +2]\nHigh-class targets',
         position: { x: 2, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -2192,7 +2194,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-vice-den',
         name: 'Vice Den',
-        description: '(Tier roll) - Heat = coin in downtime',
+        description: '[/coin +Coin]\n[/dice Tier] - *Heat*',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -2201,7 +2203,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-tavern',
         name: 'Tavern',
-        description: '+1d to Consort and Sway on site',
+        description: '[/dice +1] **Consort** and **Sway** on-site',
         position: { x: 4, y: 0 },
         quantity: 0,
         maxQuantity: 1,
@@ -2210,7 +2212,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-ancient-gate',
         name: 'Ancient Gate',
-        description: 'Safe passage in the Deathlands',
+        description: 'Safe passage into the Deathlands',
         position: { x: 0, y: 1 },
         quantity: 0,
         maxQuantity: 1,
@@ -2265,7 +2267,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-secret-routes',
         name: 'Secret Routes',
-        description: '+1d engagement for transport plans',
+        description: '[/dice +1] Engagement *Transport plans*',
         position: { x: 0, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -2274,7 +2276,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-informants',
         name: 'Informants',
-        description: '+1 gather info for scores',
+        description: '[/dice +1] Gather Information',
         position: { x: 1, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -2283,7 +2285,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-fleet',
         name: 'Fleet',
-        description: 'Your cohorts have their own vehicles',
+        description: 'Cohorts have their own vehicles',
         position: { x: 2, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -2292,7 +2294,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-cover-operation',
         name: 'Cover Operation',
-        description: '-2 heat per score',
+        description: '[/heat -2] per Score',
         position: { x: 3, y: 2 },
         quantity: 0,
         maxQuantity: 1,
@@ -2301,7 +2303,7 @@ export class Smugglers extends Crew {
       {
         id: 'smugglers-warehouse',
         name: 'Warehouse',
-        description: 'Stockpiles give you +1d to acquire assets',
+        description: 'Stockpiles give [/dice +1] *Acquire Assets*',
         position: { x: 4, y: 2 },
         quantity: 0,
         maxQuantity: 1,
