@@ -51,10 +51,10 @@
       ],
       "upgrade-descriptions": {
         "crew": {
-          "assassin-rigging": "[/load 2 free load] Weapon or Gear items\nFor example, carry a pistol (a weapon) and burglary tools (gear) for zero load",
-          "bravos-rigging": "[/load 2 free load] Weapon or Armor items\nFor example, carry a sword and pistol or wear normal armor for zero load",
-          "cult-rigging": "[/load 2 free load] Document or Arcane Implement items\nFor example, carry a profane book of curses and a demon's hand for zero load",
-          "thief-rigging": "[/load 2 free load] Tool or Gear items\nFor example, carry burglary gear and tinkering tools for zero load",
+          "assassin-rigging": "[/load 2 free load] Weapon or Gear items\n\nFor example, carry a pistol (a weapon) and burglary tools (gear) for zero load",
+          "bravos-rigging": "[/load 2 free load] Weapon or Armor items\n\nFor example, carry a sword and pistol or wear normal armor for zero load",
+          "cult-rigging": "[/load 2 free load] Document or Arcane Implement items\n\nFor example, carry a profane book of curses and a demon's hand for zero load",
+          "thief-rigging": "[/load 2 free load] Tool or Gear items\n\nFor example, carry burglary gear and tinkering tools for zero load",
           "hawker-rigging": "[/load 1 free load] *Concealed* even against a patdown",
           "smuggler-rigging": "Two of your carried items are *concealed* even against a pat down",
           "elite-skulks": "Skulks Cohorts get [/dice +1] to *Quality Rolls* for Skulk-related actions",

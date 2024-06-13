@@ -354,7 +354,7 @@
           <Divider />
           <div class="input-group coin-group">
             <label for="crew-coin"
-              >Crew Treasury
+              >Treasury
               <label class="muted">{{ vaultsText }}</label>
             </label>
             <CheckboxBar
@@ -486,10 +486,6 @@
               :change="(quantity: number) => onChangeAbility(ability, quantity)"
               :onEdit="onEditAbility"
               :onDelete="onDeleteAbility"
-              :class="{
-                'wide-tile':
-                  ability.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
-              }"
             />
           </div>
           <p v-if="specialAbilities.length == 0" class="no-tiles">
@@ -537,10 +533,6 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'crew')"
-              :class="{
-                'wide-tile':
-                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
-              }"
             />
           </div>
           <p v-if="crewUpgrades.length == 0" class="no-tiles">
@@ -590,10 +582,6 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'lair')"
-              :class="{
-                'wide-tile':
-                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
-              }"
             />
           </div>
           <p v-if="lairUpgrades.length == 0" class="no-tiles">
@@ -643,10 +631,6 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'training')"
-              :class="{
-                'wide-tile':
-                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
-              }"
             />
           </div>
           <p v-if="trainingUpgrades.length == 0" class="no-tiles">
@@ -696,10 +680,6 @@
                 }
               "
               :onDelete="(id) => onDeleteUpgrade(id, 'quality')"
-              :class="{
-                'wide-tile':
-                  upgrade.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD
-              }"
             />
           </div>
           <p v-if="qualityUpgrades.length == 0" class="no-tiles">
@@ -729,7 +709,7 @@
               label="Show only selected"
             />
           </div>
-          <div class="tile-list" v-if="contacts.length > 0">
+          <div class="tile-list tile-list--mini" v-if="contacts.length > 0">
             <PersonTile
               v-for="contact in contacts"
               :key="contact.id"
@@ -802,7 +782,6 @@
           </div>
           <div class="tile-list" v-if="cohorts.length > 0">
             <CohortTile
-              class="wide-tile"
               v-for="cohort in cohorts"
               :key="cohort.id"
               :cohort="cohort"
@@ -962,44 +941,36 @@ const showOnlySelectedCrewUpgrades = ref(
   localStorage.getItem('showOnlySelectedCrewUpgrades') === 'true'
 );
 const crewUpgrades = computed(() => {
-  return (
-    showOnlySelectedCrewUpgrades.value
-      ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
-      : props.sheet.crewUpgrades
-  ).sort(sortByDescription);
+  return showOnlySelectedCrewUpgrades.value
+    ? props.sheet.crewUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.crewUpgrades;
 });
 
 const showOnlySelectedLairUpgrades = ref(
   localStorage.getItem('showOnlySelectedLairUpgrades') === 'true'
 );
 const lairUpgrades = computed(() => {
-  return (
-    showOnlySelectedLairUpgrades.value
-      ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
-      : props.sheet.lairUpgrades
-  ).sort(sortByDescription);
+  return showOnlySelectedLairUpgrades.value
+    ? props.sheet.lairUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.lairUpgrades;
 });
 
 const showOnlySelectedTrainingUpgrades = ref(
   localStorage.getItem('showOnlySelectedTrainingUpgrades') === 'true'
 );
 const trainingUpgrades = computed(() => {
-  return (
-    showOnlySelectedTrainingUpgrades.value
-      ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
-      : props.sheet.trainingUpgrades
-  ).sort(sortByDescription);
+  return showOnlySelectedTrainingUpgrades.value
+    ? props.sheet.trainingUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.trainingUpgrades;
 });
 
 const showOnlySelectedQualityUpgrades = ref(
   localStorage.getItem('showOnlySelectedQualityUpgrades') === 'true'
 );
 const qualityUpgrades = computed(() => {
-  return (
-    showOnlySelectedQualityUpgrades.value
-      ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
-      : props.sheet.qualityUpgrades
-  ).sort(sortByDescription);
+  return showOnlySelectedQualityUpgrades.value
+    ? props.sheet.qualityUpgrades.filter((a) => a.quantity > 0)
+    : props.sheet.qualityUpgrades;
 });
 
 /** Upgrades Functions */
@@ -1127,11 +1098,9 @@ const showOnlySelectedAbilities = ref(
   localStorage.getItem('showOnlySelectedAbilities') === 'true'
 );
 const specialAbilities = computed(() => {
-  return (
-    showOnlySelectedAbilities.value
-      ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
-      : props.sheet.specialAbilities
-  ).sort(sortByDescription);
+  return showOnlySelectedAbilities.value
+    ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
+    : props.sheet.specialAbilities;
 });
 
 /** Special Abilities Functions */
@@ -1184,13 +1153,13 @@ function onCreateAbility(ability: Effectable) {
 
 /** Helper Functions */
 
-function sortByDescription(a: Effectable, b: Effectable) {
-  const aExceeds = a.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
-  const bExceeds = b.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
-  if (aExceeds && !bExceeds) return -1;
-  if (bExceeds && !aExceeds) return 1;
-  return 0;
-}
+// function sortByDescription(a: Effectable, b: Effectable) {
+//   const aExceeds = a.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
+//   const bExceeds = b.description.length > WIDE_TILE_DESCRIPTION_THRESHOLD;
+//   if (aExceeds && !bExceeds) return -1;
+//   if (bExceeds && !aExceeds) return 1;
+//   return 0;
+// }
 
 function sortClaimsByPosition(a: Claim, b: Claim) {
   if (a.position.x !== b.position.x) return a.position.x - b.position.x;
@@ -1250,11 +1219,9 @@ const showOnlySelectedHuntingGrounds = ref(
   localStorage.getItem('showOnlySelectedHuntingGrounds') === 'true'
 );
 const huntingGrounds = computed(() => {
-  return (
-    showOnlySelectedHuntingGrounds.value
-      ? props.sheet.huntingGrounds.filter((a) => a.quantity > 0)
-      : props.sheet.huntingGrounds
-  ).sort(sortByDescription);
+  return showOnlySelectedHuntingGrounds.value
+    ? props.sheet.huntingGrounds.filter((a) => a.quantity > 0)
+    : props.sheet.huntingGrounds;
 });
 
 function onChangeHuntingGround(ground: Effectable, quantity: number) {
@@ -1506,6 +1473,7 @@ watch(
   background-color: var(--translucent-light);
   padding: 1rem;
   padding-left: 0;
+  width: fit-content;
 
   .stepper {
     background-color: transparent;
@@ -1535,13 +1503,6 @@ watch(
   }
 }
 
-/** WIDE DESKTOP ONLY */
-@media (min-width: 1080px) {
-  .tile-list {
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  }
-}
-
 /** TABLET */
 @media (max-width: 1079px) {
   .crew-layout {
@@ -1564,9 +1525,6 @@ watch(
 @media (max-width: 767px) {
   .input-block {
     grid-template-columns: 1fr;
-    .input-group {
-      // width: 100%;
-    }
   }
 
   .input-group.crew-xp {

@@ -1,9 +1,8 @@
 <template>
-  <div class="cohort-tile">
+  <div class="cohort-tile" :class="{ harmed: harm }">
     <div class="header">
       <div v-if="props.cohort.cohortType === 'gang'">
         <h3>
-          <span class="harm" v-if="harm">{{ harm }}!</span>
           <span>{{ scaleText }}</span>
         </h3>
         <h1>
@@ -50,6 +49,8 @@
         <i class="fas fa-edit"></i>
       </button>
     </div>
+    <span class="harm" v-if="harm">{{ harm }}!</span>
+
     <div class="edges-and-flaws">
       <ul>
         <li v-for="edge in edges" :key="edge">
@@ -72,9 +73,9 @@
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
 import { Cohort } from '@/game-data/sheets/crew-sheet';
+import { useGameStore } from '@/stores/game-store';
 import { computed, defineProps } from 'vue';
 import EditCohortModal from './modals/modal-content/EditCohortModal.vue';
-import { useGameStore } from '@/stores/game-store';
 const codex = useGameStore().game?.codex;
 
 const props = defineProps<{
@@ -143,6 +144,10 @@ function onDeleteCohort(id: string) {
   border: 1px solid transparent;
   transition: border 0.2s;
 
+  &.harmed {
+    border: 1px solid var(--red);
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -172,14 +177,6 @@ function onDeleteCohort(id: string) {
       span {
         font-size: inherit;
       }
-
-      > .harm {
-        font-size: inherit;
-        background-color: var(--red);
-        color: var(--dark);
-        padding: 0.2rem 0.2rem 0.2rem 0.4rem;
-        margin-right: 0.2rem;
-      }
     }
 
     button {
@@ -195,6 +192,19 @@ function onDeleteCohort(id: string) {
   > p {
     opacity: 0.8;
     font-size: 1.2rem;
+  }
+
+  > span.harm {
+    display: inline-flex;
+    background-color: var(--red);
+    color: var(--dark);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.6rem;
+    width: fit-content;
+    font-weight: bold;
+    margin-right: 0.8rem;
   }
 
   .edges-and-flaws {
