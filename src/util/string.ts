@@ -47,12 +47,12 @@ export function text(str: string): string {
       pattern: /\n/g,
       replacement: '<br />'
     },
-    // Tagged: [/dice bar]
+    // Tagged: [/dice bar] => <span class="t t--dice">bar<i class="fas fa-dice-three"></i></span>
     {
       pattern: /\[\/dice\s+([^\]]+)\]/g,
       replacement: `<span class="t t--dice">$1<i class="fas fa-dice-three"></i></span>`
     },
-    // Tagged: [/foo bar]
+    // Tagged: [/foo bar baz] => <span class="t t--foo">bar baz</span>
     {
       pattern: /\[\/(\w+)\s+([^\]]+)\]/g,
       replacement: `<span class="t t--$1">$2</span>`

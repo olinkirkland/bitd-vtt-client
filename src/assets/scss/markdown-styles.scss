@@ -15,7 +15,7 @@ span.markdown-text {
 
   > .t {
     white-space: nowrap;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: bold;
@@ -28,9 +28,8 @@ span.markdown-text {
     border-radius: 3px;
     background-color: var(--light);
     color: var(--dark);
-
-    line-height: 1;
-
+    line-height: 1.1;
+    
     &--dice {
       padding-right: 0.1rem;
       background-color: transparent;
