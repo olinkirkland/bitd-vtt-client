@@ -427,14 +427,21 @@
           </div>
 
           <InfoBox>
-            <p>
-              For each item below, mark 1 xp.<br />If it occurred more than
-              once, mark 2 xp.
-            </p>
+            <p
+              v-html="
+                text(
+                  `For each item below, mark [/xp 1 XP]\nIf it occurred more than once, mark [/xp 2 XP]`
+                )
+              "
+            ></p>
             <ul>
-              <li v-for="label in sheet.crewExperienceLabels">
-                {{ label }}
-              </li>
+              <li
+                v-for="label in [
+                  ...sheet.crewExperienceLabels,
+                  ...(sheet.crewDefaultExperienceLabels || [])
+                ]"
+                v-html="text(label)"
+              ></li>
             </ul>
           </InfoBox>
           <InfoBox>
