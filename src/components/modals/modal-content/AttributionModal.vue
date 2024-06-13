@@ -122,7 +122,7 @@ p.images-description {
 
 ul.images {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   gap: 1.6rem;
   background-color: var(--translucent-light);
   padding: 2.4rem;

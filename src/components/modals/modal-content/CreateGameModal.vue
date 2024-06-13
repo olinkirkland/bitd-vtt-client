@@ -159,9 +159,8 @@ ul.cover-image-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 1rem;
-  max-height: 20rem;
+  max-height: 32rem;
   overflow-y: auto;
-  scrollbar-width: none;
 
   > li {
     width: 100%;
@@ -246,8 +245,10 @@ ul.cover-image-list {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
+    scrollbar-width: none;
+
     > li {
-      min-width: 45%;
+      min-width: 40%;
       height: 8rem;
     }
   }
