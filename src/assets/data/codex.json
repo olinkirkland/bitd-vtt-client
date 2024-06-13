@@ -113,7 +113,7 @@
           },
           {
             "name": "Dead",
-            "description": "Destroyed. Spend [/coin Coin] equal to your *Tier* +2 to restore"
+            "description": "Destroyed. Spend [/coin Coin] equal to your *Tier* +2 to restore it"
           }
         ],
         "expertise": ["Doctor", "Investigator", "Occultist", "Assassin", "Spy"],

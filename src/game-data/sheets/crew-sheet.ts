@@ -2013,7 +2013,7 @@ export class Smugglers extends Crew {
         id: 'like-part-of-the-family',
         name: 'Like Part of the Family',
         description:
-          'Create one of your vehicles as a cohort. Its quality is equal to your Tier +1.',
+          'Create one of your vehicles as a Cohort. Its *Quality* is equal to your *Tier* +1.',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2021,7 +2021,7 @@ export class Smugglers extends Crew {
         id: 'all-hands',
         name: 'All Hands',
         description:
-          'During downtime, one of your cohorts may perform a downtime activity for the crew to acquire an asset, reduce heat, or work on a long-term project.',
+          'One of your Cohorts may perform a *Downtime Activity* for the Crew to *Acquire an Asset*, reduce *Heat*, or work on a *Long-term Project*',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2029,7 +2029,7 @@ export class Smugglers extends Crew {
         id: 'ghost-passage',
         name: 'Ghost Passage',
         description:
-          'From harsh experience or occult ritual, all crew members become immune to possession by spirits, but may choose to "carry" a second ghost as a passenger within their body.',
+          'All crew members become immune to possession by Spirits, but may choose to "carry" a Ghost as a passenger within their body.',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2037,7 +2037,7 @@ export class Smugglers extends Crew {
         id: 'just-passing-through',
         name: 'Just Passing Through',
         description:
-          'During downtime, take -1 heat. When your heat is 4 or less, you get +1d to deceive people when you pass yourselves off as ordinary citizens.',
+          '[/heat -1 Heat] in Downtime\n\nWhen your *Heat* is 4 or less, take [/dice +1] to deceive people when you pass yourselves off as ordinary citizens',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2045,7 +2045,7 @@ export class Smugglers extends Crew {
         id: 'leverage',
         name: 'Leverage',
         description:
-          'Your crew supplies contraband for other factions. Your success is good for them. Whenever you gain rep, gain +1 rep.',
+          'Your Crew supplies contraband for other *Factions*. Your success is good for them\n\nGain [/rep +1 Rep] whenever you gain *Rep*',
         quantity: 0,
         maxQuantity: 1
       },
@@ -2053,7 +2053,7 @@ export class Smugglers extends Crew {
         id: 'reavers',
         name: 'Reavers',
         description:
-          'When you go into conflict aboard a vehicle, you gain +1 effect for vehicle damage and speed. Your vehicle gains armor.',
+          'When you go into conflict aboard a vehicle, you gain +1 *Effect* for vehicle damage and speed\n\nYour vehicle gains Armor',
         quantity: 0,
         maxQuantity: 1
       },
