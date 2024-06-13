@@ -1531,6 +1531,11 @@ watch(
     align-items: center;
   }
 
+  .turf-and-hold {
+    width: 100%;
+    justify-content: center;
+  }
+
   .coin-group {
     align-items: center;
   }
