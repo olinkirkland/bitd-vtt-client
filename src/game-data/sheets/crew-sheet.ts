@@ -300,7 +300,7 @@ export class Assassins extends Crew {
         id: 'assassins-predators',
         name: 'Predators',
         description:
-          'When you use stealth or subterfuge to commit murder, add [/dice +1] to the *Engagement* roll.',
+          'When you use stealth or subterfuge to commit murder, add [/dice +1] to the *Engagement* roll',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1699,7 +1699,7 @@ export class Shadows extends Crew {
         id: 'second-story',
         name: 'Second Story',
         description:
-          'When you execute a clandestine infiltration, you get +1d to the engagement roll.',
+          'When you execute a clandestine infiltration, you get [/dice +1] to the *Engagement* roll',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1707,7 +1707,7 @@ export class Shadows extends Crew {
         id: 'slippery',
         name: 'Slippery',
         description:
-          'When you roll entanglements, roll twice and keep the one you want. When you reduce heat on the crew, take +1d.',
+          'When you roll *Entanglements*, roll twice and keep the one you want\n\nTake [/dice +1] when you reduce *Heat*',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1715,7 +1715,7 @@ export class Shadows extends Crew {
         id: 'synchronized',
         name: 'Synchronized',
         description:
-          'When you perform a group action, you may count multiple 6s from different rolls as a critical success.',
+          'When you perform a *Group Action* you may count multiple 6s from different rolls as a Critical Success',
         quantity: 0,
         maxQuantity: 1
       },
