@@ -141,7 +141,6 @@ function updateCurrentIndex(carousel: HTMLElement) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    // object-position: 50% 50%;
     filter: brightness(0.8);
   }
 
@@ -225,8 +224,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
         > p {
           // I want it to hang off the bottom; to overlap the edge
           position: relative;
-          top: 1rem;
-          padding-bottom: 3rem;
+          bottom: -2rem;
+          padding-bottom: 4rem;
+          transform: translateY(100%);
+          transition: transform 0.5s;
         }
 
         &.left-of-active {
@@ -241,6 +242,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
           z-index: 1;
           filter: brightness(1);
           height: 100%;
+
+          > p {
+            transform: translateY(0);
+          }
         }
 
         &.prevent-click-on-mobile {
