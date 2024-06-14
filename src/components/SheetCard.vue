@@ -46,6 +46,7 @@ function getSubtitle() {
   height: 16rem;
   overflow: hidden;
   box-shadow: var(--shadow);
+  animation: fade 0.5s ease-in-out;
 
   > img {
     position: absolute;
@@ -70,8 +71,6 @@ function getSubtitle() {
     line-height: 1;
     z-index: 1;
     padding: 0.4rem;
-
-    animation: fadeIn;
 
     &.extra-long {
       font-size: 2rem;
