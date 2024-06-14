@@ -48,7 +48,6 @@ const dateCreatedText = computed(() => {
   height: 16rem;
   overflow: hidden;
   box-shadow: var(--shadow);
-  animation: fade 0.5s ease-in-out;
 
   > img {
     position: absolute;

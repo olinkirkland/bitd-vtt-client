@@ -1,5 +1,8 @@
 <template>
-  <div class="checkbox-bar" :class="{ 'coin-mode': props.coinMode }">
+  <div
+    class="checkbox-bar"
+    :class="{ 'coin-mode': props.coinMode, locked: lockLevel < 1 }"
+  >
     <ul class="checkbox-list">
       <Checkbox
         v-for="i in props.max"
@@ -15,8 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, ref, watch } from 'vue';
+import { computed, defineEmits, defineProps, ref, watch } from 'vue';
 import Checkbox from './Checkbox.vue';
+import { useGameStore } from '@/stores/game-store';
 
 const props = defineProps<{
   value: number;
@@ -28,6 +32,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'change', value: number): void;
 }>();
+
+const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
 
 const internalValue = ref(props.value);
 const checkboxValues = ref<string[]>([]);
@@ -107,7 +113,7 @@ function updateQuantity(lastClicked: string) {
   }
 
   .locked {
-    opacity: 0.4;
+    opacity: 0.4 !important;
     pointer-events: none;
   }
 
@@ -135,6 +141,15 @@ function updateQuantity(lastClicked: string) {
       width: 1.6rem;
       height: 2.4rem;
     }
+  }
+}
+
+.checkbox-bar.locked .checkbox-group {
+  opacity: 0.2;
+
+  &.checked,
+  &.locked {
+    opacity: unset;
   }
 }
 </style>

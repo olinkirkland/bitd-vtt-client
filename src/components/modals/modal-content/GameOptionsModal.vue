@@ -85,13 +85,45 @@
             />
           </div>
         </section>
+        <Divider />
+        <div v-if="isGM">
+          <section>
+            <div class="input-group">
+              <label>Game Master Options</label>
+              <div class="row lock-box">
+                <button
+                  v-for="i in [0, 1, 2]"
+                  :key="i"
+                  class="btn btn--tab btn--tab--big mobile-full-width"
+                  :class="{ active: lockLevel === i }"
+                  @click="
+                    patch([{ op: 'replace', path: '/lockLevel', value: i }])
+                  "
+                >
+                  <i
+                    class="fas"
+                    :class="{
+                      'fa-lock': i === 0,
+                      'fa-unlock': i === 1,
+                      'fa-lock-open': i === 2
+                    }"
+                  ></i>
+                  <span v-if="i === 0">Locked for Players</span>
+                  <span v-if="i === 1">Players can select </span>
+                  <span v-if="i === 2">Players can edit</span>
+                </button>
+              </div>
+            </div>
+          </section>
+          <Divider />
+        </div>
         <section>
           <div class="row">
             <button
               class="btn btn--alt mobile-full-width"
               @click="onClickAbandonGame"
             >
-              <span> Leave Game </span>
+              <span>Abandon Game</span>
             </button>
           </div>
         </section>
@@ -122,12 +154,15 @@ import LoadingModal from './LoadingModal.vue';
 
 const nameError = ref<string | null>(null);
 const gameName = ref(useGameStore().game?.name);
+const isGM = computed(() => useGameStore().userPlayer?.role === PlayerRole.GM);
 
 const inviteLink = computed(() => {
   return `${window.location.origin}/invite/${useGameStore().game?.inviteCode}`;
 });
 
-console.log(useGameStore().game?.codex?.sheets?.crew?.cohorts);
+const lockLevel = computed(() => {
+  return useGameStore().game?.lockLevel ?? 0;
+});
 
 const codexHash = computed(() => {
   // Use string-hash library to hash the codex
@@ -215,6 +250,13 @@ function onClickResetCodex() {
 
 .invite label {
   margin-bottom: 0.4rem;
+}
+
+.lock-box {
+  display: flex;
+  padding: 1.2rem;
+  background-color: var(--translucent-very-light);
+  border-radius: 5px;
 }
 
 .row.invite-block {

@@ -18,11 +18,14 @@
             onEdit: onEditEffectable
           })
         "
+        :class="{
+          removed: lockLevel < 2
+        }"
       >
         <i class="fas fa-edit"></i>
       </button>
     </div>
-    <div class="row selection-bar">
+    <div class="row selection-bar" :class="{ locked: lockLevel < 1 }">
       <Checkbox
         v-for="i in effectable.maxQuantity"
         :key="effectable.id + i"
@@ -37,8 +40,9 @@
 
 <script setup lang="ts">
 import ModalController from '@/controllers/modal-controller';
+import { useGameStore } from '@/stores/game-store';
 import { text } from '@/util/string';
-import { defineProps, ref, watch } from 'vue';
+import { computed, defineProps, ref, watch } from 'vue';
 import { Effectable } from '../game-data/game-data-types';
 import Checkbox from './Checkbox.vue';
 import EditEffectableModal from './modals/modal-content/EditEffectableModal.vue';
@@ -51,6 +55,8 @@ const props = defineProps<{
   onEdit?: (effectable: Effectable) => void;
   onDelete?: (id: string) => void;
 }>();
+
+const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
 
 function updateCheckboxes() {
   checkboxValues.value = checkboxValuesFromQuantity(props.effectable.quantity);
@@ -170,6 +176,19 @@ function onDeleteEffectable(id: string) {
       }
       &:last-child {
         padding-right: 0.6rem;
+      }
+    }
+
+    &.locked {
+      pointer-events: none;
+
+      :deep(.checkbox-group:not(.checked) > .icon) {
+        background-color: transparent;
+
+        span,
+        i {
+          color: var(--translucent-light);
+        }
       }
     }
   }

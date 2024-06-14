@@ -43,6 +43,8 @@
               @change="
                 changeValue(($event.target as HTMLInputElement)?.value, 'name')
               "
+              :class="{ locked: lockLevel < 1 }"
+              :disabled="lockLevel < 1"
             />
             <CollapsingShelf :show="focus == 'name'">
               <p>Choose a name for your crew.</p>
@@ -58,6 +60,8 @@
                   'description'
                 )
               "
+              :class="{ locked: lockLevel < 1 }"
+              :disabled="lockLevel < 1"
             >
             </textarea>
             <CollapsingShelf :show="focus == 'description'">
@@ -79,6 +83,8 @@
                   'reputationType'
                 )
               "
+              :class="{ locked: lockLevel < 1 }"
+              :disabled="lockLevel < 1"
             />
             <CollapsingShelf :show="focus == 'reputation-type'">
               <p>Choose how other underworld factions see you.</p>
@@ -111,8 +117,14 @@
                       'deityName'
                     )
                   "
+                  :class="{ locked: lockLevel < 1 }"
+                  :disabled="lockLevel < 1"
                 />
-                <button class="btn btn--icon" @click="randomizeDeityName">
+                <button
+                  class="btn btn--icon"
+                  @click="randomizeDeityName"
+                  :class="{ removed: lockLevel < 1 }"
+                >
                   <i class="fas fa-random"></i>
                 </button>
               </div>
@@ -132,6 +144,8 @@
                 "
                 placeholder="Describe your deity in a few words"
                 :value="(props.sheet as Cult).deityFeatures"
+                :class="{ locked: lockLevel < 1 }"
+                :disabled="lockLevel < 1"
               />
               <CollapsingShelf :show="focus == 'deity-features'">
                 <p>Choose two features from the list to describe your deity.</p>
@@ -183,8 +197,14 @@
                     'lair'
                   )
                 "
+                :class="{ locked: lockLevel < 1 }"
+                :disabled="lockLevel < 1"
               />
-              <button class="btn btn--icon" @click="randomizeLair">
+              <button
+                class="btn btn--icon"
+                @click="randomizeLair"
+                :class="{ removed: lockLevel < 1 }"
+              >
                 <i class="fas fa-random"></i>
               </button>
             </div>
@@ -201,6 +221,8 @@
                     'lairDistrict'
                   )
                 "
+                :class="{ locked: lockLevel < 1 }"
+                :disabled="lockLevel < 1"
               />
               <CollapsingShelf :show="focus == 'lair-district'">
                 <p>Where is your lair located?</p>
@@ -270,7 +292,7 @@
                 @change="changeValue($event, 'turf')"
               />
             </div>
-            <div class="input-group">
+            <div class="input-group" :class="{ locked: lockLevel < 1 }">
               <label for="crew-hold">Hold</label>
               <div class="row flat">
                 <button
@@ -388,6 +410,7 @@
                   claims: props.sheet.claims
                 })
               "
+              :class="{ removed: lockLevel < 1 }"
             >
               <span>Edit Claims</span>
             </button>
@@ -407,6 +430,7 @@
               propertyName="Claim"
               :neighborClaims="getNeighborClaims(claim)"
               :change="(quantity: number) => onChangeClaim(claim, quantity)"
+              :class="{ locked: lockLevel < 1 }"
             />
           </div>
         </section>
@@ -1348,6 +1372,10 @@ watch(
     );
   }
 );
+
+const lockLevel = computed(() => {
+  return useGameStore().game?.lockLevel ?? 0;
+});
 </script>
 
 <style scoped lang="scss">

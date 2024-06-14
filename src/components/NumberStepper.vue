@@ -4,7 +4,8 @@
       @click="decrease"
       class="btn btn--icon"
       :class="{
-        disabled: props.min !== undefined && internalValue <= props.min
+        disabled: props.min !== undefined && internalValue <= props.min,
+        locked: lockLevel < 1
       }"
     >
       <i class="fas fa-minus-circle"></i>
@@ -17,7 +18,8 @@
       @click="increase"
       class="btn btn--icon"
       :class="{
-        disabled: props.max !== undefined && internalValue >= props.max
+        disabled: props.max !== undefined && internalValue >= props.max,
+        locked: lockLevel < 1
       }"
     >
       <i class="fas fa-plus-circle"></i>
@@ -26,7 +28,8 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, ref, watch } from 'vue';
+import { useGameStore } from '@/stores/game-store';
+import { computed, defineEmits, defineProps, ref, watch } from 'vue';
 
 const props = defineProps<{
   value: number;
@@ -34,6 +37,8 @@ const props = defineProps<{
   max?: number;
   label?: string;
 }>();
+
+const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
 
 const emit = defineEmits<{
   (e: 'change', value: number): void;

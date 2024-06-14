@@ -164,6 +164,12 @@ button.btn--tab {
   color: var(--primary);
   background-color: transparent;
 
+  &--big {
+    height: auto;
+    max-height: unset;
+    padding: 1.2rem 2.4rem;
+  }
+
   &.active {
     background-color: var(--translucent-light);
     filter: brightness(1.2);
@@ -196,6 +202,14 @@ textarea {
     box-shadow: var(--shadow);
     outline: none;
   }
+
+  &.locked {
+    background-color: transparent;
+  }
+}
+
+.locked {
+  pointer-events: none;
 }
 
 textarea {
@@ -440,6 +454,15 @@ a.anchor-link {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+button.locked {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.removed {
+  display: none !important;
 }
 
 @media (max-width: 1200px) {

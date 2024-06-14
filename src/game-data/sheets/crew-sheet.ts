@@ -997,7 +997,7 @@ export class Cult extends Crew {
         id: 'sealed-in-blood',
         name: 'Sealed in Blood',
         description:
-          'Each human sacrifice yields [/stress -3 Stress Cost] for any ritual you perform',
+          'Each human sacrifice yields -3 *Stress Cost* when performing a ritual',
         quantity: 0,
         maxQuantity: 1
       },
@@ -1123,7 +1123,8 @@ export class Cult extends Crew {
       {
         id: 'cult-ancient-obelisk',
         name: 'Ancient Obelisk',
-        description: '[/stress -1 Stress Cost] *Arcane Powers* and *Rituals*',
+        description:
+          '-1 *Stress Cost* for *Arcane Powers* and *Rituals*',
         position: { x: 3, y: 0 },
         quantity: 0,
         maxQuantity: 1,

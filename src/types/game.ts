@@ -18,6 +18,7 @@ export type Game = {
   coverImage: string;
   dateCreated: Date;
   inviteCode: string;
+  lockLevel: number;
 
   players: Record<string, Player>;
 
