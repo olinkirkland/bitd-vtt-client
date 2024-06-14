@@ -360,22 +360,6 @@ em {
   }
 }
 
-.animate-fade {
-  animation: fade 2s infinite;
-}
-
-@keyframes fade {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.5;
-  }
-}
-
 .reminder,
 .tooltip {
   z-index: 99;

@@ -18,6 +18,7 @@ export const useTokenStore = defineStore('auth', () => {
 
   // Clear the refresh token from the store and localStorage
   const clear = () => {
+    console.warn('Clearing tokens');
     storeRefreshToken(null);
     accessToken.value = null;
   };

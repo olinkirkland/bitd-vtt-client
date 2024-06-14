@@ -226,8 +226,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
           position: relative;
           bottom: -2rem;
           padding-bottom: 4rem;
-          transform: translateY(100%);
-          transition: transform 0.5s;
+          opacity: 0;
+          transition: opacity 0.3s;
         }
 
         &.left-of-active {
@@ -244,7 +244,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
           height: 100%;
 
           > p {
-            transform: translateY(0);
+            opacity: 1;
           }
         }
 

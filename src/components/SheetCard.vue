@@ -71,6 +71,8 @@ function getSubtitle() {
     z-index: 1;
     padding: 0.4rem;
 
+    animation: fadeIn;
+
     &.extra-long {
       font-size: 2rem;
     }
