@@ -18,6 +18,7 @@
           <span>{{ buttonSheet.text }}</span>
         </button>
       </div>
+
       <div class="row sheet-controls" v-else>
         <button class="btn btn--icon" @click="currentSheet = null">
           <i class="fas fa-arrow-left"></i>
@@ -38,7 +39,11 @@
       </div>
     </div>
 
-    <div class="sheet-layout" v-if="currentSheet">
+    <div class="loading" v-if="isLoading">
+      <i class="fas fa-circle-notch fa-spin"></i>
+    </div>
+
+    <div class="sheet-layout" v-else-if="currentSheet">
       <TheCrewSheet
         :sheet="(currentSheet as Crew)"
         v-if="currentSheet?.sheetType === 'crew'"
@@ -109,6 +114,8 @@ import { useRoute } from 'vue-router';
 import TheCharacterSheet from './sheets/TheCharacterSheet.vue';
 import TheCrewSheet from './sheets/TheCrewSheet.vue';
 const route = useRoute();
+
+const isLoading = computed(() => !useGameStore().game?.codex);
 
 const sheetType = ref('crew');
 const sheets = computed(() => {
@@ -336,6 +343,19 @@ h2.breadcrumbs {
 
   > i {
     font-size: 1.2rem;
+  }
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > i {
+    font-size: 2.4rem;
+    color: var(--primary);
   }
 }
 

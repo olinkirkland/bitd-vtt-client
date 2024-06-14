@@ -8,7 +8,7 @@
     <template v-slot:content>
       <div class="info">
         <p v-html="props.message"></p>
-        <button class="btn mobile-full-width" @click="ModalController.close">
+        <button class="btn mobile-full-width" @click="ModalController.close()">
           <span>Okay</span>
         </button>
       </div>
