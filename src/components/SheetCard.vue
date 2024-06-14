@@ -69,6 +69,7 @@ function getSubtitle() {
     text-shadow: 2px 2px 2px var(--dark);
     line-height: 1;
     z-index: 1;
+    padding: 0.4rem;
 
     &.extra-long {
       font-size: 2rem;

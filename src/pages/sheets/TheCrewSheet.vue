@@ -346,7 +346,7 @@
             <p
               v-html="
                 text(
-                  'When the tracker is full, increase the *Wanted Level* and clear all your *Heat*'
+                  `When the tracker is full, increase the *Wanted Level* and clear all your *Heat*\n\nThe only way to reduce your *Wanted Level* is through *Incarceration*. When one of the PCs, friends, contacts—or a framed enemy—is convicted and incarcerated for crimes associated with your Crew, clear your *Heat* and reduce your *Wanted Level* by 1`
                 )
               "
             ></p>
@@ -448,7 +448,7 @@
             <p
               v-html="
                 text(
-                  `When the tracker is full, choose one *Special Ability* or two *Upgrades* and clear the *XP*`
+                  `When the tracker is full, choose one *Special Ability* or two *Upgrades* and clear the *XP*\n\nEvery time the crew advances, each PC gets [/coin +1 Stash] and an additional [/coin +2 Stash] for each *Tier*`
                 )
               "
             ></p>

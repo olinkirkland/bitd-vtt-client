@@ -86,7 +86,7 @@
           "prowess": "Earn [/xp 2 XP] instead of 1 when you train **Prowess** during Downtime",
           "resolve": "Earn [/xp 2 XP] instead of 1 when you train **Resolve** during Downtime",
           "personal": "Earn [/xp 2 XP] instead of 1 when you train **Playbook** during Downtime",
-          "mastery": "The Crew gains access to master level training. You may advance your *Action Ratings* to 4\n\nThis costs four upgrades to unlock"
+          "mastery": "The PCs gain access to master level training. You may advance your *Action Ratings* to 4\n\nThis costs four upgrades to unlock"
         },
         "quality": {
           "documents": "Improves the *Quality Rating* of the Crew's Documents",

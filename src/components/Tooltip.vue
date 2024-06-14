@@ -33,7 +33,7 @@ const tooltip = ref<HTMLElement | null>(null);
     &::before {
       border-bottom: 0;
       border-top: 0.8rem solid var(--translucent-heavy);
-      transform: translateX(-50%) translateY(2.6rem);
+      transform: translateX(-50%) translateY(2.2rem);
     }
   }
 }

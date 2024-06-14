@@ -6,6 +6,7 @@ import { Game } from '@/types/game';
 import { Operation, applyPatch } from 'fast-json-patch';
 import { Socket, io } from 'socket.io-client';
 import ModalController from './modal-controller';
+import InfoModal from '@/components/modals/modal-content/InfoModal.vue';
 
 export enum SocketMessageType {
   PATCH = 'patch'
@@ -65,10 +66,19 @@ function onConnect() {
 
 function onDisconnect() {
   console.log('onClose');
+  ModalController.open(InfoModal, {
+    title: 'Disconnected',
+    message:
+      'You have been disconnected from the game. Please try to reconnect.'
+  });
 }
 
 function onError(error: any) {
   console.log('onError:', error);
+  ModalController.open(InfoModal, {
+    title: 'Network Error',
+    message: 'A network error occurred.'
+  });
 }
 
 export async function patch(patches: Operation[]) {
