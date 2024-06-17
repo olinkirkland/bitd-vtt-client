@@ -221,11 +221,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
           font-size: 2.4rem;
         }
 
-        > p {
-          // I want it to hang off the bottom; to overlap the edge
-          position: relative;
-          bottom: -2rem;
-          padding-bottom: 4rem;
+        > p,
+        h3 {
           opacity: 0;
           transition: opacity 0.3s;
         }
@@ -243,8 +240,11 @@ function updateCurrentIndex(carousel: HTMLElement) {
           filter: brightness(1);
           height: 100%;
 
-          > p {
+          > p,
+          h3 {
+            transition-delay: 0.3s;
             opacity: 1;
+            z-index: 1;
           }
         }
 
