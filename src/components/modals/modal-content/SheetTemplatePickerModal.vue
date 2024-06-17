@@ -224,7 +224,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
         > p,
         h3 {
           opacity: 0;
-          transition: opacity 0.3s;
+          transition: opacity 0.5s;
         }
 
         &.left-of-active {
@@ -242,7 +242,7 @@ function updateCurrentIndex(carousel: HTMLElement) {
 
           > p,
           h3 {
-            transition-delay: 0.3s;
+            transition-delay: 0.5s;
             opacity: 1;
             z-index: 1;
           }
