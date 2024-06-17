@@ -821,6 +821,20 @@
       </div>
     </div>
     <div class="row center mobile-nav">
+      <!-- <button
+        class="btn btn--icon cycle-lock-level"
+        v-if="useGameStore().userPlayer?.role === PlayerRole.GM"
+        @click="cycleLockLevel"
+      >
+        <i
+          class="fas"
+          :class="{
+            'fa-lock': lockLevel === 0,
+            'fa-unlock': lockLevel === 1,
+            'fa-lock-open': lockLevel === 2
+          }"
+        ></i>
+      </button> -->
       <button
         class="btn btn--tab"
         @click="scrollToIndex(0)"
@@ -872,6 +886,7 @@ import {
 } from '@/game-data/sheets/crew-sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
+import { PlayerRole } from '@/types/game';
 import { pick } from '@/util/rand-helper';
 import { text } from '@/util/string';
 import { computed, defineProps, onMounted, onUnmounted, ref, watch } from 'vue';
@@ -898,6 +913,13 @@ const focus = ref();
 function onBlur(event: FocusEvent) {
   if ((event.relatedTarget as HTMLElement)?.closest('.shelf')) return;
   focus.value = null;
+}
+
+function cycleLockLevel() {
+  // Cycle through lock levels (0, 1, 2)
+  let newLockLevel = props.sheet.lockLevel + 1;
+  if (newLockLevel > 2) newLockLevel = 0;
+  changeValue(newLockLevel, 'lockLevel');
 }
 
 function changeValue(value: any, partialPath: string) {
@@ -1374,7 +1396,7 @@ watch(
 );
 
 const lockLevel = computed(() => {
-  return useGameStore().game?.lockLevel ?? 0;
+  return props.sheet.lockLevel;
 });
 </script>
 
@@ -1546,6 +1568,9 @@ const lockLevel = computed(() => {
 
   .mobile-nav {
     display: flex;
+    > .cycle-lock-level {
+      margin-right: auto;
+    }
   }
 }
 

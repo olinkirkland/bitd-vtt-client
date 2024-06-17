@@ -76,12 +76,11 @@
 <script setup lang="ts">
 import { createNewGame } from '@/api/games';
 import coverImagesJson from '@/assets/data/cover-images.json';
-import ModalController from '@/controllers/modal-controller';
-import { useUserStore } from '@/stores/user-store';
 import { computed, ref } from 'vue';
 import ModalFrame from '../modal-parts/ModalFrame.vue';
 import ModalHeader from '../modal-parts/ModalHeader.vue';
-import GamePreviewModal from './GamePreviewModal.vue';
+import { router } from '@/router';
+import { useUserStore } from '@/stores/user-store';
 
 const coverImages = ref(
   coverImagesJson.map((image) => ({ ...image, loaded: false }))
@@ -128,10 +127,12 @@ async function onClickCreate() {
   const response = await createNewGame(gameName.value, coverImage.value);
   busyCreating.value = false;
   if (response) createError.value = response;
-  else
-    ModalController.open(GamePreviewModal, {
-      game: useUserStore().games.find((game) => game.name === gameName.value)
-    });
+  else {
+    const gameId = useUserStore().games.find(
+      (game) => game.name === gameName.value
+    )?._id;
+    router.push({ name: 'game', params: { id: gameId } });
+  }
 }
 </script>
 

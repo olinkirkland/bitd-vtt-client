@@ -86,7 +86,7 @@
           </div>
         </section>
         <Divider />
-        <div v-if="isGM">
+        <!-- <div v-if="isGM">
           <section>
             <div class="input-group">
               <label>Game Master Options</label>
@@ -122,7 +122,7 @@
             </div>
           </section>
           <Divider />
-        </div>
+        </div> -->
         <section>
           <div class="row">
             <button

@@ -69,7 +69,11 @@ function onDisconnect() {
   ModalController.open(InfoModal, {
     title: 'Disconnected',
     message:
-      'You have been disconnected from the game. Please try to reconnect.'
+      'You have been disconnected from the game. Please try to reconnect.',
+    onClose: () => {
+      ModalController.open(LoadingModal);
+      location.reload();
+    }
   });
 }
 

@@ -7,6 +7,7 @@ export default class Sheet {
   createdBy: string; // The id of the player who created the sheet
   createdAt: number; // The timestamp of when the sheet was created
   image: string;
+  lockLevel: number;
 
   constructor() {
     this.id = uuidv4();
@@ -14,5 +15,6 @@ export default class Sheet {
     this.createdBy = useUserStore().id;
     this.createdAt = Date.now();
     this.image = '';
+    this.lockLevel = 99;
   }
 }
