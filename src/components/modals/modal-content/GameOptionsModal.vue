@@ -108,9 +108,15 @@
                       'fa-lock-open': i === 2
                     }"
                   ></i>
-                  <span v-if="i === 0">Locked for Players</span>
-                  <span v-if="i === 1">Players can select </span>
-                  <span v-if="i === 2">Players can edit</span>
+                  <span v-if="i === 0" class="mobile-hidden"
+                    >Locked for Players</span
+                  >
+                  <span v-if="i === 1" class="mobile-hidden"
+                    >Players can select
+                  </span>
+                  <span v-if="i === 2" class="mobile-hidden"
+                    >Players can edit</span
+                  >
                 </button>
               </div>
             </div>
