@@ -31,6 +31,7 @@ import AttributionModal from '@/components/modals/modal-content/AttributionModal
 import CreateGameModal from '@/components/modals/modal-content/CreateGameModal.vue';
 import GamePreviewModal from '@/components/modals/modal-content/GamePreviewModal.vue';
 import ModalController from '@/controllers/modal-controller';
+import { router } from '@/router';
 import { useUserStore } from '@/stores/user-store';
 import { Game } from '@/types/game';
 import { computed, onMounted } from 'vue';
@@ -42,7 +43,7 @@ async function onClickNewGame() {
 const games = computed(() => useUserStore().games);
 
 function onClickGame(game: Game) {
-  ModalController.open(GamePreviewModal, { game });
+  router.push({ name: 'game', params: { id: game._id } });
 }
 
 onMounted(() => {
