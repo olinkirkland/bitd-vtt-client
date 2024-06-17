@@ -33,7 +33,7 @@ const emit = defineEmits<{
   (e: 'change', value: number): void;
 }>();
 
-const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
+const lockLevel = 99;
 
 const internalValue = ref(props.value);
 const checkboxValues = ref<string[]>([]);

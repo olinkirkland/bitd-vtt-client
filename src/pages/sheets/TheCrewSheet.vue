@@ -1395,9 +1395,7 @@ watch(
   }
 );
 
-const lockLevel = computed(() => {
-  return props.sheet.lockLevel;
-});
+const lockLevel = 99;
 </script>
 
 <style scoped lang="scss">

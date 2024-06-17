@@ -56,7 +56,7 @@ const props = defineProps<{
   onDelete?: (id: string) => void;
 }>();
 
-const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
+const lockLevel = 99;
 
 function updateCheckboxes() {
   checkboxValues.value = checkboxValuesFromQuantity(props.effectable.quantity);

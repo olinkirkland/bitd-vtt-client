@@ -38,7 +38,7 @@ const props = defineProps<{
   label?: string;
 }>();
 
-const lockLevel = computed(() => useGameStore().game?.lockLevel ?? 0);
+const lockLevel = 99;
 
 const emit = defineEmits<{
   (e: 'change', value: number): void;

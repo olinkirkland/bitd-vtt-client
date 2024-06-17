@@ -166,10 +166,6 @@ const inviteLink = computed(() => {
   return `${window.location.origin}/invite/${useGameStore().game?.inviteCode}`;
 });
 
-const lockLevel = computed(() => {
-  return useGameStore().game?.lockLevel ?? 0;
-});
-
 const codexHash = computed(() => {
   // Use string-hash library to hash the codex
   return stringHash(JSON.stringify(useGameStore().game?.codex) ?? '');
