@@ -12,6 +12,7 @@
           <h1>CHARACTER TYPE DESCRIPTION</h1>
           <h1>CREW</h1>
         </section>
+        <Divider />
         <section>
           <h1>NAME</h1>
           <h1>ALIAS</h1>
@@ -21,36 +22,43 @@
           <h1>BACKGROUND</h1>
           <h1>BACKGROUND DESCRIPTION</h1>
         </section>
-      </div>
-      <div>
+        <Divider />
         <section>
           <h1>VICE</h1>
           <h1>VICE PURVEYOR</h1>
         </section>
+        <Divider />
         <section>
           <h1>CONTACTS</h1>
         </section>
+      </div>
+      <div>
         <section>
           <h1>STRESS + MAX STRESS</h1>
           <h1>TRAUMAS + MAX TRAUMAS</h1>
         </section>
+        <Divider />
         <section>
           <h1>HARMS</h1>
           <h1>HEALING</h1>
           <h1>ARMORS</h1>
         </section>
+        <Divider />
         <section>
           <h1>PLAYBOOK XP</h1>
           <h1>SPECIAL ABILITIES</h1>
         </section>
+        <Divider />
         <section>
           <h1>INSIGHT XP</h1>
           <h1>HUNT, STUDY, SURVEY, TINKER</h1>
         </section>
+        <Divider />
         <section>
           <h1>PROWESS XP</h1>
           <h1>FINESSE, PROWL, SKIRMISH, WRECK</h1>
         </section>
+        <Divider />
         <section>
           <h1>RESOLVE XP</h1>
           <h1>ATTUNE, COMMAND, CONSORT, SWAY</h1>
