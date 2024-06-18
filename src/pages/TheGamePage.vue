@@ -121,6 +121,18 @@ const sheetType = ref('crew');
 const sheets = computed(() => {
   return Object.values(useGameStore().game?.data?.sheets || []) as Sheet[];
 });
+const sheetTypeDescription = computed(() => {
+  const sheetTypeDescriptions = {
+    crew: "Your crew type determines the scores that you'll focus on, as well as a selection of special abilities that support that kind of action.",
+    character:
+      'What kind of scoundrel are you? Each playbook has a unique set of special abilities and XP triggers to change how you play.'
+  };
+  return (
+    sheetTypeDescriptions[
+      sheetType.value as keyof typeof sheetTypeDescriptions
+    ] || 'Choose a sheet type to get started.'
+  );
+});
 
 const crewSheets = computed(() => {
   return sheets.value.filter((sheet) => sheet.sheetType === 'crew');
@@ -142,7 +154,8 @@ onMounted(() => {
 function onClickNewSheet() {
   ModalController.open(SheetTemplatePickerModal, {
     sheetType: sheetType.value,
-    templateTypeKey: 'crewType',
+    description: sheetTypeDescription.value,
+    templateTypeKey: sheetType.value + 'Type',
     templates: createTemplates(sheetType.value),
     onConfirm: createNewSheet
   });

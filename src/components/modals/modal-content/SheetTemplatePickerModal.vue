@@ -8,8 +8,7 @@
     <template v-slot:content>
       <div class="template-picker">
         <p>
-          The crew type you choose determines the group's purpose, their special
-          abilities, and how they advance.
+          {{ props.description }}
         </p>
         <ul
           class="scroll-container"
@@ -27,15 +26,10 @@
                 'right-of-active': currentIndex < index
               }"
               :style="{
-                'background-color': imagesLoaded[index]
-                  ? getSheetImage(template.image)?.commonColor
-                  : 'transparent'
+                'background-color': getSheetImage(template.image)?.commonColor
               }"
             >
-              <img
-                :src="getSheetImage(template.image)?.url"
-                @load="imagesLoaded[index] = true"
-              />
+              <img :src="getSheetImage(template.image)?.url" />
               <h3>
                 {{ template[templateTypeKey as keyof typeof template] }}
               </h3>
@@ -60,8 +54,9 @@
           >
             <span
               >New
-              {{ capitalize(Object.keys(props.templates || [])[currentIndex]) }}
-              {{ capitalize(sheetType || 'sheet') }}</span
+              {{
+                capitalize(Object.keys(props.templates || [])[currentIndex])
+              }}</span
             >
           </button>
         </div>
@@ -80,6 +75,7 @@ import ModalHeader from '../modal-parts/ModalHeader.vue';
 
 const props = defineProps({
   sheetType: String,
+  description: String,
   templateTypeKey: String,
   templates: Object, // Object of key/value pairs like { assassins: new Assassins() }
   onConfirm: {
@@ -87,8 +83,6 @@ const props = defineProps({
     required: true
   }
 });
-
-const imagesLoaded = ref({} as Record<number, boolean>);
 
 function onClickChooseTemplate(template: any) {
   console.log('template', template);
@@ -145,8 +139,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
 
   > img {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    left: -1rem;
+    top: -1rem;
+    width: calc(100% + 2rem);
+    height: calc(100% + 2rem);
     object-fit: cover;
     filter: brightness(0.8);
   }
