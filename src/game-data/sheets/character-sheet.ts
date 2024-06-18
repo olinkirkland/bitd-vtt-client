@@ -1,46 +1,37 @@
-import { Effectable } from '../game-data-types';
+import { Effectable, Person } from '../game-data-types';
 import Sheet from './sheet';
 
 export type Harm = {
   level: number; // 0-4
   description: string;
-  effect: Effectable;
-  healed: boolean;
 };
 
 export class Character extends Sheet {
-  name: string;
+  ui: { [key: string]: boolean } = {};
 
-  book: PlayBook;
+  name: string = 'Unnamed Character';
+  description: string = '';
+  crewId: string = '';
+  alias: string;
+  look: string;
+  heritage: string;
+  heritageDescription: string;
+  background: string;
+  backgroundDescription: string;
 
-  choices: {
-    crew: string;
+  vice: string;
+  vicePurveyor: string;
 
-    alias: string;
-    look: string;
-    heritage: string;
-    heritageDescription: string;
-    background: string;
-    backgroundDescription: string;
-
-    vice: string;
-    vicePurveyor: string;
-
-    stress: number; // 0-9
-    maxStress: number;
-
-    trauma: Effectable[];
-    maxTrauma: number;
-  };
+  stress: number; // 0-9
+  maxStress: number;
+  trauma: Effectable[];
+  maxTrauma: number;
 
   characterType: string = '';
+  characterTypeDescription: string = '';
 
-  constructor(book: PlayBook) {
+  constructor() {
     super();
-
-    this.sheetType = 'character';
-    this.book = book;
-    this.choices = getDefaultChoices();
   }
 
   getTags(): string[] {
@@ -48,22 +39,16 @@ export class Character extends Sheet {
   }
 }
 
-export interface PlayBook {
-  name: string;
-  description: string;
-  specialAbilities: Effectable[];
-  contacts: string[];
-  standardItems: string[];
-  bookItems: string[];
-}
-
-export class Cutter implements PlayBook {
-  name: string = 'Cutter';
-  description: string = 'A dangerous and intimidating fighter';
-  specialAbilities: Effectable[] = [];
-  contacts: string[] = [];
-  standardItems: string[] = [];
-  bookItems: string[] = [];
+export class Cutter extends Character {
+  constructor() {
+    super();
+    this.name = 'Cutter';
+    this.description = 'A dangerous and intimidating fighter';
+    this.specialAbilities = [];
+    this.contacts = [];
+    this.standardItems = [];
+    this.uniqueItems = [];
+  }
 }
 
 export interface Hound extends PlayBook {}

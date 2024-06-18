@@ -27,10 +27,15 @@
                 'right-of-active': currentIndex < index
               }"
               :style="{
-                'background-color': getSheetImage(template.image)?.commonColor
+                'background-color': imagesLoaded[index]
+                  ? getSheetImage(template.image)?.commonColor
+                  : 'transparent'
               }"
             >
-              <img :src="getSheetImage(template.image)?.url" />
+              <img
+                :src="getSheetImage(template.image)?.url"
+                @load="imagesLoaded[index] = true"
+              />
               <h3>
                 {{ template[templateTypeKey as keyof typeof template] }}
               </h3>
@@ -82,6 +87,8 @@ const props = defineProps({
     required: true
   }
 });
+
+const imagesLoaded = ref({} as Record<number, boolean>);
 
 function onClickChooseTemplate(template: any) {
   console.log('template', template);

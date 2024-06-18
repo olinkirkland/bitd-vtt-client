@@ -5,7 +5,7 @@
         <button
           v-for="buttonSheet in [
             { name: 'crew', text: 'Crews' },
-            { name: 'character', text: 'Characters', disabled: true },
+            { name: 'character', text: 'Characters' },
             { name: 'world', text: 'World', disabled: true }
           ]"
           class="btn btn--tab"
