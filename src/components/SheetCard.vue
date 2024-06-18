@@ -32,7 +32,7 @@ function getSubtitle() {
     return `Tier ${crewSheet.tier} ❖ ${crewSheet.crewType}`;
   } else {
     const characterSheet = props.sheet as Character;
-    return ``;
+    return `${characterSheet.characterType}`;
   }
 }
 </script>
