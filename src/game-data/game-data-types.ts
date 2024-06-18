@@ -31,6 +31,6 @@ export type Faction = Person & {
 };
 
 export type Clock = Thing & {
-  ticks: number;
+  value: number;
   segments: number;
 };

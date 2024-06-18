@@ -5,9 +5,64 @@
       ref="carouselRef"
       @scroll="updateCurrentIndex($event.target as HTMLElement)"
     >
-      <div><h1>1</h1></div>
-      <div><h1>2</h1></div>
-      <div><h1>3</h1></div>
+      <div>
+        <section>
+          <h1>CHARACTER TYPE CARD (IMAGE)</h1>
+          <h1>CHARACTER TYPE</h1>
+          <h1>CHARACTER TYPE DESCRIPTION</h1>
+          <h1>CREW</h1>
+        </section>
+        <section>
+          <h1>NAME</h1>
+          <h1>ALIAS</h1>
+          <h1>LOOK</h1>
+          <h1>HERITAGE</h1>
+          <h1>HERITAGE DESCRIPTION</h1>
+          <h1>BACKGROUND</h1>
+          <h1>BACKGROUND DESCRIPTION</h1>
+        </section>
+      </div>
+      <div>
+        <section>
+          <h1>VICE</h1>
+          <h1>VICE PURVEYOR</h1>
+        </section>
+        <section>
+          <h1>CONTACTS</h1>
+        </section>
+        <section>
+          <h1>STRESS + MAX STRESS</h1>
+          <h1>TRAUMAS + MAX TRAUMAS</h1>
+        </section>
+        <section>
+          <h1>HARMS</h1>
+          <h1>HEALING</h1>
+          <h1>ARMORS</h1>
+        </section>
+        <section>
+          <h1>PLAYBOOK XP</h1>
+          <h1>SPECIAL ABILITIES</h1>
+        </section>
+        <section>
+          <h1>INSIGHT XP</h1>
+          <h1>HUNT, STUDY, SURVEY, TINKER</h1>
+        </section>
+        <section>
+          <h1>PROWESS XP</h1>
+          <h1>FINESSE, PROWL, SKIRMISH, WRECK</h1>
+        </section>
+        <section>
+          <h1>RESOLVE XP</h1>
+          <h1>ATTUNE, COMMAND, CONSORT, SWAY</h1>
+        </section>
+      </div>
+      <div>
+        <section>
+          <h1>LOAD</h1>
+          <h1>UNIQUE ITEMS</h1>
+          <h1>STANDARD ITEMS</h1>
+        </section>
+      </div>
     </div>
     <div class="row center mobile-nav">
       <button
@@ -94,6 +149,12 @@ function scrollToIndex(index: number) {
 </script>
 
 <style scoped lang="scss">
+h1 {
+  color: yellow;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
+}
+
 .sheet-layout__nested {
   height: 100%;
   display: flex;

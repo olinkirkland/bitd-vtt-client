@@ -1,4 +1,4 @@
-import { Effectable } from '../game-data-types';
+import { Clock, Effectable } from '../game-data-types';
 import Sheet from './sheet';
 
 export type Harm = {
@@ -10,19 +10,19 @@ export class Character extends Sheet {
   ui: { [key: string]: boolean } = {};
 
   crewId: string = ''; // The  crew this character is a part of
-  name: string = 'Unnamed Character';
-  alias: string = 'A Mysterious Stranger';
-  notes: string = '';
 
   characterType: string = '';
   characterTypeDescription: string = '';
   image: string = '';
 
+  name: string = 'Unnamed Character';
+  alias: string = 'A Mysterious Stranger';
   look: string;
   heritage: string;
   heritageDescription: string;
   background: string;
   backgroundDescription: string;
+  notes: string = '';
 
   vice: string;
   vicePurveyor: string;
@@ -32,6 +32,15 @@ export class Character extends Sheet {
 
   trauma: Effectable[];
   maxTrauma: number;
+
+  harm: Harm[];
+  healingClock: Clock = {
+    id: 'healing',
+    name: 'healing',
+    description: '',
+    segments: 4,
+    value: 0
+  };
 
   constructor() {
     super();
